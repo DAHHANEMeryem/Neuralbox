@@ -9,5 +9,6 @@ return [
     'Se connecter'=>'Se connecter',
     'Créer un compte'=>'Créer un compte',
     'deconnexion'=>'se déconnecter',
-    'profile'=>'profile'
+    'profile'=>'profile',
+    'Messagerie'=> 'Messagerie'
 ];

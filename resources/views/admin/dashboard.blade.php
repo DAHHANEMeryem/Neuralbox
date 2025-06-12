@@ -1,8 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard')
-
-@section('page-title', 'Dashboard')
+@section('title', 'نورال بوكس | الرئيسية')
+ 
 
 @section('content')
 <link href="{{asset('css/dashbordadmin.css')}}" rel="stylesheet">
@@ -12,22 +11,24 @@
         <h1 class="admin-dashboard-heading">Tableau de bord Admin</h1>
         <p class="admin-dashboard-subtitle">Bienvenue ! Voici une vue d'ensemble de votre plateforme.</p>
     </div>
-    <div class="admin-dashboard-actions">
-        <button class="btn-filter">
-            <i class="fas fa-filter mr-2"></i>
-            Filtres
-        </button>
-        <button class="btn-export">
-            <i class="fas fa-download mr-2"></i>
-            Exporter
-        </button>
-    </div>
+   <div class="admin-dashboard-actions">
+    <form id="formFiltre" method="GET">
+    <input type="hidden" name="filtre" id="filtreInput" value="{{ $filtre }}">
+    <button type="button" class="btn-filter" onclick="changerMode()">Filtrer par <span id="filtreLabel">{{ ucfirst($filtre) }}</span></button>
+</form>
+
+    <a href="{{ route('admin.export.dashboard.pdf') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
+    📄 Exporter en PDF
+</a>
+
+</div>
+
 </div>
 
 
 <div class="dashboard-cards-grid">
     <!-- Card 1 -->
-    
+
 
 
     <!-- Card 2 -->
@@ -35,43 +36,44 @@
         <div class="dashboard-card-header">
             <div>
                 <h3 class="dashboard-card-title">Total revenus</h3>
-                <p class="dashboard-card-value">{{ $revenus_mois ?? '56,562' }}  DH</p>
+                <p class="dashboard-card-value">{{ $revenus_total ?? '00.00' }}DH </p>
             </div>
-            <div class="dashboard-card-icon bg-green">
-                <i class="fas fa-money-bill-wave text-green-500"></i>
+            <div class="dashboard-card-icon bg-green-100">
+              <i class="fas fa-money-bill-wave text-green-500"></i>
             </div>
         </div>
         <div class="dashboard-progress">
     <div class="progress-bar">
-        <div class="progress-fill bg-green" style="width: {{ $evolution_revenus ?? 0 }}%"></div>
+        <div class="progress-fill bg-green" style="width: {{ $evolution_revenus }}%"></div>
     </div>
-    <span class="progress-percentage text-green">+{{ $evolution_revenus ?? 0 }}%</span>
-</div>
+        <span class="progress-percentage text-green">+{{ $evolution_revenus }}%</span>
+    </div>
 
         <div class="dashboard-card-footer">
             <a href="/admin/paiements" class="dashboard-link">Voir tout <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
-            <span class="dashboard-subtext">Par rapport au mois dernier</span>
+            <span class="dashboard-subtext">{{ $phrase}}</span>
         </div>
     </div>
     <div class="dashboard-card">
         <div class="dashboard-card-header">
             <div>
-                <h3 class="dashboard-card-title">Total paiments</h3>
-                <p class="dashboard-card-value">{{ $revenus_mois ?? '56,562' }} DH</p>
+                <h3 class="dashboard-card-title">Total Abonnements</h3>
+                <p class="dashboard-card-value">{{ $abonne_total ?? '00.00' }} </p>
             </div>
-            <div class="dashboard-card-icon bg-green">
-                <i class="fas fa-money-bill-wave text-green-500"></i>
+            <div class="dashboard-card-icon bg-green-100">
+              
+               <i class="fas fa-user text-green-500"></i>
             </div>
         </div>
         <div class="dashboard-progress">
             <div class="progress-bar">
-            <div class="progress-fill bg-green" style="width: {{ $evolution_revenus ?? 0 }}%"></div>
+            <div class="progress-fill bg-green" style="width: {{ $evolution_paiments ?? 0 }}%"></div>
             </div>
-            <span class="progress-percentage text-green">+{{ $evolution_revenus ?? 0 }}%</span>
+            <span class="progress-percentage text-green">+{{$evolution_paiments ?? 0 }}%</span>
         </div>
         <div class="dashboard-card-footer">
             <a href="/admin/paiements" class="dashboard-link">Voir tout <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
-            <span class="dashboard-subtext">Par rapport au mois dernier</span>
+            <span class="dashboard-subtext">{{ $phrase}}</span>
         </div>
     </div>
 
@@ -82,13 +84,13 @@
             <h3 class="dashboard-card-title">Total Utilisateurs</h3>
             <p class="dashboard-card-value">{{ $nombre_utilisateurs }}</p>
         </div>
-        <div class="dashboard-card-icon bg-blue">
+        <div class="dashboard-card-icon bg-blue-100">
             <i class="fas fa-users text-blue-500"></i>
         </div>
     </div>
 
     <!-- Barre de progression -->
-    
+
     <!-- Détail utilisateurs -->
     <div class="user-chart-wrapper mt-4">
         <div class="user-chart-circle">
@@ -109,29 +111,61 @@
             </div>
         </div>
     </div>
-<div class="dashboard-progress">
-        <div class="progress-bar">
-            <div class="progress-fill bg-blue" style="width: {{ abs($evolution_utilisateurs) }}%"></div>
+<div class="dashboard-progress mt-4">
+    <div class="progress-bar h-3 w-full bg-gray-200 rounded-full overflow-hidden">
+        <div class="progress-fill h-full transition-all duration-300
+            {{ $evolution_utilisateurs >= 0 ? 'bg-green-500' : 'bg-red-500' }}"
+            style="width: {{ min(abs($evolution_utilisateurs), 100) }}%">
         </div>
-        <span class="progress-percentage {{ $evolution_utilisateurs >= 0 ? 'text-green' : 'text-red-500' }}">
-            {{ $evolution_utilisateurs >= 0 ? '+' : '' }}{{ $evolution_utilisateurs }}%
-        </span>
     </div>
+
+    <span class="progress-percentage mt-1 block text-sm font-semibold
+        {{ $evolution_utilisateurs >= 0 ? 'text-green-600' : 'text-red-500' }}">
+        {{ $evolution_utilisateurs >= 0 ? '+' : '' }}{{ number_format($evolution_utilisateurs, 1) }}%
+    </span>
+</div>
+
 
     <!-- Footer -->
     <div class="dashboard-card-footer mt-4">
         <a href="{{ route('admin.utilisateurs') }}" class="dashboard-link">
             Voir tout <i class="fas fa-chevron-right ml-1 text-xs"></i>
         </a>
-        <span class="dashboard-subtext">Par rapport au mois dernier</span>
+        <span class="dashboard-subtext">{{$phrase}}</span>
     </div>
 </div>
 
 
     </div>
 </div>
-
  
+<div class="revenus-analytics-container"> 
+    <div class="analytics-card">
+        <div class="card-header">
+            <h3 class="header-title">Revenus Analytics</h3>
+        </div>
+        <div class="chart-container">
+            <canvas id="revenusChart" width="1000" height="200"></canvas>
+        </div>
+        <div class="chart-footer">
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color revenue-color" style="background-color:#4ade80;"></div>
+                    <span class="legend-text">Revenus</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color profit-color" style="background-color:#3b82f6;"></div>
+                    <span class="legend-text">Abonnés</span>
+                </div>
+            </div>
+            <a href="/admin/paiements" class="view-all-link">
+                Voir tout
+                <i class="fas fa-chevron-right link-icon"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
 
 
 <!-- Exemple avec Style 3: Arrondi et Coloré -->
@@ -161,25 +195,42 @@
         </div>
     </div>
 
-    <div class="card-chart">
-    @php
-    $total = $messagesNonLus + $messagesLus;
-    $percentNonLus = $total > 0 ? round(($messagesNonLus / $total) * 100) : 0;
-    $percentLus = $total > 0 ? round(($messagesLus / $total) * 100) : 0;
-@endphp
+<div class="flex justify-between px-4 py-2">
 
 
 
-<div class="flex items-end h-16 space-x-1 px-4 bg-green-100 rounded-md">
-    <div class="w-1/2 bg-red-400 rounded-t-lg transition-all duration-300" style="height: {{ $percentNonLus }}%;" title="Non lus"></div>
-    <div class="w-1/2 bg-green-500 rounded-t-lg transition-all duration-300" style="height: {{ $percentLus }}%;" title="Lus"></div>
+
+
+  
+
+       
+               @foreach($last as $data)
+           <div class="relative flex items-end justify-center h-20">
+    <div
+        class="w-4 rounded-t-md shadow-md transform transition-transform duration-500 hover:scale-105"
+        style="
+            height: {{ $data['height'] }}%;
+            background: linear-gradient(to top, {{ $data['color'] === 'bg-green-600' ? '#16a34a' : ($data['color'] === 'bg-yellow-400' ? '#facc15' : '#f87171') }}, #fff);
+        "
+        title="{{ $data['count'] }} message">
+    </div>
+    <span class="absolute bottom-[-1.5rem] text-xs text-gray-600">{{ $data['date'] }}</span>
 </div>
+
+        @endforeach
+       
+  
+   
+        
+         
+    
+
 
 
     </div>
-    
+
     <div class="card-footer-rounded flex justify-between items-center">
-    
+
         <a href="{{ route('admin.messages.index') }}" class="card-link-rounded conversion-link-rounded">
             Voir tous les messages
             <i class="fas fa-chevron-right ml-1 text-xs"></i>
@@ -189,142 +240,101 @@
         </span>
     </div>
 </div>
-@php
-    $total = $reussis + $enAttente + $annules ;
-    
-@endphp
 
     <!-- Card 5 - Total Deals -->
-    <div class="dashboard-card-rounded deals-card-rounded"> 
+   <div class="dashboard-card-rounded deals-card-rounded">
     <div class="card-header-rounded">
         <div>
             <h3 class="card-title-rounded">Total Rendez-vous</h3>
-            <p class="card-value-rounded deals-value-rounded">{{$total}}</p>
+            <p class="card-value-rounded deals-value-rounded">{{ $totalRDV }}</p>
         </div>
         <div class="card-icon-container-rounded deals-icon-bg-rounded">
             <i class="fas fa-calendar-check deals-icon-rounded"></i>
         </div>
     </div>
-  
-    <br>
+
+
     
-    <div class="card-chart">
-        @foreach($rdvsParMois as $count)
-            @php
-                $max = max($rdvsParMois) ?: 1;
-                $height = ($count / $max) * 100;
-            @endphp
-            <div class="chart-bar deals-bar" style="height: {{ $height }}%;"></div>
+    <br>
+
+    {{-- Hack pour Tailwind Purge --}}
+    <span class="hidden bg-green-600 bg-yellow-400 bg-red-400"></span>
+
+    <!-- Graphique des 7 derniers jours -->
+    <div class="card-chart flex items-end justify-between h-24 px-4 rounded-md">
+        @foreach($last as $data)
+           <div class="relative flex items-end justify-center h-24">
+    <div
+        class="w-4 rounded-t-md shadow-md transform transition-transform duration-500 hover:scale-105"
+        style="
+            height: {{ $data['height'] }}%;
+            background: linear-gradient(to top, {{ $data['color'] === 'bg-green-600' ? '#16a34a' : ($data['color'] === 'bg-yellow-400' ? '#facc15' : '#f87171') }}, #fff);
+        "
+        title="{{ $data['count'] }} RDV">
+    </div>
+    <span class="absolute bottom-[-1.5rem] text-xs text-gray-600">{{ $data['date'] }}</span>
+</div>
+
         @endforeach
     </div>
-<br>
-    <div class="card-footer-rounded">
-        <a href="/admin/rendezvous" class="card-link-rounded deals-link-rounded">
+
+    <br>
+
+    <div class="card-footer-rounded flex items-center justify-between">
+        <a href="{{ route('admin.rendezvous.index') }}" class="card-link-rounded deals-link-rounded">
             Voir tout
             <i class="fas fa-chevron-right ml-1 text-xs"></i>
         </a>
-        
 
-<!-- Affichage du pourcentage basé sur l'évolution des rendez-vous -->
-<span class="card-status-rounded status-positive-rounded">
-    @if($rdvMoisActuel > 0)
-        {{ $pourcentageRdv }}% ce mois
-    @else
-        0% ce mois
-    @endif
-</span>
-
+        <span class="card-status-rounded {{ $evolution >= 0 ? 'status-positive-rounded' : 'status-negative-rounded' }}">
+            Évolution : {{ $evolution >= 0 ? '+' : '' }}{{ $evolution }}% depuis {{ $phrase1 }}
+        </span>
     </div>
 </div>
 
+
+    
 </div>
 
 
 
-    <!-- Third Row - Revenue Analytics Card -->
-    <div class="revenus-analytics-container">
-    <div class="analytics-card">
-        <div class="card-header">
-            <h3 class="header-title">Revenus Analytics</h3>
-            <div class="period-selector">
-                <button class="period-button">Jour</button>
-                <button class="period-button">Semaine</button>
-                <button class="period-button period-button-active">Mois</button>
-                <button class="period-button">Année</button>
-            </div>
-        </div>
-        <div class="chart-container">
-            <!-- Placeholder for analytics chart -->
-            <div class="chart-visualization">
-                <!-- <div class="chart-placeholder">
-                    <i class="fas fa-chart-line chart-icon"></i>
-                </div> -->
-                <!-- Creating a simple line chart visualization -->
-                <svg viewBox="0 0 1000 200" class="chart-svg">
-                    <path d="M0,150 Q100,100 200,130 T400,90 T600,140 T800,60 T1000,100" class="revenue-line" />
-                    <path d="M0,170 Q100,120 200,150 T400,130 T600,160 T800,100 T1000,130" class="profit-line" />
-                </svg>
-            </div>
-        </div>
-        <div class="chart-footer">
-            <div class="legend">
-                <div class="legend-item">
-                    <div class="legend-color revenue-color"></div>
-                    <span class="legend-text">Revenus</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color profit-color"></div>
-                    <span class="legend-text">Profit</span>
-                </div>
-            </div>
-            <a href="#" class="view-all-link">
-                Voir tout
-                <i class="fas fa-chevron-right link-icon"></i>
-            </a>
-        </div>
-    </div>
-</div>
     <!-- Fourth Row - Two Cards -->
-    @php
-    $total = $reussis + $enAttente + $annules ;
-    $pctReussis = $total > 0 ? ($reussis / $total) * 100 : 0;
-    $pctAttente = $total > 0 ? ($enAttente / $total) * 100 : 0;
-    $pctAnnules = $total > 0 ? ($annules / $total) * 100 : 0;
-   
-    $totalEvolution = $evolution ?? 0;
-@endphp
+  
 
 <!-- Fourth Row - Two Cards -->
- <div  class="revenus-analytics-container">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-    <!-- Card - État des Rendez-vous -->
-    <div class="bg-white rounded-lg shadow-sm p-6">
-        <div class="flex justify-between items-center mb-6">
-            <h3 class="text-gray-800 font-medium text-lg">État des Rendez-vous</h3>
-            <a href="/admin/rendezvous" class="text-blue-500 text-sm flex items-center hover:underline">
-                Voir tout
-                <i class="fas fa-chevron-right ml-1 text-xs"></i>
-            </a>
-        </div>
+ <div class="revenus-analytics-container">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <!-- Card - État des Rendez-vous -->
+        <div class="bg-white rounded-lg shadow-sm p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-gray-800 font-medium text-lg">État des Rendez-vous</h3>
+                <a href="/admin/rendezvous" class="text-blue-500 text-sm flex items-center hover:underline">
+                    Voir tout
+                    <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                </a>
+            </div>
 
-        <!-- Résumé global -->
-        <div class="mb-4">
-        <div class="flex justify-between items-center mb-2"> 
-    <span class="text-2xl font-bold">{{ $total }}</span>
-
-    @php
+            <!-- Résumé global -->
+            <div class="mb-4">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-2xl font-bold">{{ $totalRDV }} <span class="text-sm text-gray-500">{{$phrase3}}</span></span>
+                    <span class="{{ $evolutionColor }} text-sm">
+                        {{ $evolutionPrefix }}{{ $totalEvolution }}%
+                    </span>
+                </div>
+                 @php
         // Conditions personnalisées basées sur le total
-        if ($total == 0) {
+        if ($totalRDV == 0) {
             $totalEvolution = 0;
-        } elseif ($total <= 10) {
+        } elseif ($totalRDV <= 10) {
             $totalEvolution = 10;
-        } elseif ($total <= 20) {
+        } elseif ($totalRDV <= 20) {
             $totalEvolution = 20;
-        } elseif ($total <= 30) {
+        } elseif ($totalRDV <= 30) {
             $totalEvolution = 30;
-        } elseif ($total <= 50) {
+        } elseif ($totalRDV <= 50) {
             $totalEvolution = 50;
-        } elseif ($total <= 100) {
+        } elseif ($totalRDV <= 100) {
             $totalEvolution = 75;
         } else {
             $totalEvolution = 100;
@@ -339,135 +349,73 @@
         $evolutionPrefix = $totalEvolution > 0 ? '+' : '';
     @endphp
 
-    <span class="{{ $evolutionColor }} text-sm">
-        {{ $evolutionPrefix }}{{ $totalEvolution }}%
-    </span>
-</div>
 
-
-    <!-- Barre de progression globale -->
-    @php
-        $progressPercent = $total > 0 ? round((($reussis  ) / $total) * 100) : 0;
-        $progressColor = $progressPercent >= 75 ? 'from-green-500 to-indigo-500'
-                       : ($progressPercent >= 50 ? 'from-yellow-400 to-yellow-600'
-                       : ($progressPercent >= 25 ? 'from-orange-400 to-orange-600'
-                       : 'from-red-400 to-red-600'));
-    @endphp
-
-    <div class="w-full h-2 bg-gray-200 rounded-full">
-        <div class="h-2 rounded-full bg-gradient-to-r {{ $progressColor }}" style="width: {{ $progressPercent }}%"></div>
-    </div>
-
-    <div class="text-xs text-gray-500 mt-1">
-        Comparé au mois dernier
-    </div>
-</div>
-    
-
-        <!-- Détails par statut -->
-        <div class="space-y-4">
-            <!-- Réussis -->
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                    <span class="text-sm text-gray-600">Accepte</span>
+                <div class="w-full h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 rounded-full bg-gradient-to-r {{ $progressColor }}" style="width: {{ $progressPercent }}%"></div>
                 </div>
-                <div class="flex items-center">
-                    <span class="text-sm font-medium mr-2">{{ $reussis }}</span>
-                    <div class="w-16 h-1 bg-gray-200 rounded-full">
-                        <div class="h-1 rounded-full bg-green-500" style="width: {{ $pctReussis }}%"></div>
-                    </div>
+
+                <div class="text-xs text-gray-500 mt-1">
+                    {{ $phrase }}
+                    <br>
+                    <span class="text-[11px] italic text-gray-400">
+                        {{$phrase4}}: {{ $rdvlast }} rendez-vous
+                    </span>
                 </div>
             </div>
 
-            <!-- En attente -->
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <div class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
-                    <span class="text-sm text-gray-600">En attente</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="text-sm font-medium mr-2">{{ $enAttente }}</span>
-                    <div class="w-16 h-1 bg-gray-200 rounded-full">
-                        <div class="h-1 rounded-full bg-yellow-500" style="width: {{ $pctAttente }}%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Annulés -->
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <div class="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
-                    <span class="text-sm text-gray-600">Annulés</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="text-sm font-medium mr-2">{{ $annules }}</span>
-                    <div class="w-16 h-1 bg-gray-200 rounded-full">
-                        <div class="h-1 rounded-full bg-red-500" style="width: {{ $pctAnnules }}%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- À venir -->
-           
-        </div>
-    </div>
-</div>
-</div>
-<div class="p-6 ">
-        <div class="bg-white rounded-lg shadow-sm p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-gray-800 font-medium">Activité Récente</h3>
-                <a href="#" class="text-blue-500 text-sm flex items-center">
-                    Voir tout
-                    <i class="fas fa-chevron-right ml-1 text-xs"></i>
-                </a>
-            </div>
+            <!-- Détails par statut -->
             <div class="space-y-4">
-                <div class="border-l-2 border-blue-500 pl-4 pb-4">
-                    <div class="flex items-center">
-                        <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
-                        <span class="text-sm font-medium">Mise à jour du calendrier</span>
-                        <span class="text-xs text-gray-500 ml-auto">12:00</span>
-                    </div>
-                    <p class="text-xs text-gray-500 mt-1">Ajout de nouveaux événements au système</p>
-                </div>
-                <div class="border-l-2 border-green-500 pl-4 pb-4">
+                <!-- Acceptés -->
+                <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                        <span class="text-sm font-medium">Nouveau thème pour le site web</span>
-                        <span class="text-xs text-gray-500 ml-auto">09:45</span>
+                        <span class="text-sm text-gray-600">Acceptés</span>
                     </div>
-                    <p class="text-xs text-gray-500 mt-1">Complétion et ajout du nouveau design</p>
+                    <div class="flex items-center">
+                        <span class="text-sm font-medium mr-2">{{ $reussis }}</span>
+                        <div class="w-16 h-1 bg-gray-200 rounded-full">
+                            <div class="h-1 rounded-full bg-green-500" style="width: {{ $pctReussis }}%"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="border-l-2 border-yellow-500 pl-4 pb-4">
+
+                <!-- En attente -->
+                <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <div class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
-                        <span class="text-sm font-medium">Nouveau task créé</span>
-                        <span class="text-xs text-gray-500 ml-auto">Hier</span>
+                        <span class="text-sm text-gray-600">En attente</span>
                     </div>
-                    <p class="text-xs text-gray-500 mt-1">Ajout d'une nouvelle tâche dans le système</p>
-                </div>
-                <div class="border-l-2 border-indigo-500 pl-4 pb-4">
                     <div class="flex items-center">
-                        <div class="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
-                        <span class="text-sm font-medium">32 nouveaux utilisateurs</span>
-                        <span class="text-xs text-gray-500 ml-auto">Hier</span>
+                        <span class="text-sm font-medium mr-2">{{ $enAttente }}</span>
+                        <div class="w-16 h-1 bg-gray-200 rounded-full">
+                            <div class="h-1 rounded-full bg-yellow-500" style="width: {{ $pctAttente }}%"></div>
+                        </div>
                     </div>
-                    <p class="text-xs text-gray-500 mt-1">Nouveaux membres rejoignant la plateforme</p>
                 </div>
-                <div class="border-l-2 border-red-500 pl-4">
+
+                <!-- Annulés -->
+                <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <div class="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
-                        <span class="text-sm font-medium">Réponse au support client</span>
-                        <span class="text-xs text-gray-500 ml-auto">2 jours</span>
+                        <span class="text-sm text-gray-600">Annulés</span>
                     </div>
-                    <p class="text-xs text-gray-500 mt-1">Résolution d'une demande de support</p>
+                    <div class="flex items-center">
+                        <span class="text-sm font-medium mr-2">{{ $annules }}</span>
+                        <div class="w-16 h-1 bg-gray-200 rounded-full">
+                            <div class="h-1 rounded-full bg-red-500" style="width: {{ $pctAnnules }}%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>
+
 </div>
+
+
+
+
 
     <!-- Fifth Row - Upcoming Appointments Table -->
   <!-- Fifth Row - Upcoming Appointments Table -->
@@ -476,10 +424,10 @@
     <div class="bg-white rounded-lg shadow-sm p-6">
         <div class="flex justify-between items-center mb-6">
             <h3 class="text-gray-800 font-medium">Prochains rendez-vous</h3>
-            <div class="relative">
+            <!-- <div class="relative">
                 <input type="text" placeholder="Rechercher ici..." class="px-3 py-1 pr-8 text-sm rounded-md border border-gray-300 focus:outline-none focus:border-indigo-500">
                 <i class="fas fa-search text-gray-400 absolute right-3 top-2 text-xs"></i>
-            </div>
+            </div> -->
         </div>
 
         <div class="overflow-x-auto">
@@ -508,12 +456,12 @@
                             </td>
 
                             <!-- Spécialiste -->
-                           
+
                             <!-- Type -->
-                           
+
 
                             <!-- Lieu -->
-                            
+
 
                             <!-- Date -->
                             <td class="px-4 py-3">
@@ -549,12 +497,90 @@
    </div>
 
 
+<div class="p-6">
+    <div class="bg-white rounded-lg shadow-sm p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-gray-800 font-medium">Activité Récente</h3>
+            <!-- <a href="#" class="text-blue-500 text-sm flex items-center">Voir tout
+                <i class="fas fa-chevron-right ml-1 text-xs"></i>
+            </a> -->
+        </div>
+        <div class="space-y-4">
+
+            @if($recentRdv)
+            <div class="border-l-2 border-blue-500 pl-4 pb-4">
+                <div class="flex items-center">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                    <span class="text-sm font-medium">Nouveau rendez-vous réservé</span>
+                    <span class="text-xs text-gray-500 ml-auto">{{ $recentRdv->created_at->diffForHumans() }}</span>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">
+                    {{ $recentRdv->user->name ?? 'Utilisateur inconnu' }} a pris un rendez-vous
+                </p>
+            </div>
+            @endif
+
+            @if($recentMessage)
+            <div class="border-l-2 border-green-500 pl-4 pb-4">
+                <div class="flex items-center">
+                    <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                    <span class="text-sm font-medium">Nouveau message reçu</span>
+                    <span class="text-xs text-gray-500 ml-auto">{{ $recentMessage->created_at->diffForHumans() }}</span>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">
+                    Message de {{ $recentMessage->user->name ?? 'Inconnu' }}
+                </p>
+            </div>
+            @endif
+
+            @if($recentPaiement)
+            <div class="border-l-2 border-yellow-500 pl-4 pb-4">
+                <div class="flex items-center">
+                    <div class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                    <span class="text-sm font-medium">Paiement confirmé</span>
+                    <span class="text-xs text-gray-500 ml-auto">{{ $recentPaiement->created_at->diffForHumans() }}</span>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">
+                    Paiement de {{ $recentPaiement->montant }} MAD par {{ $recentPaiement->user->name ?? 'Client inconnu' }}
+                </p>
+            </div>
+            @endif
+
+            @if($recentRessource)
+            <div class="border-l-2 border-indigo-500 pl-4 pb-4">
+                <div class="flex items-center">
+                    <div class="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
+                    <span class="text-sm font-medium">Nouvelle ressource ajoutée</span>
+                    <span class="text-xs text-gray-500 ml-auto">{{ $recentRessource->created_at->diffForHumans() }}</span>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">
+                    Ressource : {{ Str::limit($recentRessource->titre, 30) }}
+                </p>
+            </div>
+            @endif
+
+            @if($recentUser)
+            <div class="border-l-2 border-red-500 pl-4">
+                <div class="flex items-center">
+                    <div class="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
+                    <span class="text-sm font-medium">Nouvel utilisateur inscrit</span>
+                    <span class="text-xs text-gray-500 ml-auto">{{ $recentUser->created_at->diffForHumans() }}</span>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">
+                    Bienvenue à {{ $recentUser->name }}
+                </p>
+            </div>
+            @endif
+
+        </div>
+    </div>
+</div>
     <!-- Sixth Row - Objectives Card -->
-    <div class="mt-6">
+    <div class="p-6">
         <div class="bg-white rounded-lg shadow-sm p-6">
             <h3 class="text-xl font-semibold mb-4 text-gray-800">🎯 Objectifs</h3>
             <p class="text-gray-800 mb-6">Avoir une vision complète du fonctionnement de la plateforme.</p>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Objectif 1 -->
                 <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 hover:shadow-md transition">
@@ -579,7 +605,7 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <!-- Objectif 2 -->
                 <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 hover:shadow-md transition">
                     <div class="flex items-center mb-3">
@@ -603,7 +629,7 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <!-- Objectif 3 -->
                 <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 hover:shadow-md transition">
                     <div class="flex items-center mb-3">
@@ -627,7 +653,7 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <!-- Objectif 4 -->
                 <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 hover:shadow-md transition">
                     <div class="flex items-center mb-3">
@@ -651,7 +677,7 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <!-- Objectif 5 -->
                 <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 hover:shadow-md transition">
                     <div class="flex items-center mb-3">
@@ -675,32 +701,123 @@
                         </li>
                     </ul>
                 </div>
-                
-                <!-- Objectif 6 -->
+
+                <!-- Objectif 6 - Messagerie -->
+
                 <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 hover:shadow-md transition">
-                    <div class="flex items-center mb-3">
-                        <div class="bg-red-100 p-2 rounded-md mr-3">
-                            <i class="fas fa-chart-bar text-red-600"></i>
-                        </div>
-                        <h4 class="font-medium">📊 Statistiques</h4>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-2 ml-4">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2 text-xs"></i>
-                            Évolution utilisateurs/paiements
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2 text-xs"></i>
-                            Rapports hebdomadaires
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-arrow-right text-indigo-500 mr-2 text-xs"></i>
-                            <a href="/admin/statistiques" class="text-indigo-500 hover:underline">Voir les statistiques</a>
-                        </li>
-                    </ul>
-                </div>
+
+                <div class="flex items-center mb-3">
+
+                <div class="bg-blue-100 p-2 rounded-md mr-3">
+
+                <i class="fas fa-comments text-blue-600"></i>
+
+            </div>
+
+            <h4 class="font-medium">💬 Messagerie</h4>
+
+        </div>
+
+        <ul class="text-sm text-gray-600 space-y-2 ml-4">
+
+        <li class="flex items-center">
+
+        <i class="fas fa-check text-green-500 mr-2 text-xs"></i>
+
+        Conversation avec les utilisateurs
+
+    </li>
+
+    <li class="flex items-center">
+
+    <i class="fas fa-check text-green-500 mr-2 text-xs"></i>
+
+    Réponses des administrateurs
+
+</li>
+        <li class="flex items-center">
+            <i class="fas fa-arrow-right text-indigo-500 mr-2 text-xs"></i>
+            <a href="/messagerie" class="text-indigo-500 hover:underline">Accéder à la messagerie</a>
+        </li>
+    </ul>
+</div>
+
             </div>
         </div>
     </div>
 </div>
+<script>
+  let modes = ['jour', 'semaine', 'mois','annee'];
+    let currentIndex = modes.indexOf("{{ $filtre }}");
+
+    function changerMode() {
+        currentIndex = (currentIndex + 1) % modes.length;
+        document.getElementById('filtreLabel').innerText = modes[currentIndex].charAt(0).toUpperCase() + modes[currentIndex].slice(1);
+        document.getElementById('filtreInput').value = modes[currentIndex];
+        document.getElementById('formFiltre').submit();
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('revenusChart').getContext('2d');
+
+    const revenusChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {!! json_encode($dates) !!},
+            datasets: [
+                {
+                    label: 'Revenus (MAD)',
+                    data: {!! json_encode($revenus) !!},
+                    borderColor: '#4ade80',
+                    backgroundColor: 'rgba(74, 222, 128, 0.2)',
+                    fill: true,
+                    tension: 0.3,
+                    yAxisID: 'y1',
+                },
+                {
+                    label: 'Abonnés',
+                    data: {!! json_encode($abonnes) !!},
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    fill: true,
+                    tension: 0.3,
+                    yAxisID: 'y2',
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            scales: {
+                y1: {
+                    type: 'linear',
+                    position: 'left',
+                    title: {
+                        display: true,
+                        text: 'Revenus (MAD)',
+                    },
+                    beginAtZero: true,
+                },
+                y2: {
+                    type: 'linear',
+                    position: 'right',
+                    title: {
+                        display: true,
+                        text: 'Abonnés',
+                    },
+                    beginAtZero: true,
+                    grid: {
+                        drawOnChartArea: false,
+                    },
+                },
+            },
+        },
+    });
+</script>
+
 @endsection

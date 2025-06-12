@@ -35,7 +35,7 @@
                     <option value="">Tous</option>
                     <option value="attente" {{ request('statut') == 'attente' ? 'selected' : '' }}>En attente</option>
                     <option value="confirme" {{ request('statut') == 'confirme' ? 'selected' : '' }}>Confirmés</option>
-                    <option value="refuse" {{ request('statut') == 'refuse' ? 'selected' : '' }}>Refusés</option>
+                    
                     <option value="annule" {{ request('statut') == 'annule' ? 'selected' : '' }}>Annulés</option>
                 </select>
             </div>

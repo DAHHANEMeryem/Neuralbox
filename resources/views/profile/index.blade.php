@@ -111,49 +111,47 @@
             position: relative;
         }
 
-        .profile-photo-container {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 20px;
-        }
+        
+.profile-photo-container {
+  text-align: center;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
 
-        .profile-photo {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary-light);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-        }
+.profile-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%; /* Cercle parfait */
+  object-fit: cover;  /* Recadrer l'image pour bien remplir */
+  border: 3px solid #007bff; /* Bordure bleue */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Ombre légère */
+  transition: transform 0.3s ease;
+}
 
-        .photo-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            opacity: 0;
-            transition: var(--transition);
-            cursor: pointer;
-        }
+.profile-photo:hover {
+  transform: scale(1.05); /* Zoom léger au survol */
+}
 
-        .profile-photo-container:hover .photo-overlay {
-            opacity: 1;
-        }
+#modify-photo-btn {
+  margin-top: 12px;
+  padding: 10px 20px;
+  background-color: #007bff; /* Bleu bootstrap */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
 
-        .profile-photo-container:hover .profile-photo {
-            filter: blur(1px);
-        }
+#modify-photo-btn:hover {
+  background-color: #0056b3; /* Bleu plus foncé au hover */
+}
 
-        .photo-upload-input {
-            display: none;
-        }
+
+       
+
+       
 
         .profile-name {
             font-size: 1.5rem;
@@ -516,14 +514,18 @@
     <header>
         <div class="container">
             <div class="header-content">
+              <a href="javascript:history.back()" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 5px;">
+  <i class="fas fa-arrow-left"></i> Retour
+</a>
                 <div class="logo">MonProfil</div>
                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                <button class="logout-btn" onclick="handleLogout(event)">
+    <i class="fas fa-sign-out-alt"></i> Déconnexion
+</button>
+
     @csrf
 </form>
 
-<button class="logout-btn" onclick="handleLogout(event)">
-    <i class="fas fa-sign-out-alt"></i> Déconnexion
-</button>
 
 
             </div>
@@ -536,14 +538,18 @@
             <div class="profile-container">
                 <!-- Sidebar with photo -->
                 <div class="profile-sidebar">
-                    <div class="profile-photo-container">
-                        <img src="/api/placeholder/150/150" alt="Photo de profil" class="profile-photo" id="profile-photo">
-                        <div class="photo-overlay">
-                            <i class="fas fa-camera"></i>
-                            <span>Changer</span>
-                        </div>
-                        <input type="file" id="photo-upload" class="photo-upload-input" accept="image/*">
-                    </div>
+    <div class="profile-photo-container" style="text-align:center;">
+    <img src="{{ auth()->user()->photo ?? '/api/placeholder/150/150' }}" alt="Photo de profil" class="profile-photo" id="profile-photo" style="border-radius:50%; width:150px; height:150px; object-fit:cover;">
+
+    
+    <!-- Bouton Modifier -->
+    <button type="button" id="modify-photo-btn" style="margin-top:10px; padding:8px 15px; cursor:pointer; background-color:#007bff; color:white; border:none; border-radius:5px;">
+        Modifier la photo
+    </button>
+
+    <input type="file" id="photo-upload" class="photo-upload-input" accept="image/*" style="display:none;">
+</div>
+
                     <h2 class="profile-name">{{ Auth::user()->name }}</h2>
                    <!-- <p class="profile-since">Membre depuis Octobre 2023</p>-->
 
@@ -634,7 +640,7 @@
                             </div>
 
                             <div class="buttons-container">
-                                <button type="button" class="btn btn-secondary" id="reset-personal-info">Annuler</button>
+                               <a href="{{ url()->previous() }}" class="btn btn-secondary">Annuler</a>
                                 <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
                             </div>
                         </form>
@@ -695,7 +701,6 @@
     const passwordStrengthValue = document.getElementById('password-strength-value');
     const personalInfoForm = document.getElementById('personal-info-form');
     const securityForm = document.getElementById('security-form');
-    const resetPersonalInfoBtn = document.getElementById('reset-personal-info');
     const deleteAccountBtn = document.getElementById('delete-account');
     const successToast = document.getElementById('success-toast');
     const errorToast = document.getElementById('error-toast');
@@ -739,9 +744,7 @@
     });
 
     // Photo upload
-    photoOverlay.addEventListener('click', () => {
-        photoUploadInput.click();
-    });
+ 
 
     photoUploadInput.addEventListener('change', (e) => {
         if (e.target.files.length > 0) {
@@ -843,4 +846,36 @@
             document.getElementById('logout-form').submit();
         }
     }
+  
+   
+</script>
+<script>
+document.getElementById('modify-photo-btn').addEventListener('click', function(){
+    document.getElementById('photo-upload').click();
+});
+
+document.getElementById('photo-upload').addEventListener('change', function(){
+    const file = this.files[0];
+    if(file){
+        const formData = new FormData();
+        formData.append('photo', file);
+
+        fetch('/profile/photo', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success){
+                document.getElementById('profile-photo').src = data.photo_url;
+            } else {
+                alert('Erreur lors du téléchargement.');
+            }
+        })
+        .catch(() => alert('Erreur réseau.'));
+    }
+});
 </script>

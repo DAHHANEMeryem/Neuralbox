@@ -5844,170 +5844,52 @@
         ac = /\r?\n/g,
         bc = /^(?:submit|button|image|reset|file)$/i,
         cc = /^(?:input|select|textarea|keygen)/i;
-    function dc(a, b, c, d) {
-        var e;
-        if (n.isArray(b))
-            n.each(b, function (b, e) {
-                c || _b.test(a)
-                    ? d(a, e)
-                    : dc(
-                          a +
-                              "[" +
-                              ("object" == typeof e && null != e ? b : "") +
-                              "]",
-                          e,
-                          c,
-                          d
-                      );
-            });
-        else if (c || "object" !== n.type(b)) d(a, b);
-        else for (e in b) dc(a + "[" + e + "]", b[e], c, d);
+   function dc(a, b, c, d) {
+    var e;
+    if (n.isArray(b)) {
+        n.each(b, function (b, e) {
+            c || _b.test(a)
+                ? d(a, e)
+                : dc(
+                      a +
+                          "[" +
+                          ("object" == typeof e && null != e ? b : "") +
+                          "]",
+                      e,
+                      c,
+                      d
+                  );
+        });
+    } else if (c || "object" !== n.type(b)) {
+        d(a, b);
+    } else {
+        for (e in b) dc(a + "[" + e + "]", b[e], c, d);
     }
-    (n.param = function (a, b) {
-        var c,
-            d = [],
-            e = function (a, b) {
-                (b = n.isFunction(b) ? b() : null == b ? "" : b),
-                    (d[d.length] =
-                        encodeURIComponent(a) + "=" + encodeURIComponent(b));
-            };
-        if (
-            (void 0 === b && (b = n.ajaxSettings && n.ajaxSettings.traditional),
-            n.isArray(a) || (a.jquery && !n.isPlainObject(a)))
-        )
-            n.each(a, function () {
-                e(this.name, this.value);
-            });
-        else for (c in a) dc(c, a[c], b, e);
-        return d.join("&").replace($b, "+");
-    }),
-        n.fn.extend({
-            serialize: function () {
-                return n.param(this.serializeArray());
-            },
-            serializeArray: function () {
-                return this.map(function () {
-                    var a = n.prop(this, "elements");
-                    return a ? n.makeArray(a) : this;
-                })
-                    .filter(function () {
-                        var a = this.type;
-                        return (
-                            this.name &&
-                            !n(this).is(":disabled") &&
-                            cc.test(this.nodeName) &&
-                            !bc.test(a) &&
-                            (this.checked || !Z.test(a))
-                        );
-                    })
-                    .map(function (a, b) {
-                        var c = n(this).val();
-                        return null == c
-                            ? null
-                            : n.isArray(c)
-                            ? n.map(c, function (a) {
-                                  return {
-                                      name: b.name,
-                                      value: a.replace(ac, "\r\n"),
-                                  };
-                              })
-                            : { name: b.name, value: c.replace(ac, "\r\n") };
-                    })
-                    .get();
-            },
-        }),
-        (n.ajaxSettings.xhr =
-            void 0 !== a.ActiveXObject
-                ? function () {
-                      return this.isLocal
-                          ? ic()
-                          : d.documentMode > 8
-                          ? hc()
-                          : (/^(get|post|head|put|delete|options)$/i.test(
-                                this.type
-                            ) &&
-                                hc()) ||
-                            ic();
-                  }
-                : hc);
-    var ec = 0,
-        fc = {},
-        gc = n.ajaxSettings.xhr();
-    a.attachEvent &&
-        a.attachEvent("onunload", function () {
-            for (var a in fc) fc[a](void 0, !0);
-        }),
-        (l.cors = !!gc && "withCredentials" in gc),
-        (gc = l.ajax = !!gc),
-        gc &&
-            n.ajaxTransport(function (b) {
-                if (!b.crossDomain || l.cors) {
-                    var c;
-                    return {
-                        send: function (d, e) {
-                            var f,
-                                g = b.xhr(),
-                                h = ++ec;
-                            if (
-                                (g.open(
-                                    b.type,
-                                    b.url,
-                                    b.async,
-                                    b.username,
-                                    b.password
-                                ),
-                                b.xhrFields)
-                            )
-                                for (f in b.xhrFields) g[f] = b.xhrFields[f];
-                            b.mimeType &&
-                                g.overrideMimeType &&
-                                g.overrideMimeType(b.mimeType),
-                                b.crossDomain ||
-                                    d["X-Requested-With"] ||
-                                    (d["X-Requested-With"] = "XMLHttpRequest");
-                            for (f in d)
-                                void 0 !== d[f] &&
-                                    g.setRequestHeader(f, d[f] + "");
-                            g.send((b.hasContent && b.data) || null),
-                                (c = function (a, d) {
-                                    var f, i, j;
-                                    if (c && (d || 4 === g.readyState))
-                                        if (
-                                            (delete fc[h],
-                                            (c = void 0),
-                                            (g.onreadystatechange = n.noop),
-                                            d)
-                                        )
-                                            4 !== g.readyState && g.abort();
-                                        else {
-                                            (j = {}),
-                                                (f = g.status),
-                                                "string" ==
-                                                    typeof g.responseText &&
-                                                    (j.text = g.responseText);
-                                            try {
-                                                i = g.statusText;
-                                            } catch (k) {
-                                                i = "";
-                                            }
-                                            f || !b.isLocal || b.crossDomain
-                                                ? 1223 === f && (f = 204)
-                                                : (f = j.text ? 200 : 404);
-                                        }
-                                    j && e(f, i, j, g.getAllResponseHeaders());
-                                }),
-                                b.async
-                                    ? 4 === g.readyState
-                                        ? a.setTimeout(c)
-                                        : (g.onreadystatechange = fc[h] = c)
-                                    : c();
-                        },
-                        abort: function () {
-                            c && c(void 0, !0);
-                        },
-                    };
-                }
-            });
+}
+
+n.param = function (a, b) {
+    var c,
+        d = [],
+        e = function (a, b) {
+            // 🔽 Ici on modifie la valeur si elle contient /video-url
+            if (typeof b === "string" && b.includes("/video-url/")) {
+                b = b.replace("/video-url", "");
+            }
+            b = n.isFunction(b) ? b() : b == null ? "" : b;
+            d[d.length] = encodeURIComponent(a) + "=" + encodeURIComponent(b);
+        };
+
+    if (void 0 === b && (b = n.ajaxSettings && n.ajaxSettings.traditional),
+        n.isArray(a) || (a.jquery && !n.isPlainObject(a))) {
+        n.each(a, function () {
+            e(this.name, this.value);
+        });
+    } else {
+        for (c in a) dc(c, a[c], b, e);
+    }
+    return d.join("&").replace($b, "+");
+};
+
     function hc() {
         try {
             return new a.XMLHttpRequest();

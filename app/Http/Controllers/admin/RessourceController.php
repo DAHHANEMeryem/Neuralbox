@@ -7,36 +7,39 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
+use App\Models\Paiement;
 class RessourceController extends Controller
 {
     
 public function pedagogie()
 {
     $ressources = Ressource::where('categorie', 'pedagogie')->get();
-     $estAbonne = Auth::check() && Auth::user()->is_admin;
+     $estAbonne = Auth::check() && Auth::user()->is_admin || Paiement::where('user_id', Auth::id())->exists();
+
         $visibilite = $estAbonne ? 'abonne' : 'tous';
         
         // Récupère les ressources gratuites et premium si l'utilisateur est abonné
         $ressourcesGratuites = Ressource::getRessources('pedagogie', 'tous');
         $ressourcesPremium = Ressource::getRessources('pedagogie', 'abonne');
-    return view('pedagogie', compact('ressources','estAbonne','visibilite','ressourcesGratuites','ressourcesPremium'));
+    return view('peda', compact('ressources','estAbonne','visibilite','ressourcesGratuites','ressourcesPremium'));
 }
 
 public function neuralbox()
 {
     $ressources = Ressource::where('categorie', 'neuralbox')->get();
-      $estAbonne = Auth::check() && Auth::user()->is_admin;
+      $estAbonne = Auth::check() && Auth::user()->is_admin || Paiement::where('user_id', Auth::id())->exists();
         $visibilite = $estAbonne ? 'abonne' : 'tous';
         
         // Récupère les ressources gratuites et premium si l'utilisateur est abonné
         $ressourcesGratuites = Ressource::getRessources('neuralbox', 'tous');
         $ressourcesPremium = Ressource::getRessources('neuralbox', 'abonne');
-    return view('neuralbox1', compact('ressources','estAbonne','visibilite','ressourcesGratuites','ressourcesPremium'));
+        
+    return view('neuralbox', compact('ressources','estAbonne','visibilite','ressourcesGratuites','ressourcesPremium'));
 }
     public function showPedagogie()
     {
         // Détermine si l'utilisateur est abonné
-        $estAbonne = Auth::check() && Auth::user()->is_admin;
+        $estAbonne = Auth::check() && Auth::user()->is_admin || Paiement::where('user_id', Auth::id())->exists();
         $visibilite = $estAbonne ? 'abonne' : 'tous';
         
         // Récupère les ressources gratuites et premium si l'utilisateur est abonné
@@ -57,7 +60,7 @@ public function neuralbox()
     public function showNeuralBox()
     {
         // Détermine si l'utilisateur est abonné
-        $estAbonne = Auth::check() && Auth::user()->is_admin;
+        $estAbonne = Auth::check() && Auth::user()->is_admin || Paiement::where('user_id', Auth::id())->exists();
         $visibilite = $estAbonne ? 'abonne' : 'tous';
         
         // Récupère les ressources
@@ -89,17 +92,23 @@ public function store(Request $request)
         'categorie' => 'required|in:pedagogie,محتوى نيورال بوكس',
         'description' => 'required|string|max:255',
         'visibilite' => 'required|in:abonne,tous',
-        'video_url' => 'required|url',
+        'video_url' => 'nullable|file|mimes:mp4|max:101200', // max ~100MB
         'ordre' => 'nullable|integer|min:0',
-        'preview_image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        'preview_image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', // max ~2MB
     ]);
 
-    $data = $request->only(['titre', 'categorie', 'description', 'visibilite', 'video_url', 'ordre']);
+    $data = $request->only(['titre', 'categorie', 'description', 'visibilite', 'ordre']);
 
     // Gestion de l'image
     if ($request->hasFile('preview_image')) {
-        $path = $request->file('preview_image')->store('ressources', 'public');
-        $data['preview_image'] = $path;
+        $imagePath = $request->file('preview_image')->store('images', 'public');
+        $data['preview_image'] = 'storage/' . $imagePath;
+    }
+
+    // Gestion de la vidéo
+    if ($request->hasFile('video_url')) {
+        $videoPath = $request->file('video_url')->store('videos', 'public');
+        $data['video_url'] = $videoPath;
     }
 
     Ressource::create($data);
@@ -107,41 +116,63 @@ public function store(Request $request)
     return redirect()->route('admin.ressources.index')->with('success', 'Ressource ajoutée.');
 }
 
-public function edit(Ressource $ressource)
+  public function edit($id)
+    {
+        $ressource = Ressource::findOrFail($id);
+        return view('admin.ressource.edit', compact('ressource'));
+    }
+public function update(Request $request, $id)
 {
-    return view('admin.ressource.edit', compact('ressource'));
-}
-public function update(Request $request, Ressource $ressource)
-{
+    $ressource = Ressource::findOrFail($id);
+
     $request->validate([
         'titre' => 'required|string|max:255',
-        'description' => 'required|string|max:255',
-        'categorie' => 'required|in:pedagogie,محتوى نيورال بوكس',
-        'visibilite' => 'required|in:tous,abonne',
-        'video_url' => 'required|url',
+        'description' => 'nullable|string',
+        'categorie' => 'required|string',
+        'visibilite' => 'required|string',
         'ordre' => 'nullable|integer|min:0',
-        'preview_image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        'video_url' => 'nullable|file|mimetypes:video/mp4,video/avi,video/mpeg|max:102400',
+        'preview_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
     ]);
 
-    $data = $request->only(['titre', 'description', 'categorie', 'visibilite', 'video_url', 'ordre']);
+    // Mise à jour des champs texte
+    $ressource->titre = $request->input('titre');
+    $ressource->description = $request->input('description');
+    $ressource->categorie = $request->input('categorie');
+    $ressource->visibilite = $request->input('visibilite');
+    $ressource->ordre = $request->input('ordre');
 
-    if ($request->hasFile('preview_image')) {
-        // Supprimer l'ancienne image si elle existe
-        if ($ressource->preview_image && Storage::disk('public')->exists($ressource->preview_image)) {
-            Storage::disk('public')->delete($ressource->preview_image);
-        }
-
-        $data['preview_image'] = $request->file('preview_image')->store('ressources', 'public');
+    // Mise à jour de la vidéo
+    if ($request->hasFile('video_url')) {
+        if ($ressource->video_url) {
+    $videoPath = str_replace('/storage/', 'public/', $ressource->video_url);
+    if (Storage::exists($videoPath)) {
+        Storage::delete($videoPath);
     }
-
-    $ressource->update($data);
-
-    return redirect()->route('admin.ressources.index')->with('success', 'Ressource modifiée.');
 }
 
 
+       
+     $videoPath = $request->file('video_url')->store('videos', 'public');
+$ressource->video_url =  $videoPath;
+ // /storage/videos/...
+    }
 
-  
+    // Mise à jour de l'image
+    if ($request->hasFile('preview_image')) {
+        if ($ressource->preview_image && Storage::exists(str_replace('/storage', 'public/', $ressource->preview_image))) {
+            Storage::delete(str_replace('/storage', 'public/', $ressource->preview_image));
+        }
+
+        $imagePath = $request->file('preview_image')->store('resources', 'public');
+        $ressource->preview_image = 'storage/'. $imagePath; // /storage/resources/...
+    }
+
+    $ressource->save();
+
+    return redirect()->route('admin.ressources.index')->with('success', 'Ressource modifiée avec succès.');
+}
+
 
 public function destroy(Ressource $ressource)
 {

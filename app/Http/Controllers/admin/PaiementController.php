@@ -44,12 +44,14 @@ class PaiementController extends Controller
         $paiements = $query->with('user')->latest()->paginate(10);
 
         // إحصائيات
-        $total = Paiement::sum('amount');
+       $total = Paiement::where('status', 'success')->sum('amount');
+
         $successCount = Paiement::where('status', 'success')->count();
         $failCount = Paiement::where('status', 'failed')->count();
         $monthlyRevenue = Paiement::where('status', 'success')
             ->whereMonth('created_at', Carbon::now()->month)
             ->sum('amount');
+           
 
         return view('admin.paiements.index', compact(
             'paiements', 'total', 'successCount', 'failCount', 'monthlyRevenue','paiements_2300', 'paiements_3200'

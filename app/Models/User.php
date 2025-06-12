@@ -93,6 +93,68 @@ public function isOnline()
 {
     return Cache::has('user-is-online-' . $this->id);
 }
+// Dans app/Models/User.php
+
+public function getRedirectRoute()
+{
+    return $this->is_admin ? route('admin.dashboard') : route('home');
+}
+public function sentMessages()
+{
+    return $this->hasMany(Contact::class, 'sender_id');
+}
+
+public function receivedMessages()
+{
+    return $this->hasMany(Contact::class, 'receiver_id');
+}
+public function messagesSent()
+{
+    return $this->hasMany(Message::class, 'sender_id');
+}
+
+public function messagesReceived()
+{
+    return $this->hasMany(Message::class, 'receiver_id');
+}
+public function lastMessage()
+{
+    return $this->hasOne(Contact::class, 'sender_id')->latestOfMany();
+}
+public function contacts()
+{
+    return $this->hasMany(Contact::class, 'sender_id');
+}
+public function scopeSearch($query, $term)
+{
+    return $query->where('name', 'like', "%$term%")
+                 ->orWhere('email', 'like', "%$term%");
+}
+public function messages()
+{
+    return $this->hasMany(Contact::class, 'sender_id');
+}
+
+public function latestMessage()
+{
+    return $this->hasOne(Contact::class, 'sender_id')->latestOfMany();
+}
+public function sentContacts()
+{
+    return $this->hasMany(Contact::class, 'sender_id');
+}
+
+public function receivedContacts()
+{
+    return $this->hasMany(Contact::class, 'receiver_id');
+}
+
+
+
+
+
+// User.php
+
 
 
 }

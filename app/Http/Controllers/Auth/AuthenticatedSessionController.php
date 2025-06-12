@@ -23,7 +23,6 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      */
     
-
 public function store(Request $request): RedirectResponse
 {
     $request->validate([
@@ -36,18 +35,17 @@ public function store(Request $request): RedirectResponse
 
         $user = Auth::user();
 
-        if ($user->email === 'admin@gmail.com') {
-            return redirect()->intended('/admin/dashboard'); // redirection spéciale pour l’admin
+        if ($user->is_admin) {
+            return redirect()->intended('/admin/dashboard'); // redirection pour l'admin
         }
 
-        return redirect()->intended('/utilisateurs/dashboard'); // redirection pour les autres
+        return redirect()->intended('/'); // redirection pour les utilisateurs
     }
 
     return back()->withErrors([
         'email' => 'Les identifiants ne correspondent pas.',
     ]);
 }
-
 
     /**
      * Destroy an authenticated session.

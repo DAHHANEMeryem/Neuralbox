@@ -27,7 +27,7 @@ class GoogleController extends Controller
 
         Auth::login($user);
 
-        return redirect('/utilisateurs/dashboard'); // أو لأي صفحة بغيتها
+        return redirect('/'); // أو لأي صفحة بغيتها
     }
 }
 

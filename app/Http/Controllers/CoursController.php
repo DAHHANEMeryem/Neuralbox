@@ -26,8 +26,9 @@ class CoursController extends Controller
             now()->addMinutes(30),
             ['filename' => $filename]
         );
-        return response()->json(['url' => $url]);
+        return response()->json(['success' => true,'url' => $url]);
     }
+   
 
 
     public function getVideo(string $video)

@@ -24,6 +24,7 @@ class RendezVousController extends Controller
         'date' => 'required|date|after:now',
         'numero' => 'required|string|max:20',
         'email' => 'required|email',
+       
     ]);
 
     RendezVous::create([
@@ -32,6 +33,7 @@ class RendezVousController extends Controller
         'statut' => 'attente',
         'numero' => $request->numero,
         'email' => $request->email,
+        'message'=>$request->message
     ]);
 
     return redirect()->route('rendezvous.create')->with('success', 'Rendez-vous demandé avec succès !');

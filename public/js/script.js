@@ -444,6 +444,7 @@
 
             var filename = $(".open-video").data("video");
             var signedUrl = "/video-url/" + filename; // Backend route to fetch the signed URL
+console.log(signedUrl);
 
             // Fetch the signed URL dynamically
             $.get(signedUrl, function (data) {

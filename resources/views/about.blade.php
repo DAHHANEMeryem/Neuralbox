@@ -20,12 +20,17 @@
         </p>
       </div>
       <div class="video-container">
-        <div class="video">
-          <img src="images/peda/1.png" alt="Aperçu vidéo" id="preview-image" />
-          <a href="javascript:void(0)" data-video="main.mp4" class="open-video overlay-box"></a>
-          <video id="video-player" controls>
-            <source src="تعريف الانتباه والتركيز.mp4" type="video/mp4" />
+       
+           <div class="video" style="position: relative;">
+          <img src="{{ asset('images/peda/1.png') }}" alt="Aperçu vidéo" id="preview-image" />
+
+           <a href="javascript:void(0)" data-video="storage/app/public/videos/فيديوتعريفي.mov" class="open-video overlay-box">
+            
+          </a>
+          <video controls style="display: none;">
+            <source src="{{ asset('storage/app/public/videos/فيديوتعريفي.mov') }}" type="video/mp4">
           </video>
+       
         </div>
       </div>
     </div>
@@ -175,73 +180,37 @@
         </div>
     </section>
     <script>
- document.addEventListener('DOMContentLoaded', function() {
-  const previewImage = document.getElementById('preview-image');
-  const videoPlayer = document.getElementById('video-player');
-  const openVideoBtn = document.querySelector('.open-video');
-  const videoContainer = document.getElementById('video-container');
 
-  // Cacher la vidéo au départ
-  videoPlayer.style.display = 'none';
+      document.addEventListener('DOMContentLoaded', () => {
+  const buttons = document.querySelectorAll('.open-video');
 
-  // Au clic sur l'image ou le bouton "play"
-  if(previewImage) {
-    previewImage.addEventListener('click', playVideo);
-  }
-  
-  if(openVideoBtn) {
-    openVideoBtn.addEventListener('click', playVideo);
-  }
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const container = button.closest('.video');
+      if (!container) return;
 
-  function playVideo(e) {
-    e.preventDefault();
-    
-    // Masquer l'image et le bouton
-    previewImage.style.display = 'none';
-    openVideoBtn.style.display = 'none';
-    
-    // Afficher et lancer la vidéo
-    videoPlayer.style.display = 'block';
-    videoPlayer.play();
-    
-    // Ajuster la taille du conteneur vidéo si nécessaire
-    videoContainer.style.height = videoPlayer.offsetHeight + 'px';
-  }
+      const previewImage = container.querySelector('img');
+      const video = container.querySelector('video');
 
-  // Quand la vidéo se termine, réafficher l'image
-  videoPlayer.addEventListener('ended', function() {
-    videoPlayer.style.display = 'none';
-    previewImage.style.display = 'block';
-    openVideoBtn.style.display = 'block';
-  });
-  
-  // Ajout de l'effet d'animation pour les cards
-  const missionCards = document.querySelectorAll('.mission-card');
-  
-  if(missionCards.length > 0) {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-    
-    missionCards.forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(20px)';
-      card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      observer.observe(card);
+      // Cacher l'image si elle existe
+      if (previewImage) {
+        previewImage.style.display = 'none';
+      }
+
+      // Cacher le bouton
+      button.style.display = 'none';
+
+      // Afficher et jouer la vidéo
+      if (video) {
+        video.style.display = 'block';
+        video.play().catch(err => {
+          console.error('Erreur lors de la lecture de la vidéo :', err);
+        });
+      }
     });
-  }
+  });
 });
+
 
 </script>
    

@@ -24,7 +24,7 @@
   
   .video {
     width: 100%;
-    max-width: 500px;
+   
     position: relative;
   }
   
@@ -81,7 +81,7 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+   
     margin: 0 auto;
     padding: 0 15px;
    border-radius: 10px;

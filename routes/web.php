@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\PolicyControllers;
 use App\Http\Controllers\conditionsControllers;
-use App\Http\Controllers\AboutusController; 
+use App\Http\Controllers\AboutusController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\subscribeControllers; 
+use App\Http\Controllers\Auth\subscribeControllers;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
@@ -26,7 +26,85 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminRendezVousController;
 use App\Http\Controllers\Admin\RessourceController;
+use App\Http\Controllers\Admin\ExportController;
+use App\Http\Controllers\Admin\ElementController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
+// routes/web.php
+use App\Http\Controllers\ContactController;
+
+// Route::middleware(['auth'])->group(function () {
+//      Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+
+//      Route::post('/contact/send-to-admin', [ContactController::class, 'sendToAdmin'])->name('contact.sendToAdmin');
+
+//      Route::get('/contact/conversation/{user}', [ContactController::class, 'showConversation'])->name('contact.showConversation');
+
+//      Route::post('/contact/message/{user}', [ContactController::class, 'sendMessageToUser'])->name('contact.sendMessageToUser');
+
+//   Route::get('/messagerie', [ContactController::class, 'index'])->name('messagerie.index');
+//   Route::post('/messagerie/send-admin', [ContactController::class, 'sendToAdmin'])->name('messagerie.sendToAdmin');
+//   Route::post('/messagerie/send-user', [ContactController::class, 'sendMessageToUser'])->name('messagerie.sendMessageToUser');
+//   // Pour charger les messages d'un utilisateur
+//   Route::get('/messagerie/messages/{user}', [ContactController::class, 'getUserMessages']);
+
+//   Route::middleware('auth')->get('/messagerie/messages/{user}', [ContactController::class, 'getUserMessages']);
+
+//   // Pour envoyer un message (déjà existante, mais vérifiez qu'elle retourne du JSON)
+
+//   // Dans votre contrôleur ContactController
+//   Route::get('/messagerie/all-messages', [ContactController::class, 'getAllMessages'])->name('messagerie.getAllMessages');
+//   Route::post('/messagerie/send-general', [ContactController::class, 'sendGeneralMessage'])->name('messagerie.sendGeneralMessage');
+//   Route::get('/messages/{user}', [ContactController::class, 'getMessages'])->name('messagerie.getMessages');
+//   Route::get('/messagerie/{user}', [ContactController::class, 'showConversation'])->name('messagerie.showConversation');
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+//     Route::post('/contact/send-to-user', [ContactController::class, 'sendToUser'])->name('contact.sendToUser');
+//     Route::post('/contact/send-to-admin', [ContactController::class, 'sendToAdmin'])->name('contact.sendToAdmin');
+//     Route::get('/contact/conversation/{id}', [ContactController::class, 'showConversation'])->name('contact.showConversation');
+
+
+
+// Routes pour la messagerie
+Route::middleware('auth')->group(function () {
+    // Page principale de messagerie
+    Route::get('/messagerie', [ContactController::class, 'index'])->name('messagerie.index');
+
+    // Envoyer un message à l'admin (utilisateurs normaux)
+    Route::post('/messagerie/send-admin', [ContactController::class, 'sendToAdmin'])->name('messagerie.sendToAdmin');
+
+    // Envoyer un message à un utilisateur spécifique (admins)
+    Route::post('/messagerie/send-user', [ContactController::class, 'sendMessageToUser'])->name('messagerie.sendMessageToUser');
+
+    // Charger les messages d'une conversation avec un utilisateur spécifique
+    Route::get('/messagerie/messages/{user}', [ContactController::class, 'getUserMessages']);
+
+    // Charger tous les messages généraux (pour les admins)
+    Route::get('/messagerie/all-messages', [ContactController::class, 'getAllMessages'])->name('messagerie.getAllMessages');
+
+    // Envoyer un message général (pour les admins)
+    Route::post('/messagerie/send-general', [ContactController::class, 'sendGeneralMessage'])->name('messagerie.sendGeneralMessage');
+
+    // Afficher une conversation spécifique (page dédiée)
+    Route::get('/messagerie/conversation/{user}', [ContactController::class, 'showConversation'])->name('messagerie.showConversation');
+    Route::get('/messagerie/messages-generaux', [ContactController::class, 'getGeneralMessages']);
+});
+
+use App\Http\Controllers\SubscriptionController;
+
+
+Route::get('/subscriptions', [SubscriptionController::class, 'index'])->name('subscriptions.index');
+Route::get('/subscription/payment/{plan}', [SubscriptionController::class, 'showPaymentForm'])->name('subscription.payment');
+Route::post('/subscription/process', [SubscriptionController::class, 'processSubscriptionPayment'])->name('subscription.process');
+Route::get('/subscription/confirmation/{id}', [SubscriptionController::class, 'showConfirmation'])->name('subscription.confirmation');
+Route::get('/subscription/success', [SubscriptionController::class, 'showSuccess'])->name('subscription.success');
+
+// Routes existantes pour les paiements (à garder si nécessaire)
+Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
+Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.process');
+Route::get('/payment/confirmation/{id}', [PaymentController::class, 'showConfirmation'])->name('payment.confirmation');
+
+
 // Routes pour la page d'information de paiement
 Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
 Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.process');
@@ -34,44 +112,54 @@ Route::get('/payment/confirmation/{id}', [PaymentController::class, 'showConfirm
 
 Route::middleware(['auth', 'IsAdmin'])->group(function () {
 
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-    Route::resource('ressources', RessourceController::class);
-});
+    Route::get('/admin/ressources', [App\Http\Controllers\Admin\RessourceController::class, 'index'])->name('admin.ressources.index');
+    Route::get('/admin/ressources/create', [App\Http\Controllers\Admin\RessourceController::class, 'create'])->name('admin.ressources.create');
+    Route::post('/admin/ressources', [App\Http\Controllers\Admin\RessourceController::class, 'store'])->name('admin.ressources.store');
+    Route::get('/admin/ressources/{ressource}/edit', [App\Http\Controllers\Admin\RessourceController::class, 'edit'])->name('admin.ressources.edit');
+    Route::put('/admin/ressources/{ressource}', [App\Http\Controllers\Admin\RessourceController::class, 'update'])->name('admin.ressources.update');
+    Route::delete('/admin/ressources/{ressource}', [App\Http\Controllers\Admin\RessourceController::class, 'destroy'])->name('admin.ressources.destroy');
 
 
 
-     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/utilisateurs', [AdminUserController::class, 'index'])->name('admin.utilisateurs');
-  Route::delete('/admin/utilisateurs/{id}', [AdminUserController::class, 'destroy'])->name('admin.utilisateurs.destroy');
-  Route::get('/admin/rendezvous', [AdminRendezVousController::class, 'index'])->name('admin.rendezvous.index');
-  Route::patch('/admin/rendezvous/{id}/statut', [AdminRendezVousController::class, 'updateStatut'])->name('admin.rendezvous.updateStatut');
-  Route::get('/admin/rendezvous', [AdminRendezVousController::class, 'index'])
-  ->name('admin.rendezvous.index');
-  Route::get('/rendezvous/{id}', [RendezvousController::class, 'show'])->name('rendezvous.show');
-  Route::get('/rendezvous/{id}/edit', [RendezvousController::class, 'edit'])->name('rendezvous.edit');
-  
-Route::put('/rendezvous/{id}', [RendezvousController::class, 'update'])->name('rendezvous.update');
+    Route::delete('/admin/utilisateurs/{id}', [AdminUserController::class, 'destroy'])->name('admin.utilisateurs.destroy');
+    Route::get('/admin/rendezvous', [AdminRendezVousController::class, 'index'])->name('admin.rendezvous.index');
+    Route::patch('/admin/rendezvous/{id}/statut', [AdminRendezVousController::class, 'updateStatut'])->name('admin.rendezvous.updateStatut');
+    Route::get('/admin/rendezvous', [AdminRendezVousController::class, 'index'])
+        ->name('admin.rendezvous.index');
+    Route::get('/rendezvous/{id}', [RendezvousController::class, 'show'])->name('rendezvous.show');
+    Route::get('/rendezvous/{id}/edit', [RendezvousController::class, 'edit'])->name('rendezvous.edit');
+
+    Route::put('/rendezvous/{id}', [RendezvousController::class, 'update'])->name('rendezvous.update');
 
 
-Route::get('/admin/paiements', [PaiementController::class, 'index'])->name('admin.paiements');
-  
-// Mettre à jour le statut d'un rendez-vous (accepter/refuser)
-Route::patch('/admin/rendezvous/{id}/update-status', [AdminRendezVousController::class, 'updateStatus'])
-  ->name('admin.rendezvous.updateStatus');
-  
-// Récupérer les détails d'un rendez-vous (pour la modal)
-Route::get('/admin/rendezvous/{id}/details', [AdminRendezVousController::class, 'getDetails'])
-  ->name('admin.rendezvous.details');
-  Route::delete('/admin/rendezvous/{id}', [AdminRendezVousController::class, 'destroy'])->name('admin.rendezvous.destroy');
-  Route::get('/admin/rendezvous/{id}/edit-statut', [AdminRendezVousController::class, 'editStatutArrive'])->name('admin.rendezvous.updateStatut');
-  Route::patch('/admin/rendezvous/{id}/update-statut', [AdminRendezVousController::class, 'updateStatutArrive'])->name('admin.rendezvous.saveStatut');
-  
- 
+    Route::get('/admin/paiements', [PaiementController::class, 'index'])->name('admin.paiements');
+
+
+    // Mettre à jour le statut d'un rendez-vous (accepter/refuser)
+    Route::patch('/admin/rendezvous/{id}/update-status', [AdminRendezVousController::class, 'updateStatus'])
+        ->name('admin.rendezvous.updateStatus');
+
+    // Récupérer les détails d'un rendez-vous (pour la modal)
+    Route::get('/admin/rendezvous/{id}/details', [AdminRendezVousController::class, 'getDetails'])
+        ->name('admin.rendezvous.details');
+    Route::delete('/admin/rendezvous/{id}', [AdminRendezVousController::class, 'destroy'])->name('admin.rendezvous.destroy');
+    Route::get('/admin/rendezvous/{id}/edit-statut', [AdminRendezVousController::class, 'editStatutArrive'])->name('admin.rendezvous.updateStatut');
+    Route::patch('/admin/rendezvous/{id}/update-statut', [AdminRendezVousController::class, 'updateStatutArrive'])->name('admin.rendezvous.saveStatut');
+
+
     Route::get('admin/messages', [App\Http\Controllers\Admin\MessageController::class, 'index'])->name('admin.messages.index');
     Route::get('admin/messages/{id}', [App\Http\Controllers\Admin\MessageController::class, 'show'])->name('admin.messages.show');
     Route::post('admin/messages/{id}/read', [App\Http\Controllers\Admin\MessageController::class, 'markAsRead'])->name('admin.messages.markAsRead');
     Route::delete('admin/messages/{id}', [App\Http\Controllers\Admin\MessageController::class, 'destroy'])->name('admin.messages.destroy');
- 
+    Route::get('/admin/export-pdf', [App\Http\Controllers\Admin\ExportController::class, 'exportPDF'])->name('admin.export.pdf');
+    Route::get('/admin/export/paiements', [App\Http\Controllers\Admin\ExportController::class, 'exportPaiementsPDF'])->name('admin.export.paiements.pdf');
+    Route::get('/admin/export/dashboard', [App\Http\Controllers\Admin\DashboardExportController::class, 'exportPdf'])->name('admin.export.dashboard.pdf');
+
+
+    // Action d'export en PDF (GET, avec paramètres de filtre, format, sections)
+
 });
 
 
@@ -97,7 +185,7 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
- 
+
 
 
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
@@ -110,8 +198,8 @@ Route::get('/account', [App\Http\Controllers\AccountController::class, 'index'])
 Route::get('/privacy-policy', [PolicyControllers::class, 'index'])->name('privacy-policy');
 
 // صفحة الشروط
-Route::get('conditions-utilisateur',[conditionsControllers::class, 'index'])->name('conditions-utilisateur');
-Route::get('subscribe',[subscribeControllers::class, 'index'])->name('subscribe');
+Route::get('conditions-utilisateur', [conditionsControllers::class, 'index'])->name('conditions-utilisateur');
+Route::get('subscribe', [subscribeControllers::class, 'index'])->name('subscribe');
 
 // الصفحة الرئيسية
 Route::get('/', [MeanController::class, 'index'])->name('home');
@@ -129,8 +217,8 @@ Route::get('lang/{locale}', function ($locale) {
 
 // باقي الروابط
 Route::get('/video-url/{filename}', [CoursController::class, 'getVideoUrl']);
-Route::get('/neuralbox', [NeuralBoxController::class, 'index'])->name('neuralbox');
-Route::get('/peda', [NeuralBoxController::class, 'peda'])->name('peda');
+// Route::get('/neuralbox', [NeuralBoxController::class, 'index'])->name('neuralbox');
+// Route::get('/peda', [NeuralBoxController::class, 'peda'])->name('peda');
 Route::get('/suivre', [MeanController::class, 'suivre'])->name('suivre');
 Route::get('/policy', [MeanController::class, 'suivre'])->name('suivre');
 Route::get('/about', [AboutusController::class, 'about'])->name('about');
@@ -138,6 +226,8 @@ Route::get('/about', [AboutusController::class, 'about'])->name('about');
 // المسار للفيديو
 Route::get('/video/stream/{filename}', function ($filename) {
     // تحقق من التوقيع
+
+
     if (!request()->hasValidSignature()) {
         abort(403, 'Unauthorized or expired link.');
     }
@@ -217,8 +307,8 @@ Route::get('/video/stream/{filename}', function ($filename) {
 
 Route::get('/utilisateurs/dashboard', function () {
     $user = Auth::user();
-     return view('welcome', compact('user'));
-     })->middleware(['auth', 'verified'])->name('dashboard');
+    return view('welcome', compact('user'));
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 // المسارات المحمية
@@ -231,13 +321,16 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile')->mi
 Route::middleware(['auth'])->group(function () {
     Route::put('/profile/update-photo', [ProfileController::class, 'updatePhoto'])->name('profile.updatePhoto');
 });
+Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])->middleware('auth');
+
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 Route::post('/update-password', [ProfileController::class, 'updatePassword'])->name('update.password');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
-Route::get('/pedagogie', [RessourceController::class, 'pedagogie'])->name('pedagogie');
-Route::get('/neuralbox1', [RessourceController::class, 'neuralbox'])->name('neuralbox');
+Route::get('/peda', [RessourceController::class, 'pedagogie'])->name('peda');
+Route::get('/neuralbox', [RessourceController::class, 'neuralbox'])->name('neuralbox');
+
 
 
 
@@ -246,8 +339,18 @@ Route::get('/neuralbox1', [RessourceController::class, 'neuralbox'])->name('neur
 Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
-Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+
+use App\Http\Controllers\Auth\NewPasswordController;
+
+Route::middleware(['web'])->group(function () {
+    Route::put('/password', [NewPasswordController::class, 'store'])->name('password.update');
+});
+
+
+Route::put('/reset-password', [NewPasswordController::class, 'update'])->name('password.update');
 
 
 Route::get('/welcome', [MessagesController::class, 'showRegistrationForm'])->name('welcome');
@@ -260,4 +363,4 @@ Route::post('/welcome', [MessagesController::class, 'register']); // صلحنا 
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

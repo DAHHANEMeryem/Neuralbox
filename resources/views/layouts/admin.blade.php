@@ -2,16 +2,26 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Admin | @yield('title')</title>
-    @vite('resources/css/app.css')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+    @vite('resources/css/app.css','resources/js/app.js')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 </head>
+
+
+ 
 @stack('scripts')
 <body class="bg-gray-100 font-sans leading-normal tracking-tight">
     <div class="flex min-h-screen">
         <!-- Sidebar -->
         <aside class="w-64 bg-white shadow-lg fixed h-full">
             <div class="p-6">
+
+            
                 <div class="flex items-center mb-8">
                     <div class="bg-indigo-600 h-8 w-8 rounded-md flex items-center justify-center mr-3">
                         <i class="fas fa-chart-line text-white text-sm"></i>
@@ -53,7 +63,7 @@
                class="flex items-center px-4 py-3 rounded-md
                {{ request()->is('admin/paiements*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
                 <i class="fas fa-credit-card mr-3 w-5 text-center"></i>
-                <span>Paiements</span>
+                <span>Abonnes</span>
             </a>
         </li>
         
@@ -72,16 +82,18 @@
                class="flex items-center px-4 py-3 rounded-md
                {{ request()->is('admin/messages*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
                 <i class="fas fa-envelope mr-3 w-5 text-center"></i>
-                <span>Messagerie</span>
+                <span>Message</span>
             </a>
         </li>
 
         <li>
-            <a href="/admin/statistiques"
+            <a href="/messagerie"
                class="flex items-center px-4 py-3 rounded-md
-               {{ request()->is('admin/statistiques*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
-                <i class="fas fa-chart-bar mr-3 w-5 text-center"></i>
-                <span>Statistiques</span>
+               {{ request()->is('/messagerie*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
+               <i class="fas fa-comment mr-3 w-5 text-center"></i>
+
+
+                <span>Messagerie</span>
             </a>
         </li>
     </ul>
@@ -110,11 +122,11 @@
                     <div>
                         <h1 class="text-xl font-semibold text-gray-800">@yield('page-title', 'Dashboard')</h1>
                     </div>
-                    <div class="flex items-center space-x-4">
-                        <div class="relative">
+                                        <div class="flex items-center space-x-4">
+                        <!-- <div class="relative">
                             <input type="text" placeholder="Rechercher..." class="px-4 py-2 pr-8 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-500">
                             <i class="fas fa-search text-gray-400 absolute right-3 top-2.5"></i>
-                        </div>
+                        </div> -->
                         <div class=" flex items-center space-x-2">
                             <button    onclick="window.location.href='/profile'"class="relative flex items-center space-x-2">
                             <div class="w-8 h-8 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-700 font-semibold">A</div>
@@ -133,4 +145,5 @@
         </main>
     </div>
 </body>
+
 </html>

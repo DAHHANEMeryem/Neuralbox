@@ -42,6 +42,27 @@ class ProfileController extends Controller
 
     return redirect()->route('profile')->with('success', 'Profil mis à jour avec succès');
 }
+public function updatePhoto(Request $request)
+{
+    $request->validate([
+        'photo' => 'required|image|max:2048',
+    ]);
+
+    $user = auth()->user();
+
+    // Stockage de l'image dans storage/app/public/profile_photos
+    $path = $request->file('photo')->store('profile_photos', 'public');
+
+    // Enregistrer le chemin dans la colonne 'photo'
+    $user->photo = '/storage/app/' . $path;
+    $user->save();
+
+    return response()->json([
+        'success' => true,
+        'photo_url' => $user->photo
+    ]);
+}
+
 public function updatePassword(Request $request)
 {
     $request->validate([

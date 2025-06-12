@@ -27,7 +27,7 @@
                     @if(!$msg->is_read)
                     <form action="{{ route('admin.messages.markAsRead', $msg->id) }}" method="POST">
                         @csrf
-                        <button type="submit" class="text-green-500 hover:underline text-xs">Lire</button>
+                        <button type="submit" class="text-green-500 hover:underline text-xs">Lu</button>
                     </form>
                     @endif
 
