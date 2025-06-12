@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+
+</head>
+<body>
+    <div class="background-shape-top"></div>
+    <div class="background-shape-bottom"></div>
+
+    <div class="login-container">
+        <div class="signin-section">
+            <div class="logo">
+                
+                <a href="{{ url('/') }}" class="logo-text1" style=" text-decoration: none;">الرئيسية</a>
+ 
+            </div>
+
+            <h1>تسجيل الدخول الى نورال بوكس</h1>
+
+            <div class="social-login">
+               
+                <a href="{{ route('google.login') }}" class="social-btn">
+                    <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
+                        <path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/>
+                    </svg>
+                </a>
+                
+                
+            </div>
+
+            <div class="divider">:او استخدم حسابك البريدي</div>
+
+            <form class="login-form" action="{{ route('login') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="البريد الالكتروني" name="email" required value="{{ old('email') }}">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="كلمة المرور" name="password" required>
+                </div>
+                <div class="forgot-password">
+                    <a href="#"> هل نسيت كلمة المرور؟</a>
+                </div>
+                <button type="submit" class="btn">تسجيل الدخول</button>
+            </form>
+        </div>
+
+        <div class="welcome-section">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            
+            <h2 class="welcome-title">!مرحبا</h2>
+            <p class="welcome-text">:ادخل معلوماتك الشخصية وابدء رحلتك معنا</p>
+            <a href="{{ route('register') }}" class="signup-btn">انشاء حساب</a>
+        </div>
+    </div>
+</body>
+</html>
+
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage; // ← هذا هو السطر المهم
+use Illuminate\View\View;
+
+class ProfileController extends Controller{
+    /**
+     * Display the user's profile form.
+     */
+    public function update(Request $request)
+{
+    $user = Auth::user();
+
+    // Commenter la validation pour tester
+    // $request->validate([
+    //     'name' => 'required|string|max:255',
+    //     'email' => 'required|email|unique:users,email,' . $user->id,
+    //     'numero' => 'required|string|max:15',
+    //     'photo' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+    // ]);
+
+    // Mise à jour des informations de l'utilisateur
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->numero = $request->numero;
+
+    // Gestion de la photo
+    if ($request->hasFile('photo')) {
+        // Supprimer l'ancienne photo si elle existe
+        if ($user->photo && Storage::exists('public/' . $user->photo)) {
+            Storage::delete('public/' . $user->photo);
+        }
+
+        // Sauvegarder la nouvelle photo
+        $path = $request->file('photo')->store('photos', 'public');
+        $user->photo = $path;
+    }
+
+    // Sauvegarde des informations mises à jour dans la base de données
+    $user->save();
+
+    // Retour avec un message de succès
+    return back()->with('success', 'تم التحديث بنجاح');
+}
+public function deletePhoto()
+{
+    $user = Auth::user();
+
+    if ($user->photo) {
+        // Supprimer l'image du stockage
+        $photoPath = public_path('storage/' . $user->photo);
+        if (file_exists($photoPath)) {
+            unlink($photoPath); // Supprime le fichier de la photo
+        }
+
+        // Mettre à jour l'utilisateur pour supprimer la photo
+        $user->photo = null;
+        $user->save();
+    }
+
+    return redirect()->route('profile.edit')->with('success', 'تم حذف الصورة بنجاح');
+}
+
+
+
+
+public function upload(Request $request)
+{
+    // Si la requête contient une demande de suppression de photo
+    if ($request->has('delete_photo') && $request->delete_photo == '1') {
+        $user = Auth::user();
+
+        // Supprimer l'ancienne photo si elle existe
+        if ($user->photo && \Storage::exists('public/' . $user->photo)) {
+            \Storage::delete('public/' . $user->photo);
+            $user->photo = null;  // Réinitialiser la photo
+            $user->save();
+
+            return redirect()->back()->with('success', 'تم حذف الصورة بنجاح!');
+        }
+    }
+
+    // Validation de l'image téléchargée
+    $request->validate([
+        'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+
+    $user = Auth::user();
+
+    // Supprimer l'ancienne photo si elle existe avant d'enregistrer la nouvelle
+    if ($user->photo && \Storage::exists('public/' . $user->photo)) {
+        \Storage::delete('public/' . $user->photo);
+    }
+
+    // Sauvegarder la nouvelle photo
+    $path = $request->file('photo')->store('public/photos');
+    $filename = str_replace('public/', '', $path);
+
+    $user->photo = $filename;
+    $user->save();
+
+    return redirect()->back()->with('success', 'تم تحديث الصورة بنجاح!');
+}
+
+    public function index()
+    {
+        $user = Auth::user(); // جلب بيانات المستخدم المسجل
+        return view('profile.index', compact('user'));
+    }
+    public function edit(Request $request): View
+    {
+        return view('profile.edit', [
+            'user' => $request->user(),
+        ]);
+    }
+
+    /**
+     * Update the user's profile information.
+     */
+    /*public function update(ProfileUpdateRequest $request): RedirectResponse
+    {
+        $request->user()->fill($request->validated());
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+
+        $request->user()->save();
+
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    /**
+     * Delete the user's account.
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $user = $request->user();
+
+        Auth::logout();
+
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Redirect::to('/');
+    }
+}
+
+
+
+@extends('layouts.app')
+
+@section('content')
+<div class="max-w-xl mx-auto mt-10 bg-white p-6 rounded-xl shadow-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">تعديل المعلومات الشخصية</h2>
+
+    <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+
+        <!-- Affichage de la photo -->
+        <div class="flex flex-col items-center mb-6">
+            @if(Auth::user()->photo)
+                <img src="{{ asset('storage/' . Auth::user()->photo) }}"
+                     alt="الصورة ديالك"
+                     class="rounded-full w-20 h-20 object-cover border-2 border-gray-300 shadow-sm mb-2">
+                <!-- Option de suppression de la photo -->
+                <button type="button" onclick="document.getElementById('delete-photo').submit()"
+                        class="text-red-600 hover:text-red-800 mt-2">حذف الصورة</button>
+                <form id="delete-photo" action="{{ route('profile.deletePhoto') }}" method="POST" class="hidden">
+                    @csrf
+                    @method('DELETE')
+                </form>
+            @else
+                <p class="text-gray-500">ما كايناش صورة.</p>
+            @endif
+            <!-- Option d'upload de nouvelle photo -->
+            <input type="file" name="photo" id="photo" accept="image/*"
+                   class="mt-2 text-sm text-gray-600 file:mr-2 file:py-1 file:px-3 file:rounded file:border file:border-gray-300 file:text-sm file:bg-gray-100 hover:file:bg-gray-200">
+        </div>
+
+        <!-- Autres champs -->
+        <div class="mb-4">
+            <label for="name" class="block mb-1 text-sm font-medium text-gray-700">الاسم الكامل:</label>
+            <input type="text" name="name" id="name" value="{{ Auth::user()->name }}"
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="mb-4">
+            <label for="email" class="block mb-1 text-sm font-medium text-gray-700">البريد الإلكتروني:</label>
+            <input type="email" name="email" id="email" value="{{ Auth::user()->email }}"
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="mb-6">
+            <label for="phone" class="block mb-1 text-sm font-medium text-gray-700">رقم الهاتف:</label>
+            <input type="text" name="phone" id="phone" value="{{ Auth::user()->phone }}"
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="text-center">
+            <button type="submit"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition">
+                حفظ التغييرات
+            </button>
+        </div>
+    </form>
+</div>
+@endsection
