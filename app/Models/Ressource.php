@@ -29,8 +29,7 @@ class Ressource extends Model
         
         if ($visibilite) {
             $query->where(function($q) use ($visibilite) {
-                $q->where('visibilite', $visibilite)
-                  ->orWhere('visibilite', 'tous');
+                $q->where('visibilite', $visibilite);
             });
         }
         

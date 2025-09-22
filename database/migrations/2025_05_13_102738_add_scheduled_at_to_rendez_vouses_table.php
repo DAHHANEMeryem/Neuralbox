@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('rendez_vouses', function (Blueprint $table) {
-            $table->timestamp('scheduled_at')->nullable();
-        });
+        // Schema::table('rendez_vouses', function (Blueprint $table) {
+        //     $table->timestamp('scheduled_at')->nullable();
+        // });
     }
     
     /**
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('rendez_vouses', function (Blueprint $table) {
-            //
-        });
+        // Schema::table('rendez_vouses', function (Blueprint $table) {
+        //     //
+        // });
     }
 };

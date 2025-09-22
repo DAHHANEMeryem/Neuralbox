@@ -11,24 +11,24 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('email');
-            $table->string('telephone');
-            $table->text('message');
-            $table->boolean('destinataire_id')->nullable()->default(false);
-            $table->boolean('lu')->nullable()->default(false);
-            $table->timestamp('date')->useCurrent();
-            $table->timestamps();
+        // Schema::create('messages', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('nom');
+        //     $table->string('prenom');
+        //     $table->string('email');
+        //     $table->string('telephone');
+        //     $table->text('message');
+        //     $table->boolean('destinataire_id')->nullable()->default(false);
+        //     $table->boolean('lu')->nullable()->default(false);
+        //     $table->timestamp('date')->useCurrent();
+        //     $table->timestamps();
 
-        });
+        // });
     }
     
     public function down()
     {
-        Schema::dropIfExists('messages');
+        // Schema::dropIfExists('messages');
     }
     
 };

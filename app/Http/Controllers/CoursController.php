@@ -19,21 +19,24 @@ class CoursController extends Controller
     }
 
 
-    public function getVideoUrl($filename)
+    public function getVideoUrl($filename,Request $request)
     {
         $url = URL::temporarySignedRoute(
             'video.stream',
             now()->addMinutes(30),
             ['filename' => $filename]
         );
-        return response()->json(['success' => true,'url' => $url]);
+        if($request->expectsJson()){
+            return response()->json(['success' => true,'url' => $url]);
+        }
+        return redirect($url);
+        
     }
    
 
 
     public function getVideo(string $video)
     {
-        // dd($video);
         $name = $video;
         $fileContents = Storage::get("videos/{$name}");
 

@@ -25,6 +25,9 @@
 (function ($) {
     ("use strict");
 
+
+    
+
     $("#contactForm").submit(function (e) {
         e.preventDefault(); // Prevent the default form submission
 

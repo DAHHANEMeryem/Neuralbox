@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('rendez_vouses', function (Blueprint $table) {
-            $table->dateTime('date_heure')->nullable();
-        });
+        // Schema::table('rendez_vouses', function (Blueprint $table) {
+        //     $table->dateTime('date_heure')->nullable();
+        // });
     }
     
     public function down()
     {
-        Schema::table('rendez_vouses', function (Blueprint $table) {
-            $table->dropColumn('date_heure');
-        });
+        // Schema::table('rendez_vouses', function (Blueprint $table) {
+        //     $table->dropColumn('date_heure');
+        // });
     }
 };

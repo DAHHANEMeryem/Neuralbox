@@ -4,66 +4,68 @@
 
 @section('content')
 
-<div class="policy-container">
-    <h1 class="policy-title">سياسة الخصوصية</h1>
-    <p class="policy-date">آخر تحديث: مارس 2025</p>
+<div class="container py-5">
+    <div class="mb-4">
+        <h1 class="display-4 text-secondary fw-bold">{!! trans('privacy.title') !!}</h1>
+        <p class="text-muted">{!! trans('privacy.last_update') !!}</p>
+    </div>
 
-    <p class="policy-text">
-        نحن في <strong>نيورال بوكس</strong> نولي أهمية كبيرة لخصوصية مستخدمينا وحماية بياناتهم الشخصية.
-        تهدف هذه السياسة إلى توضيح كيفية جمع واستخدام ومشاركة وتخزين المعلومات التي نحصل عليها منكم عند استخدام خدماتنا.
-    </p>
-    
-    <p class="policy-warning">
-        يُرجى قراءة هذه السياسة بعناية، حيث أن استخدامكم للمنصة يعني موافقتكم الكاملة على ما ورد فيها.
-        في حال عدم موافقتكم، يُرجى عدم استخدام المنصة.
-    </p>
+    <div class="my-4">
+        <p class="lead">{!! trans('privacy.intro') !!}</p>
 
-    <h2 class="policy-section">1. نطاق سياسة الخصوصية</h2>
-    <p class="policy-text">
-        تنطبق هذه السياسة على جميع الخدمات التي تقدمها نيورال بوكس عبر الموقع الإلكتروني والتطبيقات المرتبطة بها، وتشمل أي استخدام، وصول، تحميل، تسجيل، أو تصفح للخدمات.
-    </p>
+        <div class="alert alert-warning" role="alert">
+            <p class="mb-0">{!! trans('privacy.alert') !!}</p>
+        </div>
+    </div>
 
-    <h2 class="policy-section">2. جمع المعلومات</h2>
-    <ul class="policy-list">
-        <li><strong>المعلومات الشخصية:</strong> الاسم، البريد الإلكتروني، رقم الهاتف.</li>
-        <li><strong>معلومات الاستخدام:</strong> عنوان IP، نوع الجهاز، سجل التصفح.</li>
-        <li><strong>معلومات الدفع:</strong> تتم معالجة المدفوعات عبر مزودي خدمات دفع آمنين.</li>
-    </ul>
+    <hr class="my-5">
 
-    <h2 class="policy-section">3. استخدام المعلومات</h2>
-    <p class="policy-text">
-        نستخدم المعلومات التي نجمعها من أجل تحسين تجربة المستخدم، إرسال التحديثات، تقديم الدعم الفني، والامتثال للمتطلبات القانونية.
-    </p>
+    <div class="row g-5">
+        <div class="col-12">
+            <h2 class="h4 fw-bold mb-3 text-secondary">{!! trans('privacy.scope_title') !!}</h2>
+            <p>{!! trans('privacy.scope') !!}</p>
+        </div>
 
-    <h2 class="policy-section">4. حماية البيانات</h2>
-    <p class="policy-text">
-        نطبق معايير أمان عالية، ولكن لا يوجد نظام آمن بنسبة 100%، لذا ننصح بالحفاظ على سرية معلوماتكم الشخصية.
-    </p>
+        <div class="col-12">
+            <h2 class="h4 fw-bold mb-3 text-secondary">{!! trans('privacy.collect_title') !!}</h2>
+            {!! trans('privacy.collect') !!}
+        </div>
 
-    <h2 class="policy-section">5. ملفات تعريف الارتباط</h2>
-    <p class="policy-text">
-        نستخدم ملفات تعريف الارتباط لتحسين التجربة. يمكنكم تعطيلها من إعدادات المتصفح، ولكن ذلك قد يؤثر على بعض الوظائف.
-    </p>
+        <div class="col-12">
+            <h2 class="h4 fw-bold mb-3 text-secondary">{!! trans('privacy.use_title') !!}</h2>
+            <p>{!! trans('privacy.use') !!}</p>
+        </div>
 
-    <h2 class="policy-section">6. حقوق المستخدمين</h2>
-    <p class="policy-text">
-        يمكنكم تحديث أو حذف بياناتكم، أو إلغاء الاشتراك في الرسائل الترويجية في أي وقت.
-    </p>
+        <div class="col-12">
+            <h2 class="h4 fw-bold mb-3 text-secondary">{!! trans('privacy.protect_title') !!}</h2>
+            <p>{!! trans('privacy.protect') !!}</p>
+        </div>
 
-    <h2 class="policy-section">7. خصوصية الأطفال</h2>
-    <p class="policy-text">
-        لا نقوم بجمع بيانات الأطفال تحت سن 18 عامًا دون موافقة الوالدين. إذا كنت تعتقد أن طفلك قد زودنا بمعلومات، يُرجى التواصل معنا.
-    </p>
+        <div class="col-12">
+            <h2 class="h4 fw-bold mb-3 text-secondary">{!! trans('privacy.cookies_title') !!}</h2>
+            <p>{!! trans('privacy.cookies') !!}</p>
+        </div>
 
-    <h2 class="policy-section">8. تعديلات على سياسة الخصوصية</h2>
-    <p class="policy-text">
-        قد نقوم بتحديث هذه السياسة، وسنقوم بإعلامكم بأي تغييرات رئيسية عبر البريد الإلكتروني أو الموقع.
-    </p>
+        <div class="col-12">
+            <h2 class="h4 fw-bold mb-3 text-secondary">{!! trans('privacy.rights_title') !!}</h2>
+            <p>{!! trans('privacy.rights') !!}</p>
+        </div>
 
-    <h2 class="policy-section">كيفية التواصل معنا</h2>
-    <p class="policy-text">
-        <strong>البريد الإلكتروني:</strong> <a href="mailto:contact@insiconsulting.com">contact@insiconsulting.com</a><br>
-        <strong>العنوان:</strong> Roa Offices, Étage 01, N3, Sat village, Tanger
-    </p>
+        <div class="col-12">
+            <h2 class="h4 fw-bold mb-3 text-secondary">{!! trans('privacy.children_title') !!}</h2>
+            <p>{!! trans('privacy.children') !!}</p>
+        </div>
+
+        <div class="col-12">
+            <h2 class="h4 fw-bold mb-3 text-secondary">{!! trans('privacy.changes_title') !!}</h2>
+            <p>{!! trans('privacy.changes') !!}</p>
+        </div>
+
+        <div class="col-12">
+            <h2 class="h4 fw-bold mb-3 text-secondary">{!! trans('privacy.contact_title') !!}</h2>
+            <p>{!! trans('privacy.contact') !!}</p>
+        </div>
+    </div>
 </div>
 @endsection
+@section('footer','footer')

@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         
-    Schema::table('ressources', function (Blueprint $table) {
-        $table->string('preview_image')->nullable();
-        $table->integer('ordre')->default(0);
-    });
+    // Schema::table('ressources', function (Blueprint $table) {
+    //     $table->string('preview_image')->nullable();
+    //     $table->integer('ordre')->default(0);
+    // });
    
     }
 
@@ -24,9 +24,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-     Schema::table('ressources', function (Blueprint $table) {
-        $table->dropColumn('preview_image');
-        $table->dropColumn('ordre');
-    });
+    //  Schema::table('ressources', function (Blueprint $table) {
+    //     $table->dropColumn('preview_image');
+    //     $table->dropColumn('ordre');
+    // });
     }
 };

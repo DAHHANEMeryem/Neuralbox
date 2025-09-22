@@ -30,8 +30,26 @@ class User extends Authenticatable
         'rue',
         'code_postal'
     ];
-    
-    
+
+
+    public function subscription()
+    {
+        return $this->hasMany(Subscription::class, 'user_id');
+    }
+
+    /**
+     * Determine if the user has a gold subscription.
+     *
+     * @return bool
+     */
+    public function hasGoldSubscriptionOrIsAdmin(): bool
+    {
+        if ($this->is_admin) {
+            return true;
+        }
+        return $this->subscription() && $this->subscription()->where('type', 'gold')->exists();
+    }
+
 
 
     /**

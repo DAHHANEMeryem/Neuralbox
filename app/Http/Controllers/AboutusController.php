@@ -10,5 +10,9 @@ class AboutusController extends Controller
 {
     return view('about');
 }
+    public function about2()
+{
+    return view('about2');
+}
 
 }

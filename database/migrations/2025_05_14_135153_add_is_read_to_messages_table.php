@@ -12,18 +12,18 @@ return new class extends Migration
      */
 public function up()
 {
-    Schema::table('messages', function (Blueprint $table) {
-        $table->boolean('is_read')->default(false)->after('message');
-    });
+    // Schema::table('messages', function (Blueprint $table) {
+    //     $table->boolean('is_read')->default(false)->after('message');
+    // });
 }
-public function markAsRead($id)
-{
-    $message = Message::findOrFail($id);
-    $message->is_read = true;
-    $message->save();
+// public function markAsRead($id)
+// {
+//     $message = Message::findOrFail($id);
+//     $message->is_read = true;
+//     $message->save();
 
-    return response()->json(['success' => true]);
-}
+//     return response()->json(['success' => true]);
+// }
 
 
     /**
@@ -31,8 +31,8 @@ public function markAsRead($id)
      */
     public function down(): void
     {
-        Schema::table('messages', function (Blueprint $table) {
-            //
-        });
+        // Schema::table('messages', function (Blueprint $table) {
+        //     //
+        // });
     }
 };

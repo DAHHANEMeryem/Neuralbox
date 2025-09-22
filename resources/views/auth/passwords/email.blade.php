@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>استرجاع كلمة المرور - نورال بوكس</title>
+    <title>استرجاع كلمة المرور - نيورال بوكس</title>
     <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
 </head>
+
 <body>
-    
+
     <div class="background-shape-top"></div>
     <div class="background-shape-bottom"></div>
 
@@ -20,9 +22,9 @@
             <h1>استرجاع كلمة المرور</h1>
 
             @if (session('status'))
-                <div class="mb-4 text-green-600" style="text-align:center; margin-bottom:1rem;">
-                    {{ session('status') }}
-                </div>
+            <div class="mb-4 text-green-600" style="text-align:center; margin-bottom:1rem;">
+                {{ session('status') }}
+            </div>
             @endif
 
             <form class="login-form" method="POST" action="{{ route('password.email') }}">
@@ -37,10 +39,9 @@
                         placeholder="البريد الإلكتروني"
                         required
                         autofocus
-                        value="{{ old('email') }}"
-                    >
+                        value="{{ old('email') }}">
                     @error('email')
-                        <div class="text-red-600 text-sm" style="margin-top:0.25rem;">{{ $message }}</div>
+                    <div class="text-red-600 text-sm" style="margin-top:0.25rem;">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -62,4 +63,5 @@
     </div>
 
 </body>
+
 </html>

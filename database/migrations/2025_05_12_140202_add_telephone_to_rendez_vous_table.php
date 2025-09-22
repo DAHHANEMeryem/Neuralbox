@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up()
 {
-    Schema::table('rendez_vouses', function (Blueprint $table) {
-        $table->string('telephone')->nullable(); // ou notNullable selon ton besoin
+    // Schema::table('rendez_vouses', function (Blueprint $table) {
+    //     $table->string('telephone')->nullable(); // ou notNullable selon ton besoin
 
-    });
+    // });
 }
 
 
@@ -23,8 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('rendez_vous', function (Blueprint $table) {
-            //
-        });
+        // Schema::table('rendez_vous', function (Blueprint $table) {
+        //     //
+        // });
     }
 };

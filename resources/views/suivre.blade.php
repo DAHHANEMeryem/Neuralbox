@@ -1,189 +1,212 @@
 @extends('layouts.app')
- 
-@section('title', 'نورال بوكس | دلبل نورال بوكس')
- 
+
+@section('title', 'نيورال بوكس | دلبل نيورال بوكس')
+
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/suiv.css') }}">
-<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cairo&family=Changa&family=Lalezar&family=Reem+Kufi&family=Noto+Naskh+Arabic&family=Scheherazade+New&family=El+Messiri&family=Markazi+Text&family=Harmattan&display=swap" rel="stylesheet">
+<!-- <link rel="stylesheet" href="{{ asset('css/About.css') }}"> -->
 
 
-    <header>
-        <div class="container11">
-        <h1>فريق متكامل لدعم طفلك واكتشاف إمكانياته الحقيقية</h1>
-        </div>
 
-        <div class="container">
-            <img src="images/coachs.jpg" alt="Neural Box Logo" class="logo">
-        </div>
-    </header>
-    
-    <section class="intro">
-        <div class="container2">
-            <p>في نيورال بوكس، ندرك أن لكل طفل احتياجات خاصة، وتحديات تمنعه من تحقيق التغيير المنشود، ومساعدته على اكتشاف قدراته الكاملة. توفر المنصة إمكانية التواصل المباشر مع فريق الخبراء والمتخصصين في مجالات متعددة؛ تشمل التوجيه الدراسي، التنويم المغناطيسي، المواكبة النفسية، والعلوم العصبية. سواء كنت تبحث عن استشارة لتحسين الأداء الدراسي، أو معالجة مشاكل التركيز والانتباه، الإدمان على الشاشات، أو التوجيه النفسي؛ فريقنا مستعد لتقديم حلول عملية ومخصصة تناسب احتياجات طفلك. اختر بين جلسات عن بُعد أو حضورياً، وكن على ثقة بأنك ستحصل على الدعم اللازم لإحداث تغيير حقيقي وإيجابي في حياة طفلك.</p>
-        </div>
-        <div class="container3">
-           <img src="images/imag11.jpg" alt="la mere et la fille">
-        </div>
-    </section>
-    
-    <section class="team-container">
-        <div class="container">
-           <div class="team-categories">
-                <button class="category-btn active" data-category="all">جميع التخصصات</button>
-                <button class="category-btn" data-category="hypno">التنويم المغناطيسي</button>
-                <button class="category-btn" data-category="life">الحياة التدريبية</button>
-                <button class="category-btn" data-category="school">التوجيه المدرسي</button>
-                <button class="category-btn" data-category="social">التدريب الاجتماعي</button>
+<section class="pager-section blog-version">
+    <div class="container">
+        <div class="pager-content text-center">
+            <h2>{{ __('nav.suivre') }}</h2>
+            <ul>
+
+                <li><span>في نيورال بوكس، ندرك أن لكل طفل احتياجات خاصة، وتحديات تمنعه من تحقيق التغيير المنشود، ومساعدته على اكتشاف قدراته الكاملة. توفر المنصة إمكانية التواصل المباشر مع فريق الخبراء والمتخصصين في مجالات متعددة؛ تشمل التوجيه الدراسي، التنويم المغناطيسي، المواكبة النفسية، والعلوم العصبية. سواء كنت تبحث عن استشارة لتحسين الأداء الدراسي، أو معالجة مشاكل التركيز والانتباه، الإدمان على الشاشات، أو التوجيه النفسي؛ فريقنا مستعد لتقديم حلول عملية ومخصصة تناسب احتياجات طفلك. اختر بين جلسات عن بُعد أو حضورياً، وكن على ثقة بأنك ستحصل على الدعم اللازم لإحداث تغيير حقيقي وإيجابي في حياة طفلك.</span></li>
+            </ul>
+
+        </div><!--pager-content end-->
+    </div>
+</section>
+
+
+
+<section class="newsletter-section call  bg-transparent">
+    <div class="newsletter-sec w-75 mx-auto">
+        <div class="d-flex flex-column text-center align-items-center">
+            <div class="col-lg-6">
+                <div class="newsz-ltr-text">
+                    <h2>{{__("suivre.call_to_action")}}</h2>
+                </div><!--newsz-ltr-text end-->
             </div>
-
-            
-            <div class="team-grid">
-                <!-- Coach 1 -->
-                <div class="team-member"data-category="hypno">
-                    <div class="member-header">
-                        <div class="member-color coaching-color">
-                            <img src="{{ asset('images/resource/DSC00476.png') }}" alt="Coach abdelhadi" class="member-img">
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name"  id="coach-abdelhadi">المدرب عبد الهادي</h3>
-                        <p class="member-title">خبير التنويم المغناطيسي</p>
-                        <p class="member-description">متخصص في تقنيات التنويم المغناطيسي التي تساعد الأطفال على تجاوز العوائق النفسية وتحسين التركيز.</p>
-                
-                    </div>
-                </div>
-                
-                <!-- Coach 2 -->
-                <div class="team-member"  data-category="life">
-                    <div class="member-header">
-                        <div class="member-color coaching-color">
-                            <img src="{{ asset('images/resource/abderahim.png-removebg-preview.png') }}" alt="Coach Khaoula" class="member-img">
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name" id="Coach-Abderrahim">المدرب عبدالرحيم</h3>
-                        <p class="member-title">مدرب الحياة</p>
-                        <p class="member-description">يساعد الأطفال على تطوير مهارات الحياة الأساسية وتعزيز الثقة بالنفس لتحقيق أهدافهم.</p>
-                       
-                    </div>
-                </div>
-                
-                <!-- Coach 3 -->
-                <div class="team-member"  data-category="school">
-                    <div class="member-header">
-                        <div class="member-color coaching-color">
-                            <img src="{{ asset('images/resource/abdessmed1.png') }}" alt="Coach Khaoula" class="member-img">
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name"id="Mr-Abdessamad">السيد عبدالصمد</h3>
-                        <p class="member-title">خبير التوجيه المدرسي</p>
-                        <p class="member-description">متخصص في مساعدة الطلاب على تحسين أدائهم الأكاديمي واختيار المسار الدراسي المناسب.</p>
-                        
-                    </div>
-                </div>
-                
-                <!-- Coach 4 -->
-                <div class="team-member" data-category="life">
-                    <div class="member-header">
-                        <div class="member-color coaching-color">
-                            <img src="{{ asset('images/resource/khaoula.png') }}" alt="Coach Khaoula" class="member-img">
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name" id="Coach-Khaoula1">المدربة خولة</h3>
-                        <p class="member-title">مدربة الحياة للفتيات</p>
-                        <p class="member-description">متخصصة في تمكين الفتيات وتعزيز قدراتهن على التعبير والمشاركة الاجتماعية.</p>
-                    </div>
-                </div>
-                
-                
-                <!-- Coach 5 -->
-                <div class="team-member" data-category="social">
-                    <div class="member-header">
-                        <div class="member-color coaching-color">
-                            <img src="{{ asset('images/resource/nisrin1.png') }}" alt="Coach Khaoula" class="member-img">
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name" id="Coach-Nisrine">المدربة نسرين</h3>
-                        <p class="member-title">مدربة التدريب الاجتماعي</p>
-                        <p class="member-description">تساعد الأطفال على تطوير مهارات التواصل والتفاعل الاجتماعي في بيئة آمنة وداعمة.</p>
-                       
-                    </div>
-                </div>
-                
-                <!-- Coach 6 -->
-                <div class="team-member" data-category="social">
-                    <div class="member-header">
-                        <div class="member-color coaching-color">
-                            <img src="{{ asset('images/resource/malika1.png') }}" alt="Coach Khaoula" class="member-img">
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name" id="Coach-Malika">المدربة مليكة</h3>
-                        <p class="member-title">مدربة التدريب الاجتماعي</p>
-                        <p class="member-description">خبيرة في تنمية المهارات الاجتماعية للأطفال وتعزيز قدرتهم على بناء علاقات صحية.</p>
-                       
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title">ابدأ رحلة التغيير لطفلك اليوم!</h2>
-                <p class="cta-description">انضم إلى العديد من العائلات التي وثقت بنا لمساعدة أطفالهم على تحقيق إمكاناتهم الكاملة.</p>
-                <a href="/prendre-rendez-vous" class="cta-btn">احجز جلستك الأولى</a>
+            <div class="text-center col-lg-8">
+                <p>{{__("suivre.call_to_action_desc")}}</p>
+                <a href="{{ route('rendezvous.create') }}" title="" class="w-fit btn-default mt-2">{{__("suivre.call_to_action_btn")}} <i class="fa fa-long-arrow-alt-right"></i></a>
 
             </div>
         </div>
-    </section>
-    
-    
-    
-    <script>
-        // Simple filter functionality
-        const categoryButtons = document.querySelectorAll('.category-btn');
-        
-        categoryButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Remove active class from all buttons
-                categoryButtons.forEach(btn => btn.classList.remove('active'));
-                
-                // Add active class to clicked button
-                this.classList.add('active');
-                
-                // Here you would add filtering logic based on category
-                // For now, this is just UI feedback
-            });
-        });
-     
-    const buttons = document.querySelectorAll('.category-btn');
-    const members = document.querySelectorAll('.team-member');
+    </div>
+</section>
+<section class="team-section">
+    <div class="container">
+        <h2 class="team-title">فريقنا المتخصص:</h2>
+        <p class="about-description">
+            سواء كنت تبحث عن استشارة لتحسين الأداء الدراسي، أو معالجة مشاكل التركيز والانتباه، الإدمان على الشاشات، أو التوجيه النفسي، فريقنا مستعد لتقديم حلول عملية ومخصصة تناسب احتياجات طفلك. اختر بين جلسات عن بُعد أو حضورياً، وكن على ثقة بأنك ستحصل على الدعم اللازم لإحداث تغيير حقيقي وإيجابي في حياة طفلك.
+        </p>
 
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Enlève la classe "active" des autres boutons
-            buttons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+        <div class="team-members-wrapper">
+            <div class="row g-4 justify-content-center flex-nowrap">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                    <a href="/policy#coach-abdelhadi" class="text-decoration-none text-dark">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="assets/img/coaches/DSC00476.png" alt="صورة المختص" class="img-fluid">
+                            </div>
+                            <h3 class="member-name">{{ __('coaches.abdelhadi_name') }}</h3>
+                            <p class="member-role mb-0">{{ __('coaches.abdelhadi_spec') }}</p>
+                        </div>
+                    </a>
+                </div>
 
-            const category = btn.getAttribute('data-category');
+                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                    <a href="/policy#Coach-Abderrahim" class="text-decoration-none text-dark">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="{{ asset('assets/img/coaches/abderahim1.png') }}" alt="صورة المختص" class="img-fluid">
+                            </div>
+                            <h3 class="member-name">{{ __('coaches.abderahim_name') }}</h3>
+                            <p class="member-role mb-0">{{ __('coaches.abderahim_spec') }}</p>
+                        </div>
+                    </a>
+                </div>
 
-            members.forEach(member => {
-                const memberCategory = member.getAttribute('data-category');
+                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                    <a href="/policy#Mr-Abdessamad" class="text-decoration-none text-dark">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="{{ asset('assets/img/coaches/abdessmed1.png') }}" alt="صورة المختص" class="img-fluid">
+                            </div>
+                            <h3 class="member-name">{{ __('coaches.abdsamad_name') }}</h3>
+                            <p class="member-role mb-0">{{ __('coaches.abdsamad_spec') }}</p>
+                        </div>
+                    </a>
+                </div>
 
-                if (category === 'all' || memberCategory === category) {
-                    member.style.display = 'block';
-                } else {
-                    member.style.display = 'none';
-                }
-            });
-        });
-    });
+                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                    <a href="/policy#Coach-Khaoula" class="text-decoration-none text-dark">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="{{ asset('assets/img/coaches/khaoula1.png') }}" alt="صورة المختص" class="img-fluid">
+                            </div>
+                            <h3 class="member-name">{{ __('coaches.khaoula_name') }}</h3>
+                            <p class="member-role mb-0">{{ __('coaches.khaoula_spec') }}</p>
+                        </div>
+                    </a>
+                </div>
 
+                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                    <a href="/policy#Coach-Nisrine" class="text-decoration-none text-dark">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="{{ asset('assets/img/coaches/nisrin1.png') }}" alt="صورة المختص" class="img-fluid">
+                            </div>
+                            <h3 class="member-name">{{ __('coaches.nisrin_name') }}</h3>
+                            <p class="member-role mb-0">{{ __('coaches.nisrin_spec') }}</p>
+                        </div>
+                    </a>
+                </div>
 
-    </script>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                    <a href="/policy#Coach-Malika" class="text-decoration-none text-dark">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="{{ asset('assets/img/coaches/malika1.png') }}" alt="صورة المختص" class="img-fluid">
+                            </div>
+                            <h3 class="member-name">{{ __('coaches.malika_name') }}</h3>
+                            <p class="member-role mb-0">{{ __('coaches.malika_spec') }}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection
+@section('footer','footer')
+
+<!-- 
+<section class="team-section">
+    <div class="container">
+        <h2 class="team-title">فريقنا المتخصص:</h2>
+        <p class="about-description">
+            سواء كنت تبحث عن استشارة لتحسين الأداء الدراسي، أو معالجة مشاكل التركيز والانتباه، الإدمان على الشاشات، أو التوجيه النفسي، فريقنا مستعد لتقديم حلول عملية ومخصصة تناسب احتياجات طفلك. اختر بين جلسات عن بُعد أو حضورياً، وكن على ثقة بأنك ستحصل على الدعم اللازم لإحداث تغيير حقيقي وإيجابي في حياة طفلك.
+        </p>
+
+        <div class="team-members-wrapper">
+            <div class="row g-4 justify-content-center flex-nowrap">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a href="/policy#coach-abdelhadi" class="text-decoration-none text-dark">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="assets/img/coaches/DSC00476.png" alt="صورة المختص" class="img-fluid">
+                            </div>
+                            <h3 class="member-name">{{ __('coaches.abdelhadi_name') }}</h3>
+                            <p class="member-role mb-0">{{ __('coaches.abdelhadi_spec') }}</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a href="/policy#Coach-Abderrahim" class="text-decoration-none text-dark">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="{{ asset('assets/img/coaches/abderahim1.png') }}" alt="صورة المختص" class="img-fluid">
+                            </div>
+                            <h3 class="member-name">{{ __('coaches.abderahim_name') }}</h3>
+                            <p class="member-role mb-0">{{ __('coaches.abderahim_spec') }}</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a href="/policy#Mr-Abdessamad" class="text-decoration-none text-dark">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="{{ asset('assets/img/coaches/abdessmed1.png') }}" alt="صورة المختص" class="img-fluid">
+                            </div>
+                            <h3 class="member-name">{{ __('coaches.abdsamad_name') }}</h3>
+                            <p class="member-role mb-0">{{ __('coaches.abdsamad_spec') }}</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a href="/policy#Coach-Khaoula" class="text-decoration-none text-dark">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="{{ asset('assets/img/coaches/khaoula1.png') }}" alt="صورة المختص" class="img-fluid">
+                            </div>
+                            <h3 class="member-name">{{ __('coaches.khaoula_name') }}</h3>
+                            <p class="member-role mb-0">{{ __('coaches.khaoula_spec') }}</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a href="/policy#Coach-Nisrine" class="text-decoration-none text-dark">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="{{ asset('assets/img/coaches/nisrin1.png') }}" alt="صورة المختص" class="img-fluid">
+                            </div>
+                            <h3 class="member-name">{{ __('coaches.nisrin_name') }}</h3>
+                            <p class="member-role mb-0">{{ __('coaches.nisrin_spec') }}</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a href="/policy#Coach-Malika" class="text-decoration-none text-dark">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="{{ asset('assets/img/coaches/malika1.png') }}" alt="صورة المختص" class="img-fluid">
+                            </div>
+                            <h3 class="member-name">{{ __('coaches.malika_name') }}</h3>
+                            <p class="member-role mb-0">{{ __('coaches.malika_spec') }}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->

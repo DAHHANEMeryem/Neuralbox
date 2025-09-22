@@ -13,7 +13,9 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->decimal('amount', 8, 2); 
             $table->string('method'); 
-            $table->enum('status', ['success', 'failed']); 
+            $table->string('status', 20);
+            $table->decimal('montant', 8, 2)->nullable();
+            $table->string('name');
             $table->timestamps();
         });
     }

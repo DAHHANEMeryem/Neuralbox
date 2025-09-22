@@ -20,7 +20,11 @@ return new class extends Migration
             $table->dateTime('date');
             $table->text('message')->nullable(); // nouveau champ message
             $table->enum('statut', ['attente', 'confirme', 'annule'])->default('attente');
-        
+            $table->string('telephone')->nullable();
+            $table->timestamp('scheduled_at')->nullable();
+            $table->dateTime('date_heure')->nullable();
+            $table->enum('arrive', ['oui', 'non'])->nullable();
+            $table->decimal('montant_paye', 8, 2)->nullable();
             $table->timestamps();
         });
         

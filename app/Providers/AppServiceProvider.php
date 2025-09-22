@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Paiement;
 use Illuminate\Support\Facades\Schema;
 use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
 
 
@@ -31,6 +33,11 @@ class AppServiceProvider extends ServiceProvider
                 $expiresAt = now()->addMinutes(2);
                 Cache::put('user-is-online-' . Auth::id(), true, $expiresAt);
             }
+        });
+        
+        Gate::define('see', function (User $user) {
+            $paiments = Paiement::where('user_id',$user->id)->andwhere('status','success')->get();
+            return (count($paiments) > 0) ;
         });
     }
     public function redirectTo()

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PaymentInfoRequest;
+use App\Http\Requests\PaymentRequest;
 use App\Models\PaymentInfo;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,10 +27,10 @@ class PaymentController extends Controller
      * @param PaymentInfoRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function processPayment(PaymentInfoRequest $request)
+    public function processPayment(Request $request)
     {
         // Récupération des données validées
-        $validatedData = $request->validated();
+        $validatedData = $request->all();
         
         // Ajout de l'ID utilisateur si connecté
         if (Auth::check()) {
@@ -39,14 +41,18 @@ class PaymentController extends Controller
             // Simulation d'un appel à une API de paiement
             // Dans un environnement de production, vous appelleriez ici votre passerelle de paiement
             $paymentProcessed = $this->simulatePaymentGateway($validatedData);
-            
+            dd("hna");
             if ($paymentProcessed) {
                 // Enregistrement des informations de paiement en base de données
                 $validatedData['status'] = 'completed';
-                $paymentInfo = PaymentInfo::create($validatedData);
-                
-                return redirect()->route('payment.confirmation', ['id' => $paymentInfo->id])
-                                ->with('success', 'Paiement traité avec succès');
+                $subscription = Subscription::create(['type'=> $validatedData['pack']]);
+                $subscription->user()->attach($validatedData['user_id']);
+
+                // $paymentInfo = PaymentInfo::create($validatedData);
+
+                return view('payments.confirmation');
+                // return redirect()->route('payment.confirmation')
+                //                 ->with('success', 'Paiement traité avec succès');
             } else {
                 return back()->withErrors(['payment' => 'Le paiement a échoué, veuillez réessayer.'])
                             ->withInput($request->except(['card_number', 'cvv']));
@@ -109,7 +115,7 @@ class PaymentController extends Controller
         */
         
         // Pour la simulation
-        if ($data['payment_method'] === 'credit_card') {
+        if ($data['payment_method'] === 'card') {
             // Validation supplémentaire du numéro de carte
             $cardNumber = preg_replace('/\D/', '', $data['card_number']);
             

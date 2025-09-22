@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('messages');
+        // Schema::dropIfExists('messages');
     }
 
     /**

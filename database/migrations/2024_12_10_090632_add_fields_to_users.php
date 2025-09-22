@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('type')->default('user');
+        // Schema::table('users', function (Blueprint $table) {
             // $table->boolean('subscribed')->default(0);
-        });
+        // });
     }
 
     /**

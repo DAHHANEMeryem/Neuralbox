@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Socialite;
+// use Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite ;
 
 class GoogleController extends Controller
 {
@@ -21,13 +22,13 @@ class GoogleController extends Controller
             ['email' => $googleUser->getEmail()],
             [
                 'name' => $googleUser->getName(),
-                'password' => bcrypt('password') // أو null حيت الدخول ب Google
+                'password' => bcrypt('password') 
             ]
         );
 
         Auth::login($user);
 
-        return redirect('/'); // أو لأي صفحة بغيتها
+        return redirect('/'); 
     }
 }
 

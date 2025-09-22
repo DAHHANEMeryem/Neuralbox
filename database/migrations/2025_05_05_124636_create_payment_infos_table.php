@@ -14,19 +14,19 @@ return new class extends Migration
         Schema::create('payment_infos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('card_holder_name');
-            $table->string('card_number');
-            $table->string('expiration_date');
-            $table->string('cvv');
-            $table->string('address');
-            $table->string('city');
-            $table->string('postal_code');
-            $table->string('country');
+            // $table->string('card_holder_name');
+            // $table->string('card_number');
+            // $table->string('expiration_date');
+            // $table->string('cvv');
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            // $table->string('postal_code');
+            $table->string('country')->nullable();
             $table->string('phone');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->decimal('amount', 10, 2);
             $table->string('status')->default('pending');
-            $table->string('payment_method')->default('credit_card');
+            $table->string('payment_method')->default('card');
             $table->timestamps();
             
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

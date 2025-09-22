@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up()
 {
-    Schema::table('users', function (Blueprint $table) {
-        $table->string('photo')->nullable(); 
-    });
+    // Schema::table('users', function (Blueprint $table) {
+    //     $table->string('photo')->nullable(); 
+    // });
 }
 
 public function down()
 {
-    Schema::table('users', function (Blueprint $table) {
-        $table->dropColumn('photo');
-    });
+    // Schema::table('users', function (Blueprint $table) {
+    //     $table->dropColumn('photo');
+    // });
 }
 
 };

@@ -154,7 +154,7 @@
 
       <div class="form-group">
         <label for="numero">رقم الهاتف</label>
-        <input type="text" id="numero" name="numero" placeholder="+33 6 12 34 56 78" 
+        <input type="tel" id="numero" name="numero" placeholder="+33 6 12 34 56 78" 
                value="{{ old('numero') }}" maxlength="20" required />
         @error('numero')
           <span class="form-note" style="color: #e74c3c;">{{ $message }}</span>

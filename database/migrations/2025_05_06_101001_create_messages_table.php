@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Message;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,16 +14,27 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('expediteur_id');
-            $table->unsignedBigInteger('destinataire_id');
-            $table->text('contenu');
-            $table->boolean('lu')->default(false);
+            $table->string('nom');
+            $table->string('prenom');
+            $table->string('email');
+            $table->string('telephone');
+            $table->text('message');
+            $table->boolean('destinataire_id')->nullable()->default(false);
+            $table->boolean('lu')->nullable()->default(false);
+            $table->timestamp('date')->useCurrent();
+            $table->boolean('is_read')->default(false);
             $table->timestamps();
-        
-            $table->foreign('expediteur_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('destinataire_id')->references('id')->on('users')->onDelete('cascade');
         });
         
+    }
+    
+    public function markAsRead($id)
+    {
+        $message = Message::findOrFail($id);
+        $message->is_read = true;
+        $message->save();
+
+        return response()->json(['success' => true]);
     }
 
     /**

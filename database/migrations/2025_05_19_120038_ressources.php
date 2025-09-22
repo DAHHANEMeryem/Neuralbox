@@ -12,14 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ressources', function (Blueprint $table) {
-    $table->id();
-    $table->string('titre');
-    $table->text('description')->nullable();
-    $table->string('video_url')->nullable();
-    $table->enum('categorie', ['pedagogie', 'neuralbox']);
-    $table->enum('visibilite', ['abonne', 'tous']); // accès
-    $table->timestamps();
-});
+            $table->id();
+            $table->string('titre');
+            $table->text('description')->nullable();
+            $table->string('video_url')->nullable();
+            $table->enum('categorie', ['pedagogie', 'neuralbox']);
+            $table->enum('visibilite', ['abonne', 'tous']); // accès
+            $table->string('preview_image')->nullable();
+            $table->integer('ordre')->default(0);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('ressources');
     }
 };

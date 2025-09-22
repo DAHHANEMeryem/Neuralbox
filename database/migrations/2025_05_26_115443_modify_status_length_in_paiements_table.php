@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('paiements', function (Blueprint $table) {
-            // Modifier la colonne status pour avoir une taille plus grande
-            $table->string('status', 20)->change();
-        });
+        // Schema::table('paiements', function (Blueprint $table) {
+        //     // Modifier la colonne status pour avoir une taille plus grande
+        //     $table->string('status', 20)->change();
+        // });
     }
 
     /**
@@ -22,9 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('paiements', function (Blueprint $table) {
-            // Remettre la taille d'origine (exemple 6)
-            $table->string('status', 6)->change();
-        });
+        // Schema::table('paiements', function (Blueprint $table) {
+        //     // Remettre la taille d'origine (exemple 6)
+        //     $table->string('status', 6)->change();
+        // });
     }
 };

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('type'); // إزالة العمود 'type'
-        });
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->dropColumn('type'); // إزالة العمود 'type'
+        // });
     }
 
     /**
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('type')->default('user'); // إعادة إضافة العمود 'type' إذا تم التراجع عن الهجرة
-        });
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->string('type')->default('user'); 
+        // });
     }
 };

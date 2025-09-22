@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
-    <title>نورال بوكس | تأكيد الاشتراك</title>
+    <title>نيورال بوكس | تأكيد الاشتراك</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -22,7 +23,7 @@
         .success-card {
             background: white;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             padding: 40px;
             text-align: center;
         }
@@ -45,9 +46,17 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .payment-details {
@@ -98,18 +107,19 @@
         }
     </style>
 </head>
+
 <body>
     @if(session('success'))
     <div style="background-color: #d4edda; padding: 10px; text-align: center; color: #155724;">
         {{ session('success') }}
     </div>
-@endif
+    @endif
 
-@if(session('info'))
+    @if(session('info'))
     <div style="background-color: #d1ecf1; padding: 10px; text-align: center; color: #0c5460;">
         {{ session('info') }}
     </div>
-@endif
+    @endif
 
     <div class="confirmation-container">
         <div class="success-card">
@@ -133,31 +143,31 @@
                     <span>{{ $paymentInfo->name }}</span>
                 </div>
 
-@if($paymentInfo->method === 'stripe')
-    <div class="detail-row">
-        <span>رقم البطاقة:</span>
-        <span>{{ $paymentInfo->masked_card_number ?? '**** **** **** ****' }}</span>
-    </div>
-@endif
+                @if($paymentInfo->method === 'stripe')
+                <div class="detail-row">
+                    <span>رقم البطاقة:</span>
+                    <span>{{ $paymentInfo->masked_card_number ?? '**** **** **** ****' }}</span>
+                </div>
+                @endif
 
-                
+
 
                 <div class="detail-row">
                     <span>طريقة الدفع:</span>
                     <span>
                         @switch($paymentInfo->method)
-                            @case('stripe') بطاقة ائتمان @break
-                            @case('paypal') PayPal @break
-                            @case('bank_transfer') تحويل بنكي @break
-                            @default {{ $paymentInfo->payment_method }}
+                        @case('stripe') بطاقة ائتمان @break
+                        @case('paypal') PayPal @break
+                        @case('bank_transfer') تحويل بنكي @break
+                        @default {{ $paymentInfo->payment_method }}
                         @endswitch
                     </span>
                 </div>
 
-              <div class="detail-row">
-    <span>البريد الإلكتروني:</span>
-    <span>{{ $paymentInfo->email ?? 'غير متوفر' }}</span>
-</div>
+                <div class="detail-row">
+                    <span>البريد الإلكتروني:</span>
+                    <span>{{ $paymentInfo->email ?? 'غير متوفر' }}</span>
+                </div>
 
 
                 <div class="detail-row">
@@ -193,4 +203,5 @@
         </div>
     </div>
 </body>
+
 </html>

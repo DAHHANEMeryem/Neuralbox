@@ -7,15 +7,15 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('rue')->nullable()->change();
-        });
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->string('rue')->nullable()->change();
+        // });
     }
 
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('rue')->nullable(false)->change();
-        });
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->string('rue')->nullable(false)->change();
+        // });
     }
 };

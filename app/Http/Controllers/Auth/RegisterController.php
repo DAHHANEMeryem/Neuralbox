@@ -21,11 +21,11 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'numero' => 'required|string',
-            'ville' => 'required|string',
-            'rue'=>'required|string',
-            'code_postal'=>'required|string',  
-            
+            'numero' => 'string',
+            'ville' => 'string',
+            'rue' => 'string',
+            'code_postal' => 'string',
+
         ]);
     
         // Création de l'utilisateur
@@ -35,13 +35,17 @@ class RegisterController extends Controller
             'password' => Hash::make($validated['password']),
             'numero' => $validated['numero'],
             'ville' => $validated['ville'],
-            'rue'=>$validated['rue'],
-            'code_postal'=>$validated['code_postal'],
+            // 'rue'=>$validated['rue'],
+            // 'code_postal'=>$validated['code_postal'],
         ]);
-        
+
+        Auth::login($user);
 
         // Enlève Auth::login($user) pour ne pas connecter automatiquement
         // Utilisateur redirigé vers la page de login
-        return redirect()->route('login')->with('success', 'Votre compte a été créé avec succès. Veuillez vous connecter.');
+
+        // return redirect()->route('login')->with('success', 'Votre compte a été créé avec succès. Veuillez vous connecter.');
+
+        return redirect()->back();
     }
 }

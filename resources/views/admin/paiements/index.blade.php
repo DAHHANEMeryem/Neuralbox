@@ -31,10 +31,10 @@
 
     <!-- Listes des paiements -->
     <div class="bg-gray-50 rounded-xl p-6 shadow-md">
-        <h2 class="text-2xl font-semibold text-indigo-600 mb-4">Paiements 2300 MAD</h2>
+        <h2 class="text-2xl font-semibold text-indigo-600 mb-4">Paiements Neuralbox (2300 MAD)</h2>
         @include('admin.paiements.table', ['paiements' => $paiements_2300])
 
-        <h2 class="text-2xl font-semibold text-indigo-600 mt-10 mb-4">Paiements 3200 MAD</h2>
+        <h2 class="text-2xl font-semibold text-indigo-600 mt-10 mb-4">Paiements Gold (3200 MAD)</h2>
         @include('admin.paiements.table', ['paiements' => $paiements_3200])
     </div>
 </div>

@@ -36,7 +36,7 @@ class RendezVousController extends Controller
         'message'=>$request->message
     ]);
 
-    return redirect()->route('rendezvous.create')->with('success', 'Rendez-vous demandé avec succès !');
+    return redirect()->route('rendezvous.create')->with('success', __('responses.date_success'));
 }
 
 

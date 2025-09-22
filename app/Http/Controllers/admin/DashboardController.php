@@ -236,7 +236,7 @@ $pctAnnules = getEvolution($annulesToday, $annulesYesterday);
 
 
    $abonneToday = Paiement::whereDate('created_at', today())->where('status', 'reussi')->count();
-$abonne_total=$abonneToday;
+    $abonne_total=$abonneToday;
        
 
 

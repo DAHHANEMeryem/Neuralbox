@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\MeanController;
-use App\Http\Controllers\NeuralBoxController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -12,29 +11,31 @@ use App\Http\Controllers\AboutusController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\subscribeControllers;
-use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\admin\MessageController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\MessagesController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\admin\RendezVousController;
-use App\Http\Controllers\Admin\PaiementController;
+use App\Http\Controllers\admin\PaiementController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\GoogleController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\AdminUserController;
-use App\Http\Controllers\Admin\AdminRendezVousController;
-use App\Http\Controllers\Admin\RessourceController;
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\AdminUserController;
+use App\Http\Controllers\admin\AdminRendezVousController;
 use App\Http\Controllers\Admin\ExportController;
-use App\Http\Controllers\Admin\ElementController;
+use App\Http\Controllers\admin\RessourceController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use Illuminate\Http\Request;
 
 // routes/web.php
-use App\Http\Controllers\ContactController;
 
 // Route::middleware(['auth'])->group(function () {
-//      Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+//  Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 
 //      Route::post('/contact/send-to-admin', [ContactController::class, 'sendToAdmin'])->name('contact.sendToAdmin');
 
@@ -90,7 +91,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/messagerie/messages-generaux', [ContactController::class, 'getGeneralMessages']);
 });
 
-use App\Http\Controllers\SubscriptionController;
 
 
 Route::get('/subscriptions', [SubscriptionController::class, 'index'])->name('subscriptions.index');
@@ -105,19 +105,15 @@ Route::post('/payment', [PaymentController::class, 'processPayment'])->name('pay
 Route::get('/payment/confirmation/{id}', [PaymentController::class, 'showConfirmation'])->name('payment.confirmation');
 
 
-// Routes pour la page d'information de paiement
-Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
-Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.process');
-Route::get('/payment/confirmation/{id}', [PaymentController::class, 'showConfirmation'])->name('payment.confirmation');
 
 Route::middleware(['auth', 'IsAdmin'])->group(function () {
 
-    Route::get('/admin/ressources', [App\Http\Controllers\Admin\RessourceController::class, 'index'])->name('admin.ressources.index');
-    Route::get('/admin/ressources/create', [App\Http\Controllers\Admin\RessourceController::class, 'create'])->name('admin.ressources.create');
-    Route::post('/admin/ressources', [App\Http\Controllers\Admin\RessourceController::class, 'store'])->name('admin.ressources.store');
-    Route::get('/admin/ressources/{ressource}/edit', [App\Http\Controllers\Admin\RessourceController::class, 'edit'])->name('admin.ressources.edit');
-    Route::put('/admin/ressources/{ressource}', [App\Http\Controllers\Admin\RessourceController::class, 'update'])->name('admin.ressources.update');
-    Route::delete('/admin/ressources/{ressource}', [App\Http\Controllers\Admin\RessourceController::class, 'destroy'])->name('admin.ressources.destroy');
+    Route::get('/admin/ressources', [RessourceController::class, 'index'])->name('admin.ressources.index');
+    Route::get('/admin/ressources/create', [RessourceController::class, 'create'])->name('admin.ressources.create');
+    Route::post('/admin/ressources', [RessourceController::class, 'store'])->name('admin.ressources.store');
+    Route::get('/admin/ressources/{ressource}/edit', [RessourceController::class, 'edit'])->name('admin.ressources.edit');
+    Route::put('/admin/ressources/{ressource}', [RessourceController::class, 'update'])->name('admin.ressources.update');
+    Route::delete('/admin/ressources/{ressource}', [RessourceController::class, 'destroy'])->name('admin.ressources.destroy');
 
 
 
@@ -149,13 +145,13 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     Route::patch('/admin/rendezvous/{id}/update-statut', [AdminRendezVousController::class, 'updateStatutArrive'])->name('admin.rendezvous.saveStatut');
 
 
-    Route::get('admin/messages', [App\Http\Controllers\Admin\MessageController::class, 'index'])->name('admin.messages.index');
-    Route::get('admin/messages/{id}', [App\Http\Controllers\Admin\MessageController::class, 'show'])->name('admin.messages.show');
-    Route::post('admin/messages/{id}/read', [App\Http\Controllers\Admin\MessageController::class, 'markAsRead'])->name('admin.messages.markAsRead');
-    Route::delete('admin/messages/{id}', [App\Http\Controllers\Admin\MessageController::class, 'destroy'])->name('admin.messages.destroy');
-    Route::get('/admin/export-pdf', [App\Http\Controllers\Admin\ExportController::class, 'exportPDF'])->name('admin.export.pdf');
-    Route::get('/admin/export/paiements', [App\Http\Controllers\Admin\ExportController::class, 'exportPaiementsPDF'])->name('admin.export.paiements.pdf');
-    Route::get('/admin/export/dashboard', [App\Http\Controllers\Admin\DashboardExportController::class, 'exportPdf'])->name('admin.export.dashboard.pdf');
+    Route::get('admin/messages', [MessageController::class, 'index'])->name('admin.messages.index');
+    Route::get('admin/messages/{id}', [MessageController::class, 'show'])->name('admin.messages.show');
+    Route::post('admin/messages/{id}/read', [MessageController::class, 'markAsRead'])->name('admin.messages.markAsRead');
+    Route::delete('admin/messages/{id}', [MessageController::class, 'destroy'])->name('admin.messages.destroy');
+    Route::get('/admin/export-pdf', [ExportController::class, 'exportPDF'])->name('admin.export.pdf');
+    Route::get('/admin/export/paiements', [ExportController::class, 'exportPaiementsPDF'])->name('admin.export.paiements.pdf');
+    Route::get('/admin/export/dashboard', [DashboardExportController::class, 'exportPdf'])->name('admin.export.dashboard.pdf');
 
 
     // Action d'export en PDF (GET, avec paramètres de filtre, format, sections)
@@ -216,25 +212,24 @@ Route::get('lang/{locale}', function ($locale) {
 
 
 // باقي الروابط
-Route::get('/video-url/{filename}', [CoursController::class, 'getVideoUrl']);
+Route::get('/video-url/{filename}', [CoursController::class, 'getVideoUrl'])->where('filename', '.*')->name('video-link');
 // Route::get('/neuralbox', [NeuralBoxController::class, 'index'])->name('neuralbox');
 // Route::get('/peda', [NeuralBoxController::class, 'peda'])->name('peda');
 Route::get('/suivre', [MeanController::class, 'suivre'])->name('suivre');
-Route::get('/policy', [MeanController::class, 'suivre'])->name('suivre');
+// Route::get('/policy', [MeanController::class, 'suivre'])->name('suivre');
 Route::get('/about', [AboutusController::class, 'about'])->name('about');
+Route::get('/about2', [AboutusController::class, 'about2'])->name('about2');
 
 // المسار للفيديو
 Route::get('/video/stream/{filename}', function ($filename) {
     // تحقق من التوقيع
 
-
     if (!request()->hasValidSignature()) {
         abort(403, 'Unauthorized or expired link.');
     }
 
-    $disk = Storage::disk('local');
-    $filePath = $disk->path('videos/' . $filename);
-
+    $disk = Storage::disk('private');
+    $filePath = $disk->path($filename);
     // تأكد من وجود الملف
     if (!file_exists($filePath)) {
         abort(404, 'File not found.');
@@ -271,10 +266,18 @@ Route::get('/video/stream/{filename}', function ($filename) {
     return response()->stream(function () use ($filePath, $start, $length) {
         $handle = fopen($filePath, 'rb');
         fseek($handle, $start);
-        echo fread($handle, $length);
+        $bufferSize = 8192;
+        $bytesSent = 0;
+        while ($bytesSent < $length && !feof($handle)) {
+            $readLength = min($bufferSize, $length - $bytesSent);
+            $buffer = fread($handle, $readLength);
+            echo $buffer;
+            flush();
+            $bytesSent += strlen($buffer);
+        }
         fclose($handle);
     }, $statusCode, $headers);
-})->name('video.stream');
+})->where('filename', '.*')->name('video.stream');
 
 // صفحة الداشبورد
 
@@ -325,7 +328,7 @@ Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])->middle
 
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 Route::post('/update-password', [ProfileController::class, 'updatePassword'])->name('update.password');
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 Route::get('/peda', [RessourceController::class, 'pedagogie'])->name('peda');
@@ -343,7 +346,6 @@ Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkE
 
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 
-use App\Http\Controllers\Auth\NewPasswordController;
 
 Route::middleware(['web'])->group(function () {
     Route::put('/password', [NewPasswordController::class, 'store'])->name('password.update');
@@ -356,7 +358,30 @@ Route::put('/reset-password', [NewPasswordController::class, 'update'])->name('p
 Route::get('/welcome', [MessagesController::class, 'showRegistrationForm'])->name('welcome');
 Route::post('/welcome', [MessagesController::class, 'register']); // صلحنا الاسم هنا
 
-// routes/web.php
+Route::get('/file/{id}', function ($id) {
+    $model = \App\Models\Ressource::findOrFail($id);
+    $filePath = $model->preview_image ?? abort(404);
+    // optional: validate filename to avoid path traversal
+    $disk = Storage::disk('private'); // configure disk in config/filesystems.php
+    if (! $disk->exists($filePath)) {
+        abort(404);
+    }
+
+    // Optional: authorization logic
+    // if (! $request->user()->can('view-image', $someModelOrId)) { abort(403); }
+
+    // get mime type
+    $mime = $disk->mimeType($filePath) ?? 'image/jpeg';
+
+    // stream file to response (memory-efficient)
+    return response()->stream(function () use ($disk, $filePath) {
+        echo $disk->get($filePath);
+    }, 200, [
+        'Content-Type' => $mime,
+        'Content-Disposition' => 'inline; filename="' . basename($filePath) . '"',
+        'Cache-Control' => 'public, max-age=604800, immutable',
+    ]);
+})->name('secure.file');
 
 
 

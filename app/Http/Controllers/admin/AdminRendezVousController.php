@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Rendezvous;
+use App\Models\RendezVous;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -11,7 +11,7 @@ class AdminRendezVousController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Rendezvous::query();
+        $query = RendezVous::query();
         
 
 
@@ -37,11 +37,11 @@ class AdminRendezVousController extends Controller
         $rendezvous = $query->with('user')->paginate(10);
 
         // Statistiques
-        $totalToday = Rendezvous::whereDate('date', Carbon::today())->count();
-        $totalWeek = Rendezvous::whereBetween('date', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
-        $totalmonth = Rendezvous::whereBetween('date', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->count();
-        $totalAttente = Rendezvous::where('statut', 'attente')->count();
-        $totalRdv = Rendezvous::count();
+        $totalToday = RendezVous::whereDate('date', Carbon::today())->count();
+        $totalWeek = RendezVous::whereBetween('date', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
+        $totalmonth = RendezVous::whereBetween('date', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->count();
+        $totalAttente = RendezVous::where('statut', 'attente')->count();
+        $totalRdv = RendezVous::count();
 
         return view('admin.rendezvous.index', compact(
             'rendezvous', 
@@ -55,7 +55,7 @@ class AdminRendezVousController extends Controller
 
     public function updateStatus(Request $request, $id)
 {
-    $rendezvous = Rendezvous::findOrFail($id);
+    $rendezvous = RendezVous::findOrFail($id);
     
     // Validation du statut
     $validated = $request->validate([
@@ -77,7 +77,7 @@ class AdminRendezVousController extends Controller
 
     public function getDetails($id)
     {
-        $rendezvous = Rendezvous::with('user')->findOrFail($id);
+        $rendezvous = RendezVous::with('user')->findOrFail($id);
         
         // Formater les dates pour l'affichage
         $data = $rendezvous->toArray();
@@ -131,12 +131,12 @@ class AdminRendezVousController extends Controller
 
     /*
     // Méthodes pour l'envoi d'emails (à implémenter selon vos besoins)
-    private function sendConfirmationEmail(Rendezvous $rendezvous)
+    private function sendConfirmationEmail(RendezVous $rendezvous)
     {
         // Logique d'envoi d'email de confirmation
     }
     
-    private function sendRefusalEmail(Rendezvous $rendezvous)
+    private function sendRefusalEmail(RendezVous $rendezvous)
     {
         // Logique d'envoi d'email de refus
     }

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::table('contacts', function (Blueprint $table) {
-            $table->timestamp('read_at')->nullable()->after('message');
-        });
+    //    Schema::table('contacts', function (Blueprint $table) {
+    //         $table->timestamp('read_at')->nullable()->after('message');
+    //     });
     }
 
     /**
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-       Schema::table('contacts', function (Blueprint $table) {
-            $table->dropColumn('read_at');
-        });
+    //    Schema::table('contacts', function (Blueprint $table) {
+    //         $table->dropColumn('read_at');
+    //     });
     }
 };

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -23,28 +25,44 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      */
     
-public function store(Request $request): RedirectResponse
+public function store(Request $request): RedirectResponse | JsonResponse
 {
-    $request->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-    ]);
+        try {
+            // Valider les données du formulaire
+            $credentials = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
 
-    if (Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
-        $request->session()->regenerate();
+            // Tenter la connexion
+            if (!Auth::attempt($credentials)) {
+                throw ValidationException::withMessages([
+                    'email' => __('auth.failed'),
+                ]);
+            }
 
-        $user = Auth::user();
+            // Si l'authentification réussit
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Connexion réussie!',
+                    'redirect' => route('home') // Or the desired redirection route
+                ]);
+            }
 
-        if ($user->is_admin) {
-            return redirect()->intended('/admin/dashboard'); // redirection pour l'admin
+            // Pour les requêtes normales, rediriger
+            return redirect()->intended(route('home'));
+        } catch (ValidationException $e) {
+            // Gérer les erreurs de validation
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json([
+                    'errors' => $e->errors(),
+                ], 422);
+            }
+
+            // Pour les requêtes normales, rediriger avec les erreurs
+            return back()->withErrors($e->errors())->onlyInput('email');
         }
-
-        return redirect()->intended('/'); // redirection pour les utilisateurs
-    }
-
-    return back()->withErrors([
-        'email' => 'Les identifiants ne correspondent pas.',
-    ]);
 }
 
     /**

@@ -1,0 +1,38 @@
+<?php
+
+return [
+    "continue_payment"=> "أكمل تسجيلك في نيورال بوكس",
+    "pack"=> "اختر العرض",
+    "type"=> "طريقة الدفع",
+    "paiement"=> "الدفع",
+    "confirmation"=> "تأكيد الدفع",
+    "select_type"=> "اختر طريقة الدفع:" ,
+    "mad"=> "د.م" ,
+    "card"=> "بطاقة بنكية" ,
+    "paypal"=> "Paypal" ,
+    "virement"=> "تحويل بنكي" ,
+    "price"=> "الثمن الإجمالي:" ,
+    "bank"=> "البنك" ,
+    "rib"=> "<span style='float:right'>RIB</span>" ,
+    "iban"=> "<span style='float:right'>IBAN</span>" ,
+    "swift"=> "<span style='float:right'>BIC/SWIFT</span>" ,
+    "beneficiary"=> "صاحب الحساب" ,
+    "price_to_transfer"=> "المبلغ المراد تحويله" ,
+    "bank_info"=> "معلومات البنك" ,
+    "virement_notion"=> "يرجى تضمين اسمك الأول والأخير في وصل التحويل." ,
+
+    "card_number"=> "رقم البطاقة" ,
+    "card_holder_name"=> "اسم صاحب البطاقة" ,
+    "card_security_code"=> "رمز الأمان" ,
+    "card_expedation_date"=> "تاريخ انتهاء الصلاحية" ,
+    "card_security_message_SSL"=> "الدفع مؤمن بتشفير SSL" ,
+
+    "receipt"=> "إيصال الدفع" ,
+    "process"=> "إتمام الدفع" ,
+
+    "errors" => [
+        "payment_option_required" =>  "يرجى اختيار طريقة الدفع",
+        "payment_option_in" =>  "طريقة الدفع المختارة غير صحيحة",
+    ]
+];
+

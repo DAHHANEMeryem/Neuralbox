@@ -4,10 +4,10 @@
 
 @section('content')
 
-<section class="main-banner">
+<section class="main-banner pt-0">
 	<div class="container">
-		<div class="row align-items-center">
-			<div class="col-lg-7 col-md-7 ">
+		<div class="row align-items-start">
+			<div class="col-lg-7 col-md-7 pt-5">
 				<div class="banner-text wow fadeInLeft position-relative" data-wow-duration="1000ms">
 					<h2><span>{{ __("hero.NeuralBox") }}</span><br>{{__("hero.slogan")}}</h2>
 					<p>{{__("hero.desc")}}</p>
@@ -15,6 +15,9 @@
 						<input type="text" name="search" placeholder="Search Class">
 						<button><i class="fa fa-search"></i></button>
 					</form> -->
+				</div>
+				<div class="box">
+					<img src="assets/img/Box/Box.png" class="box" alt="">
 				</div>
 			</div>
 			<div class="col-lg-5 col-md-5">
@@ -27,51 +30,50 @@
 					أسرة سعيدة
 				</div>
 				<div class="banner-img wow zoomIn" data-wow-duration="1000ms">
-					<img src="https://html.merku.love/shelly/assets/img/banner-img.png" alt="">
+					<img src="assets/img/banner-img.png" alt="">
 				</div><!--banner-img end-->
 				<div class="elements-bg wow zoomIn" data-wow-duration="1000ms"></div>
 			</div>
 		</div>
 	</div>
 </section><!--main-banner end-->
-<h2 class="main-title">{{ __("hero.NeuralBox") }}</h2>
+<!-- <h2 class="main-title">{{ __("hero.NeuralBox") }}</h2> -->
 
 </div>
 
 <section class="about-us-section">
 	<div class="container">
-		<div class="section-title text-center">
+		<div class="section-title  text-center">
 			<h2>{{ __("about.welcome_to") }}<span> {{ __("hero.NeuralBox") }}</span></h2>
-			<p>{{ __("about.desc")}}</p>
+			<p class="mt-5 mb-4">{!! trans("about.desc")!!}</p>
 		</div><!--section-title end-->
 		<div class="about-sec">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-3 col-md-6 col-sm-6">
+					<!-- <div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="abt-col wow fadeInUp" data-wow-duration="1000ms">
 							<img src="assets/img/icon5.png" alt="">
-							<h3>{{ __("about.tools") }}</h3>
-							<!-- <p>Vivamus interdum, mauris interdum quis curdum sodales</p> -->
-						</div><!--abt-col end-->
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6">
+							<h3>{{ __("welcome.values.inside_change") }}</h3>
+						</div>
+					</div> -->
+					<div class="col-lg-4 col-md-6 col-sm-6">
 						<div class="abt-col wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="200ms">
-							<img src="assets/img/icon7.png" alt="">
-							<h3>{{ __("about.manual") }}</h3>
+							<img src="assets/img/about/1.png" alt="">
+							<h3>{{ __("welcome.values.empowering") }}</h3>
 							<!-- <p>Pelleneget tespharetra que fringilla egugue id eget pharetra</p> -->
 						</div><!--abt-col end-->
 					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="col-lg-4 col-md-6 col-sm-6">
 						<div class="abt-col wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
-							<img src="assets/img/icon8.png" alt="">
-							<h3>{{ __("about.suivre_instructions") }}</h3>
+							<img src="assets/img/about/2.png" alt="">
+							<h3>{{ __("welcome.values.integrating") }}</h3>
 							<!-- <p>Etiam risus neque, volutpat vel laoreet a, finibus volutpat non</p> -->
 						</div><!--abt-col end-->
 					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="col-lg-4 col-md-6 col-sm-6">
 						<div class="abt-col wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
-							<img src="assets/img/icon9.png" alt="">
-							<h3>{{ __("about.suivre_rate") }}</h3>
+							<img src="assets/img/about/3.png" alt="">
+							<h3>{{ __("welcome.values.creativity") }}</h3>
 							<!-- <p>Mauris nec mi fequis giat, cursus tortor nec, pharetra tellus</p> -->
 						</div><!--abt-col end-->
 					</div>
@@ -84,11 +86,11 @@
 				<div class="blog-post video-post">
 					<div class="blog-thumbnail ">
 						<a href="#" title="">
-							<img src="assets/img/blog-large4.jpg" alt="" class="cover">
+							<img src="assets/img/covers/intro.jpg" alt="" class="cover">
 						</a>
 						<span class="category">{{__("welcome.video_title")}}</span>
-						<a href="https://www.youtube.com/watch?v=9MUDvEHkREM" target="_blank" title="" class="video-play">
-							<!-- <img src="assets/img/play.png" alt=""> -->
+						<a href="{{ url('/video-url/videos/intro.mp4') }}" class="video-play html5lightbox overlay-box">
+							<img src="assets/img/play.png" alt="">
 						</a>
 					</div>
 
@@ -111,6 +113,8 @@
 		</div> -->
 	</div>
 </section><!--about-us-section end-->
+
+
 {{-- <section class="page-content call-to-action-1  p-0">
 	<div class="container">
 		<div class="row">
@@ -147,9 +151,9 @@
 						<h2>{{__("welcome.call.title1")}}</h2>
 					</div><!--newsz-ltr-text end-->
 				</div>
-				<div class="text-center col-lg-8">
+				<div class="text-center col-lg-10">
 					<p>{{__("welcome.call.text1")}}</p>
-					<a href="contacts.html" title="" class="w-fit btn-default mt-2">{{__("welcome.call.button1")}} <i class="fa fa-long-arrow-alt-right"></i></a>
+					<a href="#pricing" title="" class="w-fit btn-default mt-4">{{__("welcome.call.button1")}} <i class="fa fa-long-arrow-alt-right"></i></a>
 					<!-- <form class="newsletter-form">
 						<div class="row">
 							<div class="col-md-4">
@@ -187,13 +191,13 @@
 	</div>
 </section>
 
-<section class="about-page-content">
+<section class="about-page-content pt-4">
 	<div class="container">
 		<div class="abt-page-row">
 			<div class="row align-items-center">
 				<div class="col-lg-6 col-md-6">
 					<div class="section-title">
-						<h2>أستاذ<br /> <span>عبدالصمد أشتاشن</span></h2>
+						<h2><span>ذ. عبد الصمد أشتاشن </span></h2>
 						<!-- <p class="mw-100"></p> -->
 						<!-- <a href="classes.html" title="" class="btn-default">Classes <i class="fa fa-long-arrow-alt-right"></i></a> -->
 					</div>
@@ -247,7 +251,6 @@
 									<span class="icon"><img src="{{asset('images/icons/fea/9.png')}}" alt="" /></span>
 								</div>
 								{!!__('transelt.h51')!!}
-								{{-- <div class="text">Vim novum tritaniys scribentur varet peru dicat copiosae reprimique teimy laborey fabulas scriptorem.</div> --}}
 							</div>
 						</div>
 						<!-- Service Block -->
@@ -257,7 +260,6 @@
 									<span class="icon"><img src="{{asset('images/icons/fea/4.png')}}" alt="" /></span>
 								</div>
 								{!!__('transelt.h52')!!}
-								{{-- <div class="text">Vim novum tritaniys scribentur varet peru dicat copiosae reprimique teimy laborey fabulas scriptorem.</div> --}}
 							</div>
 						</div>
 						<!-- Service Block -->
@@ -267,7 +269,6 @@
 									<span class="icon"><img src="{{asset('images/icons/fea/8.png')}}" alt="" /></span>
 								</div>
 								{!!__('transelt.h53')!!}
-								{{-- <div class="text">Vim novum tritaniys scribentur varet peru dicat copiosae reprimique teimy laborey fabulas scriptorem.</div> --}}
 							</div>
 						</div>
 						<!-- Service Block -->
@@ -277,7 +278,6 @@
 									<span class="icon"><img src="{{asset('images/icons/fea/5.png')}}" alt="" /></span>
 								</div>
 								{!!__('transelt.h54')!!}
-								{{-- <div class="text">Vim novum tritaniys scribentur varet peru dicat copiosae reprimique teimy laborey fabulas scriptorem.</div> --}}
 							</div>
 						</div>
 						<!-- Service Block -->
@@ -287,7 +287,6 @@
 									<span class="icon"><img src="{{asset('images/icons/fea/12.png')}}" alt="" /></span>
 								</div>
 								{!!__('transelt.h55')!!}
-								{{-- <div class="text">Vim novum tritaniys scribentur varet peru dicat copiosae reprimique teimy laborey fabulas scriptorem.</div> --}}
 							</div>
 						</div>
 
@@ -299,7 +298,6 @@
 									<span class="icon slide-up"><img src="{{asset('images/icons/fea/1.png')}}" alt="" /></span>
 								</div>
 								{!!__('transelt.h56')!!}
-								{{-- <div class="text">Vim novum tritaniys scribentur varet peru dicat copiosae reprimique teimy laborey fabulas scriptorem.</div> --}}
 							</div>
 						</div>
 
@@ -310,7 +308,6 @@
 									<span class="icon"><img src="{{asset('images/icons/fea/2.png')}}" alt="" /></span>
 								</div>
 								{!!__('transelt.h57')!!}
-								{{-- <div class="text">Vim novum tritaniys scribentur varet peru dicat copiosae reprimique teimy laborey fabulas scriptorem.</div> --}}
 							</div>
 						</div>
 
@@ -321,7 +318,6 @@
 									<span class="icon"><img src="{{asset('images/icons/fea/3.png')}}" alt="" /></span>
 								</div>
 								{!!__('transelt.h58')!!}
-								{{-- <div class="text">Vim novum tritaniys scribentur varet peru dicat copiosae reprimique teimy laborey fabulas scriptorem.</div> --}}
 							</div>
 						</div>
 
@@ -336,7 +332,6 @@
 									<span class="icon"><img src="{{asset('images/icons/fea/6.png')}}" alt="" /></span>
 								</div>
 								{!!__('transelt.h59')!!}
-								{{-- <div class="text">Vim novum tritaniys scribentur varet peru dicat copiosae reprimique teimy laborey fabulas scriptorem.</div> --}}
 							</div>
 						</div>
 
@@ -347,7 +342,6 @@
 									<span class="icon"><img src="{{asset('images/icons/fea/7.png')}}" alt="" /></span>
 								</div>
 								{!!__('transelt.h510')!!}
-								{{-- <div class="text">Vim novum tritaniys scribentur varet peru dicat copiosae reprimique teimy laborey fabulas scriptorem.</div> --}}
 							</div>
 						</div>
 
@@ -362,7 +356,6 @@
 									<span class="icon"><img src="{{asset('images/icons/fea/10.png')}}" alt="" /></span>
 								</div>
 								{!!__('transelt.h511')!!}
-								{{-- <div class="text">Vim novum tritaniys scribentur varet peru dicat copiosae reprimique teimy laborey fabulas scriptorem.</div> --}}
 							</div>
 						</div>
 
@@ -373,7 +366,6 @@
 									<span class="icon"><img src="{{asset('images/icons/fea/11.png')}}" alt="" /></span>
 								</div>
 								{!!__('transelt.h512')!!}
-								{{-- <div class="text">Vim novum tritaniys scribentur varet peru dicat copiosae reprimique teimy laborey fabulas scriptorem.</div> --}}
 							</div>
 						</div>
 
@@ -395,7 +387,7 @@
 					<div class="sec-title">
 						<h2>{{ __("welcome.temoignage.title") }}</h2>
 						<!-- <p>{{ __("welcome.temoignage.text") }}</p> -->
-						<h3><img src="assets/img/icon11.png" alt="">{{__("welcome.temoignage.call")}}<a href="´tel:+212539324232"><strong dir="ltr"> +212 539 32 42 32</strong></a></h3>
+						<!-- <h3><img src="assets/img/icon11.png" alt="">{{__("welcome.temoignage.call")}}<a href="´tel:+212539324232"><strong dir="ltr"> +212 539 32 42 32</strong></a></h3> -->
 					</div><!--sec-title end-->
 					<div class="course-img">
 						<img src="assets/img/course-img.png" alt="">
@@ -417,7 +409,7 @@
 							</ul>
 							<span>FREE</span>
 						</div> -->
-						<h3><a href="event-single.html" title="">Une très belle expérience pour nos petits je recommande vivement </a></h3>
+						<h3>Une très belle expérience pour nos petits je recommande vivement</h3>
 						<div class="d-flex flex-wrap">
 							<div class="posted-by">
 								<img src="https://via.placeholder.com/26x26" alt="">
@@ -427,19 +419,8 @@
 						</div>
 					</div>
 					<div class="course-card wow fadeInLeft" data-wow-duration="1000ms">
-						<!-- <div class="d-flex flex-wrap align-items-center">
-							<ul class="course-meta">
-								<li>
-									<img src="assets/img/icon12.png" alt="">
-									29/07/2020
-								</li>
-								<li>
-									11AM to 15PM
-								</li>
-							</ul>
-							<span>FREE</span>
-						</div> -->
-						<h3><a href="event-single.html" title="">Merci bcp Mr Abdessamad pour votre professionnalisme ainsi que votre équipe... Bravo 👏👍👏 et bonne continuation …</a></h3>
+
+						<h3>Merci bcp Mr Abdessamad pour votre professionnalisme ainsi que votre équipe... Bravo 👏👍👏 et bonne continuation …</h3>
 						<div class="d-flex flex-wrap">
 							<div class="posted-by">
 								<img src="https://via.placeholder.com/26x26" alt="">
@@ -449,84 +430,74 @@
 						</div>
 					</div>
 					<div class="course-card wow fadeInLeft" data-wow-duration="1000ms">
-						<!-- <div class="d-flex flex-wrap align-items-center">
-							<ul class="course-meta">
-								<li>
-									<img src="assets/img/icon12.png" alt="">
-									29/07/2020
-								</li>
-								<li>
-									11AM to 15PM
-								</li>
-							</ul>
-							<span>FREE</span>
-						</div> -->
-						<h3><a href="event-single.html" title="">تجربة رائعة انصح بها جميع الآباء</a></h3>
+						<h3>تجربة رائعة انصح بها جميع الآباء</h3>
 						<div class="d-flex flex-wrap">
 							<div class="posted-by">
 								<img src="https://via.placeholder.com/26x26" alt="">
 								<a href="#" title="">Najat Harti</a>
 							</div>
-							<!-- <span class="locat"><img src="assets/img/loct.png" alt="" />43 castle road 517 district</span> -->
 						</div>
 					</div>
-					<!-- <div class="course-card wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="400ms">
-						<div class="d-flex flex-wrap align-items-center">
-							<ul class="course-meta">
-								<li>
-									<img src="assets/img/icon12.png" alt="">
-									29/07/2020
-								</li>
-								<li>
-									11AM to 15PM
-								</li>
-							</ul>
-							<span>$16</span>
-						</div>
-						<h3><a href="event-single.html" title="">Environment conference</a></h3>
+					<div class="course-card wow fadeInLeft" data-wow-duration="1000ms">
+
+						<h3>I recommend it, Real coaching professionals</h3>
 						<div class="d-flex flex-wrap">
 							<div class="posted-by">
 								<img src="https://via.placeholder.com/26x26" alt="">
-								<a href="#" title="">Cvita Doleschall</a>
+								<a href="#" title="">Ziani Ahmed</a>
 							</div>
-							<span class="locat"><img src="assets/img/loct.png" alt="" />43 castle road 517 district</span>
+							<!-- <span class="locat"><img src="assets/img/loct.png" alt="" />43 castle road 517 district</span> -->
 						</div>
-					</div>-->
+					</div>
 				</div>
-				<!-- <a href="events.html" title="" class="all-btn">All Events <i class="fa fa-long-arrow-alt-right"></i></a> -->
 				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>
-</section><!--course-section end-->
+</section>
 
 <section class="portfolio-section">
 	<div class="auto-container">
-		<!-- Sec Title -->
 		<div class="sec-title right-align">
 			{!!__('transelt.p2')!!}
 		</div>
 
-		<div class="masonry-items-container row clearfix overflow-hidden">
-
+		<!-- <img src="{{asset('assets/img/abt-element.png')}}" class=" bg translate-middle -z-10 position-absolute start-0 top-50" alt=""> -->
+		<div class="masonry-items-container relative  row  clearfix overflow-hidden ">
+			<!-- <img class="cadre absolute top-0 left-0 " src="{{ asset('assets/img/cadre.svg') }}" alt=""> -->
 			<!-- Project Block -->
+
+			<!-- <div class="corner top-left"></div>
+			<div class="corner top-right"></div>
+			<div class="corner bottom-right"></div>
+			<div class="dash top"></div>
+			<div class="dash bottom"></div>
+			<div class="dash left"></div>
+			<div class="dash right"></div> -->
+
 			<div class="project-block masonry-item col-lg-6 col-md-12 col-sm-12">
 				<div class="inner-box3">
 					<div class="image1">
 						<img src="images/resource/cover/1.jpg" alt="" />
 						<!-- Overlay Box -->
-						<div class="overlay-box">
-							<div class="overlay-inner">
-								<div class="content">
-									<a class="icon html5lightbox" data-fancybox="gallery-2" data-caption="" href="https://www.youtube.com/embed/7VR3UoDR3TE"><img src="images/play.png" alt="" /></a>
+						<a class="icon html5lightbox" data-fancybox="gallery-2" data-caption="" href="https://www.youtube.com/embed/7VR3UoDR3TE">
+							<div class="overlay-box">
+								<div class="overlay-inner">
+									<div class="content">
+										<svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+											width="800px" height="800px" viewBox="0 0 163.861 163.861"
+											xml:space="preserve">
+											<g>
+												<path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
+														c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" />
+											</g>
+										</svg>
+									</div>
 								</div>
 							</div>
-						</div>
 					</div>
-					{{-- <div class="lower-content">
-							<!--<div class="category">\\  The Mockup</div>
-							<h2><a href="#">iPhone XS With Shadow</a></h2>-->
-						</div> --}}
+					</a>
+
 				</div>
 			</div>
 
@@ -536,15 +507,23 @@
 					<div class="image1">
 						<img src="images/resource/cover/2.jpg" alt="" />
 						<!-- Overlay Box -->
-						<div class="overlay-box">
-							<div class="overlay-inner">
-								<div class="content">
-									<a class="icon html5lightbox" data-fancybox="gallery-2" data-caption="" href="https://www.youtube.com/embed/kz1GnP8OOLQ"><img src="images/play.png" alt="" /></a>
+						<a class="icon html5lightbox" data-fancybox="gallery-2" data-caption="" href="https://www.youtube.com/embed/kz1GnP8OOLQ">
+							<div class="overlay-box">
+								<div class="overlay-inner">
+									<div class="content">
+										<svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+											width="800px" height="800px" viewBox="0 0 163.861 163.861"
+											xml:space="preserve">
+											<g>
+												<path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
+															c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" />
+											</g>
+										</svg>
+									</div>
 								</div>
 							</div>
-						</div>
 					</div>
-
+					</a>
 				</div>
 			</div>
 
@@ -555,16 +534,23 @@
 					<div class="image1">
 						<img src="images/resource/cover/4.jpg" alt="" />
 						<!-- Overlay Box -->
-						<div class="overlay-box">
-							<div class="overlay-inner">
-								<div class="content">
-									<a class="icon html5lightbox html5lightbox" data-fancybox="gallery-2" data-caption="" href="https://www.youtube.com/embed/pCbDVP1D2ug"><img src="images/play.png" alt="" /></a>
+						<a class="icon html5lightbox html5lightbox" data-fancybox="gallery-2" data-caption="" href="https://www.youtube.com/embed/pCbDVP1D2ug">
+							<div class="overlay-box">
+								<div class="overlay-inner">
+									<div class="content">
+										<svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+											width="800px" height="800px" viewBox="0 0 163.861 163.861"
+											xml:space="preserve">
+											<g>
+												<path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
+														c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" />
+											</g>
+										</svg>
+									</div>
 								</div>
 							</div>
-						</div>
+						</a>
 					</div>
-
-
 				</div>
 			</div>
 
@@ -574,14 +560,23 @@
 					<div class="image1">
 						<img src="images/resource/cover/5.jpg" alt="" />
 						<!-- Overlay Box -->
-						<div class="overlay-box">
-							<div class="overlay-inner">
-								<div class="content">
-									<a class="icon html5lightbox" data-fancybox="gallery-3" data-caption="" href="https://youtu.be/pCbDVP1D2ug?si=mbYCXjSYK0DnNYZF"><img src="images/play.png" alt="" /></a>
+						<a class="icon html5lightbox" data-fancybox="gallery-3" data-caption="" href="https://youtu.be/pCbDVP1D2ug?si=mbYCXjSYK0DnNYZF">
+							<div class="overlay-box">
+								<div class="overlay-inner">
+									<div class="content">
+										<svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+											width="800px" height="800px" viewBox="0 0 163.861 163.861"
+											xml:space="preserve">
+											<g>
+												<path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
+														c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" />
+											</g>
+										</svg>
+									</div>
 								</div>
 							</div>
-						</div>
 					</div>
+					</a>
 				</div>
 			</div>
 
@@ -591,14 +586,23 @@
 					<div class="image1">
 						<img src="images/resource/cover/3.jpg" alt="" />
 						<!-- Overlay Box -->
-						<div class="overlay-box">
-							<div class="overlay-inner">
-								<div class="content">
-									<a class="icon html5lightbox" data-fancybox="gallery-2" data-caption="" href="https://www.youtube.com/embed/69dyRI7yhyM"><img src="images/play.png" alt="" /></a>
+						<a class="icon html5lightbox" data-fancybox="gallery-2" data-caption="" href="https://www.youtube.com/embed/69dyRI7yhyM">
+							<div class="overlay-box">
+								<div class="overlay-inner">
+									<div class="content">
+										<svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+											width="800px" height="800px" viewBox="0 0 163.861 163.861"
+											xml:space="preserve">
+											<g>
+												<path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
+															c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" />
+											</g>
+										</svg>
+									</div>
 								</div>
 							</div>
-						</div>
 					</div>
+					</a>
 				</div>
 			</div>
 
@@ -619,8 +623,8 @@
 							<stop offset="1" stop-color="#9a262d" />
 						</linearGradient>
 						<linearGradient id="red-linear-gradient-2" x1="189.56" y1="323.5" x2="189.56" y2="419.7" gradientTransform="translate(0 574.12) scale(1 -1)" gradientUnits="userSpaceOnUse">
-							<stop offset="0" stop-color="#71272d" />
-							<stop offset="1" stop-color="#c1272d" />
+							<stop offset="0" stop-color="#d84c07" />
+							<stop offset="1" stop-color="#f37335" />
 						</linearGradient>
 						<linearGradient id="red-linear-gradient-3" y1="393.1" y2="574.12" xlink:href="#linear-gradient-2" />
 					</defs>
@@ -646,24 +650,14 @@
 				<div>
 					<h5 class="card-title text-white fw-bold fs-4 z-1 position-relative">{!! __('transelt.title1')!!}</h5>
 					<h2 class="price text-white fw-bold mt-n2 z-1 position-relative" dir="ltr">0 DH</h2>
+					{!!__('transelt.ul1')!!}
 				</div>
-				{!!__('transelt.ul1')!!}
-				<!-- <ul class="list-unstyled text-end mt-4 px-3">
-					<li class="mb-2"><i class="bi bi-check heading "></i> صندوق نيورال بوكس؛</li>
-					<li class="mb-2"><i class="bi bi-check heading "></i> كتب إلكترونية في تقنيات التربية؛</li>
-					<li class="mb-2"><i class="bi bi-check heading "></i> مجتمع نيورال بوكس على الواتساب؛</li>
-					<li class="mb-2"><i class="bi bi-check heading "></i> تخفيض على الدورات التدريبية؛</li>
-					<li class="mb-2"><i class="bi bi-check heading "></i> دليل شامل مع برنامج استعمال نيورال بوكس؛</li>
-					<li class="mb-2"><i class="bi bi-check heading "></i> خصم على استشارات مواكبة +؛</li>
-					<li class="mb-2"><i class="bi bi-check heading "></i> تقييم ومتابعة لتطور الطفل؛</li>
-					<li><i class="bi bi-check heading "></i> المحتوى البداغوجي.</li>
-				</ul> -->
 
-				<a href="#" class="btn btn-warning fw-bold rounded-pill mt-3 w-100 px-5 justify-content-center">اختر الباقة</a>
+
+				<a href="{{route('register')}}" class="btn btn-warning fw-bold text-white rounded-pill mt-3 w-100 px-5 justify-content-center">{{ __("auth.register_now") }}</a>
 			</div>
 		</div>
 		<div class="card pricing-card price-gold text-center">
-			<!-- SVG Wave -->
 			<div class="top-wave">
 				<svg id="Layer_1" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 379.14 196.29">
 					<defs>
@@ -697,7 +691,6 @@
 				</svg>
 			</div>
 
-			<!-- Ribbon -->
 			<div class="ribbon">
 				<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 111.84 138.11">
 					<defs>
@@ -749,24 +742,23 @@
 				<div>
 					<h5 class="card-title text-white fw-bold fs-4 z-1 position-relative">{!! __('transelt.title2')!!}</h5>
 					<h2 class="price text-white fw-bold mt-n2 z1 position-relative" dir="ltr">3200 DH</h2>
+					{!!__('transelt.ul2')!!}
 				</div>
-				{!!__('transelt.ul2')!!}
-				<a href="#" class="btn btn-warning fw-bold rounded-pill mt-3 w-100 px-5 justify-content-center">اختر الباقة</a>
+				<a href="{{route('payment.form')}}" class="btn btn-warning fw-bold text-white rounded-pill mt-3 w-100 px-5 justify-content-center">اختر الباقة</a>
 			</div>
 		</div>
 		<div class="card pricing-card price-blue text-center">
-			<!-- SVG Wave -->
 			<div class="top-wave">
 				<svg id="Layer_1" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 379.14 196.29">
 					<defs>
 						<linearGradient id="blue-linear-gradient" x1="189.57" y1="300.38" x2="189.57" y2="398.76" gradientTransform="translate(0 560.34) scale(1 -1)" gradientUnits="userSpaceOnUse">
-							<stop offset="0" stop-color="#ffd26f" />
+							<stop offset="0" stop-color="#69c4d8" />
 							<stop offset="1" stop-color="#3677ff" />
 						</linearGradient>
 						<linearGradient id="blue-linear-gradient-2" x1="189.56" y1="309.73" x2="189.56" y2="405.92" xlink:href="#linear-gradient" />
 						<linearGradient id="blue-linear-gradient-3" x1="189.56" y1="379.32" x2="189.56" y2="560.34" gradientTransform="translate(0 560.34) scale(1 -1)" gradientUnits="userSpaceOnUse">
 							<stop offset="0" stop-color="#5ce0ff" />
-							<stop offset="1" stop-color="#223b8a" />
+							<stop offset="1" stop-color="#69c4d8" />
 						</linearGradient>
 					</defs>
 					<g id="Layer_1-2" data-name="Layer 1">
@@ -791,10 +783,10 @@
 				<div>
 					<h5 class="card-title text-white fw-bold fs-4 z-1 position-relative">{!! __('transelt.title3')!!}</h5>
 					<h2 class="price text-white fw-bold mt-n2 z1 position-relative" dir="ltr">2300 DH</h2>
+					{!!__('transelt.ul3')!!}
 				</div>
-				{!!__('transelt.ul3')!!}
 
-				<a href="#" class="btn btn-warning fw-bold rounded-pill mt-3 w-100 px-5 justify-content-center">اختر الباقة</a>
+				<a href="{{route('payment.form')}}" class="btn btn-warning fw-bold text-white rounded-pill mt-3 w-100 px-5 justify-content-center">اختر الباقة</a>
 			</div>
 		</div>
 
@@ -802,16 +794,13 @@
 </section>
 
 
-<section class="page-content">
-	<div class="container">
-		<div class="mdp-map">
-			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3366.376379496629!2d-5.8426422510888365!3d35.76103609613877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b87629bd97a35%3A0xa3d8d404e9cd8c3e!2sInstitut%20de%20Neurosciences%20et%20Coaching%20-%20INSIC!5e0!3m2!1sfr!2sma!4v1749116315210!5m2!1sfr!2sma" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-		</div><!--mdp-map end-->
+<section class="page-content mt-5 pt-2 pb-0">
+	<div class="container pt-5">
 		<div class="mdp-contact">
 			<div class="row">
-				<div class="col-lg-8 col-md-7">
-					<div class="comment-area">
-						<h3>{{ __("contact.contact_us")}}</h3>
+				<div class="col-lg-7 gap-3 col-md-7">
+					<div class="sec-title comment-area">
+						<h2 class="mb-5">{{ __("contact.contact_us")}}</h2>
 						<form id="contact-form" method="post" action="#">
 							<div class="response"></div>
 							<div class="row">
@@ -835,13 +824,17 @@
 										<button type="button" id="submit" class="btn-default">{{ __("contact.send") }} <i class="fa fa-long-arrow-alt-right"></i></button>
 									</div><!--form-submit end-->
 								</div>
+								<div class="mdp-map">
+									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3366.376379496629!2d-5.8426422510888365!3d35.76103609613877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b87629bd97a35%3A0xa3d8d404e9cd8c3e!2sInstitut%20de%20Neurosciences%20et%20Coaching%20-%20INSIC!5e0!3m2!1sfr!2sma!4v1749116315210!5m2!1sfr!2sma"
+										width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+								</div>
 							</div>
 						</form>
 					</div><!--comment-area end-->
 				</div>
-				<div class="col-lg-4 col-md-5">
+				<div class="col-lg-5 col-md-5">
 					<div class="mdp-our-contacts">
-						<h3>{{ __('contact.we_are_here') }}</h3>
+						<!-- <h3>{{ __('contact.we_are_here') }}</h3> -->
 						<ul>
 							<li>
 								<div class="d-flex flex-wrap">
@@ -849,8 +842,14 @@
 										<img src="assets/img/icon15.png" alt="">
 									</div>
 									<div class="dd-cont">
-										<h4>{{ __('contact.full_name') }}</h4>
-										<span>+2 342 5446 67</span>
+										<h4>{{ __('contact.phone') }}</h4>
+										<div class="d-flex">
+											<span dir="ltr"><a target="_blank" href="tel:212539324232">+212 539 32 42 32</a></span>
+											<div class="vr mx-2"></div>
+											<span dir="ltr"><a target="_blank" href="tel:212661553765">+212 661 55 37 65</a></span>
+											<div class="vr mx-2"></div>
+											<span dir="ltr"><a target="_blank" href="https://wa.me/212667325757">+212 667 32 57 57</a></span>
+										</div>
 									</div>
 								</div>
 							</li>
@@ -876,13 +875,26 @@
 									</div>
 								</div>
 							</li>
+							<li>
+								<div>
+									<ul class="social-links">
+										<li><a href="#" title=""><i class="fab fa-facebook-f"></i></a></li>
+										<li>
+											<a href="https://www.youtube.com/@TAQASOM.Podcast" title="">
+												<i class="fab fa-youtube"></i>
+											</a>
+										</li>
+										<li><a href="https://www.instagram.com/neuralbox/" title="Neuralbox Instagram account"><i class="fab fa-instagram"></i></a></li>
+									</ul>
+								</div>
+							</li>
 						</ul>
 					</div><!--mdp-our-contacts end-->
 				</div>
 			</div>
 		</div><!--mdp-contact end-->
 	</div>
-</section><!--page-content end-->
+</section>
 
 
 {{--
@@ -1092,7 +1104,7 @@
 								<img src="https://via.placeholder.com/1120x1680" alt="" class="w-100">
 								<div class="sc-div">
 									<ul>
-										<li><a href="#" title=""><i class="fab fa-instagram"></i></a></li>
+										<li><a href="https://www.instagram.com/neuralbox/" title="Neuralbox Instagram account"><i class="fab fa-instagram"></i></a></li>
 										<li><a href="#" title=""><i class="fab fa-linkedin-in"></i></a></li>
 										<li><a href="#" title=""><i class="fab fa-facebook-f"></i></a></li>
 									</ul>
@@ -1111,7 +1123,7 @@
 								<img src="https://via.placeholder.com/1376x2064" alt="" class="w-100">
 								<div class="sc-div">
 									<ul>
-										<li><a href="#" title=""><i class="fab fa-instagram"></i></a></li>
+										<li><a href="https://www.instagram.com/neuralbox/" title="Neuralbox Instagram account"><i class="fab fa-instagram"></i></a></li>
 										<li><a href="#" title=""><i class="fab fa-linkedin-in"></i></a></li>
 										<li><a href="#" title=""><i class="fab fa-facebook-f"></i></a></li>
 									</ul>
@@ -1130,7 +1142,7 @@
 								<img src="https://via.placeholder.com/1336x2004" alt="" class="w-100">
 								<div class="sc-div">
 									<ul>
-										<li><a href="#" title=""><i class="fab fa-instagram"></i></a></li>
+										<li><a href="https://www.instagram.com/neuralbox/" title="Neuralbox Instagram account"><i class="fab fa-instagram"></i></a></li>
 										<li><a href="#" title=""><i class="fab fa-linkedin-in"></i></a></li>
 										<li><a href="#" title=""><i class="fab fa-facebook-f"></i></a></li>
 									</ul>
@@ -1149,7 +1161,7 @@
 								<img src="https://via.placeholder.com/1204x1804" alt="" class="w-100">
 								<div class="sc-div">
 									<ul>
-										<li><a href="#" title=""><i class="fab fa-instagram"></i></a></li>
+										<li><a href="https://www.instagram.com/neuralbox/" title="Neuralbox Instagram account"><i class="fab fa-instagram"></i></a></li>
 										<li><a href="#" title=""><i class="fab fa-linkedin-in"></i></a></li>
 										<li><a href="#" title=""><i class="fab fa-facebook-f"></i></a></li>
 									</ul>
@@ -1285,3 +1297,4 @@
 --}}
 
 @endsection
+@section('footer','footer')

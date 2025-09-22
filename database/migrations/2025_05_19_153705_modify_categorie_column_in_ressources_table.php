@@ -6,15 +6,15 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('ressources', function (Blueprint $table) {
-            $table->string('categorie', 100)->change();
-        });
+    //     Schema::table('ressources', function (Blueprint $table) {
+    //         $table->string('categorie', 100)->change();
+    //     });
     }
 
     public function down(): void
     {
-        Schema::table('ressources', function (Blueprint $table) {
-            $table->string('categorie', 20)->change(); // Ancienne taille, à adapter
-        });
+        // Schema::table('ressources', function (Blueprint $table) {
+        //     $table->string('categorie', 20)->change(); // Ancienne taille, à adapter
+        // });
     }
 };

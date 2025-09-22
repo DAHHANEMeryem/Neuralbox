@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paiements', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->decimal('montant', 8, 2);
-            $table->string('methode'); // carte, PayPal, etc.
-            $table->date('date_paiement');
-            $table->timestamps();
+        // Schema::create('paiements', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        //     $table->decimal('montant', 8, 2);
+        //     $table->string('methode'); // carte, PayPal, etc.
+        //     $table->date('date_paiement');
+        //     $table->timestamps();
             
-        });
+        // });
     }
 
     /**
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paiements');
+        // Schema::dropIfExists('paiements');
     }
 };

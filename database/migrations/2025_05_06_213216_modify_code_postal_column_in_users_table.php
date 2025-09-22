@@ -7,15 +7,15 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('code_postal')->nullable()->change();
-        });
+        // Schema::table('users', function (Blueprint $table) {
+            // $table->string('code_postal')->nullable()->change();
+        // });
     }
 
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('code_postal')->nullable(false)->change();
-        });
+        // Schema::table('users', function (Blueprint $table) {
+            // $table->string('code_postal')->nullable(false)->change();
+        // });
     }
 };
