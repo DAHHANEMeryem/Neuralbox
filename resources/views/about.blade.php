@@ -9,22 +9,30 @@
 
         <div class=" col-6 mb-2 mb-md-0 ps-0 px-md-2 py-md-4">
             <h1 class=" fs-1 text-white fw-bold">من نحن؟</h1>
-            <p class="text-white fs-5 lh-base mt-5">
-                في معهد العلوم العصبية والمواكبة، نؤمن بأن التحوّل الحقيقي يبدأ من الداخل، ولهذا نكرّس جهودنا لتحرير الإمكانات الكامنة لدى الأفراد والأسر والمجتمعات، عبر مزيج فريد من الكوتشينغ، التكوين، وعلم النفس الديناميكي.
-
-                بفضل خبرة تمتد لأكثر من 12 سنة من العمل الميداني والمعرفي، نرافق الأطفال، الآباء، والمدارس، في مسارات تطوير شاملة تدمج بين النجاح الدراسي، التوازن النفسي، واكتساب المهارات الحياتية.
-
-                ومن خلال منصة نيورال بوكس، نضع هذه التجربة بين يدي الأسر والأطر التربوية في قالب رقمي حديث، يجمع بين الأدوات العلاجية، المحتوى البيداغوجي، التكوين التربوي، والتوجيه الشخصي، لمواكبة كل من يسعى إلى بناء مستقبل تعليمي ونفسي متكامل.
+            <p class="text-white fs-5 px-2 mt-5">
+                {!! trans('about.description') !!}
             </p>
         </div>
-        <div class="video-container col-5 shadow-lg">
+        <div class="slider-container">
+            <div class="abt-carousel">
+                @for ($i = 1; $i <= 16; $i++)
+                    
+                <div class="img-container">
+                    <img class="shadow" src="{{ asset('assets/img/slide/'.$i.'.webp') }}" alt="Neuralbox carousels images">
+                </div>
+                @endfor
+              
+            </div>
+        </div>
+        <!-- <div class="video-container col-5 shadow-lg position-relative">
 
-            <div class="position-relative rounded-4 overflow-hidden tra" >
+            <div class="position-relative rounded-4 overflow-hidden tra">
                 <a href="{{ route('video-link', ['filename' => 'Tool-1.mp4']) }}" class="html5lightbox ">
                     <img src="{{ asset('images/peda/1.png') }}" alt="suivre video neuralbox" class="w-100 " />
                 </a>
             </div>
-        </div>
+            
+        </div> -->
     </div>
 
     <svg class="hero-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none">
@@ -33,6 +41,7 @@
 </section>
 
 <section class="mission-section mw-75">
+
     <div class="cccontainer">
         <!-- <div class="lg:max-w-2xl max-w-5xl "> -->
         <h2 class="section-title">قيمنا:</h2>

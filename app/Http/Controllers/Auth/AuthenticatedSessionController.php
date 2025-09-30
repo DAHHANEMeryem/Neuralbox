@@ -46,7 +46,7 @@ public function store(Request $request): RedirectResponse | JsonResponse
                 return response()->json([
                     'success' => true,
                     'message' => 'Connexion réussie!',
-                    'redirect' => route('home') // Or the desired redirection route
+                    'redirect' => back()->getTargetUrl()// Or the desired redirection route
                 ]);
             }
 

@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
 
-            $table->enum('type', ['basic', 'gold', 'neuralbox'])->default('basic');
+            $table->enum('type', ['golden', 'neuralbox'])->default('basic');
             // $table->decimal('price', 10, 2);
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
-            $table->enum('status', ['golden', 'neuralbox']);
+            $table->enum('status', ['confirmed', 'not_confirmed','stoped']);
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Paiement;
+use App\Models\Subscription;
 use Carbon\Carbon;
 
 class PaiementController extends Controller
@@ -11,14 +12,21 @@ class PaiementController extends Controller
     public function index(Request $request)
     {
         $query = Paiement::query();
+        
 
-    // Récupère les paiements de 2300 MAD
-    $paiements_2300 = Paiement::where('amount', 2300)->get();
+        // Récupère les paiements de 2300 MAD
+        $neuralboxs = Subscription::where('type', 'neuralbox')->with(['user' => function ($query) {
+            $query->select('id', 'name'); // Select specific attributes from the 'users' table
+        }])->get();
+        $goldens = Subscription::where('type', 'golden')->with(['user' => function ($query) {
+            $query->select('id', 'name'); // Select specific attributes from the 'users' table
+        }])->get();
 
-    // Récupère les paiements de 3200 MAD
-    $paiements_3200 = Paiement::where('amount', 3200)->get();
 
-    
+        // Récupère les paiements de 3200 MAD
+        // $paiements_3200 = Paiement::where('amount', 3200)->get();
+
+
 
         // فلترة حسب المستخدم
         if ($request->filled('user')) {
@@ -54,7 +62,13 @@ class PaiementController extends Controller
            
 
         return view('admin.paiements.index', compact(
-            'paiements', 'total', 'successCount', 'failCount', 'monthlyRevenue','paiements_2300', 'paiements_3200'
+            'paiements',
+            'total',
+            'successCount',
+            'failCount',
+            'monthlyRevenue',
+            'neuralboxs',
+            'goldens'
         ));
     }
 }

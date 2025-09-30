@@ -18,10 +18,10 @@ class MeanController extends Controller
     {
         // if(Auth::check())
         //     return view('neuralbox');
-
+        
         return view('suivre');
     }
-
+    
     public function index(Request $request)
     {
         $locale = session('locale', 'ar'); // Default to Arabic

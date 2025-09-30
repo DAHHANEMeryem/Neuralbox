@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('method'); 
             $table->string('status', 20);
             $table->decimal('montant', 8, 2)->nullable();
-            $table->string('name');
+            // $table->string('name');
             $table->timestamps();
         });
     }

@@ -11,7 +11,7 @@ class Paiement extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id','name', 'amount', 'method', 'status','created_at','updated_at'
+        'user_id', 'amount', 'method', 'status','receipt','created_at','updated_at'
     ];
 
     public function user()

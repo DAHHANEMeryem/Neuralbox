@@ -11,6 +11,8 @@ class GoogleController extends Controller
 {
     public function redirectToGoogle()
     {
+        session(['url.intended' => url()->previous()]);
+
         return Socialite::driver('google')->redirect();
     }
 
@@ -27,8 +29,10 @@ class GoogleController extends Controller
         );
 
         Auth::login($user);
+        return redirect()->intended('/');
 
-        return redirect('/'); 
+        // Pour les requêtes normales, rediriger
+        // return redirect()->back();
     }
 }
 

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PaymentInfoRequest;
 use App\Http\Requests\PaymentRequest;
+use App\Models\Paiement;
 use App\Models\PaymentInfo;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
@@ -27,40 +29,77 @@ class PaymentController extends Controller
      * @param PaymentInfoRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function processPayment(Request $request)
+    public function processPayment(PaymentRequest $request)
     {
+        // $validatedData = $request->validate([
+        //     'receipt' => 'required|mimes:png,jpeg,jpg',
+        // ]);
         // Récupération des données validées
-        $validatedData = $request->all();
-        
+        // $validatedData = $request->all();
+
+        // Return a JSON response for AJAX requests
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => $request->all(),
+        //     'redirect' => back()->getTargetUrl(),
+        // ]);
+
+
+
         // Ajout de l'ID utilisateur si connecté
-        if (Auth::check()) {
-            $validatedData['user_id'] = Auth::id();
-        }
+        // if (Auth::check()) {
+        //     $validatedData['user_id'] = Auth::id();
+        // }´
 
-        try {
-            // Simulation d'un appel à une API de paiement
-            // Dans un environnement de production, vous appelleriez ici votre passerelle de paiement
-            $paymentProcessed = $this->simulatePaymentGateway($validatedData);
-            dd("hna");
-            if ($paymentProcessed) {
-                // Enregistrement des informations de paiement en base de données
-                $validatedData['status'] = 'completed';
-                $subscription = Subscription::create(['type'=> $validatedData['pack']]);
-                $subscription->user()->attach($validatedData['user_id']);
+        $data = $request->only(["pack", "payment_option", "card-number", "card_name", "card_expiry", "card_cvv", "receipt"]);
 
-                // $paymentInfo = PaymentInfo::create($validatedData);
-
-                return view('payments.confirmation');
-                // return redirect()->route('payment.confirmation')
-                //                 ->with('success', 'Paiement traité avec succès');
-            } else {
-                return back()->withErrors(['payment' => 'Le paiement a échoué, veuillez réessayer.'])
-                            ->withInput($request->except(['card_number', 'cvv']));
+        
+        if ($data["payment_option"] == "transfer") {
+            if ($request->hasFile('receipt')) {
+                $imagePath = $request->file('receipt')->store('images/receipts', 'private');
+                $data['receipt'] = $imagePath;
             }
-        } catch (\Exception $e) {
-            return back()->withErrors(['payment' => 'Une erreur est survenue lors du traitement du paiement.'])
-                        ->withInput($request->except(['card_number', 'cvv']));
+            $paiement = Paiement::create([
+                'method'=>$data[''],
+                'amount'=>$data[''],
+                'user_id'=>$data[''],
+                'receipt'=>$data['receipt'],
+            ]);
+
         }
+
+
+        Subscription::create([
+            'type' => $data['pack'],
+            'status' => 'not_confirmed',
+            'user_id' => Auth::id(),
+        ]);
+
+        return redirect(route('home'));
+
+        // try {
+        //     // Simulation d'un appel à une API de paiement
+        //     // Dans un environnement de production, vous appelleriez ici votre passerelle de paiement
+        //     $paymentProcessed = $this->simulatePaymentGateway($validatedData);
+        //     if ($paymentProcessed) {
+        //         // Enregistrement des informations de paiement en base de données
+        //         $validatedData['status'] = 'completed';
+        //         $subscription = Subscription::create(['type'=> $validatedData['pack']]);
+        //         $subscription->user()->attach($validatedData['user_id']);
+
+        //         // $paymentInfo = PaymentInfo::create($validatedData);
+
+        //         return view('payments.confirmation');
+        //         // return redirect()->route('payment.confirmation')
+        //         //                 ->with('success', 'Paiement traité avec succès');
+        //     } else {
+        //         return back()->withErrors(['payment' => 'Le paiement a échoué, veuillez réessayer.'])
+        //                     ->withInput($request->except(['card_number', 'cvv']));
+        //     }
+        // } catch (\Exception $e) {
+        //     return back()->withErrors(['payment' => 'Une erreur est survenue lors du traitement du paiement.'])
+        //                 ->withInput($request->except(['card_number', 'cvv']));
+        // }
     }
 
     /**
@@ -72,8 +111,7 @@ class PaymentController extends Controller
     public function showConfirmation($id)
     {
         $paymentInfo = PaymentInfo::findOrFail($id);
-        
-        // Vérification que l'utilisateur a le droit de voir cette confirmation
+
         if (Auth::check() && $paymentInfo->user_id !== Auth::id() && !Auth::user()->isAdmin()) {
             abort(403);
         }

@@ -1,10 +1,85 @@
 
 // const { start } = require("alpinejs");
 (function ($) {
-    ("use strict");
+    "use strict";
 
     $(document).ready(function () {
         gsap.registerPlugin(ScrollTrigger);
+        if (
+            typeof gsap !== "undefined" &&
+            typeof ScrollTrigger !== "undefined"
+        ) {
+            // 1. Target all elements with the specific animation class or data attribute
+            const $animatedElements = $(
+                ".gsap-anim-target, .main-timeline5 .timeline-icon, .main-timeline5 .timeline-content"
+            );
+
+            // 2. Loop through each element using jQuery's .each()
+            $animatedElements.each(function (index) {
+                const $element = $(this);
+                const element = this; // Get the native DOM element for GSAP
+
+                // Get animation type from a data attribute or hardcoded for timeline elements
+                let animType = $element.data("animation");
+
+                // Default animation logic for timeline components
+                if ($element.hasClass("timeline-icon")) {
+                    animType = "zoom-in";
+                } else if ($element.hasClass("timeline-content")) {
+                    // Determine slide direction based on index (even = right side, odd = left side)
+                    animType = index % 2 === 0 ? "slide-right" : "slide-left";
+                }
+
+                // --- Define Start Properties ---
+                let startProps = {
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: "power2.out",
+                };
+
+                switch (animType) {
+                    case "slide-left":
+                        startProps.x = 50; // Starts right, slides left
+                        break;
+                    case "slide-right":
+                        startProps.x = -50; // Starts left, slides right
+                        break;
+                    case "zoom-in":
+                        startProps.scale = 0.8;
+                        startProps.y = 20;
+                        startProps.ease = "back.out(1.2)"; // Bouncy pop
+                        break;
+                    case "fade-up":
+                    default:
+                        startProps.y = 30; // Starts 30px below
+                        break;
+                }
+
+                // --- Apply GSAP with ScrollTrigger ---
+                gsap.from(element, {
+                    ...startProps,
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top bottom", // Trigger when the element enters the viewport
+                        toggleActions: "play none none none",
+                    },
+                });
+            });
+
+            // 3. Special animation for the main title (always fade-down)
+            gsap.from($(".newsz-ltr-text h2").get(0), {
+                y: -50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".newsletter-section.call",
+                    start: "top 80%",
+                    toggleActions: "play none none none",
+                },
+            });
+        }
+
         $(".section-header").on("click", function (element) {
             const content = element.target.nextElementSibling;
             const arrow = element.target.querySelector(".arrow-icon");
@@ -19,7 +94,7 @@
                 arrow.innerHTML = "&#9650;"; // 🔽 لتحت = مفتوح
             }
         });
-        
+
         // Show the popup when any .disabled-link is clicked
         $(".disabled-link").on("click", function (event) {
             $("#popup-payment").css("display", "flex");
@@ -42,8 +117,8 @@
         // });
         // Handle hover effects for video playback
         //   document.querySelectorAll('.video-card video').forEach(video => {
-            //     video.addEventListener('mouseenter', () => {
-                //       video.play();
+        //     video.addEventListener('mouseenter', () => {
+        //       video.play();
         //     });
         //     video.addEventListener('mouseleave', () => {
         //       video.pause();
@@ -51,6 +126,20 @@
         //       video.load(); // Reset to show poster
         //     });
         //   });
+
+        $(".abt-carousel").slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            focusOnSelect: true,
+            centerPadding: "60px",
+            centerMode: true,
+            speed: 700, // Duration of the slide transition in milliseconds
+            cssEase: "ease-in-out",
+            // arrows: true,
+            dots: true,
+            rtl: true,
+        });
 
         $(".slick-carousel").slick({
             centerMode: false,
@@ -301,53 +390,53 @@
             scrollTo({ top: 0, behavior: "smooth" });
         });
 
-        //Masonary
-        // function enableMasonry() {
-        //     if ($(".masonry-items-container").length) {
-        //         var winDow = $(window);
-        //         // Needed variables
-        //         var $container = $(".masonry-items-container");
+        /**Masonary
+            // function enableMasonry() {
+            //     if ($(".masonry-items-container").length) {
+            //         var winDow = $(window);
+            //         // Needed variables
+            //         var $container = $(".masonry-items-container");
 
-        //         $container.isotope({
-        //             itemSelector: ".masonry-item",
-        //             masonry: {
-        //                 columnWidth: ".masonry-item.col-lg-6",
-        //             },
-        //             animationOptions: {
-        //                 duration: 500,
-        //                 easing: "linear",
-        //             },
-        //         });
+            //         $container.isotope({
+            //             itemSelector: ".masonry-item",
+            //             masonry: {
+            //                 columnWidth: ".masonry-item.col-lg-6",
+            //             },
+            //             animationOptions: {
+            //                 duration: 500,
+            //                 easing: "linear",
+            //             },
+            //         });
 
-        //         // GSAP animation after Isotope layout is complete
-        //         $container.on("arrangeComplete", function () {
-        //             gsap.fromTo(
-        //                 ".masonry-item",
-        //                 { opacity: 0, y: 50 },
-        //                 {
-        //                     opacity: 1,
-        //                     y: 0,
-        //                     duration: 0.6,
-        //                     stagger: 0.1,
-        //                     ease: "power2.out",
-        //                 }
-        //             );
-        //         });
+            //         // GSAP animation after Isotope layout is complete
+            //         $container.on("arrangeComplete", function () {
+            //             gsap.fromTo(
+            //                 ".masonry-item",
+            //                 { opacity: 0, y: 50 },
+            //                 {
+            //                     opacity: 1,
+            //                     y: 0,
+            //                     duration: 0.6,
+            //                     stagger: 0.1,
+            //                     ease: "power2.out",
+            //                 }
+            //             );
+            //         });
 
-        //         winDow.bind("resize", function () {
-        //             $container.isotope({
-        //                 itemSelector: ".masonry-item",
-        //                 animationOptions: {
-        //                     duration: 500,
-        //                     easing: "linear",
-        //                     queue: false,
-        //                 },
-        //             });
-        //         });
-        //     }
-        // }
+            //         winDow.bind("resize", function () {
+            //             $container.isotope({
+            //                 itemSelector: ".masonry-item",
+            //                 animationOptions: {
+            //                     duration: 500,
+            //                     easing: "linear",
+            //                     queue: false,
+            //                 },
+            //             });
+            //         });
+            //     }
+            // }
 
-        // enableMasonry();
+         enableMasonry();**/
     });
 
     $(window).on("load", function () {
@@ -428,51 +517,51 @@
         }
     }
 
-    gsap.from(".coach-card", {
-        opacity: 0,
-        y: 50,
-        scale: 0.9,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.2,
-        scrollTrigger: {
-            trigger: ".coach-card",
-            start: "top 90%",
-            toggleActions: "play none none none",
-        },
-    });
+    // gsap.from(".coach-card", {
+    //     opacity: 0,
+    //     y: 50,
+    //     scale: 0.9,
+    //     duration: 0.8,
+    //     ease: "power3.out",
+    //     stagger: 0.2,
+    //     scrollTrigger: {
+    //         trigger: ".coach-card",
+    //         start: "top 90%",
+    //         toggleActions: "play none none none",
+    //     },
+    // });
 
     if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
         // Animate title and description on scroll
-        gsap.to(".hero-title-animated", {
-            scrollTrigger: {
-                trigger: ".hero-title-animated",
-                start: "top 80%",
-                toggleActions: "play none none none",
-            },
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 1.2,
-            ease: "power2.out",
-            overwrite: true,
-        });
+        // gsap.to(".hero-title-animated", {
+        //     scrollTrigger: {
+        //         trigger: ".hero-title-animated",
+        //         start: "top 80%",
+        //         toggleActions: "play none none none",
+        //     },
+        //     opacity: 1,
+        //     y: 0,
+        //     scale: 1,
+        //     duration: 1.2,
+        //     ease: "power2.out",
+        //     overwrite: true,
+        // });
 
-        gsap.to(".hero-description", {
-            scrollTrigger: {
-                trigger: ".hero-description",
-                start: "top 85%",
-                scrub: true,
-                toggleActions: "play none none none",
-            },
-            opacity: 1,
-            y: 0,
-            scale: 1,
+        // gsap.to(".hero-description", {
+        //     scrollTrigger: {
+        //         trigger: ".hero-description",
+        //         start: "top 85%",
+        //         scrub: true,
+        //         toggleActions: "play none none none",
+        //     },
+        //     opacity: 1,
+        //     y: 0,
+        //     scale: 1,
 
-            duration: 1.2,
-            ease: "power2.out",
-            overwrite: true,
-        });
+        //     duration: 1.2,
+        //     ease: "power2.out",
+        //     overwrite: true,
+        // });
 
         // Video reveal and playback using ScrollTrigger
         const videoWrapper = document.querySelector(".video-wrapper");
@@ -516,4 +605,4 @@
             );
         }
     }
-} ( jQuery ) );
+})(jQuery);

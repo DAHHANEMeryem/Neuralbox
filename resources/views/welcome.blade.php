@@ -9,7 +9,7 @@
 		<div class="row align-items-start">
 			<div class="col-lg-7 col-md-7 pt-5">
 				<div class="banner-text wow fadeInLeft position-relative" data-wow-duration="1000ms">
-					<h2><span>{{ __("hero.NeuralBox") }}</span><br>{{__("hero.slogan")}}</h2>
+					<h2 class="position-relative "><span>{{ __("hero.NeuralBox") }}</span><span class="insic ">by insic</span><br>{{__("hero.slogan")}}</h2>
 					<p>{{__("hero.desc")}}</p>
 					<!-- <form class="search-form">
 						<input type="text" name="search" placeholder="Search Class">
@@ -22,12 +22,12 @@
 			</div>
 			<div class="col-lg-5 col-md-5">
 				<div class="hero_circle blue_circle">
-					500+<br>
-					طفل مستفيد
-				</div>
-				<div class="hero_circle pink_circle">
 					120+<br>
 					أسرة سعيدة
+				</div>
+				<div class="hero_circle pink_circle">
+					500+<br>
+					طفل مستفيد
 				</div>
 				<div class="banner-img wow zoomIn" data-wow-duration="1000ms">
 					<img src="assets/img/banner-img.png" alt="">
@@ -45,7 +45,7 @@
 	<div class="container">
 		<div class="section-title  text-center">
 			<h2>{{ __("about.welcome_to") }}<span> {{ __("hero.NeuralBox") }}</span></h2>
-			<p class="mt-5 mb-4">{!! trans("about.desc")!!}</p>
+			<p class="mt-5 mb-4 	">{!! trans("about.desc")!!}</p>
 		</div><!--section-title end-->
 		<div class="about-sec">
 			<div class="container">
@@ -57,23 +57,23 @@
 						</div>
 					</div> -->
 					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="abt-col wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="200ms">
-							<img src="assets/img/about/1.png" alt="">
-							<h3>{{ __("welcome.values.empowering") }}</h3>
+						<div class="abt-col " >
+							<img src="assets/img/about/1.png" alt="" class="gsap-anim-target" data-animation="zoom-in">
+							<h3 class="gsap-anim-target" data-animation="fade-up" >{{ __("welcome.values.empowering") }}</h3>
 							<!-- <p>Pelleneget tespharetra que fringilla egugue id eget pharetra</p> -->
 						</div><!--abt-col end-->
 					</div>
 					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="abt-col wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
-							<img src="assets/img/about/2.png" alt="">
-							<h3>{{ __("welcome.values.integrating") }}</h3>
+						<div class="abt-col " >
+							<img src="assets/img/about/2.png" alt="" class="gsap-anim-target" data-animation="zoom-in">
+							<h3 class="gsap-anim-target" data-animation="fade-up" >{{ __("welcome.values.integrating") }}</h3>
 							<!-- <p>Etiam risus neque, volutpat vel laoreet a, finibus volutpat non</p> -->
 						</div><!--abt-col end-->
 					</div>
 					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="abt-col wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
-							<img src="assets/img/about/3.png" alt="">
-							<h3>{{ __("welcome.values.creativity") }}</h3>
+						<div class="abt-col " >
+							<img src="assets/img/about/3.png" alt="" class="gsap-anim-target" data-animation="zoom-in">
+							<h3 class="gsap-anim-target" data-animation="fade-up" >{{ __("welcome.values.creativity") }}</h3>
 							<!-- <p>Mauris nec mi fequis giat, cursus tortor nec, pharetra tellus</p> -->
 						</div><!--abt-col end-->
 					</div>
@@ -86,7 +86,7 @@
 				<div class="blog-post video-post">
 					<div class="blog-thumbnail ">
 						<a href="#" title="">
-							<img src="assets/img/covers/intro.jpg" alt="" class="cover">
+							<img src="assets/img/covers/intro.jpg" alt="" class="cover object-position-top">
 						</a>
 						<span class="category">{{__("welcome.video_title")}}</span>
 						<a href="{{ url('/video-url/videos/intro.mp4') }}" class="video-play html5lightbox overlay-box">
@@ -112,7 +112,7 @@
 			</ul>
 		</div> -->
 	</div>
-</section><!--about-us-section end-->
+</section>
 
 
 {{-- <section class="page-content call-to-action-1  p-0">
@@ -130,7 +130,7 @@
 	<!-- <li><img src="assets/img/icon13.png" alt="" /><a href="#" title="">Teachers,</a><a href="#" title="">
 											School</a></li> -->
 </ul>
-<p>{{__("welcome.call.text1")}}</p>
+<p>{{!!("welcome.call.text1")!!}}</p>
 <a href="#contact">{{__("welcome.call.button1")}}</a>
 <!-- <span>Mother</span> -->
 </div>
@@ -143,17 +143,18 @@
 </section> --}}
 
 <section class="newsletter-section call">
-	<div class="container">
+
+	{{-- <div class="container">
 		<div class="newsletter-sec">
 			<div class="d-flex flex-column text-center align-items-center">
 				<div class="col-lg-4">
 					<div class="newsz-ltr-text">
 						<h2>{{__("welcome.call.title1")}}</h2>
-					</div><!--newsz-ltr-text end-->
-				</div>
-				<div class="text-center col-lg-10">
-					<p>{{__("welcome.call.text1")}}</p>
-					<a href="#pricing" title="" class="w-fit btn-default mt-4">{{__("welcome.call.button1")}} <i class="fa fa-long-arrow-alt-right"></i></a>
+					</div>
+				</div> --}}
+				{{-- <div class="text-center col-lg-10">
+					<p>{!! trans("welcome.call.text1")!!}</p>
+					<a href="#pricing" title="" class="w-fit btn-default mt-4">{{__("welcome.call.button1")}} <i class="fa fa-long-arrow-alt-right"></i></a> --}}
 					<!-- <form class="newsletter-form">
 						<div class="row">
 							<div class="col-md-4">
@@ -185,10 +186,67 @@
 							</div>
 						</div>
 					</form> -->
-				</div>
+				{{-- </div> --}}
+			{{-- </div>
+		</div>
+	</div> --}}
+
+	<div class="container">
+            <div class="section-title text-center">
+				<h2 >{{__("welcome.call.title1")}}</h2>
 			</div>
-		</div><!--newsletter-sec end-->
-	</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-timeline5">
+                        <div class="timeline timeline-item">
+                            <div class="timeline-icon"><span class="year">1</span></div>
+                            <div class="timeline-content">
+                                {{-- <h3 class="title">Web Desginer</h3> --}}
+                                <p class="description">
+                                    {!! trans('welcome.steps.first') !!}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="timeline timeline-item">
+                            <div class="timeline-icon"><span class="year">2</span></div>
+                            <div class="timeline-content">
+                                {{-- <h3 class="title">Web Developer</h3> --}}
+                                <p class="description">
+                                    {!! trans('welcome.steps.second') !!}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="timeline timeline-item">
+                            <div class="timeline-icon"><span class="year">3</span></div>
+                            <div class="timeline-content">
+                                {{-- <h3 class="title">Web Desginer</h3> --}}
+                                <p class="description">
+                                    {!! trans('welcome.steps.third') !!}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="timeline timeline-item">
+                            <div class="timeline-icon"><span class="year">4</span></div>
+                            <div class="timeline-content">
+                                {{-- <h3 class="title">Web Developer</h3> --}}
+                                <p class="description">
+                                    {!! trans('welcome.steps.four') !!}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="timeline timeline-item">
+                            <div class="timeline-icon"><span class="year">5</span></div>
+                            <div class="timeline-content">
+                                {{-- <h3 class="title">Web Developer</h3> --}}
+                                <p class="description">
+                                    {!! trans('welcome.steps.five') !!}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </section>
 
 <section class="about-page-content pt-4">
@@ -197,7 +255,7 @@
 			<div class="row align-items-center">
 				<div class="col-lg-6 col-md-6">
 					<div class="section-title">
-						<h2><span>ذ. عبد الصمد أشتاشن </span></h2>
+						<h2>{!! trans("welcome.coach_abd") !!}</h2>
 						<!-- <p class="mw-100"></p> -->
 						<!-- <a href="classes.html" title="" class="btn-default">Classes <i class="fa fa-long-arrow-alt-right"></i></a> -->
 					</div>
@@ -206,19 +264,15 @@
 						<h2>Our Mission</h2> -->
 						<!-- <p>Praesent rhoncus justo erat, sed sollicitudin arcu malesuada vel. Etiam scelerisque justo ut purus luctus ullamcorper. Vivamus vitae elit ligula. Fusce eu rutrum nisl.</p> -->
 						<ul>
-							<li>رئيس معهد العلوم العصبية - المغرب</li>
+							<li>{!! trans("welcome.abd_info_1") !!}</li>
+							<li>{!! trans("welcome.abd_info_2") !!}</li>
+							<li>{!! trans("welcome.abd_info_3") !!}</li>
+							<li>{!! trans("welcome.abd_info_4") !!}</li>
+							<li>{!! trans("welcome.abd_info_5") !!}</li>
+							<li>{!! trans("welcome.abd_info_6") !!}</li>
+							<li>{!! trans("welcome.abd_info_7") !!}</li>
 
-							<li>أخصائي علاج سلوكي معرفي</li>
 
-							<li>أخصائي علاج اضطرابات التعلم</li>
-
-							<li>أستاذ بجامعة محمد الخامس – الرباط</li>
-
-							<li>أستاذ في المدرسة الوطنية للتجارة والتسيير – طنجة</li>
-
-							<li>حاصل على ماستر في الجودة، الصحة، السلامة، البيئة والتنمية المستدامة</li>
-
-							<li>حاصل على ماستر في التدبير الاستراتيجي للموارد البشرية</li>
 						</ul>
 					</div>
 				</div>
@@ -239,13 +293,13 @@
 			<section class="services-section">
 				<div class="container">
 					<div class="sec-title right-align">
-						<h2>
+						<h2 >
 							{!!__('transelt.titre1')!!}
 						</h2>
 					</div>
 					<div class="row clearfix">
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-sm-6">
+						<div class="service-block col-lg-3 col-md-4 col-4">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/9.png')}}" alt="" /></span>
@@ -254,7 +308,7 @@
 							</div>
 						</div>
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-sm-6">
+						<div class="service-block col-lg-3 col-md-4 col-4">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/4.png')}}" alt="" /></span>
@@ -263,7 +317,7 @@
 							</div>
 						</div>
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-sm-6">
+						<div class="service-block col-lg-3 col-md-4 col-4">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/8.png')}}" alt="" /></span>
@@ -272,7 +326,7 @@
 							</div>
 						</div>
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-sm-6">
+						<div class="service-block col-lg-3 col-md-4 col-4">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/5.png')}}" alt="" /></span>
@@ -281,7 +335,7 @@
 							</div>
 						</div>
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-sm-6">
+						<div class="service-block col-lg-3 col-md-4 col-4">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/12.png')}}" alt="" /></span>
@@ -292,7 +346,7 @@
 
 
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-sm-6">
+						<div class="service-block col-lg-3 col-md-4 col-4">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon slide-up"><img src="{{asset('images/icons/fea/1.png')}}" alt="" /></span>
@@ -302,7 +356,7 @@
 						</div>
 
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-sm-6">
+						<div class="service-block col-lg-3 col-md-4 col-4">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/2.png')}}" alt="" /></span>
@@ -312,7 +366,7 @@
 						</div>
 
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-sm-6">
+						<div class="service-block col-lg-3 col-md-4 col-4">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/3.png')}}" alt="" /></span>
@@ -326,7 +380,7 @@
 
 
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-sm-6">
+						<div class="service-block col-lg-3 col-md-4 col-4">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/6.png')}}" alt="" /></span>
@@ -336,7 +390,7 @@
 						</div>
 
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-sm-6">
+						<div class="service-block col-lg-3 col-md-4 col-4">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/7.png')}}" alt="" /></span>
@@ -350,7 +404,7 @@
 
 
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-sm-6">
+						<div class="service-block col-lg-3 col-md-4 col-4">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/10.png')}}" alt="" /></span>
@@ -360,7 +414,7 @@
 						</div>
 
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-sm-6">
+						<div class="service-block col-lg-3 col-md-4 col-4">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/11.png')}}" alt="" /></span>
@@ -846,8 +900,8 @@
 										<div class="d-flex">
 											<span dir="ltr"><a target="_blank" href="tel:212539324232">+212 539 32 42 32</a></span>
 											<div class="vr mx-2"></div>
-											<span dir="ltr"><a target="_blank" href="tel:212661553765">+212 661 55 37 65</a></span>
-											<div class="vr mx-2"></div>
+											<!-- <span dir="ltr"><a target="_blank" href="tel:212661553765">+212 661 55 37 65</a></span>
+											<div class="vr mx-2"></div> -->
 											<span dir="ltr"><a target="_blank" href="https://wa.me/212667325757">+212 667 32 57 57</a></span>
 										</div>
 									</div>

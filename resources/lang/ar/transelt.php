@@ -43,7 +43,7 @@ return [
     'h59'=>'<h5>تعزيز الروابط الأسرية</h5>',
     'h510'=>'<h5>دلائل عملية وخطوات ملموسة</h5>',
     'h511'=>'<h5>مواكبة وتوجيه مستمر</h5>',
-    'h512'=>'<h5>مواكبة وتوجيه مستمر</h5>',
+    'h512'=> '<h5>إبداع وتحديث مستمر</h5>',
     'titre2'=>'<h2 class="h2 ">ابدأ رحلتك الآن</h2>',
     'p1'=>'<h3 class="h3">اكتشف صندوق الوسائل العلاجية و استفد من ساعات من المحتوى التربوي البيداغوجي من بيتك, لتصير أنت الأخصائي بمساعدة فريق مختص ذو خبرة عالية  في مجال العلوم العصبية والمواكبة النفسية والتربوية.</h3>',
     'a1'=>'<a href="#contact" class="btn">اطلب الآن واحصل على استشارة مجانية!</a>',
@@ -58,16 +58,16 @@ return [
     'a9'=>'<a href="/register" style="font-size: 15px" class="tehme-btn buy-btn">&ensp; سجل الان</a>',
     'ul1'=> '<ul class="list-unstyled text-end mt-4 px-3">
                 <li class="mb-2"><i class="bi bi-check heading "></i> محتوى مجاني</li>
-                <li class="mb-2"><i class="bi bi-check heading "></i> كتب الكترونية في تقنيات التربية</li>
+                <li class="mb-2"><i class="bi bi-check heading "></i> كتب الكترونية </li>
                 <li class="mb-2"><i class="bi bi-check heading "></i> مجتمع نيورال بوكس على التلغرام</li>
                 <li class="mb-2"><i class="bi bi-check heading "></i> تخفيض على الدورات التدريبية</li>
             </ul>',
     'ul2'=> '<ul class="list-unstyled text-end mt-4 px-3">
 							<li class="mb-2"><i class="bi bi-check heading "></i> صندوق نيورال بوكس</li>
-							<li class="mb-2"><i class="bi bi-check heading "></i> كتب الكترونية في تقنيات التربية</li>
+							<li class="mb-2"><i class="bi bi-check heading "></i> كتب الكترونية </li>
 							<li class="mb-2"><i class="bi bi-check heading "></i> مجتمع نيورال بوكس على التلغرام</li>
 							<li class="mb-2"><i class="bi bi-check heading "></i> تخفيض على الدورات التدريبية</li>
-							<li class="mb-2"><i class="bi bi-check heading "></i> دليل شامل مع برنامج استعمال نيورال بوكس</li>
+							<li class="mb-2"><i class="bi bi-check heading "></i> دليل استعمال نيورال بوكس</li>
 							<li class="mb-2"><i class="bi bi-check heading "></i>  خصم على استشارات مواكبة +</li>
 							<li class="mb-2"><i class="bi bi-check heading "></i> تقييم ومتابعة لتطور الطفل</li>	
 							<li class="mb-2"><i class="bi bi-check heading "></i> المحتوى البيداغوجي</li>
@@ -76,10 +76,10 @@ return [
 						</ul>',
     'ul3'=> '<ul class="list-unstyled text-end mt-4 px-3">
 							<li class="mb-2"><i class="bi bi-check heading "></i> صندوق نيورال بوكس</li>
-							<li class="mb-2"><i class="bi bi-check heading "></i> كتب الكترونية في تقنيات التربية</li>
+							<li class="mb-2"><i class="bi bi-check heading "></i> كتب الكترونية </li>
                             <li class="mb-2"><i class="bi bi-check heading "></i> مجتمع نيورال بوكس على التلغرام</li>
                             <li class="mb-2"><i class="bi bi-check heading "></i> تخفيض على الدورات التدريبية</li>
-							<li class="mb-2"><i class="bi bi-check heading "></i> دليل شامل مع برنامج استعمال نيورال بوكس</li>
+							<li class="mb-2"><i class="bi bi-check heading "></i> دليل استعمال نيورال بوكس</li>
 							<li class="mb-2"><i class="bi bi-check heading "></i>  خصم على استشارات مواكبة +</li>
 						</ul>',
 'cmt'=> '<h3 style="margin-right:25vh;">:تقييمات العملاء</h3>',

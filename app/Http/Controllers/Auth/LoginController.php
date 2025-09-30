@@ -35,12 +35,12 @@ class LoginController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'Connexion réussie!',
-                    'redirect' => route('home') // Or the desired redirection route
+                    'redirect' => back()->getTargetUrl() // Or the desired redirection route
                 ]);
             }
 
             // Pour les requêtes normales, rediriger
-            return redirect()->intended(route('home'));
+            return redirect()->back();
         } catch (ValidationException $e) {
             // Gérer les erreurs de validation
             if ($request->ajax() || $request->wantsJson()) {

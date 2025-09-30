@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     public function subscription()
     {
-        return $this->hasMany(Subscription::class, 'user_id');
+        return $this->hasOne(Subscription::class, 'user_id');
     }
 
     /**
@@ -47,7 +47,7 @@ class User extends Authenticatable
         if ($this->is_admin) {
             return true;
         }
-        return $this->subscription() && $this->subscription()->where('type', 'gold')->exists();
+        return $this->subscription() && $this->subscription()->where('type', 'golden')->exists();
     }
 
 
@@ -168,10 +168,19 @@ public function receivedContacts()
 }
 
 
+    protected $appends = ['subscription_type'];
+
+    public function getSubscriptionTypeAttribute()
+    {
+        $subscription = $this->subscription()->where('status', 'confirmed')->first();
+        return $subscription ? $subscription->type : null;
+    }
 
 
 
-// User.php
+
+
+    // User.php
 
 
 

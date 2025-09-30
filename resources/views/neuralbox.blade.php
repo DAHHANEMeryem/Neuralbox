@@ -64,16 +64,16 @@
      @foreach($ressourcesPremium as $ressource)
      @php
 
-     $hasGold = false;
+     $subscribed = false;
      if(Auth::check())
-     $hasGold = Auth::user()->hasGoldSubscriptionOrIsAdmin();
+     $subscribed = Auth::check() && Auth::user()->subscription_type;
      $linkAttrs = [
-     'class' => $hasGold ? 'slide-card html5lightbox overlay-box' : 'slide-card disabled-link',
+     'class' => $subscribed ? 'slide-card html5lightbox overlay-box' : 'slide-card disabled-link',
      ];
      @endphp
 
      <a
-       @if($hasGold)
+       @if($subscribed)
        href="{{ url('/video-url/'. $ressource->video_url) }}"
        @else
        href="javascript:void(0)" onclick="showPopup()"
@@ -83,7 +83,7 @@
        @endforeach
        >
        <div class="image-wrapper">
-         @if(!$hasGold)
+         @if(!($subscribed))
          <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 224.37 224.24">
   <g id="Layer_2-2" data-name="Layer 2">
     <g id="Layer_1-2" data-name="Layer 1-2">

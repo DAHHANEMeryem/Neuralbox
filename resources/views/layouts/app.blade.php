@@ -56,13 +56,25 @@
                                 <img src="assets/img/logo.png" alt="">
                             </a>
                         </div><!--logo end-->
+                        <ul class="social-links ms-auto">
+                            <li><a href="#" title="NeuralBox facebook account"><i class="fab fa-facebook-f  "></i></a></li>
+                            <li><a href="https://www.instagram.com/neuralbox/" title="Neuralbox instagram"><i class="fab fa-instagram "></i></a></li>
+                            <li><a href="https://www.youtube.com/@TAQASOM.Podcast" title="Neuralbox Youtube channel"><i class="fab fa-youtube "></i></a></li>
+                        </ul>
                         <ul class="contact-add d-flex justify-content-end flex-wrap">
                             <li>
                                 <div class="contact-info">
-                                    <a href="tel:+212661553765"><img src="assets/img/icon1.png" alt="">
+                                    <a href="https:/wa.me/212667325757" target="_blank" class="ms-2">
+                                        <i class="fab fa-whatsapp fs-4 " style="color:#f37335"></i>
                                         <div class="contact-tt">
                                             <!-- <h4>{{ __("contact.appeler") }}</h4> -->
-                                            <span dir="ltr">+212 661 55 37 65</span>
+                                            <span dir="ltr">+212 667 32 57 57</span>
+                                        </div>
+                                    </a>
+                                    <a href="tel:+212539324232"><img src="assets/img/icon1.png" alt="">
+                                        <div class="contact-tt">
+                                            <!-- <h4>{{ __("contact.appeler") }}</h4> -->
+                                            <span dir="ltr">+212 539 32 42 32</span>
                                         </div>
                                     </a>
                                 </div><!--contact-info end-->
@@ -86,6 +98,7 @@
                                 </div><!--contact-info end-->
                             </li>
                         </ul><!--contact-information end-->
+
                         <div class="menu-btn">
                             <a href="#">
                                 <span class="bar1"></span>
@@ -94,8 +107,8 @@
                             </a>
                         </div><!--menu-btn end-->
                     </div><!--header-content end-->
-                    <div @class(["navigation-bar d-flex flex-wrap align-items-center",$navTheme ?? ' ' ])>
-                        <nav>
+                    <div @class(["navigation-bar d-flex justify-content-between align-items-center",$navTheme ?? ' ' ])>
+                        <nav >
                             <ul>
                                 @if(Auth::check() && Auth::user()->is_admin)<li><a class="{{(Route::current()->getName() === 'admin.dashboard') ? 'active' : ''}}" href="{{ route('admin.dashboard') }}" title="">{{ __("nav.admin_dashboard") }}</a></li>@endif
                                 <li><a class="{{(Route::current()->getName() === 'home') ? 'active' : ''}}" href="{{ route('home') }}" title="">{{ __("nav.home") }}</a></li>
@@ -103,6 +116,14 @@
                                 <li><a class="{{(Route::current()->getName() === 'peda') ? 'active' : ''}}" href="{{ route('peda') }}" title="">{{ __("nav.peda") }}</a></li>
                                 <li><a class="{{(Route::current()->getName() === 'suivre') ? 'active' : ''}}" href="{{ route('suivre') }}" title="">{{ __("nav.suivre") }}</a></li>
                                 <li><a class="{{(Route::current()->getName() === 'about') ? 'active' : ''}}" href="{{ route('about') }}" title="">{{ __("nav.about") }}</a></li>
+                                
+                            </ul>
+                            
+                        </nav><!--nav end-->
+                        <nav>
+                            <ul>
+                                @if(!Auth::check() || !Auth::user()->subscription_type)<li class="bg-primary  p-2 rounded-5"><a class="text-white" href="{{ route('payment.form') }}" title="">{{ __("nav.pricing") }}</a></li>@endif
+
                                 @auth
                                 <li>
                                     <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
@@ -115,17 +136,11 @@
 
                                 </li>
                                 @else
-                                <li><a href="{{ route('payment.form') }}" title="">{{ __("nav.pricing") }}</a></li>
-                                <li><a href="{{ route('login') }}" title="">{{ __("nav.login") }}</a></li>
-                                <li><a href="{{ route('register') }}" title="">{{ __("nav.signUp") }}</a></li>
+                                <li><a href="" data-bs-toggle="modal" data-bs-target="#authModal" id="payment-button-disable">{{ __("nav.login") }}</a></li>
+                                <!-- <li><a href="" data-bs-toggle="modal" data-bs-target="#authModal" id="payment-button-disable">{{ __("nav.signUp") }}</a></li> -->
                                 @endif
                             </ul>
-                        </nav><!--nav end-->
-                        <ul class="social-links ms-auto">
-                            <li><a href="#" title="NeuralBox facebook account"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="https://www.instagram.com/neuralbox/" title="Neuralbox instagram"><i class="fab fa-instagram"></i></a></li>
-                            <li><a href="https://www.youtube.com/@TAQASOM.Podcast" title="Neuralbox Youtube channel"><i class="fab fa-youtube"></i></a></li>
-                        </ul>
+                        </nav>
                     </div>
                 </div>
             </header>
@@ -158,30 +173,31 @@
                     <div class="top-footer">
                         <div class="row align-items-center justify-content-between">
 
-                            <div class="d-flex gap-2 flex-column align-items-center abd-logo col-lg-2 col-md-6 col-sm-6">
-                                <h3 class="text-center">مشروع من انجاز:</h3>
+                            <div class="d-flex gap-2 flex-column align-items-center abd-logo col-lg-2 col-md-6 col-6">
                                 <a href="https://insiconsulting.com/" target="_blank"><img class="w-100" src="assets/img/insic.png" alt=""></a>
                             </div>
-                            <div class="col-lg-2 d-flex flex-column align-items-center  col-md-6 col-sm-6">
+                            <div class="col-lg-2 d-flex flex-column align-items-center gap-2  col-md-6 col-6">
+                                <h3 class="text-center">{!! trans('welcome.sponsored_by') !!}</h3>
                                 <div class="w-100 h-fit widget widget-about">
-                                    <a href="https://leaderscamp.ma/" target="_blank"><img class="w-75" src="assets/img/LC.png" alt=""></a>
+                                    <a href="https://leaderscamp.ma/" target="_blank"><img class="w-75 m-auto" src="assets/img/LC.png" alt=""></a>
                                 </div>
                             </div>
-                            <div class="col-lg-4 d-flex flex-column align-items-center  col-md-6 col-sm-6">
+                            <div class="col-lg-4 d-flex flex-column align-items-center  col-md-6 col-12">
                                 <div class="w-100 h-fit widget widget-about">
-                                    <a href="/" target="_blank"><img class="w-75" src="assets/img/logo.svg" alt=""></a>
+                                    <a href="/" target="_blank"><img class="w-75 m-auto" src="assets/img/logo.svg" alt=""></a>
                                 </div>
                             </div>
-                            <div class="col-lg-2 d-flex flex-column align-items-center  col-md-6 col-sm-6">
+                            <div class="col-lg-2 d-flex flex-column align-items-center gap-2 col-md-6 col-6">
+                                <h3 class="text-center">{!! trans('welcome.sponsored_by') !!}</h3>
                                 <div class="w-100 h-fit widget widget-about">
-                                    <a href="https://www.youtube.com/@TAQASOM.Podcast" target="_blank"><img class="w-75" src="assets/img/taqasom.png" alt=""></a>
+                                    <a href="https://www.youtube.com/@TAQASOM.Podcast" target="_blank"><img class="w-75 m-auto" src="assets/img/taqasom.png" alt=""></a>
                                 </div>
                             </div>
 
 
-                            <div class="gap-2 insic  d-flex flex-column align-items-center  col-lg-2  col-md-6 col-sm-6">
+                            <div class="gap-2 insic  d-flex flex-column align-items-center  col-lg-2  col-md-6 col-6">
                                 <h3 class="text-center">تحت اشراف:</h3>
-                                <a href="https://www.instagram.com/mr.abdessamad/" target="_blank"><img class="w-100" src="assets/img/abd-logo.png" alt=""></a>
+                                <a href="https://www.instagram.com/mr.abdessamad/" class="d-flex" target="_blank"><img class="w-100" src="assets/img/abd-logo.png" alt=""></a>
                             </div>
                         </div>
                     </div><!--top-footer end-->
@@ -329,8 +345,6 @@
             </div>
         </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -343,7 +357,11 @@
         <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
         <script src="assets/js/tweenMax.js"></script>
         <script src="assets/js/wow.min.js"></script>
-        <script src="assets/js/scripts.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+        
+        <script src="{{ asset('assets/js/scripts.js') }}"></script>
         <script>
             $(document).ready(function() {
                 // Handle form submission for both login and register forms
@@ -369,7 +387,7 @@
                         success: function(response) {
                             if (response.success) {
                                 // Handle successful submission
-                                alert(response.message);
+                                alert(response.redirect);
                                 window.location.href = response.redirect; // Redirect the user
                             } else {
                                 // Handle other non-validation errors (e.g., login failed)
@@ -417,7 +435,7 @@
                         success: function(response) {
                             if (response.success) {
                                 // Handle successful submission
-                                alert(response.message);
+                                // alert(response.redirect);
                                 window.location.href = response.redirect; // Redirect the user
                             } else {
                                 // Handle other non-validation errors (e.g., login failed)

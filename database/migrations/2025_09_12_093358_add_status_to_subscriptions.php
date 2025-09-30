@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::table('subscriptions', function (Blueprint $table) {
-        //     $table->enum('status', [ 'golden', 'neuralbox']);
-        // });
+        Schema::table('subscriptions', function (Blueprint $table) {
+            $table->enum('status', ['confirmed', 'not_confirmed', 'stoped']);
+        });
     }
 
     /**
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::table('subscriptions', function (Blueprint $table) {
-        //     $table->dropColumn('status');
-        // });
+        Schema::table('subscriptions', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
     }
 };

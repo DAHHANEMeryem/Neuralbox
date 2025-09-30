@@ -66,7 +66,7 @@
 
      $hasGold = false;
      if(Auth::check())
-     $hasGold = Auth::user()->hasGoldSubscriptionOrIsAdmin();
+     $hasGold = Auth::check() && Auth::user()->subscription_type == "golden";
      $linkAttrs = [
      'class' => $hasGold ? 'slide-card html5lightbox overlay-box' : 'slide-card disabled-link',
      ];

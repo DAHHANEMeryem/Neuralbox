@@ -12,11 +12,11 @@
              {{-- <p class="card-subtitle lead text-white-50">Complétez votre inscription à Neural Box</p> --}}
          </div>
 
-         <form action="{{ route('payment.process') }}" method="post" class="needs-validation" novalidate>
+         <form action="{{ route('payment.process') }}" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
              @csrf
              <div class="card-body p-4">
 
-                <div class="mb-4">
+                 <div class="mb-4">
                      <h3 class="h5 mb-3 d-flex align-items-center text-secondary">
                          <i class="fas fa-box-open me-2 text-primary"></i> {!! trans('payment.pack') !!}
                      </h3>
@@ -89,8 +89,11 @@
                      </ul>
                      <p class="text-muted small">{{ __("payment.virement_notion") }}</p>
                      <div class="mt-3">
-                         <label for="file" class="form-label ">{{ __("payment.receipt") }}</label>
+                         <label for="file" class="file-label form-label ">{{ __("payment.receipt") }}</label>
                          <input type="file" name="receipt" id="file" class="form-control">
+                         @error('receipt')
+                         <div class="alert alert-danger mt-2">{{ $message }}</div>
+                         @enderror
                      </div>
                  </div>
 
@@ -121,6 +124,8 @@
      document.addEventListener('DOMContentLoaded', function() {
          const paymentType = document.getElementById('payment-type');
          const cvv = document.getElementById('card_cvv');
+
+
          document.getElementById('card-number')?.addEventListener('input', function(e) {
              let value = e.target.value.replace(/\s+/g, '');
              if (value.length > 0) {
@@ -204,98 +209,108 @@
              formValidation();
          });
 
+
+
+
+         $('#file').on('change', function(element) {
+             //  const $label = $('label.file-label');
+             //  var fileName = '';
+             //  if (element.target.value) fileName = element.target.value.split('\\').pop();
+             //  fileName ? $label.addClass('has-file').find('.js-fileName').html(fileName) : $label.removeClass('has-file').html(labelVal);
+             formValidation();
+         });
+
          function formValidation() {
-            if(selectedMethod == 'card'){
-                const cardNumber = document.getElementById('card-number').value.length;
-                const cardName = document.getElementById('card_name').value.length;
-                const cardExpiry = document.getElementById('card_expiry').value;
-                const cardCvv = document.getElementById('card_cvv').value.length;
-                
-                if((cardNumber == 19 ) && (cardName > 4) && cardExpiry && cardCvv == 3)
-                    payButton.classList.remove("disabled");
-                else
-                    payButton.classList.add("disabled");
+             if (selectedMethod == 'card') {
+                 const cardNumber = document.getElementById('card-number').value.length;
+                 const cardName = document.getElementById('card_name').value.length;
+                 const cardExpiry = document.getElementById('card_expiry').value;
+                 const cardCvv = document.getElementById('card_cvv').value.length;
 
-            }
-            else{
-                const receipt = document.getElementById('file').value;
-                
-                if(receipt)
-                    payButton.classList.remove("disabled");
-                else
-                    payButton.classList.add("disabled");
-            }    
-     }
+                 if ((cardNumber == 19) && (cardName > 4) && cardExpiry && cardCvv == 3)
+                     payButton.classList.remove("disabled");
+                 else
+                     payButton.classList.add("disabled");
 
-     window.submitPayment = function() {
-
-         const bacType = document.getElementById('payment-type').value;
-         if (!bacType) {
-             alert("Veuillez sélectionner le type de payment.");
-             document.getElementById('payment-type').focus();
-             return;
-         }
-
-         if (!selectedMethod) {
-             alert("Veuillez choisir une méthode de paiement.");
-             return;
-         }
-
-
-         if (selectedMethod === 'card') {
-             const cardNumber = document.getElementById('card-number').value;
-             const cardName = document.getElementById('card_name').value;
-             const cardExpiry = document.getElementById('card_expiry').value;
-             const cardCvv = document.getElementById('card_cvv').value;
-
-             if (!cardNumber || !cardName || !cardExpiry || !cardCvv) {
-                 alert("Veuillez remplir tous les champs de paiement par carte.");
-                 return;
-             }
-         }
-
-
-         payButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Traitement en cours...';
-         payButton.disabled = true;
-
-
-         setTimeout(() => {
-
-            stepIndicators.forEach((step, index) => {
-                 if (index === 2) {
-                     step.classList.remove('opacity-50');
-                     step.querySelector('div').classList.remove('bg-light', 'text-dark');
-                     step.querySelector('div').classList.add('bg-primary', 'text-white');
-                 }
-             });
-
-             let message = "";
-             if (selectedMethod === 'card') {
-                 message = "Paiement par carte accepté ! Un email de confirmation va vous être envoyé.";
-             } else if (selectedMethod === 'paypal') {
-                 message = "Vous allez être redirigé vers PayPal pour finaliser votre paiement de " + bacType + " MAD.";
              } else {
-                 message = "Votre demande de paiement par virement de " + bacType + " MAD a été enregistrée. N'oubliez pas d'effectuer le virement dans les 48h.";
+                 const receipt = document.getElementById('file').value;
+
+                 if (receipt)
+                     payButton.classList.remove("disabled");
+                 else
+                     payButton.classList.add("disabled");
              }
+         }
 
-             alert(message);
+         //  window.submitPayment = function() {
 
-             payButton.innerHTML = '<i class="fas fa-check-circle me-2"></i> Paiement effectué';
-             payButton.classList.remove('btn-primary');
-             payButton.classList.add('btn-success');
-         }, 1500);
-     };
-    /* (function() {
-             var $input = $('#file'),
-                 $label = $input.next('.js-labelFile'),
-                 labelVal = $label.html();
+         //      const bacType = document.getElementById('payment-type').value;
+         //      if (!bacType) {
+         //          alert("Veuillez sélectionner le type de payment.");
+         //          document.getElementById('payment-type').focus();
+         //          return;
+         //      }
 
-             $input.on('change', function(element) {
-                 var fileName = '';
-                 if (element.target.value) fileName = element.target.value.split('\\').pop();
-                 fileName ? $label.addClass('has-file').find('.js-fileName').html(fileName) : $label.removeClass('has-file').html(labelVal);
-             });
-    })();*/
+         //      if (!selectedMethod) {
+         //          alert("Veuillez choisir une méthode de paiement.");
+         //          return;
+         //      }
+
+
+         //      if (selectedMethod === 'card') {
+         //          const cardNumber = document.getElementById('card-number').value;
+         //          const cardName = document.getElementById('card_name').value;
+         //          const cardExpiry = document.getElementById('card_expiry').value;
+         //          const cardCvv = document.getElementById('card_cvv').value;
+
+         //          if (!cardNumber || !cardName || !cardExpiry || !cardCvv) {
+         //              alert("Veuillez remplir tous les champs de paiement par carte.");
+         //              return;
+         //          }
+         //      }
+
+
+         //      payButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Traitement en cours...';
+         //      payButton.disabled = true;
+
+
+         //      setTimeout(() => {
+
+         //         stepIndicators.forEach((step, index) => {
+         //              if (index === 2) {
+         //                  step.classList.remove('opacity-50');
+         //                  step.querySelector('div').classList.remove('bg-light', 'text-dark');
+         //                  step.querySelector('div').classList.add('bg-primary', 'text-white');
+         //              }
+         //          });
+
+         //          let message = "";
+         //          if (selectedMethod === 'card') {
+         //              message = "Paiement par carte accepté ! Un email de confirmation va vous être envoyé.";
+         //          } else if (selectedMethod === 'paypal') {
+         //              message = "Vous allez être redirigé vers PayPal pour finaliser votre paiement de " + bacType + " MAD.";
+         //          } else {
+         //              message = "Votre demande de paiement par virement de " + bacType + " MAD a été enregistrée. N'oubliez pas d'effectuer le virement dans les 48h.";
+         //          }
+
+         //          alert(message);
+
+         //          payButton.innerHTML = '<i class="fas fa-check-circle me-2"></i> Paiement effectué';
+         //          payButton.classList.remove('btn-primary');
+         //          payButton.classList.add('btn-success');
+         //      }, 1500);
+         //  };
+         /* (function() {
+                  var $input = $('#file'),
+                      $label = $input.next('.js-labelFile'),
+                      labelVal = $label.html();
+
+                  $input.on('change', function(element) {
+                      var fileName = '';
+                      if (element.target.value) fileName = element.target.value.split('\\').pop();
+                      fileName ? $label.addClass('has-file').find('.js-fileName').html(fileName) : $label.removeClass('has-file').html(labelVal);
+                  });
+         })();*/
 
 
 

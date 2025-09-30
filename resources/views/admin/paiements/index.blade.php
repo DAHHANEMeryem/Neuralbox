@@ -2,15 +2,15 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
-   <div class="flex items-center justify-between mb-8">
-  <h1 class="text-3xl font-bold text-indigo-700">
-    Tableau des Paiements
-  </h1>
-  <a href="{{ route('admin.export.paiements.pdf') }}" 
-     class="bg-blue-500 hover:bg-blue-600 transition-colors text-white px-4 py-2 rounded shadow-sm font-semibold whitespace-nowrap">
-    📄 Exporter en PDF
-  </a>
-</div>
+    <div class="flex items-center justify-between mb-8">
+        <h1 class="text-3xl font-bold text-indigo-700">
+            Tableau des Paiements
+        </h1>
+        <a href="{{ route('admin.export.paiements.pdf') }}"
+            class="bg-blue-500 hover:bg-blue-600 transition-colors text-white px-4 py-2 rounded shadow-sm font-semibold whitespace-nowrap">
+            📄 Exporter en PDF
+        </a>
+    </div>
 
 
     <!-- Statistiques -->
@@ -31,15 +31,14 @@
 
     <!-- Listes des paiements -->
     <div class="bg-gray-50 rounded-xl p-6 shadow-md">
-        <h2 class="text-2xl font-semibold text-indigo-600 mb-4">Paiements Neuralbox (2300 MAD)</h2>
-        @include('admin.paiements.table', ['paiements' => $paiements_2300])
+        <h2 class="text-2xl font-semibold text-indigo-600 mb-4">Abonnes Neuralbox (2300 MAD)</h2>
+        @include('admin.paiements.table', ['subscriptions' => $neuralboxs])
 
-        <h2 class="text-2xl font-semibold text-indigo-600 mt-10 mb-4">Paiements Gold (3200 MAD)</h2>
-        @include('admin.paiements.table', ['paiements' => $paiements_3200])
+        <h2 class="text-2xl font-semibold text-indigo-600 mt-10 mb-4">Abonnes Golden (3200 MAD)</h2>
+        @include('admin.paiements.table', ['subscriptions' => $goldens])
     </div>
 </div>
 @endsection
 
 
-        <!-- Pagination -->
-        
+<!-- Pagination -->

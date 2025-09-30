@@ -37,7 +37,7 @@ class PaymentRequest extends FormRequest
             ]);
         }else{
             $rules = array_merge($rules, [
-                'receipt' => 'required|extensions:jpg,png,pdf',
+                'receipt' => 'required|mimes:jpeg,png,jpg,webp',
             ]);
 
         }
