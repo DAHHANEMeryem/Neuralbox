@@ -27,8 +27,10 @@ class RendezVousController extends Controller
        
     ]);
 
+    $user_id =  Auth::check() ? auth()->id() : null; 
+
     RendezVous::create([
-        'user_id' => auth()->id(),
+        'user_id' => $user_id ,
         'date' => $request->date,
         'statut' => 'attente',
         'numero' => $request->numero,

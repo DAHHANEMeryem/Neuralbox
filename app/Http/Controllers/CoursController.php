@@ -32,18 +32,88 @@ class CoursController extends Controller
         return redirect($url);
         
     }
-   
 
 
-    public function getVideo(string $video)
+
+    // public function getVideo(string $video)
+    // {
+    //     $name = $video;
+    //     $fileContents = Storage::get("videos/{$name}");
+
+    //     $response = Response::make($fileContents, 200);
+    //     $response->header('Content-Type', "video/mp4");
+    //     return $response;
+    // }
+    public function getVideo(string $videoName)
     {
-        $name = $video;
-        $fileContents = Storage::get("videos/{$name}");
+        $path = "videos/{$videoName}_hls/index.m3u8";
+        $fullPath = storage_path("app/private/{$path}");
 
-        $response = Response::make($fileContents, 200);
-        $response->header('Content-Type', "video/mp4");
-        return $response;
+        if (!file_exists($fullPath)) {
+            abort(404, 'Video not found');
+        }
+
+        // ✅ Rewrite .m3u8 file to use secure route URLs
+        $content = file_get_contents($fullPath);
+        $baseUrl = route('secure.video', ['path' => "videos/{$videoName}_hls"]);
+
+        // Replace segment names with secure URLs
+        $content = preg_replace(
+            '/^((?!#).+\.ts)$/m',
+            "{$baseUrl}/$1",
+            $content
+        );
+
+        return response($content, 200, [
+            'Content-Type' => 'application/vnd.apple.mpegurl',
+            'Cache-Control' => 'no-cache',
+        ]);
     }
+
+
+    public function serveSecureVideo($path)
+    {
+        $fullPath = storage_path("app/private/{$path}");
+
+        if (!file_exists($fullPath)) {
+            abort(404);
+        }
+
+        return response()->file($fullPath, [
+            'Content-Type' => mime_content_type($fullPath),
+            'Cache-Control' => 'no-cache',
+        ]);
+    }
+
+
+    //     public function getVideo($video)
+    // {
+    //     // Make sure only authorized users can access
+    //     $filePath = "videos/{$video}";
+    //     if (!Storage::disk('private')->exists($filePath)) {
+    //         abort(404);
+    //     }
+
+    //     $fileContents = Storage::disk('private')->get($filePath);
+    //     $mime = Storage::disk('private')->mimeType($filePath);
+
+    //     return Response::make($fileContents, 200, [
+    //         'Content-Type' => $mime,
+    //         'Content-Disposition' => 'inline; filename="'.$video.'"',
+    //     ]);
+    // }
+
+    // // Signed URL generation example
+    // public function getSignedVideoUrl($video)
+    // {
+    //     $url = URL::temporarySignedRoute(
+    //         'video.show', // named route
+    //         now()->addMinutes(5),
+    //         ['video' => $video]
+    //     );
+
+    //     return response()->json(['url' => $url]);
+    // }
     /**
      * Show the form for creating a new resource.
      */

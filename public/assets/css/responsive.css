@@ -131,6 +131,7 @@
 }
 @media only screen and (max-width: 991px) {
     header .header-content .contact-add,
+    header .header-content .social-links,
     header .navigation-bar {
         display: none !important;
     }

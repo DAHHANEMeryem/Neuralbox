@@ -1,10 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
 }
+
 /* Personnalisation des cartes admin */
 
 section {
@@ -32,3 +34,32 @@ img {
   border-radius: 50%;
   position: absolute;
 }
+
+#global-spinner {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border: 0.25em solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spinner-border 0.75s linear infinite;
+
+  }
+}
+
+ @keyframes spinner-border {
+   to {
+     transform: rotate(360deg);
+   }
+ }

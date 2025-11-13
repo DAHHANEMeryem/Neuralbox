@@ -11,7 +11,7 @@ class PaiementController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Paiement::query();
+        $query = Subscription::query();
         
 
         // Récupère les paiements de 2300 MAD
@@ -31,7 +31,7 @@ class PaiementController extends Controller
         // فلترة حسب المستخدم
         if ($request->filled('user')) {
             $query->whereHas('user', function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->user . '%');
+                $q->where('name', 'like', '%' . $request->user->name . '%');
             });
         }
 

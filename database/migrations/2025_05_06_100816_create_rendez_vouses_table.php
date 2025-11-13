@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rendez_vouses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->nullable();
         
             $table->string('numero');
             $table->string('email');

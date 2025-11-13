@@ -7,10 +7,10 @@
 <section class="main-banner pt-0">
 	<div class="container">
 		<div class="row align-items-start">
-			<div class="col-lg-7 col-md-7 pt-5">
-				<div class="banner-text wow fadeInLeft position-relative" data-wow-duration="1000ms">
-					<h2 class="position-relative "><span>{{ __("hero.NeuralBox") }}</span><span class="insic ">by insic</span><br>{{__("hero.slogan")}}</h2>
-					<p>{{__("hero.desc")}}</p>
+			<div class="col-lg-7 col-md-7 pt-4">
+				<div class="w-75 banner-text wow fadeInLeft position-relative" data-wow-duration="1000ms">
+					<h2 class="mx-auto text-center position-relative "><span>{{ __("hero.NeuralBox") }}</span><span class="insic ">by insic</span><br>{{__("hero.slogan")}}</h2>
+					<p class="mx-auto text-center">{{__("hero.desc")}}</p>
 					<!-- <form class="search-form">
 						<input type="text" name="search" placeholder="Search Class">
 						<button><i class="fa fa-search"></i></button>
@@ -45,7 +45,7 @@
 	<div class="container">
 		<div class="section-title  text-center">
 			<h2>{{ __("about.welcome_to") }}<span> {{ __("hero.NeuralBox") }}</span></h2>
-			<p class="mt-5 mb-4 	">{!! trans("about.desc")!!}</p>
+			<p class="mt-5 mb-4 desc	">{!! trans("about.desc")!!}</p>
 		</div><!--section-title end-->
 		<div class="about-sec">
 			<div class="container">
@@ -57,23 +57,23 @@
 						</div>
 					</div> -->
 					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="abt-col " >
+						<div class="abt-col ">
 							<img src="assets/img/about/1.png" alt="" class="gsap-anim-target" data-animation="zoom-in">
-							<h3 class="gsap-anim-target" data-animation="fade-up" >{{ __("welcome.values.empowering") }}</h3>
+							<h3 class="gsap-anim-target" data-animation="fade-up">{{ __("welcome.values.empowering") }}</h3>
 							<!-- <p>Pelleneget tespharetra que fringilla egugue id eget pharetra</p> -->
 						</div><!--abt-col end-->
 					</div>
 					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="abt-col " >
+						<div class="abt-col ">
 							<img src="assets/img/about/2.png" alt="" class="gsap-anim-target" data-animation="zoom-in">
-							<h3 class="gsap-anim-target" data-animation="fade-up" >{{ __("welcome.values.integrating") }}</h3>
+							<h3 class="gsap-anim-target" data-animation="fade-up">{{ __("welcome.values.integrating") }}</h3>
 							<!-- <p>Etiam risus neque, volutpat vel laoreet a, finibus volutpat non</p> -->
 						</div><!--abt-col end-->
 					</div>
 					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="abt-col " >
+						<div class="abt-col ">
 							<img src="assets/img/about/3.png" alt="" class="gsap-anim-target" data-animation="zoom-in">
-							<h3 class="gsap-anim-target" data-animation="fade-up" >{{ __("welcome.values.creativity") }}</h3>
+							<h3 class="gsap-anim-target" data-animation="fade-up">{{ __("welcome.values.creativity") }}</h3>
 							<!-- <p>Mauris nec mi fequis giat, cursus tortor nec, pharetra tellus</p> -->
 						</div><!--abt-col end-->
 					</div>
@@ -89,7 +89,10 @@
 							<img src="assets/img/covers/intro.jpg" alt="" class="cover object-position-top">
 						</a>
 						<span class="category">{{__("welcome.video_title")}}</span>
-						<a href="{{ url('/video-url/videos/intro.mp4') }}" class="video-play html5lightbox overlay-box">
+						<a data-video-url="{{ route('video-link', ['videoName' => 'intro']) }}"
+							data-bs-toggle="modal"
+							data-bs-target="#exampledsModal"
+							class="video-play play-video overlay-box">
 							<img src="assets/img/play.png" alt="">
 						</a>
 					</div>
@@ -97,20 +100,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div class="abt-img">
-			<ul class="masonary" style="position: relative; height: 588px;">
-				<li class="width1 wow zoomIn" data-wow-duration="1000ms" style="visibility: visible; animation-duration: 1000ms; animation-name: jb; position: absolute; left: 0px; top: 0px;"><a href="assets/img/gallery1.jpg" data-group="set1" title="" class="html5lightbox"><img src="assets/img/gallery1.jpg" alt=""></a></li>
-				<li class="width2 wow zoomIn" data-wow-duration="1000ms" style="visibility: visible; animation-duration: 1000ms; animation-name: jb; position: absolute; left: 199px; top: 0px;"><a href="assets/img/gallery2.jpg" data-group="set1" title="" class="html5lightbox"><img src="assets/img/gallery2.jpg" alt=""></a></li>
-				<li class="width3 wow zoomIn" data-wow-duration="1000ms" style="visibility: visible; animation-duration: 1000ms; animation-name: jb; position: absolute; left: 496px; top: 0px;"><a href="assets/img/gallery4.jpg" data-group="set1" title="" class="html5lightbox"><img src="assets/img/gallery4.jpg" alt=""></a></li>
-				<li class="width4 wow zoomIn" data-wow-duration="1000ms" style="visibility: visible; animation-duration: 1000ms; animation-name: jb; position: absolute; left: 693px; top: 0px;"><a href="assets/img/gallery6.jpg" data-group="set1" title="" class="html5lightbox"><img src="assets/img/gallery6.jpg" alt="" class="hoverZoomLink"></a></li>
-				<li class="width5 wow zoomIn" data-wow-duration="1000ms" style="visibility: visible; animation-duration: 1000ms; animation-name: jb; position: absolute; left: 873px; top: 0px;"><a href="assets/img/gallery8.jpg" data-group="set1" title="" class="html5lightbox"><img src="assets/img/gallery8.jpg" alt=""></a></li>
-				<li class="width6 wow zoomIn" data-wow-duration="1000ms" style="visibility: visible; animation-duration: 1000ms; animation-name: jb; position: absolute; left: 693px; top: 211px;"><a href="assets/img/gallery7.jpg" data-group="set1" title="" class="html5lightbox"><img src="assets/img/gallery7.jpg" alt=""></a></li>
-				<li class="width7 wow zoomIn" data-wow-duration="1000ms" style="visibility: visible; animation-duration: 1000ms; animation-name: jb; position: absolute; left: 891px; top: 211px;"><a href="assets/img/gallery9.jpg" data-group="set1" title="" class="html5lightbox"><img src="assets/img/gallery9.jpg" alt=""></a></li>
-				<li class="width8 wow zoomIn" data-wow-duration="1000ms" style="visibility: visible; animation-duration: 1000ms; animation-name: jb; position: absolute; left: 1089px; top: 211px;"><a href="assets/img/gallery10.jpg" data-group="set1" title="" class="html5lightbox"><img src="assets/img/gallery10.jpg" alt=""></a></li>
-				<li class="width9 wow zoomIn" data-wow-duration="1000ms" style="visibility: visible; animation-duration: 1000ms; animation-name: jb; position: absolute; left: 199px; top: 379px;"><a href="assets/img/gallery3.jpg" data-group="set1" title="" class="html5lightbox"><img src="assets/img/gallery3.jpg" alt=""></a></li>
-				<li class="width10 wow zoomIn" data-wow-duration="1000ms" style="visibility: visible; animation-duration: 1000ms; animation-name: jb; position: absolute; left: 496px; top: 329px;"><a href="assets/img/gallery5.jpg" data-group="set1" title="" class="html5lightbox"><img src="assets/img/gallery5.jpg" alt=""></a></li>
-			</ul>
-		</div> -->
+
 	</div>
 </section>
 
@@ -142,7 +132,7 @@
 </div>
 </section> --}}
 
-<section class="newsletter-section call">
+<section class="newsletter-section call ">
 
 	{{-- <div class="container">
 		<div class="newsletter-sec">
@@ -150,12 +140,12 @@
 				<div class="col-lg-4">
 					<div class="newsz-ltr-text">
 						<h2>{{__("welcome.call.title1")}}</h2>
-					</div>
-				</div> --}}
-				{{-- <div class="text-center col-lg-10">
+	</div>
+	</div> --}}
+	{{-- <div class="text-center col-lg-10">
 					<p>{!! trans("welcome.call.text1")!!}</p>
 					<a href="#pricing" title="" class="w-fit btn-default mt-4">{{__("welcome.call.button1")}} <i class="fa fa-long-arrow-alt-right"></i></a> --}}
-					<!-- <form class="newsletter-form">
+	<!-- <form class="newsletter-form">
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
@@ -186,14 +176,14 @@
 							</div>
 						</div>
 					</form> -->
-				{{-- </div> --}}
-			{{-- </div>
+	{{-- </div> --}}
+	{{-- </div>
 		</div>
 	</div> --}}
 
-	<div class="container">
+	{{-- <div class="container">
             <div class="section-title text-center">
-				<h2 >{{__("welcome.call.title1")}}</h2>
+				<h2 >{!! trans("welcome.call.title1")!!}</h2>
 			</div>
             <div class="row">
                 <div class="col-md-12">
@@ -201,7 +191,6 @@
                         <div class="timeline timeline-item">
                             <div class="timeline-icon"><span class="year">1</span></div>
                             <div class="timeline-content">
-                                {{-- <h3 class="title">Web Desginer</h3> --}}
                                 <p class="description">
                                     {!! trans('welcome.steps.first') !!}
                                 </p>
@@ -210,7 +199,6 @@
                         <div class="timeline timeline-item">
                             <div class="timeline-icon"><span class="year">2</span></div>
                             <div class="timeline-content">
-                                {{-- <h3 class="title">Web Developer</h3> --}}
                                 <p class="description">
                                     {!! trans('welcome.steps.second') !!}
                                 </p>
@@ -219,7 +207,6 @@
                         <div class="timeline timeline-item">
                             <div class="timeline-icon"><span class="year">3</span></div>
                             <div class="timeline-content">
-                                {{-- <h3 class="title">Web Desginer</h3> --}}
                                 <p class="description">
                                     {!! trans('welcome.steps.third') !!}
                                 </p>
@@ -228,7 +215,6 @@
                         <div class="timeline timeline-item">
                             <div class="timeline-icon"><span class="year">4</span></div>
                             <div class="timeline-content">
-                                {{-- <h3 class="title">Web Developer</h3> --}}
                                 <p class="description">
                                     {!! trans('welcome.steps.four') !!}
                                 </p>
@@ -237,7 +223,6 @@
                         <div class="timeline timeline-item">
                             <div class="timeline-icon"><span class="year">5</span></div>
                             <div class="timeline-content">
-                                {{-- <h3 class="title">Web Developer</h3> --}}
                                 <p class="description">
                                     {!! trans('welcome.steps.five') !!}
                                 </p>
@@ -246,17 +231,67 @@
                     </div>
                 </div>
             </div>
-        </div>
+    </div> --}}
+
+	<div class="container py-5">
+		<div class="row text-center justify-content-center">
+			<div class="section-title text-center">
+				<h2>{!! trans("welcome.call.title1")!!}</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<div class="timeline-steps ">
+					<div class="timeline-step">
+						<div class="timeline-content">
+							<div class="inner-circle"><span>1</span></div>
+							{{-- <p class="h6 mt-3 mb-1">1</p> --}}
+							<p class="h6 text-muted mb-0 mb-lg-0">{!! trans("welcome.steps.first")!!}</p>
+						</div>
+					</div>
+					<div class="timeline-step">
+						<div class="timeline-content">
+							<div class="inner-circle"><span>2</span></div>
+							{{-- <p class="h6 mt-3 mb-1">2004</p> --}}
+							<p class="h6 text-muted mb-0 mb-lg-0">{!! trans("welcome.steps.second")!!}</p>
+						</div>
+					</div>
+					<div class="timeline-step">
+						<div class="timeline-content">
+							<div class="inner-circle"><span>3</span></div>
+							{{-- <p class="h6 mt-3 mb-1">2005</p> --}}
+							<p class="h6 text-muted mb-0 mb-lg-0">{!! trans("welcome.steps.third")!!}</p>
+						</div>
+					</div>
+					<div class="timeline-step">
+						<div class="timeline-content">
+							<div class="inner-circle"><span>4</span></div>
+							{{-- <p class="h6 mt-3 mb-1">2010</p> --}}
+							<p class="h6 text-muted mb-0 mb-lg-0">{!! trans("welcome.steps.four")!!}</p>
+						</div>
+					</div>
+					<div class="timeline-step mb-0">
+						<div class="timeline-content">
+							<div class="inner-circle"><span>5</span></div>
+							{{-- <p class="h6 mt-3 mb-1">2020</p> --}}
+							<p class="h6 text-muted mb-0 mb-lg-0">{!! trans("welcome.steps.five")!!}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
-<section class="about-page-content pt-4">
+<section class="about-page-content pt-md-4 p-0">
 	<div class="container">
 		<div class="abt-page-row">
 			<div class="row align-items-center">
 				<div class="col-lg-6 col-md-6">
 					<div class="section-title">
+						<p class="text-blue-neural	 ">{!! trans("welcome.coach_abd_founder") !!}</p>
 						<h2>{!! trans("welcome.coach_abd") !!}</h2>
-						<!-- <p class="mw-100"></p> -->
 						<!-- <a href="classes.html" title="" class="btn-default">Classes <i class="fa fa-long-arrow-alt-right"></i></a> -->
 					</div>
 					<div class="act-inffo">
@@ -271,12 +306,10 @@
 							<li>{!! trans("welcome.abd_info_5") !!}</li>
 							<li>{!! trans("welcome.abd_info_6") !!}</li>
 							<li>{!! trans("welcome.abd_info_7") !!}</li>
-
-
 						</ul>
 					</div>
 				</div>
-				<div class="col-lg-6 col-md-6">
+				<div class="col-lg-6 col-md-6 ">
 					<div class="abt-img">
 						<img src="assets/img/abt1.png" alt="">
 					</div><!--avt-img end-->
@@ -293,7 +326,7 @@
 			<section class="services-section">
 				<div class="container">
 					<div class="sec-title right-align">
-						<h2 >
+						<h2>
 							{!!__('transelt.titre1')!!}
 						</h2>
 					</div>
@@ -432,6 +465,24 @@
 	</div>
 </section>
 
+<div class="blog-section">
+	<div class="blog-posts">
+		<div class="blog-post video-post">
+			<div class="blog-thumbnail ">
+				<a href="#" title="">
+					<img src="assets/img/covers/storyCover.webp" alt="" class="cover object-position-top">
+				</a>
+				<span class="category">{{__("welcome.video_story")}}</span>
+				<a data-video-url="{{ route('video-link', ['videoName' => 'story']) }}"
+					data-bs-toggle="modal"
+					data-bs-target="#exampledsModal" class="video-play play-video overlay-box">
+					<img src="assets/img/play.png" alt="">
+				</a>
+			</div>
+
+		</div>
+	</div>
+</div>
 
 <section class="course-section">
 	<div class="container">
@@ -711,6 +762,50 @@
 				<a href="{{route('register')}}" class="btn btn-warning fw-bold text-white rounded-pill mt-3 w-100 px-5 justify-content-center">{{ __("auth.register_now") }}</a>
 			</div>
 		</div>
+
+		<div class="card pricing-card price-blue text-center">
+			<div class="top-wave">
+				<svg id="Layer_1" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 379.14 196.29">
+					<defs>
+						<linearGradient id="blue-linear-gradient" x1="189.57" y1="300.38" x2="189.57" y2="398.76" gradientTransform="translate(0 560.34) scale(1 -1)" gradientUnits="userSpaceOnUse">
+							<stop offset="0" stop-color="#69c4d8" />
+							<stop offset="1" stop-color="#3677ff" />
+						</linearGradient>
+						<linearGradient id="blue-linear-gradient-2" x1="189.56" y1="309.73" x2="189.56" y2="405.92" xlink:href="#linear-gradient" />
+						<linearGradient id="blue-linear-gradient-3" x1="189.56" y1="379.32" x2="189.56" y2="560.34" gradientTransform="translate(0 560.34) scale(1 -1)" gradientUnits="userSpaceOnUse">
+							<stop offset="0" stop-color="#5ce0ff" />
+							<stop offset="1" stop-color="#69c4d8" />
+						</linearGradient>
+					</defs>
+					<g id="Layer_1-2" data-name="Layer 1">
+						<g class="cls-3">
+							<g id="Layer_1-3" data-name="Layer 1">
+								<g>
+									<g class="cls-5">
+										<path class="cls-4" d="M346.33,0H32.8C14.68,0,0,14.68,0,32.8v117.53h.47c31.54,0,31.54,45.96,63.08,45.96s31.55-45.96,63.09-45.96,31.56,45.96,63.12,45.96,31.55-45.96,63.1-45.96,31.57,45.96,63.14,45.96,31.57-45.96,63.14-45.96V32.8C379.14,14.69,364.46,0,346.34,0h-.01Z" />
+									</g>
+									<path class="cls-1" d="M346.33,0H32.8C14.68,0,0,14.68,0,32.8v117.79c47.39,0,47.39,30.64,94.77,30.64s47.37-30.64,94.74-30.64,47.4,30.64,94.81,30.64,47.4-30.64,94.81-30.64V32.8C379.13,14.69,364.45,0,346.33,0Z" />
+									<path class="cls-2" d="M346.33,0H32.8C14.68,0,0,14.68,0,32.8v117.53h.47c1.95,0,3.77.18,5.49.51,39.74,2.39,43.43,28.09,83.63,30.18,10.19-13.38,17.68-30.69,37.05-30.69,10.09,0,16.95,4.72,22.65,11.12,9.87-5.9,21.23-10.85,40.23-10.85s30.6,5.05,40.55,11.03c5.73-6.48,12.61-11.29,22.79-11.29,19.38,0,26.87,17.3,37.06,30.68,40.11-2.26,43.7-28.12,84.09-30.2,1.62-.29,3.31-.48,5.12-.48V32.8C379.13,14.69,364.45,0,346.33,0Z" />
+								</g>
+							</g>
+						</g>
+					</g>
+				</svg>
+			</div>
+
+
+
+			<div class="card-body ">
+				<div>
+					<h5 class="card-title text-white fw-bold fs-4 z-1 position-relative">{!! __('transelt.title3')!!}</h5>
+					<h2 class="price text-white fw-bold mt-n2 z1 position-relative" dir="ltr">2300 DH</h2>
+					{!!__('transelt.ul3')!!}
+				</div>
+
+				<a href="{{route('payment.form')}}" class="btn btn-warning fw-bold text-white rounded-pill mt-3 w-100 px-5 justify-content-center">اختر الباقة</a>
+			</div>
+		</div>
+
 		<div class="card pricing-card price-gold text-center">
 			<div class="top-wave">
 				<svg id="Layer_1" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 379.14 196.29">
@@ -798,48 +893,6 @@
 					<h2 class="price text-white fw-bold mt-n2 z1 position-relative" dir="ltr">3200 DH</h2>
 					{!!__('transelt.ul2')!!}
 				</div>
-				<a href="{{route('payment.form')}}" class="btn btn-warning fw-bold text-white rounded-pill mt-3 w-100 px-5 justify-content-center">اختر الباقة</a>
-			</div>
-		</div>
-		<div class="card pricing-card price-blue text-center">
-			<div class="top-wave">
-				<svg id="Layer_1" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 379.14 196.29">
-					<defs>
-						<linearGradient id="blue-linear-gradient" x1="189.57" y1="300.38" x2="189.57" y2="398.76" gradientTransform="translate(0 560.34) scale(1 -1)" gradientUnits="userSpaceOnUse">
-							<stop offset="0" stop-color="#69c4d8" />
-							<stop offset="1" stop-color="#3677ff" />
-						</linearGradient>
-						<linearGradient id="blue-linear-gradient-2" x1="189.56" y1="309.73" x2="189.56" y2="405.92" xlink:href="#linear-gradient" />
-						<linearGradient id="blue-linear-gradient-3" x1="189.56" y1="379.32" x2="189.56" y2="560.34" gradientTransform="translate(0 560.34) scale(1 -1)" gradientUnits="userSpaceOnUse">
-							<stop offset="0" stop-color="#5ce0ff" />
-							<stop offset="1" stop-color="#69c4d8" />
-						</linearGradient>
-					</defs>
-					<g id="Layer_1-2" data-name="Layer 1">
-						<g class="cls-3">
-							<g id="Layer_1-3" data-name="Layer 1">
-								<g>
-									<g class="cls-5">
-										<path class="cls-4" d="M346.33,0H32.8C14.68,0,0,14.68,0,32.8v117.53h.47c31.54,0,31.54,45.96,63.08,45.96s31.55-45.96,63.09-45.96,31.56,45.96,63.12,45.96,31.55-45.96,63.1-45.96,31.57,45.96,63.14,45.96,31.57-45.96,63.14-45.96V32.8C379.14,14.69,364.46,0,346.34,0h-.01Z" />
-									</g>
-									<path class="cls-1" d="M346.33,0H32.8C14.68,0,0,14.68,0,32.8v117.79c47.39,0,47.39,30.64,94.77,30.64s47.37-30.64,94.74-30.64,47.4,30.64,94.81,30.64,47.4-30.64,94.81-30.64V32.8C379.13,14.69,364.45,0,346.33,0Z" />
-									<path class="cls-2" d="M346.33,0H32.8C14.68,0,0,14.68,0,32.8v117.53h.47c1.95,0,3.77.18,5.49.51,39.74,2.39,43.43,28.09,83.63,30.18,10.19-13.38,17.68-30.69,37.05-30.69,10.09,0,16.95,4.72,22.65,11.12,9.87-5.9,21.23-10.85,40.23-10.85s30.6,5.05,40.55,11.03c5.73-6.48,12.61-11.29,22.79-11.29,19.38,0,26.87,17.3,37.06,30.68,40.11-2.26,43.7-28.12,84.09-30.2,1.62-.29,3.31-.48,5.12-.48V32.8C379.13,14.69,364.45,0,346.33,0Z" />
-								</g>
-							</g>
-						</g>
-					</g>
-				</svg>
-			</div>
-
-
-
-			<div class="card-body ">
-				<div>
-					<h5 class="card-title text-white fw-bold fs-4 z-1 position-relative">{!! __('transelt.title3')!!}</h5>
-					<h2 class="price text-white fw-bold mt-n2 z1 position-relative" dir="ltr">2300 DH</h2>
-					{!!__('transelt.ul3')!!}
-				</div>
-
 				<a href="{{route('payment.form')}}" class="btn btn-warning fw-bold text-white rounded-pill mt-3 w-100 px-5 justify-content-center">اختر الباقة</a>
 			</div>
 		</div>
@@ -1351,4 +1404,5 @@
 --}}
 
 @endsection
+@section('videoModal','without')
 @section('footer','footer')

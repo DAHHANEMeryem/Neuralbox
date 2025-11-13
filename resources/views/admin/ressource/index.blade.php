@@ -29,6 +29,7 @@
             <thead class="bg-gray-100 text-gray-600 font-semibold uppercase text-sm">
                 <tr>
                     <th class="p-3 text-left">Titre</th>
+                    <th class="p-3 text-left">Type</th>
                     <th class="p-3 text-left">Catégorie</th>
                     <th class="p-3 text-left">Description</th>
                     <th class="p-3 text-center">Visibilité</th>
@@ -43,6 +44,7 @@
                 <tr class="border-b hover:bg-indigo-50 transition">
                     <td class="p-3">{{ $res->titre }}</td>
                     <td class="p-3">{{ $res->categorie }}</td>
+                    <td class="p-3">{{ $res->category ? $res->category->name : __('transelt.sans') }}</td>
                     <td class="p-3">{{ Str::limit($res->description, 50) }}</td>
                     <td class="p-3 text-center">{{ ucfirst($res->visibilite) }}</td>
                     <td class="p-3 text-center">{{ $res->ordre }}</td>

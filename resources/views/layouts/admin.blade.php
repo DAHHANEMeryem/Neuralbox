@@ -17,6 +17,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 </head>
 
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 
 @stack('scripts')
@@ -146,10 +147,18 @@
 
             <!-- Content -->
             <div class="p-8">
+                <div id="global-spinner">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
                 @yield('content')
             </div>
         </main>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/resumablejs@1/resumable.js"></script>
+
 </body>
 
 </html>

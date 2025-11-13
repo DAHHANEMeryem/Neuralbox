@@ -7,7 +7,7 @@ return [
   'suivre' => 'مواكبة +',
   'about' => 'من نحن؟',
   // 'contact' => 'ابدأ الآن'
-  'peda' => 'الموجه التربوي',
+  'peda' => 'المحتوى التعليمي',
   'subscribe'=>'اشترك الان',
   'login'=>'تسجيل الدخول',
   'pricing'=>'الاشتراك',
@@ -17,5 +17,4 @@ return [
   'copyright'=> '© جميع الحقوق محفوظة لشركة <a href="https://insiconsulting.com">INSIC</a> 2025',
   'produced_by'=>'مطور من طرف',
   'privacy'=> 'السياسة والخصوصية',
-
 ];

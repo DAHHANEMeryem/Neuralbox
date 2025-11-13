@@ -1,185 +1,74 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    /* Alert styles */
-    .alert {
-      padding: 15px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      font-weight: 500;
-    }
-    
-    .alert-success {
-      background-color: #d4edda;
-      border: 1px solid #c3e6cb;
-      color: #155724;
-    }
+<div class="container my-5" dir="rtl">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
+          <h2 class="text-center mb-4 fw-bold">حجز موعد</h2>
 
-    /* Styles spécifiques à cette page */
-    .appointment-wrapper {
-      min-height: 80vh;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      /* Compense les marges du container Bootstrap si présent */
-    }
+          {{-- Success message --}}
+          @if(session('success'))
+          <div class="alert alert-success text-center">
+            {{ session('success') }}
+          </div>
+          @endif
 
-    .appointment-container {
-      background: #fff;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      width: 100%;
-      max-width: 60%;
-    }
+          <form method="POST" action="{{ route('rendezvous.store') }}">
+            @csrf
+            <div class="mb-3">
+              <label for="email" class="form-label fw-semibold">البريد الإلكتروني</label>
+              <input type="email" class="form-control rounded-3 @error('email') is-invalid @enderror"
+                id="email" name="email" placeholder="مثال@Gmail.com"
+                value="{{ old('email') }}" required>
+              @error('email')
+              <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
+            </div>
 
-    .appointment-container h1 {
-      text-align: center;
-      margin-bottom: 25px;
-      color: #2575fc;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+            <div class="mb-3">
+              <label for="numero" class="form-label fw-semibold">رقم الهاتف</label>
+              <input type="tel" class="form-control rounded-3 @error('numero') is-invalid @enderror"
+                id="numero" name="numero" placeholder="+33 6 12 34 56 78"
+                value="{{ old('numero') }}" maxlength="20" required>
+              @error('numero')
+              <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
+            </div>
 
-    .appointment-form {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
+            <!-- Message -->
+            <div class="mb-3">
+              <label for="message" class="form-label fw-semibold">الرسالة</label>
+              <textarea class="form-control rounded-3 @error('message') is-invalid @enderror"
+                id="message" name="message" placeholder="اكتب رسالتك ..." rows="3">{{ old('message') }}</textarea>
+              @error('message')
+              <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
+            </div>
 
-    .appointment-form .form-group {
-      display: flex;
-      flex-direction: column;
-    }
+            <div class="mb-3">
+              <label for="date" class="form-label fw-semibold">تاريخ ووقت الموعد</label>
+              <input type="datetime-local" class="form-control rounded-3 @error('date') is-invalid @enderror"
+                id="date" name="date" value="{{ old('date') }}" required>
+              <div class="form-text">يرجى اختيار تاريخ ووقت في المستقبل</div>
+              @error('date')
+              <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
+            </div>
 
-    .appointment-form label {
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #444;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+            <!-- Submit -->
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary btn-lg rounded-3">
+                <i class="bi bi-calendar-check me-2"></i> طلب الموعد
+              </button>
+            </div>
 
-    .appointment-form input, 
-    .appointment-form select, 
-    .appointment-form textarea {
-      padding: 12px 14px;
-      font-size: 1rem;
-      border: 2px solid #ddd;
-      border-radius: 8px;
-      transition: border-color 0.3s;
-      width: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    .appointment-form input{
-           direction: rtl;
-    }
-
-    .appointment-form input:focus, 
-    .appointment-form select:focus, 
-    .appointment-form textarea:focus {
-      border-color: #2575fc;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.1);
-    }
-
-    .appointment-form textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    .appointment-form .btn-submit {
-      background: #2575fc;
-      color: white;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-      border-radius: 8px;
-      padding: 12px 14px;
-      font-size: 1rem;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .appointment-form .btn-submit:hover {
-      background: #1b52d4;
-      transform: translateY(-1px);
-    }
-
-    .appointment-form .btn-submit:active {
-      transform: translateY(0);
-    }
-
-    .form-note {
-      font-size: 0.85rem;
-      color: #666;
-      margin-top: 5px;
-      font-style: italic;
-    }
-
-    /* Responsive design */
-    @media (max-width: 768px) {
-      .appointment-wrapper {
-        padding: 10px;
-        margin: -10px;
-      }
-      
-      .appointment-container {
-        padding: 20px 25px;
-      }
-    }
-</style>
-<div class="appointment-wrapper">
-  <div class="appointment-container">
-    <h1>حجز موعد</h1>
-    
-    @if(session('success'))
-      <div class="alert alert-success">
-        {{ session('success') }}
+          </form>
+        </div>
       </div>
-    @endif
-
-    <form class="appointment-form" method="POST" action="{{ route('rendezvous.store') }}">
-      @csrf
-      
-      <div class="form-group">
-        <label for="email">البريد الإلكتروني</label>
-        <input type="email" id="email" name="email" placeholder="مثال@Gmail.com" 
-               value="{{ old('email') }}" required />
-        @error('email')
-          <span class="form-note" style="color: #e74c3c;">{{ $message }}</span>
-        @enderror
-      </div>
-
-      <div class="form-group">
-        <label for="numero">رقم الهاتف</label>
-        <input type="tel" id="numero" name="numero" placeholder="+33 6 12 34 56 78" 
-               value="{{ old('numero') }}" maxlength="20" required />
-        @error('numero')
-          <span class="form-note" style="color: #e74c3c;">{{ $message }}</span>
-        @enderror
-      </div>
-
-      <div class="form-group">
-        <label for="message">الرسالة</label>
-        <input type="text" id="message" name="message" placeholder="اكتب رسالتك ..." />
-        @error('message')
-          <span class="form-note" style="color: #e74c3c;">{{ $message }}</span>
-        @enderror
-      </div>
-
-      <div class="form-group">
-        <label for="date">تاريخ ووقت الموعد</label>
-        <input type="datetime-local" id="date" name="date" value="{{ old('date') }}" required />
-        <span class="form-note">يرجى اختيار تاريخ ووقت في المستقبل</span>
-        @error('date')
-          <span class="form-note" style="color: #e74c3c;">{{ $message }}</span>
-        @enderror
-      </div>
-
-      <button type="submit" class="btn-submit">طلب الموعد</button>
-    </form>
+    </div>
   </div>
 </div>
 @endsection
+@section('footer','footer')

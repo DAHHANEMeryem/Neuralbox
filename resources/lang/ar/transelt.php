@@ -98,5 +98,6 @@ return [
 'placeholder5'=>'رسالتك',
 'fm'=>'<h4 class="counter-title">أسرة سعيدة</h4>',
 'enf'=>'<h4 class="counter-title">طفل مستفيد</h4>',
-'acc'=>'<h4 class="counter-title">مواكبة ناجحة</h4>'
+'acc'=>'<h4 class="counter-title">مواكبة ناجحة</h4>',
+'sans'=>'بدون'
 ];

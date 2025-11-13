@@ -50,7 +50,7 @@
         @endif
 
         <!-- Formulaire principal -->
-        <form action="{{ route('admin.ressources.update', $ressource->id) }}" method="POST" enctype="multipart/form-data" class="space-y-8">
+        <form id="referenceEditForm" action="{{ route('admin.ressources.update', $ressource->id) }}" method="POST" enctype="multipart/form-data" class="space-y-8">
             @csrf
             @method('PUT')
 
@@ -130,25 +130,47 @@
                         </div>
                     </div>
 
-                    <!-- Ordre d'affichage -->
-                    <div class="max-w-xs">
-                        <label for="ordre" class="block text-sm font-medium text-gray-700 mb-2">
-                            Ordre d'affichage
-                        </label>
-                        <input type="number"
-                            id="ordre"
-                            name="ordre"
-                            value="{{ old('ordre', $ressource->ordre) }}"
-                            min="0"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm"
-                            placeholder="0">
-                        <p class="mt-1 text-xs text-gray-500">Plus le nombre est petit, plus la ressource apparaîtra en premier</p>
+                    <div class="flex gap-2 justify-between">
+                        <!-- Ordre d'affichage -->
+                        <div class="w-full">
+                            <label for="ordre" class="block text-sm font-medium text-gray-700 mb-2">
+                                Ordre d'affichage
+                            </label>
+                            <input type="number"
+                                id="ordre"
+                                name="ordre"
+                                value="{{ old('ordre', $ressource->ordre) }}"
+                                min="0"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm"
+                                placeholder="0">
+                            <p class="mt-1 text-xs text-gray-500">Plus le nombre est petit, plus la ressource apparaîtra en premier</p>
+                        </div>
+                        <div class="w-full">
+                            <label for="ordre" class="block text-sm font-medium text-gray-700 mb-2">
+                                Categorie du video
+                            </label>
+                            <select id="category"
+                                name="category"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm">
+                                <option value="">
+                                    Sans categorie
+                                </option>
+                                @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" {{ $ressource->category ? ($ressource->category->id == $category->id  ? 'selected' : '') : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('category')
+                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Section Média -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class=" bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center">
                         <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -163,13 +185,54 @@
                         <h3 class="text-base font-medium text-gray-900">Vidéo de la ressource</h3>
 
                         @if($ressource->video_url)
-                        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                        <!-- <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 relative">
                             <p class="text-sm font-medium text-gray-700 mb-3">Vidéo actuelle :</p>
-                            <div class="bg-black rounded-lg overflow-hidden shadow-lg max-w-md">
-                                <video width="100%" height="200" controls class="w-full">
-                                    <source src="{{ route('video-link',['filename'=> $ressource->video_url]) }}" type="video/mp4">
+                            <div class="max-w-xs h-fit relative">
+                                <video
+                                    id="video-preview"
+                                    width="100%"
+                                    height="180"
+                                    controls
+                                    poster="{{ $ressource->preview_image ? route('secure.file',['id' => $ressource->id]) : '' }}"
+                                    class="w-full h-32 object-cover rounded-lg shadow-sm border border-gray-200"
+                                    style="pointer-events: none;">
+                                    <source src="{{ route('video-link',['videoName'=> $ressource->video_url]) }}" type="video/mp4">
                                     Votre navigateur ne supporte pas la vidéo.
                                 </video>
+                                <a href="#"
+                                    class="absolute right-2 bottom-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2 flex items-center justify-center play-video"
+                                    data-video-url="{{ route('video-link',['videoName'=> $ressource->video_url]) }}"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampledsModal"
+                                    style="box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-6.518-3.651A1 1 0 007 8.618v6.764a1 1 0 001.234.97l6.518-1.168A1 1 0 0015 14.382V9.618a1 1 0 00-.248-.45z"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div> -->
+
+                        <div class="modal fade" id="exampledsModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="videoModalLabel">Lecture de la vidéo</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                                    </div>
+                                    <div class="modal-body relative">
+                                        <video id="video-player" width="100%" height="400" controls class="w-full bg-black rounded-lg" poster="{{ $ressource->preview_image ? route('secure.file',['id' => $ressource->id]) : '' }}">
+                                            Votre navigateur ne supporte pas la vidéo.
+                                        </video>
+                                        <a href="#"
+                                            class="absolute ignite left-0 top-0 w-full h-full bg-black/50   items-center flex justify-center play-video   text-white"
+                                            data-video-url=" {{ route('video-link',['videoName'=> $ressource->video_url]) }}"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampledsModal"
+                                            style="box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                                            <i class="fa fa-play text-4xl m-auto p-8 bg-blue-600 hover:bg-blue-700 rounded-full"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         @else

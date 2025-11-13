@@ -9,7 +9,7 @@ class AdminUserController extends Controller
 {
     public function index()
 {
-        $users = User::latest()->paginate(10);
+        $users = User::latest()->paginate(9);
    
     $totalUsers = User::count(); 
     return view('admin.utilisateurs', compact('users','totalUsers'));

@@ -4,6 +4,68 @@
     "use strict";
 
     $(document).ready(function () {
+        const $spinner = $("#global-spinner");
+
+        function setupVideoModal({
+            videoPlayerSelector = "#video-player",
+            triggerSelector = ".play-video",
+            modalSelector = "#exampledsModal",
+        } = {}) {
+            const videoPlayer = document.querySelector(videoPlayerSelector);
+            const videoModalElement = document.querySelector(modalSelector);
+
+            let hls = null;
+
+            if (!videoPlayer || !videoModalElement) return;
+
+            document.querySelectorAll(triggerSelector).forEach(function (el) {
+                el.addEventListener("click", function (e) {
+                    e.preventDefault();
+
+                    const videoSrc = this.getAttribute("data-video-url");
+                    if (!videoSrc) return;
+
+                    videoPlayer.pause();
+                    videoPlayer.removeAttribute("src");
+                    if (hls) {
+                        hls.destroy();
+                        hls = null;
+                    }
+
+                    if (window.Hls && Hls.isSupported()) {
+                        hls = new Hls();
+                        hls.loadSource(videoSrc);
+                        hls.attachMedia(videoPlayer);
+                        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                            videoPlayer.play();
+                        });
+                    } else {
+                        videoPlayer.src = videoSrc;
+                        videoPlayer.play();
+                    }
+                    if (this.classList.contains("ignite"))
+                        this.classList.add("hidden");
+                });
+            });
+
+            videoModalElement.addEventListener("hidden.bs.modal", function () {
+                videoPlayer.pause();
+                videoPlayer.currentTime = 0;
+                videoPlayer.removeAttribute("src");
+                if (hls) {
+                    hls.destroy();
+                    hls = null;
+                }
+            });
+        }
+
+        // Example usage:
+        setupVideoModal({
+            videoPlayerSelector: "#video-player",
+            triggerSelector: ".play-video",
+            modalSelector: "#exampledsModal",
+        });
+
         gsap.registerPlugin(ScrollTrigger);
         if (
             typeof gsap !== "undefined" &&
@@ -605,4 +667,6 @@
             );
         }
     }
+
+
 })(jQuery);

@@ -30,6 +30,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RateController;
 use Illuminate\Http\Request;
 
 // routes/web.php
@@ -105,7 +107,9 @@ Route::post('/payment', [PaymentController::class, 'processPayment'])->name('pay
 Route::get('/payment/confirmation/{id}', [PaymentController::class, 'showConfirmation'])->name('payment.confirmation');
 
 
+Route::post('/alreadyRated', [RateController::class, 'alreadyRated'])->name('rates.isAlreadySubmitted');
 
+Route::resource('/rates', RateController::class);
 Route::middleware(['auth', 'IsAdmin'])->group(function () {
 
     Route::get('/admin/ressources', [RessourceController::class, 'index'])->name('admin.ressources.index');
@@ -116,6 +120,7 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     Route::delete('/admin/ressources/{ressource}', [RessourceController::class, 'destroy'])->name('admin.ressources.destroy');
 
 
+    Route::resource('/admin/categories', CategoryController::class);
 
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/utilisateurs', [AdminUserController::class, 'index'])->name('admin.utilisateurs');
@@ -159,9 +164,9 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
 });
 
 
+Route::get('/prendre-rendez-vous', [RendezVousController::class, 'create'])->name('rendezvous.create');
+Route::post('/prendre-rendez-vous', [RendezVousController::class, 'store'])->name('rendezvous.store');
 Route::middleware(['auth'])->group(function () {
-    Route::get('/prendre-rendez-vous', [RendezVousController::class, 'create'])->name('rendezvous.create');
-    Route::post('/prendre-rendez-vous', [RendezVousController::class, 'store'])->name('rendezvous.store');
 });
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
@@ -212,7 +217,19 @@ Route::get('lang/{locale}', function ($locale) {
 
 
 // باقي الروابط
-Route::get('/video-url/{filename}', [CoursController::class, 'getVideoUrl'])->where('filename', '.*')->name('video-link');
+// Route::get('/video-url/{filename}', [CoursController::class, 'getVideoUrl'])->where('filename', '.*')->name('video-link');
+
+Route::get('/secure/video/{path}', [CoursController::class, 'serveSecureVideo'])
+    ->where('path', '.*')
+    ->name('secure.video');
+
+Route::get('/video-url/{videoName}', [CoursController::class, 'getVideo'])
+    ->where('videoName', '.*')
+    ->name('video-link');
+
+// Route::get('/video/{video}', [CoursController::class, 'getVideo'])
+//     ->name('video.show')
+//     ->middleware('signed'); // Ensures signature validity
 // Route::get('/neuralbox', [NeuralBoxController::class, 'index'])->name('neuralbox');
 // Route::get('/peda', [NeuralBoxController::class, 'peda'])->name('peda');
 Route::get('/suivre', [MeanController::class, 'suivre'])->name('suivre');
@@ -385,7 +402,9 @@ Route::get('/file/{id}', function ($id) {
 
 
 
+Route::post('/ressources/navigate', [RessourceController::class, 'navigate'])->name('ressource.navigate');
 
-
+Route::post('/admin/ressources/upload-chunk', [RessourceController::class, 'uploadChunk'])->name('admin.ressources.uploadChunk');
+Route::post('/admin/ressources/merge-chunks', [RessourceController::class, 'mergeChunks'])->name('admin.ressources.mergeChunks');
 
 require __DIR__ . '/auth.php';

@@ -38,15 +38,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
+    @stack('navData')
 </head>
 
 <body dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
-    @stack('navData')
 
 
     <div class="wrapper" @hasSection('background') style="background: @yield('background')" @endif>
 
-        <div class="main-section" @hasSection('background') style="background:url('') ;height: inherit;backdrop-filter: blur(5rem);" @endif>
+        <div class="main-section" @hasSection('background') style="background:url('');height: inherit;backdrop-filter: blur(5rem);" @endif>
 
             <header>
                 <div class="container">
@@ -77,6 +77,7 @@
                                             <span dir="ltr">+212 539 32 42 32</span>
                                         </div>
                                     </a>
+
                                 </div><!--contact-info end-->
                             </li>
                             {{-- <li>
@@ -108,7 +109,7 @@
                         </div><!--menu-btn end-->
                     </div><!--header-content end-->
                     <div @class(["navigation-bar d-flex justify-content-between align-items-center",$navTheme ?? ' ' ])>
-                        <nav >
+                        <nav>
                             <ul>
                                 @if(Auth::check() && Auth::user()->is_admin)<li><a class="{{(Route::current()->getName() === 'admin.dashboard') ? 'active' : ''}}" href="{{ route('admin.dashboard') }}" title="">{{ __("nav.admin_dashboard") }}</a></li>@endif
                                 <li><a class="{{(Route::current()->getName() === 'home') ? 'active' : ''}}" href="{{ route('home') }}" title="">{{ __("nav.home") }}</a></li>
@@ -116,14 +117,13 @@
                                 <li><a class="{{(Route::current()->getName() === 'peda') ? 'active' : ''}}" href="{{ route('peda') }}" title="">{{ __("nav.peda") }}</a></li>
                                 <li><a class="{{(Route::current()->getName() === 'suivre') ? 'active' : ''}}" href="{{ route('suivre') }}" title="">{{ __("nav.suivre") }}</a></li>
                                 <li><a class="{{(Route::current()->getName() === 'about') ? 'active' : ''}}" href="{{ route('about') }}" title="">{{ __("nav.about") }}</a></li>
-                                
                             </ul>
-                            
+
                         </nav><!--nav end-->
                         <nav>
                             <ul>
-                                @if(!Auth::check() || !Auth::user()->subscription_type)<li class="bg-primary  p-2 rounded-5"><a class="text-white" href="{{ route('payment.form') }}" title="">{{ __("nav.pricing") }}</a></li>@endif
 
+                                @if(!Auth::check() || !Auth::user()->subscription_type)<li class="bg-orange  py-1 px-3 rounded-5"><a class="text-white" href="{{ route('payment.form') }}" title="">{{ __("nav.pricing") }}</a></li>@endif
                                 @auth
                                 <li>
                                     <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
@@ -147,86 +147,96 @@
 
             <div class="responsive-menu">
                 <ul>
-                    <li><a href="{{ route('home') }}" title="">Accueil</a></li>
-                    <li><a href="about.html" title="">About</a></li>
-                    <li><a href="events.html" title="">Events</a></li>
-                    <li><a href="event-single.html" title="">Event Single</a></li>
-                    <li><a href="schedule.html" title="">Schedule</a></li>
-                    <li><a href="classes.html" title="">Classes</a></li>
-                    <li><a href="class-single.html" title="">Classe Single</a></li>
-                    <li><a href="teachers.html" title="">Teachers</a></li>
-                    <li><a href="teacher-single.html" title="">Teacher Single</a></li>
-                    <li><a href="blog.html" title="">Blog</a></li>
-                    <li><a href="post.html" title="">Blog Single</a></li>
-                    <li><a href="contacts.html" title="">Contacts</a></li>
-                    <li><a href="error.html" title="">404</a></li>
+                    @if(Auth::check() && Auth::user()->is_admin)<li><a class="{{(Route::current()->getName() === 'admin.dashboard') ? 'active' : ''}}" href="{{ route('admin.dashboard') }}" title="">{{ __("nav.admin_dashboard") }}</a></li>@endif
+                    <li><a class="{{(Route::current()->getName() === 'home') ? 'active' : ''}}" href="{{ route('home') }}" title="">{{ __("nav.home") }}</a></li>
+                    <li><a class="{{(Route::current()->getName() === 'neuralbox') ? 'active' : ''}}" href="{{ route('neuralbox') }}" title="">{{ __("nav.neural-guide") }}</a></li>
+                    <li><a class="{{(Route::current()->getName() === 'peda') ? 'active' : ''}}" href="{{ route('peda') }}" title="">{{ __("nav.peda") }}</a></li>
+                    <li><a class="{{(Route::current()->getName() === 'suivre') ? 'active' : ''}}" href="{{ route('suivre') }}" title="">{{ __("nav.suivre") }}</a></li>
+                    <li><a class="{{(Route::current()->getName() === 'about') ? 'active' : ''}}" href="{{ route('about') }}" title="">{{ __("nav.about") }}</a></li>
+                    @if(!Auth::check() || !Auth::user()->subscription_type)<li><a href="{{ route('payment.form') }}" title="">{{ __("nav.pricing") }}</a></li>@endif
+
+                    @auth
+                    <li>
+                        <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                            @csrf
+                        </form>
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            {{ __('nav.logout') }}
+                        </a>
+
+                    </li>
+                    @else
+                    <li><a href="" data-bs-toggle="modal" data-bs-target="#authModal" id="payment-button-disable">{{ __("nav.login") }}</a></li>
+                    <!-- <li><a href="" data-bs-toggle="modal" data-bs-target="#authModal" id="payment-button-disable">{{ __("nav.signUp") }}</a></li> -->
+                    @endif
                 </ul>
+
             </div><!--responsive-menu end-->
 
-
-
-
             @yield("content")
+
             @hasSection('footer')
-            <footer>
-                <div class="container">
-                    <div class="top-footer">
-                        <div class="row align-items-center justify-content-between">
+                <footer>
+                    <div class="container">
+                        <div class="top-footer">
+                            <div class="row align-items-center justify-content-between">
 
-                            <div class="d-flex gap-2 flex-column align-items-center abd-logo col-lg-2 col-md-6 col-6">
-                                <a href="https://insiconsulting.com/" target="_blank"><img class="w-100" src="assets/img/insic.png" alt=""></a>
-                            </div>
-                            <div class="col-lg-2 d-flex flex-column align-items-center gap-2  col-md-6 col-6">
-                                <h3 class="text-center">{!! trans('welcome.sponsored_by') !!}</h3>
-                                <div class="w-100 h-fit widget widget-about">
-                                    <a href="https://leaderscamp.ma/" target="_blank"><img class="w-75 m-auto" src="assets/img/LC.png" alt=""></a>
+                                <div class="d-flex gap-2 flex-column align-items-center abd-logo col-lg-2 col-md-6 col-6">
+                                    <a href="https://insiconsulting.com/" target="_blank"><img class="w-100" src="assets/img/insic.png" alt=""></a>
+                                </div>
+                                <div class="col-lg-2 d-flex flex-column align-items-center gap-2  col-md-6 col-6">
+                                    <h3 class="text-center">{!! trans('welcome.sponsored_by') !!}</h3>
+                                    <div class="w-100 h-fit widget widget-about">
+                                        <a href="https://leaderscamp.ma/" target="_blank"><img class="w-75 m-auto" src="assets/img/LC.png" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 d-flex flex-column align-items-center  col-md-6 col-12">
+                                    <div class="w-100 h-fit widget widget-about">
+                                        <a href="/" target="_blank"><img class="w-75 m-auto" src="assets/img/logo.svg" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 d-flex flex-column align-items-center gap-2 col-md-6 col-6">
+                                    <h3 class="text-center">{!! trans('welcome.sponsored_by') !!}</h3>
+                                    <div class="w-100 h-fit widget widget-about">
+                                        <a href="https://www.youtube.com/@TAQASOM.Podcast" target="_blank"><img class="w-75 m-auto" src="assets/img/taqasom.png" alt=""></a>
+                                    </div>
+                                </div>
+
+
+                                <div class="gap-2 insic  d-flex flex-column align-items-center  col-lg-2  col-md-6 col-6">
+                                    <h3 class="text-center">تحت اشراف:</h3>
+                                    <a href="https://www.instagram.com/mr.abdessamad/" class="d-flex" target="_blank"><img class="w-100" src="assets/img/abd-logo.png" alt=""></a>
                                 </div>
                             </div>
-                            <div class="col-lg-4 d-flex flex-column align-items-center  col-md-6 col-12">
-                                <div class="w-100 h-fit widget widget-about">
-                                    <a href="/" target="_blank"><img class="w-75 m-auto" src="assets/img/logo.svg" alt=""></a>
+                        </div><!--top-footer end-->
+                        <div class="bottom-footer">
+                            <div class="row align-items-center text-sm justify-content-between">
+                                <div class="col-lg-4  d-flex gap-4">
+                                    <p>{{ __('nav.produced_by') }} <a href="conceptify.pro">Conceptify</a></p>
+                                    {{-- <p>© Copyrights 2025 INSIC All rights reserved</p> --}}
                                 </div>
-                            </div>
-                            <div class="col-lg-2 d-flex flex-column align-items-center gap-2 col-md-6 col-6">
-                                <h3 class="text-center">{!! trans('welcome.sponsored_by') !!}</h3>
-                                <div class="w-100 h-fit widget widget-about">
-                                    <a href="https://www.youtube.com/@TAQASOM.Podcast" target="_blank"><img class="w-75 m-auto" src="assets/img/taqasom.png" alt=""></a>
+                                <div class="col-lg-4 ">
+                                    {{-- <p>Produced by: <a href="conceptify.pro">Conceptify</a></p> --}}
+                                    <p>{!! trans('nav.copyright') !!}</p>
                                 </div>
+                                <div class="col-lg-4 d-flex gap-4 justify-content-end text-decoration-underline">
+                                    <p><a href="{{ route('privacy-policy')}}">{{ __('nav.privacy') }}</a></p>
+                                    {{-- <p><a href="conceptify.pro">Terms of use</a></p> --}}
+                                </div>
+                                <!-- <div class="col-lg-4 text-center">
+                                    <ul class="social-links">
+                                        <li><a target="_blank" href="#" title="Neuralbox Facebook account"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a target="_blank" href="https://www.youtube.com/@TAQASOM.Podcast" title="Neuralbox Youtube channel"><i class="fab fa-youtube"></i></a></li>
+                                        <li><a target="_blank" href="https://www.instagram.com/neuralbox/" title="Neuralbox Instagram account"><i class="fab fa-instagram"></i></a></li>
+                                    </ul>
+                                </div> -->
                             </div>
-
-
-                            <div class="gap-2 insic  d-flex flex-column align-items-center  col-lg-2  col-md-6 col-6">
-                                <h3 class="text-center">تحت اشراف:</h3>
-                                <a href="https://www.instagram.com/mr.abdessamad/" class="d-flex" target="_blank"><img class="w-100" src="assets/img/abd-logo.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div><!--top-footer end-->
-                    <div class="bottom-footer">
-                        <div class="row align-items-center text-sm justify-content-between">
-                            <div class="col-lg-4  d-flex gap-4">
-                                <p>{{ __('nav.produced_by') }} <a href="conceptify.pro">Conceptify</a></p>
-                                {{-- <p>© Copyrights 2025 INSIC All rights reserved</p> --}}
-                            </div>
-                            <div class="col-lg-4 ">
-                                {{-- <p>Produced by: <a href="conceptify.pro">Conceptify</a></p> --}}
-                                <p>{!! trans('nav.copyright') !!}</p>
-                            </div>
-                            <div class="col-lg-4 d-flex gap-4 justify-content-end text-decoration-underline">
-                                <p><a href="{{ route('privacy-policy')}}">{{ __('nav.privacy') }}</a></p>
-                                {{-- <p><a href="conceptify.pro">Terms of use</a></p> --}}
-                            </div>
-                            <!-- <div class="col-lg-4 text-center">
-                                <ul class="social-links">
-                                    <li><a target="_blank" href="#" title="Neuralbox Facebook account"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a target="_blank" href="https://www.youtube.com/@TAQASOM.Podcast" title="Neuralbox Youtube channel"><i class="fab fa-youtube"></i></a></li>
-                                    <li><a target="_blank" href="https://www.instagram.com/neuralbox/" title="Neuralbox Instagram account"><i class="fab fa-instagram"></i></a></li>
-                                </ul>
-                            </div> -->
-                        </div>
-                    </div><!--bottom-footer end-->
-                </div>
-            </footer><!--footer end-->
+                        </div><!--bottom-footer end-->
+                    </div>
+                </footer><!--footer end-->
             @endif
+           
             <!--back to top begin-->
             <!-- <button class="back-to-top">
 				<i class="fas fa-arrow-up"></i>
@@ -235,6 +245,8 @@
 
         </div>
 
+        
+
         <div id="popup-payment" class="popup-overlay">
             <div class="popup-content position-relative p-4">
                 <span role="button" class="close position-absolute top-0 p-1 translate-x-middle end-0">×</span>
@@ -242,15 +254,41 @@
                 <a class="btn-default text-xl ps-4 py-2 h-auto " href="{{ route('payment.form') }}">اشترك الآن</a>
             </div>
         </div>
+
         <div id="popup-login" class="popup-overlay">
             <div class="popup-content position-relative p-4">
                 <span role="button" class="close position-absolute top-0 p-1 translate-x-middle end-0">×</span>
                 <h3 class="title">اشترك الآن لمشاهدة هذا الفيديو</h3>
                 <a class="btn-default text-xl ps-4 py-2 h-auto " href="{{ route('login') }}">اشترك الآن</a>
             </div>
+        </div>      
+
+        @hasSection('videoModal')
+        <div class="modal fade overflow-hidden video-learning-modal vh-100" id="exampledsModal" tabindex="1" aria-labelledby="exampledsModalLabel" aria-hidden="true">
+            <div class="modal-dialog m-auto   modal-xl  modal-dialog-centered">
+                <div class="modal-content vh-100 bg-transparent flex-row-reverse   border-0 shadow-lg">
+                    <div class="modal-body  overflow-y-auto  p-0">
+                        <video id="video-player" class="rounded-4" controls width="100%"></video>
+                        @if ("{{ @yield('videoModal') }}" == 'navigation')
+                         <button class="prev-btn p-0 "></button>
+                         <button class="next-btn p-0 "></button>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
+
+        <div id="global-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
         </div>
 
-        <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+    </div>
+
+    <div class="modal fade" id="authModal"  aria-labelledby="authModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content flex-row-reverse overflow-hidden rounded-4 border-0 shadow-lg">
                     <div class="modal-body p-0">
@@ -345,7 +383,7 @@
             </div>
         </div>
 
-
+        <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script> -->
@@ -360,7 +398,7 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-        
+
         <script src="{{ asset('assets/js/scripts.js') }}"></script>
         <script>
             $(document).ready(function() {
@@ -499,7 +537,7 @@
                 });
             });
         </script>
-
+        @yield('scripts')
 </body>
 
 </html>
