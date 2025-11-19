@@ -24,6 +24,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\AdminUserController;
 use App\Http\Controllers\admin\AdminRendezVousController;
+use App\Http\Controllers\Admin\DashboardExportController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\admin\RessourceController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -69,6 +70,12 @@ use Illuminate\Http\Request;
 
 
 // Routes pour la messagerie
+
+
+Route::get('back', function () {
+    return redirect()->back();
+})->name('back');
+
 Route::middleware('auth')->group(function () {
     // Page principale de messagerie
     Route::get('/messagerie', [ContactController::class, 'index'])->name('messagerie.index');
@@ -95,7 +102,8 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::get('/subscriptions', [SubscriptionController::class, 'index'])->name('subscriptions.index');
+// Route::get('/subscriptions', [SubscriptionController::class, 'index'])->name('subscriptions.index');
+Route::get('/subscriptions/{id}', [SubscriptionController::class, 'show'])->name('subscriptions.show');
 Route::get('/subscription/payment/{plan}', [SubscriptionController::class, 'showPaymentForm'])->name('subscription.payment');
 Route::post('/subscription/process', [SubscriptionController::class, 'processSubscriptionPayment'])->name('subscription.process');
 Route::get('/subscription/confirmation/{id}', [SubscriptionController::class, 'showConfirmation'])->name('subscription.confirmation');
@@ -136,6 +144,12 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
 
 
     Route::get('/admin/paiements', [PaiementController::class, 'index'])->name('admin.paiements');
+    Route::get('/admin/paiements/{id}', [PaiementController::class, 'show'])->name('admin.paiements.show');
+
+    //admin subscription
+    Route::get('/admin/subscriptions', [SubscriptionController::class, 'index'])->name('admin.subscriptions');
+    Route::get('/admin/subscriptions/{subscription}', [SubscriptionController::class, 'edit'])->name('admin.subscription_edit');
+    Route::patch('/admin/subscriptions/{subscription}', [SubscriptionController::class, 'update'])->name('admin.subscription_update');
 
 
     // Mettre à jour le statut d'un rendez-vous (accepter/refuser)
@@ -375,8 +389,12 @@ Route::put('/reset-password', [NewPasswordController::class, 'update'])->name('p
 Route::get('/welcome', [MessagesController::class, 'showRegistrationForm'])->name('welcome');
 Route::post('/welcome', [MessagesController::class, 'register']); // صلحنا الاسم هنا
 
-Route::get('/file/{id}', function ($id) {
-    $model = \App\Models\Ressource::findOrFail($id);
+Route::get('/file/{type}/{id}', function ($type,$id) {
+
+    if ($type == 'ressource')
+        $model = \App\Models\Ressource::findOrFail($id);
+    elseif ($type == 'paiement')
+        $model = \App\Models\Paiement::findOrFail($id);
     $filePath = $model->preview_image ?? abort(404);
     // optional: validate filename to avoid path traversal
     $disk = Storage::disk('private'); // configure disk in config/filesystems.php

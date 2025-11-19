@@ -53,16 +53,15 @@ class PaymentController extends Controller
 
         $data = $request->only(["pack", "payment_option", "card-number", "card_name", "card_expiry", "card_cvv", "receipt"]);
 
-        
         if ($data["payment_option"] == "transfer") {
             if ($request->hasFile('receipt')) {
                 $imagePath = $request->file('receipt')->store('images/receipts', 'private');
                 $data['receipt'] = $imagePath;
             }
-            $paiement = Paiement::create([
-                'method'=>$data[''],
-                'amount'=>$data[''],
-                'user_id'=>$data[''],
+            Paiement::create([
+                'method'=>'transfer',
+                'amount'=> $data['pack'] == 'golden' ? 3200 : 2300 ,
+                'user_id'=> Auth::id(),
                 'receipt'=>$data['receipt'],
             ]);
 

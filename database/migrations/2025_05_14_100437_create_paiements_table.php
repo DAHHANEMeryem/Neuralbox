@@ -12,9 +12,10 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->decimal('amount', 8, 2); 
-            $table->string('method'); 
-            $table->string('status', 20);
-            $table->decimal('montant', 8, 2)->nullable();
+            $table->string('method');
+            $table->enum('status', ['pending', 'failed', 'validated'])->default('pending');
+            $table->string('receipt')->nullable();
+            // $table->decimal('montant', 8, 2)->nullable();
             // $table->string('name');
             $table->timestamps();
         });

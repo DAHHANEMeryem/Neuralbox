@@ -6,10 +6,10 @@
 
 <!-- Contenu des statistiques -->
 <div class="p-5">
-    <div class="bg-white rounded-lg shadow-md p-4 border-l-4 border-blue-500 flex items-center justify-between gap-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+    <div class="bg-white rounded-lg shadow-md p-4 border-l-4 border-blue-500 md:flex items-stretch md:items-center justify-between gap-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
         <div class="flex items-center gap-4 flex-shrink-0">
-            <div class="rounded-full bg-blue-100 p-3 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="rounded-full bg-blue-100 p-2 md:p-3 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="md:h-6 h-3 md:w-6 w-3 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
             </div>
@@ -19,7 +19,7 @@
             </div>
         </div>
         <a href="{{ route('admin.export.pdf') }}"
-            class="bg-blue-500 hover:bg-blue-600 transition-colors text-white px-4 py-2 rounded shadow-sm font-semibold whitespace-nowrap">
+            class="bg-blue-500 hover:bg-blue-600 transition-colors text-sm text-white px-4 py-2 rounded shadow-sm font-semibold whitespace-nowrap">
             📄 Exporter en PDF
         </a>
     </div>

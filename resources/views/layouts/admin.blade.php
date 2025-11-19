@@ -25,23 +25,23 @@
 <body class="bg-gray-100 font-sans leading-normal tracking-tight">
     <div class="flex min-h-screen">
         <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow-lg fixed h-full">
-            <div class="p-6">
+        <aside class=" bg-white  fixed h-screen admin-nav closed-nav">
+            <div class="p-2 pt-6 md:p-6">
 
 
                 <div class="flex items-center mb-8">
-                    <div class="bg-indigo-600 h-8 w-8 rounded-md flex items-center justify-center mr-3">
-                        <i class="fas fa-chart-line text-white text-sm"></i>
-                    </div>
-                    <span class="text-xl font-semibold text-gray-800">NeuralBox</span>
+                    <button id="admin-nav-btn" class="bg-indigo-600 h-8 w-8 mx-2 rounded-md flex items-center justify-center ">
+                        <i class="fas fa-bars text-white text-sm"></i>
+                    </button>
+                    <span class="text-xl font-semibold text-gray-800 nav-title">NeuralBox</span>
                 </div>
 
-                <nav>
+                <nav class=" nav-list">
                     <ul class="space-y-1">
                         <li>
                             <a href="{{ route('admin.dashboard') }}"
                                 class="flex items-center px-4 py-3 rounded-md
-               {{ request()->routeIs('admin.dashboard') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
+                                        {{ request()->routeIs('admin.dashboard') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
                                 <i class="fas fa-th-large mr-3 w-5 text-center"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -50,7 +50,7 @@
                         <li>
                             <a href="/admin/utilisateurs"
                                 class="flex items-center px-4 py-3 rounded-md
-               {{ request()->is('admin/utilisateurs*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
+                                        {{ request()->is('admin/utilisateurs*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
                                 <i class="fas fa-users mr-3 w-5 text-center"></i>
                                 <span>Utilisateurs</span>
                             </a>
@@ -59,18 +59,26 @@
                         <li>
                             <a href="/admin/rendezvous"
                                 class="flex items-center px-4 py-3 rounded-md
-               {{ request()->is('admin/rendezvous*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
+                                        {{ request()->is('admin/rendezvous*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
                                 <i class="fas fa-calendar-alt mr-3 w-5 text-center"></i>
                                 <span>Rendez-vous</span>
                             </a>
                         </li>
 
                         <li>
+                            <a href="{{ route('admin.subscriptions') }}"
+                                class="flex items-center px-4 py-3 rounded-md
+                                        {{ request()->is('admin/subscription*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
+                                <i class="fas fa-people-group mr-3 w-5 text-center"></i>
+                                <span>Abonnes</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('admin.paiements') }}"
                                 class="flex items-center px-4 py-3 rounded-md
-               {{ request()->is('admin/paiements*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
+                                        {{ request()->is('admin/paiements*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
                                 <i class="fas fa-credit-card mr-3 w-5 text-center"></i>
-                                <span>Abonnes</span>
+                                <span>Paiments</span>
                             </a>
                         </li>
 
@@ -78,56 +86,62 @@
                         <li>
                             <a href="/admin/ressources"
                                 class="flex items-center px-4 py-3 rounded-md
-               {{ request()->is('admin/ressources*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
+                                        {{ request()->is('admin/ressources*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
                                 <i class="fas fa-book mr-3 w-5 text-center"></i>
                                 <span>Ressources</span>
                             </a>
                         </li>
-
                         <li>
-                            <a href="/admin/messages"
+                            <a href="/"
                                 class="flex items-center px-4 py-3 rounded-md
-               {{ request()->is('admin/messages*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
-                                <i class="fas fa-envelope mr-3 w-5 text-center"></i>
-                                <span>Message</span>
+                                        text-gray-600 hover:bg-indigo-50 hover:text-indigo-700}}">
+                                <i class="fas fa-n mr-3 w-5 text-center"></i>
+                                <span>Neuralbox </span>
                             </a>
                         </li>
 
-                        <li>
+                        <!-- <li>
+                            <a href="/admin/messages"
+                                class="flex items-center px-4 py-3 rounded-md
+                                        {{ request()->is('admin/messages*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
+                                <i class="fas fa-envelope mr-3 w-5 text-center"></i>
+                                <span>Message</span>
+                            </a>
+                        </li> -->
+
+                        <!-- <li>
                             <a href="/messagerie"
                                 class="flex items-center px-4 py-3 rounded-md
-               {{ request()->is('/messagerie*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
+                                        {{ request()->is('/messagerie*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
                                 <i class="fas fa-comment mr-3 w-5 text-center"></i>
 
 
                                 <span>Messagerie</span>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
+                    <div class="absolute bottom-0 left-0 right-0 p-4">
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                            class="flex items-center justify-center px-4 py-2 rounded-md text-red-600 hover:bg-red-50 transition">
+                            <i class="fas fa-sign-out-alt mr-2"></i>
+                            <span>{{ __('nav.logout') }}</span>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                            @csrf
+                        </form>
+                    </div>
                 </nav>
 
 
-                <div class="absolute bottom-0 left-0 right-0 p-4">
-                    <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                        class="flex items-center justify-center px-4 py-2 rounded-md text-red-600 hover:bg-red-50 transition">
-                        <i class="fas fa-sign-out-alt mr-2"></i>
-                        <span>{{ __('nav.logout') }}</span>
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                        @csrf
-                    </form>
-                </div>
             </div>
         </aside>
 
-        <!-- Contenu principal -->
-        <main class="ml-64 flex-1">
-            <!-- Header -->
+        <main class=" md:ms-44 flex-1 float-end overflow-hidden">
             <header class="bg-white shadow-sm">
                 <div class="flex justify-between items-center px-8 py-4">
                     <div>
-                        <h1 class="text-xl font-semibold text-gray-800">@yield('page-title', 'Dashboard')</h1>
+                        <!-- <h1 class="text-xl font-semibold text-gray-800">@yield('page-title', 'Dashboard')</h1> -->
                     </div>
                     <div class="flex items-center space-x-4">
                         <!-- <div class="relative">
@@ -145,8 +159,7 @@
                 </div>
             </header>
 
-            <!-- Content -->
-            <div class="p-8">
+            <div class="p-2 md:p-8">
                 <div id="global-spinner">
                     <div class="spinner-border text-primary" role="status">
                         <span class="sr-only">Loading...</span>
@@ -158,6 +171,15 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/resumablejs@1/resumable.js"></script>
+    <script>
+        $('#admin-nav-btn').on('click', function() {
+            $('.admin-nav').toggleClass('closed-nav');
+            // $('main.flex-1').toggleClass('ms-24');
+            // $('main.flex-1').toggleClass('ms-64');
+            // $('.nav-title').toggleClass('hidden');
+
+        });
+    </script>
 
 </body>
 

@@ -185,7 +185,7 @@
                         <h3 class="text-base font-medium text-gray-900">Vidéo de la ressource</h3>
 
                         @if($ressource->video_url)
-                        <!-- <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 relative">
+                        {{-- <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 relative">
                             <p class="text-sm font-medium text-gray-700 mb-3">Vidéo actuelle :</p>
                             <div class="max-w-xs h-fit relative">
                                 <video
@@ -210,7 +210,7 @@
                                     </svg>
                                 </a>
                             </div>
-                        </div> -->
+                        </div>  --}}
 
                         <div class="modal fade" id="exampledsModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -220,7 +220,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                                     </div>
                                     <div class="modal-body relative">
-                                        <video id="video-player" width="100%" height="400" controls class="w-full bg-black rounded-lg" poster="{{ $ressource->preview_image ? route('secure.file',['id' => $ressource->id]) : '' }}">
+                                        <video id="video-player" width="100%" height="400" controls class="w-full bg-black rounded-lg" poster="{{ $ressource->preview_image ? route('secure.file',['type' => 'ressource','id' => $ressource->id]) : '' }}">
                                             Votre navigateur ne supporte pas la vidéo.
                                         </video>
                                         <a href="#"
@@ -274,7 +274,7 @@
                         <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
                             <p class="text-sm font-medium text-gray-700 mb-3">Image actuelle :</p>
                             <div class="max-w-xs h-fit">
-                                <img src="{{ route('secure.file',['id' => $ressource->id] ) }}"
+                                <img src="{{ route('secure.file',['type' => 'ressource','id' => $ressource->id] ) }}"
                                     alt="Image de prévisualisation"
                                     class="w-full h-32 object-cover rounded-lg relative shadow-sm border border-gray-200">
                             </div>

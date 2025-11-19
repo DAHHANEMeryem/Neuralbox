@@ -5,9 +5,13 @@
     <h2 class="text-3xl font-semibold text-gray-800 mb-6 border-b pb-2">🗓️ Détails du Rendez-vous</h2>
 
     <div class="space-y-4 text-gray-700 text-lg">
-        <div class="flex justify-between items-center border-b pb-2">
+        {{-- <div class="flex justify-between items-center border-b pb-2">
             <span class="font-medium text-gray-600">👤 Nom :</span>
-            <span class="font-semibold">{{ $rdv->user->name }}</span>
+            <span class="font-semibold">{{ $rdv->user ? $rdv->user->name : "I" }}</span>
+        </div> --}}
+        <div class="flex justify-between items-center border-b pb-2">
+            <span class="font-medium text-gray-600"><i class="fa fa-phone"></i> Télépone :</span>
+            <span class="font-semibold">{{ $rdv->numero }}</span>
         </div>
         <div class="flex justify-between items-center border-b pb-2">
             <span class="font-medium text-gray-600">📧 Email :</span>

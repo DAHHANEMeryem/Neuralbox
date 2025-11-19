@@ -61,7 +61,7 @@
   if(Auth::check())
   $subscribed = Auth::check() && (Auth::user()->subscription_type =="golden" || Auth::user()->is_admin);
   $linkAttrs = [
-  'class' => $subscribed ? 'play-video private fs-4  text-white' : ' disabled-link opacity-50 fs-4 text-white',
+  'class' => $subscribed ? 'play-video private fs-4 text-white' : ' disabled-link opacity-50 fs-4 text-white',
   ];
   @endphp
   <div class="videos-slide pb-5 position-relative">
@@ -92,14 +92,14 @@
                 @else
                 <a
                   @if($subscribed)
-                    data-video-url="{{ route('video-link', ['videoName' => $ressource->video_url]) }}"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampledsModal"
-                    data-video-title="{{ $ressource->titre }}"
-                    data-order="{{ $ressource->ordre }}"
-                    data-video-id="{{$ressource->id}}"
+                  data-video-url="{{ route('video-link', ['videoName' => $ressource->video_url]) }}"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampledsModal"
+                  data-video-title="{{ $ressource->titre }}"
+                  data-order="{{ $ressource->ordre }}"
+                  data-video-id="{{$ressource->id}}"
                   @else
-                    href="javascript:void(0)" onclick="showPopup()"
+                  href="javascript:void(0)" onclick="showPopup()"
                   @endif
                   @foreach($linkAttrs as $attr=> $value)
                   {{ $attr }}="{{ $value }}"
@@ -135,7 +135,7 @@
         class="slide-card overlay-box play-video"
         data-video-url="{{ route('video-link', ['videoName' => $ressource->video_url]) }}">
         <div class="image-wrapper">
-          <img src="{{ route('secure.file',['id' => $ressource->id] ) }}" alt="{{__('hero.peda') ." ". $ressource->titre}}">
+          <img src="{{ route('secure.file',['id' => $ressource->id,'type' => 'ressource'] ) }}" alt="{{__('hero.peda') ." ". $ressource->titre}}">
           <div class="overlay">
             <h5 class="title p-0">{{ $ressource->titre }}</h5>
             <p class="desc">{{ $ressource->description }}</p>
@@ -177,15 +177,15 @@
     let hls = null;
     let currentVideoId = 1;
 
-    let length = 
-    <?php
-    $length = 1;
-    foreach ($ressourcesGrouped as $categoryName => $ressources) {
-      $length++;
-    }
-    echo $length
-    ?>;
-    
+    let length =
+      <?php
+      $length = 1;
+      foreach ($ressourcesGrouped as $categoryName => $ressources) {
+        $length++;
+      }
+      echo $length
+      ?>;
+
 
     function loadVideo(videoData) {
       console.log(videoData);
@@ -283,7 +283,7 @@
   });
 </script>
 @endsection
-<div class="modal fade overflow-hidden video-learning-modal vh-100" id="exampledsModal"  aria-labelledby="exampledsModalLabel" aria-hidden="true">
+<div class="modal fade overflow-hidden video-learning-modal vh-100" id="exampledsModal" aria-labelledby="exampledsModalLabel" aria-hidden="true">
   <div class="modal-dialog m-auto   modal-xl  modal-dialog-centered">
     <div class="modal-content vh-100 bg-transparent flex-row-reverse   border-0 shadow-lg">
       <div class="modal-body  overflow-y-auto  p-0">

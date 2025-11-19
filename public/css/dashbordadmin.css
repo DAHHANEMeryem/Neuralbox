@@ -1,22 +1,22 @@
-.admin-dashboard-header {
+/* .admin-dashboard-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1.5rem; /* équivaut à mb-6 */
-}
+    margin-bottom: 1.5rem;
+} */
 
-.admin-dashboard-title {}
+/* .admin-dashboard-title {} */
 
-.admin-dashboard-heading {
-    font-size: 1.5rem; /* équivaut à text-2xl */
+/* .admin-dashboard-heading {
+    font-size: 1.5rem;
     font-weight: bold;
-    color: #1F2937; /* text-gray-800 */
+    color: #1F2937;
 }
 
 .admin-dashboard-subtitle {
-    color: #4B5563; /* text-gray-600 */
-    margin-top: 0.25rem; /* mt-1 */
-}
+    color: #4B5563;
+    margin-top: 0.25rem;
+} */
 
 .admin-dashboard-actions {
     display: flex;
@@ -24,11 +24,11 @@
 }
 
 .btn-filter {
-    padding: 0.5rem 1rem; /* py-2 px-4 */
+    /* padding: 0.5rem 1rem;  */
     background-color: #4F46E5; /* bg-indigo-600 */
     color: white;
     border-radius: 0.375rem; /* rounded-md */
-    display: flex;
+    /* display: flex; */
     align-items: center;
     transition: background-color 0.2s;
 }
@@ -204,47 +204,47 @@
     padding: 1.5rem;
     transition: all 0.3s ease;
   }
-  
+
   .dashboard-card:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+
   .card-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 1rem;
   }
-  
+
   .card-title {
     color: #6b7280;
     font-size: 0.875rem;
     font-weight: 500;
   }
-  
+
   .card-value {
     font-size: 1.5rem;
     font-weight: 700;
     color: #1f2937;
   }
-  
+
   .card-icon-container {
     border-radius: 9999px;
     padding: 0.75rem;
     transition: all 0.3s ease;
   }
-  
+
   .card-icon {
     font-size: 1.125rem;
   }
-  
+
   .card-chart {
     margin-top: 1rem;
     height: 5rem;
     display: flex;
     align-items: flex-end;
   }
-  
+
   .chart-bar {
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
@@ -252,14 +252,14 @@
     margin-right: 0.25rem;
     transition: all 0.3s ease;
   }
-  
+
   .card-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 1.5rem;
   }
-  
+
   .card-link {
     color: #3b82f6;
     font-size: 0.875rem;
@@ -268,58 +268,58 @@
     text-decoration: none;
     transition: all 0.3s ease;
   }
-  
+
   .card-link:hover {
     color: #2563eb;
   }
-  
+
   .card-status {
     margin-left: 0.5rem;
     font-size: 0.875rem;
     font-weight: 500;
   }
-  
+
   /* Couleurs spécifiques */
   .conversion-icon-bg {
     background-color: #dcfce7;
   }
-  
+
   .conversion-icon {
     color: #22c55e;
   }
-  
+
   .conversion-bar {
     background-color: #bbf7d0;
   }
-  
+
   .conversion-bar:hover {
     background-color: #86efac;
   }
-  
+
   .deals-icon-bg {
     background-color: #fef9c3;
   }
-  
+
   .deals-icon {
     color: #eab308;
   }
-  
+
   .deals-bar {
     background-color: #fef08a;
   }
-  
+
   .deals-bar:hover {
     background-color: #fde047;
   }
-  
+
   .status-positive {
     color: #22c55e;
   }
-  
+
   .status-negative {
     color: #ef4444;
   }
-  
+
   /* ==== Style 2: Sombre et Contrasté ==== */
   .dashboard-card-dark {
     background-color: #1f2937;
@@ -328,35 +328,35 @@
     padding: 1.5rem;
     transition: all 0.3s ease;
   }
-  
+
   .dashboard-card-dark:hover {
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
   }
-  
+
   .card-header-dark {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 1rem;
   }
-  
+
   .card-title-dark {
     color: #9ca3af;
     font-size: 0.875rem;
     font-weight: 500;
   }
-  
+
   .card-value-dark {
     font-size: 1.5rem;
     font-weight: 700;
     color: #ffffff;
   }
-  
+
   .card-icon-container-dark {
     border-radius: 9999px;
     padding: 0.75rem;
   }
-  
+
   .card-chart-dark {
     margin-top: 1rem;
     height: 3rem;
@@ -364,21 +364,21 @@
     align-items: flex-end;
     gap: 0.25rem;
   }
-  
+
   .chart-bar-dark {
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     width: 100%;
     transition: all 0.3s ease;
   }
-  
+
   .card-footer-dark {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 1.5rem;
   }
-  
+
   .card-link-dark {
     color: #60a5fa;
     font-size: 0.875rem;
@@ -387,58 +387,58 @@
     text-decoration: none;
     transition: all 0.3s ease;
   }
-  
+
   .card-link-dark:hover {
     color: #93c5fd;
   }
-  
+
   .card-status-dark {
     margin-left: 0.5rem;
     font-size: 0.875rem;
     font-weight: 500;
   }
-  
+
   /* Couleurs spécifiques (dark mode) */
   .conversion-icon-bg-dark {
     background-color: #14532d;
   }
-  
+
   .conversion-icon-dark {
     color: #4ade80;
   }
-  
+
   .conversion-bar-dark {
     background-color: #166534;
   }
-  
+
   .conversion-bar-dark:hover {
     background-color: #15803d;
   }
-  
+
   .deals-icon-bg-dark {
     background-color: #713f12;
   }
-  
+
   .deals-icon-dark {
     color: #facc15;
   }
-  
+
   .deals-bar-dark {
     background-color: #854d0e;
   }
-  
+
   .deals-bar-dark:hover {
     background-color: #a16207;
   }
-  
+
   .status-positive-dark {
     color: #4ade80;
   }
-  
+
   .status-negative-dark {
     color: #f87171;
   }
-  
+
   /* ==== Style 3: Arrondi et Coloré ==== */
   .dashboard-card-rounded {
     background-color: #ffffff;
@@ -449,18 +449,18 @@
     transition: all 0.3s ease;
     flex: 1;
   }
-  
+
   .dashboard-card-rounded:hover {
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
   }
-  
+
   .card-header-rounded {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 1rem;
   }
-  
+
   .card-title-rounded {
     color: #6b7280;
     font-size: 0.875rem;
@@ -468,17 +468,17 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
-  
+
   .card-value-rounded {
     font-size: 1.5rem;
     font-weight: 700;
   }
-  
+
   .card-icon-container-rounded {
     border-radius: 0.75rem;
     padding: 0.75rem;
   }
-  
+
   .card-chart-rounded {
     margin-top: 1rem;
     height: 3rem;
@@ -486,20 +486,20 @@
     align-items: flex-end;
     gap: 0.25rem;
   }
-  
+
   .chart-bar-rounded {
     border-radius: 0.75rem;
     width: 100%;
     transition: all 0.3s ease;
   }
-  
+
   .card-footer-rounded {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 1.5rem;
   }
-  
+
   .card-link-rounded {
     font-size: 0.875rem;
     display: flex;
@@ -508,7 +508,7 @@
     text-decoration: none;
     transition: all 0.3s ease;
   }
-  
+
   .card-status-rounded {
     margin-left: 0.5rem;
     font-size: 0.875rem;
@@ -516,82 +516,82 @@
     border-radius: 9999px;
     padding: 0.25rem 0.5rem;
   }
-  
+
   /* Couleurs spécifiques (rounded) */
   .conversion-card-rounded {
     border-left-color: #22c55e;
   }
-  
+
   .conversion-value-rounded {
     color: #15803d;
   }
-  
+
   .conversion-icon-bg-rounded {
     background-color: #dcfce7;
   }
-  
+
   .conversion-icon-rounded {
     color: #15803d;
   }
-  
+
   .conversion-bar-rounded {
     background-color: #bbf7d0;
   }
-  
+
   .conversion-bar-rounded:hover {
     background-color: #86efac;
   }
-  
+
   .conversion-link-rounded {
     color: #15803d;
   }
-  
+
   .conversion-link-rounded:hover {
     color: #166534;
   }
-  
+
   .deals-card-rounded {
     border-left-color: #eab308;
   }
-  
+
   .deals-value-rounded {
     color: #a16207;
   }
-  
+
   .deals-icon-bg-rounded {
     background-color: #fef9c3;
   }
-  
+
   .deals-icon-rounded {
     color: #a16207;
   }
-  
+
   .deals-bar-rounded {
     background-color: #fef08a;
   }
-  
+
   .deals-bar-rounded:hover {
     background-color: #fde047;
   }
-  
+
   .deals-link-rounded {
     color: #a16207;
   }
-  
+
   .deals-link-rounded:hover {
     color: #854d0e;
   }
-  
+
   .status-positive-rounded {
     background-color: #dcfce7;
     color: #166534;
   }
-  
+
   .status-negative-rounded {
     background-color: #fee2e2;
     color: #991b1b;
   }
-  
+
   /* ==== Style 4: Minimaliste ==== */
   .dashboard-card-minimal {
     background-color: #f9fafb;
@@ -600,18 +600,18 @@
     padding: 1.5rem;
     transition: all 0.3s ease;
   }
-  
+
   .dashboard-card-minimal:hover {
     border-color: #9ca3af;
   }
-  
+
   .card-header-minimal {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 1.5rem;
   }
-  
+
   .card-title-minimal {
     color: #9ca3af;
     font-size: 0.75rem;
@@ -619,19 +619,19 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
-  
+
   .card-value-minimal {
     font-size: 1.875rem;
     font-weight: 300;
     color: #1f2937;
     margin-top: 0.5rem;
   }
-  
+
   .card-icon-minimal {
     color: #9ca3af;
     font-size: 1.125rem;
   }
-  
+
   .card-chart-minimal {
     margin-top: 1.5rem;
     height: 2rem;
@@ -639,12 +639,12 @@
     align-items: flex-end;
     gap: 0.25rem;
   }
-  
+
   .chart-bar-minimal {
     width: 100%;
     transition: all 0.3s ease;
   }
-  
+
   .card-footer-minimal {
     display: flex;
     justify-content: space-between;
@@ -653,7 +653,7 @@
     padding-top: 1rem;
     border-top: 1px solid #e5e7eb;
   }
-  
+
   .card-link-minimal {
     color: #6b7280;
     font-size: 0.75rem;
@@ -662,39 +662,39 @@
     text-decoration: none;
     transition: all 0.3s ease;
   }
-  
+
   .card-link-minimal:hover {
     color: #1f2937;
   }
-  
+
   .card-status-minimal {
     margin-left: 0.5rem;
     font-size: 0.75rem;
     font-weight: 500;
   }
-  
+
   /* Couleurs spécifiques (minimal) */
   .conversion-bar-minimal {
     background-color: #34d399;
   }
-  
+
   .conversion-bar-minimal:hover {
     background-color: #10b981;
   }
-  
+
   .deals-bar-minimal {
     background-color: #fbbf24;
   }
-  
+
   .deals-bar-minimal:hover {
     background-color: #f59e0b;
   }
-  
+
   .status-positive-minimal {
     color: #059669;
     font-weight: 400;
   }
-  
+
   .status-negative-minimal {
     color: #dc2626;
     font-weight: 400;
@@ -841,228 +841,228 @@
 .grid {
     display: grid;
   }
-  
+
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
-  
+
   .gap-6 {
     gap: 1.5rem;
   }
-  
+
   .mt-6 {
     margin-top: 1.5rem;
   }
-  
+
   /* Responsive */
   @media (min-width: 768px) {
     .md\:grid-cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
-  
+
   /* Carte */
   .bg-white {
     background-color: white;
   }
-  
+
   .rounded-lg {
     border-radius: 0.5rem;
   }
-  
+
   .shadow-sm {
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
-  
+
   .p-6 {
     padding: 1.5rem;
   }
-  
+
   /* En-tête de carte */
   .flex {
     display: flex;
   }
-  
+
   .justify-between {
     justify-content: space-between;
   }
-  
+
   .items-center {
     align-items: center;
   }
-  
+
   .mb-6 {
     margin-bottom: 1.5rem;
   }
-  
+
   .mb-4 {
     margin-bottom: 1rem;
   }
-  
+
   .mb-2 {
     margin-bottom: 0.5rem;
   }
-  
+
   .text-gray-800 {
     color: #1f2937;
   }
-  
+
   .font-medium {
     font-weight: 500;
   }
-  
+
   .text-blue-500 {
     color: #3b82f6;
   }
-  
+
   .text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
-  
+
   .ml-1 {
     margin-left: 0.25rem;
   }
-  
+
   .text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
   }
-  
+
   /* Barre de progression */
   .text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
   }
-  
+
   .font-bold {
     font-weight: 700;
   }
-  
+
   .text-green-500 {
     color: #10b981;
   }
-  
+
   .w-full {
     width: 100%;
   }
-  
+
   .h-2 {
     height: 0.5rem;
   }
-  
+
   .bg-gray-200 {
     background-color: #e5e7eb;
   }
-  
+
   .rounded-full {
     border-radius: 9999px;
   }
-  
+
   .bg-gradient-to-r {
     background-image: linear-gradient(to right, var(--tw-gradient-stops));
   }
-  
+
   .from-green-500 {
     --tw-gradient-from: #10b981;
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(16, 185, 129, 0));
   }
-  
+
   .to-indigo-500 {
     --tw-gradient-to: #6366f1;
   }
-  
+
   .text-gray-500 {
     color: #121721;
   }
-  
+
   .mt-1 {
     margin-top: 0.25rem;
   }
-  
+
   /* Liste d'états */
   .space-y-4 > * + * {
     margin-top: 1rem;
   }
-  
+
   .w-2 {
     width: 0.5rem;
   }
-  
+
   .h-2 {
     height: 0.5rem;
   }
-  
+
   .mr-2 {
     margin-right: 0.5rem;
   }
-  
+
   .text-gray-600 {
     color: #0d1117;
   }
-  
+
   .w-16 {
     width: 4rem;
   }
-  
+
   .h-1 {
     height: 0.25rem;
   }
-  
+
   /* Couleurs */
   .bg-green-500 {
     background-color: #10b981;
   }
-  
+
   .bg-yellow-500 {
     background-color: #f59e0b;
   }
-  
+
   .bg-red-500 {
     background-color: #ef4444;
   }
-  
+
   .bg-indigo-500 {
     background-color: #6366f1;
   }
-  
+
   .bg-blue-500 {
     background-color: #3b82f6;
   }
-  
+
   /* Activité Récente */
   .border-l-2 {
     border-left-width: 2px;
   }
-  
+
   .border-blue-500 {
     border-left-color: #3b82f6;
   }
-  
+
   .border-green-500 {
     border-left-color: #10b981;
   }
-  
+
   .border-yellow-500 {
     border-left-color: #f59e0b;
   }
-  
+
   .border-indigo-500 {
     border-left-color: #6366f1;
   }
-  
+
   .border-red-500 {
     border-left-color: #ef4444;
   }
-  
+
   .pl-4 {
     padding-left: 1rem;
   }
-  
+
   .pb-4 {
     padding-bottom: 1rem;
   }
-  
+
   .ml-auto {
     margin-left: auto;
   }
@@ -1070,295 +1070,295 @@
 .mt-6 {
     margin-top: 1.5rem;
   }
-  
+
   .bg-white {
     background-color: white;
   }
-  
+
   .rounded-lg {
     border-radius: 0.5rem;
   }
-  
+
   .shadow-sm {
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
-  
+
   .p-6 {
     padding: 1.5rem;
   }
-  
+
   /* En-tête avec recherche */
   .flex {
     display: flex;
   }
-  
+
   .justify-between {
     justify-content: space-between;
   }
-  
+
   .items-center {
     align-items: center;
   }
-  
+
   .mb-6 {
     margin-bottom: 1.5rem;
   }
-  
+
   .text-gray-800 {
     color: #1f2937;
   }
-  
+
   .font-medium {
     font-weight: 500;
   }
-  
+
   /* Champ de recherche */
   .relative {
     position: relative;
   }
-  
+
   .px-3 {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
   }
-  
+
   .py-1 {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
   }
-  
+
   .pr-8 {
     padding-right: 2rem;
   }
-  
+
   .text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
-  
+
   .rounded-md {
     border-radius: 0.375rem;
   }
-  
+
   .border {
     border-width: 1px;
   }
-  
+
   .border-gray-300 {
     border-color: #d1d5db;
   }
-  
+
   .focus\:outline-none:focus {
     outline: none;
   }
-  
+
   .focus\:border-indigo-500:focus {
     border-color: #6366f1;
   }
-  
+
   .text-gray-400 {
     color: #9ca3af;
   }
-  
+
   .absolute {
     position: absolute;
   }
-  
+
   .right-3 {
     right: 0.75rem;
   }
-  
+
   .top-2 {
     top: 0.5rem;
   }
-  
+
   .text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
   }
-  
+
   /* Table */
   .overflow-x-auto {
     overflow-x: auto;
   }
-  
+
   .min-w-full {
     min-width: 100%;
   }
-  
+
   .text-left {
     text-align: left;
   }
-  
+
   .text-gray-500 {
     color: #6b7280;
   }
-  
+
   .uppercase {
     text-transform: uppercase;
   }
-  
+
   .tracking-wider {
     letter-spacing: 0.05em;
   }
-  
+
   .px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  
+
   .py-2 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
   }
-  
+
   .py-3 {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }
-  
+
   .py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
   }
-  
+
   .border-t {
     border-top-width: 1px;
   }
-  
+
   .border-gray-200 {
     border-color: #e5e7eb;
   }
-  
+
   .text-center {
     text-align: center;
   }
-  
+
   .italic {
     font-style: italic;
   }
-  
+
   /* Avatar et info utilisateur */
   .w-8 {
     width: 2rem;
   }
-  
+
   .h-8 {
     height: 2rem;
   }
-  
+
   .rounded-full {
     border-radius: 9999px;
   }
-  
+
   .bg-indigo-200 {
     background-color: #c7d2fe;
   }
-  
+
   .bg-green-200 {
     background-color: #a7f3d0;
   }
-  
+
   .bg-yellow-200 {
     background-color: #fde68a;
   }
-  
+
   .text-indigo-700 {
     color: #4338ca;
   }
-  
+
   .text-green-700 {
     color: #047857;
   }
-  
+
   .text-yellow-700 {
     color: #b45309;
   }
-  
+
   .font-semibold {
     font-weight: 600;
   }
-  
+
   .mr-3 {
     margin-right: 0.75rem;
   }
-  
+
   /* Badges de statut */
   .bg-blue-100 {
     background-color: #dbeafe;
   }
-  
+
   .bg-green-100 {
     background-color: #d1fae5;
   }
-  
+
   .bg-red-100 {
     background-color: #fee2e2;
   }
-  
+
   .text-blue-800 {
     color: #1e40af;
   }
-  
+
   .text-green-800 {
     color: #065f46;
   }
-  
+
   .text-red-800 {
     color: #991b1b;
   }
-  
+
   .px-2 {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
-  
+
   /* Boutons d'action */
   .space-x-2 > * + * {
     margin-left: 0.5rem;
   }
-  
+
   .p-1 {
     padding: 0.25rem;
   }
-  
+
   .text-blue-500 {
     color: #3b82f6;
   }
-  
+
   .text-green-500 {
     color: #10b981;
   }
-  
+
   .hover\:bg-blue-100:hover {
     background-color: #dbeafe;
   }
-  
+
   .hover\:bg-green-100:hover {
     background-color: #d1fae5;
   }
-  
+
   .rounded {
     border-radius: 0.25rem;
   }
-  
+
   /* Pagination */
   .mt-6 {
     margin-top: 1.5rem;
   }
-  
+
   .space-x-1 > * + * {
     margin-left: 0.25rem;
   }
-  
+
   .bg-indigo-600 {
     background-color: #4f46e5;
   }
-  
+
   .text-white {
     color: #ffffff;
   }
-  
+
   .text-gray-700 {
     color: #374151;
   }
@@ -1366,210 +1366,210 @@
 .mt-6 {
     margin-top: 1.5rem;
   }
-  
+
   .bg-white {
     background-color: white;
   }
-  
+
   .rounded-lg {
     border-radius: 0.5rem;
   }
-  
+
   .shadow-sm {
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
-  
+
   .p-6 {
     padding: 1.5rem;
   }
-  
+
   /* Titre et description */
   .text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
-  
+
   .font-semibold {
     font-weight: 600;
   }
-  
+
   .mb-4 {
     margin-bottom: 1rem;
   }
-  
+
   .text-gray-800 {
     color: #1f2937;
   }
-  
+
   .text-gray-600 {
     color: #12161c;
   }
-  
+
   .mb-6 {
     margin-bottom: 1.5rem;
   }
-  
+
   /* Grille pour les cartes d'objectifs */
   .flex {
     display: flex;
   }
-  
+
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
-  
+
   .gap-6 {
     gap: 1.5rem;
   }
-  
+
   /* Media query pour écrans medium et plus grands */
   @media (min-width: 768px) {
     .md\:grid-cols-3 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
-  
+
   /* Cartes d'objectifs */
   .border {
     border-width: 1px;
   }
-  
+
   .border-gray-200 {
     border-color: #e5e7eb;
   }
-  
+
   .p-4 {
     padding: 1rem;
   }
-  
+
   .hover\:border-indigo-300:hover {
     border-color: #a5b4fc;
   }
-  
+
   .hover\:shadow-md:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
-  
+
   .transition {
     transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
   }
-  
+
   /* En-tête de carte */
   .flex {
     display: flex;
   }
-  
+
   .items-center {
     align-items: center;
   }
-  
+
   .mb-3 {
     margin-bottom: 0.75rem;
   }
-  
+
   /* Icônes de carte */
   .bg-indigo-100 {
     background-color: #e0e7ff;
   }
-  
+
   .bg-green-100 {
     background-color: #d1fae5;
   }
-  
+
   .bg-yellow-100 {
     background-color: #fef3c7;
   }
-  
+
   .bg-blue-100 {
     background-color: #dbeafe;
   }
-  
+
   .bg-purple-100 {
     background-color: #ede9fe;
   }
-  
+
   .bg-red-100 {
     background-color: #fee2e2;
   }
-  
+
   .p-2 {
     padding: 0.5rem;
   }
-  
+
   .rounded-md {
     border-radius: 0.375rem;
   }
-  
+
   .mr-3 {
     margin-right: 0.75rem;
   }
-  
+
   .text-indigo-600 {
     color: #4f46e5;
   }
-  
+
   .text-green-600 {
     color: #059669;
   }
-  
+
   .text-yellow-600 {
     color: #d97706;
   }
-  
+
   .text-blue-600 {
     color: #2563eb;
   }
-  
+
   .text-purple-600 {
     color: #7c3aed;
   }
-  
+
   .text-red-600 {
     color: #dc2626;
   }
-  
+
   .font-medium {
     font-weight: 500;
   }
-  
+
   /* Liste d'éléments */
   .text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
-  
+
   .space-y-2 > * + * {
     margin-top: 0.5rem;
   }
-  
+
   .ml-4 {
     margin-left: 1rem;
   }
-  
+
   /* Style des items de liste */
   .text-green-500 {
     color: #10b981;
   }
-  
+
   .text-indigo-500 {
     color: #6366f1;
   }
-  
+
   .text-blue-500 {
     color: #3b82f6;
   }
-  
+
   .mr-2 {
     margin-right: 0.5rem;
   }
-  
+
   .text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
   }
-  
+
   /* Liens */
   .hover\:underline:hover {
     text-decoration: underline;

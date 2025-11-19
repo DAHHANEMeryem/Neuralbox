@@ -11,16 +11,16 @@ class PaiementController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Subscription::query();
-        
+        $query = Paiement::query();
+
 
         // Récupère les paiements de 2300 MAD
-        $neuralboxs = Subscription::where('type', 'neuralbox')->with(['user' => function ($query) {
-            $query->select('id', 'name'); // Select specific attributes from the 'users' table
-        }])->get();
-        $goldens = Subscription::where('type', 'golden')->with(['user' => function ($query) {
-            $query->select('id', 'name'); // Select specific attributes from the 'users' table
-        }])->get();
+        // $neuralboxs = Subscription::where('type', 'neuralbox')->with(['user' => function ($query) {
+        //     $query->select('id', 'name'); // Select specific attributes from the 'users' table
+        // }])->paginate(10);
+        // $goldens = Subscription::where('type', 'golden')->with(['user' => function ($query) {
+        //     $query->select('id', 'name'); // Select specific attributes from the 'users' table
+        // }])->paginate(10);
 
 
         // Récupère les paiements de 3200 MAD
@@ -52,11 +52,12 @@ class PaiementController extends Controller
         $paiements = $query->with('user')->latest()->paginate(10);
 
         // إحصائيات
-       $total = Paiement::where('status', 'success')->sum('amount');
+        $total = Paiement::where('status', 'validated')->sum('amount');
 
-        $successCount = Paiement::where('status', 'success')->count();
+        $successCount = Paiement::where('status', 'validated')->count();
         $failCount = Paiement::where('status', 'failed')->count();
-        $monthlyRevenue = Paiement::where('status', 'success')
+        $pendingCount = Paiement::where('status', 'pending')->count();
+        $monthlyRevenue = Paiement::where('status', 'validated')
             ->whereMonth('created_at', Carbon::now()->month)
             ->sum('amount');
            
@@ -66,9 +67,16 @@ class PaiementController extends Controller
             'total',
             'successCount',
             'failCount',
+            'pendingCount',
             'monthlyRevenue',
-            'neuralboxs',
-            'goldens'
         ));
+    }
+
+
+
+    public function show($id)
+    {
+        $payment = Paiement::with('user')->findOrFail($id); // Fetch the rendezvous by its ID
+        return view('admin.paiements.show', compact('payment')); // Pass it to the view
     }
 }

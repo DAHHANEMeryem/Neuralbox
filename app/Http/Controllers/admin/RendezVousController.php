@@ -23,9 +23,8 @@ class RendezVousController extends Controller
     $request->validate([
         'date' => 'required|date|after:now',
         'numero' => 'required|string|max:20',
-        'email' => 'required|email',
-       
-    ]);
+            'email' => 'required|email',
+        ]);
 
     $user_id =  Auth::check() ? auth()->id() : null; 
 
@@ -60,12 +59,14 @@ class RendezVousController extends Controller
 public function update(Request $request, $id)
 {
     $request->validate([
+        'date' => 'required|date',
         'statut' => 'required|in:attente,confirme,annule',
       
     ]);
 
     $rdv = RendezVous::findOrFail($id);
     $rdv->statut = $request->statut;
+    $rdv->date = $request->date;
    
     $rdv->save();
 

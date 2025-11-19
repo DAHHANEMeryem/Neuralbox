@@ -5,20 +5,20 @@
 
 @section('content')
 <link href="{{asset('css/dashbordadmin.css')}}" rel="stylesheet">
-<div class="mb-8">
-    <div class="admin-dashboard-header">
-        <div class="admin-dashboard-title">
-            <h1 class="admin-dashboard-heading">Tableau de bord Admin</h1>
-            <p class="admin-dashboard-subtitle">Bienvenue ! Voici une vue d'ensemble de votre plateforme.</p>
+<div class="mb-8 ">
+    <div class="justify-between gap-4 flex flex-col mb-2 md:flex-row">
+        <div class="">
+            <h1 class="admin-dashboard-heading font-semibold text-xl md:text-3xl ">Tableau de bord Admin</h1>
+            <p class="admin-dashboard-subtitle text-sm md:text-lg">Bienvenue ! Voici une vue d'ensemble de votre plateforme.</p>
         </div>
         <div class="admin-dashboard-actions">
             <form id="formFiltre" method="GET">
                 <input type="hidden" name="filtre" id="filtreInput" value="{{ $filtre }}">
-                <button type="button" class="btn-filter" onclick="changerMode()">Filtrer par <span id="filtreLabel">{{ ucfirst($filtre) }}</span></button>
+                <button type="button" class="btn-filter md:flex text-sm py-2 md:px-4 px-2" onclick="changerMode()">Filtrer par <span id="filtreLabel">{{ ucfirst($filtre) }}</span></button>
             </form>
 
-            <a href="{{ route('admin.export.dashboard.pdf') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
-                📄 Exporter en PDF
+            <a href="{{ route('admin.export.dashboard.pdf') }}" class="py-2 md:px-4 px-2 text-sm md:text-base bg-blue-500 text-white rounded">
+                Exporter en PDF
             </a>
 
         </div>
@@ -139,7 +139,7 @@
     </div>
 </div>
 
-<div class="revenus-analytics-container">
+{{-- <div class="revenus-analytics-container">
     <div class="analytics-card">
         <div class="card-header">
             <h3 class="header-title">Revenus Analytics</h3>
@@ -164,131 +164,143 @@
             </a>
         </div>
     </div>
-</div>
+
+    
+</div> --}}
 
 
 
 <!-- Exemple avec Style 3: Arrondi et Coloré -->
 <div class="flex grid-cols-1 md:grid-cols-2 gap-6 mt-6">
     <!-- Card 4 - Conversion Rate -->
-    <div class="dashboard-card-rounded conversion-card-rounded">
-        <div class="card-header-rounded">
-            <div>
+    {{-- 
+        <div class="dashboard-card-rounded conversion-card-rounded">
+            <div class="card-header-rounded">
+            <!-- <div>
                 <h3 class="card-title-rounded">Messages</h3>
                 <p class="card-value-rounded conversion-value-rounded">
                     Total : {{ $totalMessages }}
                 </p>
-            </div>
+            </div> -->
             <div class="card-icon-container-rounded conversion-icon-bg-rounded">
                 <i class="fas fa-envelope conversion-icon-rounded"></i>
             </div>
-        </div>
-
-        <div class="flex justify-between px-4 py-2">
-            <div class="flex flex-col items-center">
-                <span class="text-sm text-gray-500">Non lus</span>
-                <span class="text-lg font-bold text-red-500">{{ $messagesNonLus }}</span>
             </div>
-            <div class="flex flex-col items-center">
-                <span class="text-sm text-gray-500">Lus</span>
-                <span class="text-lg font-bold text-green-600">{{ $messagesLus }}</span>
-            </div>
-        </div>
 
-        <div class="flex justify-between px-4 py-2">
-
-
-
-
-
-
-
-
-            @foreach($last as $data)
-            <div class="relative flex items-end justify-center h-20">
-                <div
-                    class="w-4 rounded-t-md shadow-md transform transition-transform duration-500 hover:scale-105"
-                    style="
-            height: {{ $data['height'] }}%;
-            background: linear-gradient(to top, {{ $data['color'] === 'bg-green-600' ? '#16a34a' : ($data['color'] === 'bg-yellow-400' ? '#facc15' : '#f87171') }}, #fff);
-        "
-                    title="{{ $data['count'] }} message">
+            <div class="flex justify-between px-4 py-2">
+                <div class="flex flex-col items-center">
+                    <span class="text-sm text-gray-500">Non lus</span>
+                    <span class="text-lg font-bold text-red-500">{{ $messagesNonLus }}</span>
                 </div>
-                <span class="absolute bottom-[-1.5rem] text-xs text-gray-600">{{ $data['date'] }}</span>
+                <div class="flex flex-col items-center">
+                    <span class="text-sm text-gray-500">Lus</span>
+                    <span class="text-lg fon    t-bold text-green-600">{{ $messagesLus }}</span>
+                </div>
             </div>
 
-            @endforeach
+            <div class="flex justify-between px-4 py-2">
 
+                @foreach($last as $data)
+                <div class="relative flex items-end justify-center h-20">
+                    <div
+                        class="w-4 rounded-t-md shadow-md transform transition-transform duration-500 hover:scale-105"
+                        style="
+                        height: {{ $data['height'] }}%;
+                        background: linear-gradient(to top, {{ $data['color'] === 'bg-green-600' ? '#16a34a' : ($data['color'] === 'bg-yellow-400' ? '#facc15' : '#f87171') }}, #fff);
+                    "
+                        title="{{ $data['count'] }} message">
+                    </div>
+                    <span class="absolute bottom-[-1.5rem] text-xs text-gray-600">{{ $data['date'] }}</span>
+                </div>
 
+                @endforeach
 
+            </div>
 
+            <div class="card-footer-rounded flex justify-between items-center">
 
-
-
-
-
+                <a href="{{ route('admin.messages.index') }}" class="card-link-rounded conversion-link-rounded">
+                    Voir tous les messages
+                    <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                </a>
+                <span class="card-status-rounded status-positive-rounded">
+                    Non lus : {{ $percentNonLus }}% | Lus : {{ $percentLus }}%
+                </span>
+            </div>
+        </div> 
+    --}}
+<div class="analytics-card md:w-1/2">
+    <div class="card-header">
+        <h3 class="header-title">Revenus Analytics</h3>
+    </div>
+    <div class="chart-container">
+        <canvas id="revenusChart" width="1000" height="200"></canvas>
+    </div>
+    <div class="chart-footer">
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color revenue-color" style="background-color:#4ade80;"></div>
+                <span class="legend-text">Revenus</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color profit-color" style="background-color:#3b82f6;"></div>
+                <span class="legend-text">Abonnés</span>
+            </div>
         </div>
-
-        <div class="card-footer-rounded flex justify-between items-center">
-
-            <a href="{{ route('admin.messages.index') }}" class="card-link-rounded conversion-link-rounded">
-                Voir tous les messages
-                <i class="fas fa-chevron-right ml-1 text-xs"></i>
-            </a>
-            <span class="card-status-rounded status-positive-rounded">
-                Non lus : {{ $percentNonLus }}% | Lus : {{ $percentLus }}%
-            </span>
+        <a href="/admin/paiements" class="view-all-link">
+            Voir tout
+            <i class="fas fa-chevron-right link-icon"></i>
+        </a>
+    </div>
+</div>
+<!-- Card 5 - Total Deals -->
+<div class="dashboard-card-rounded deals-card-rounded">
+    <div class="card-header-rounded">
+        <div>
+            <h3 class="card-title-rounded">Total Rendez-vous</h3>
+            <p class="card-value-rounded deals-value-rounded">{{ $totalRdv }}</p>
+        </div>
+        <div class="card-icon-container-rounded deals-icon-bg-rounded">
+            <i class="fas fa-calendar-check deals-icon-rounded"></i>
         </div>
     </div>
 
-    <!-- Card 5 - Total Deals -->
-    <div class="dashboard-card-rounded deals-card-rounded">
-        <div class="card-header-rounded">
-            <div>
-                <h3 class="card-title-rounded">Total Rendez-vous</h3>
-                <p class="card-value-rounded deals-value-rounded">{{ $totalRDV }}</p>
-            </div>
-            <div class="card-icon-container-rounded deals-icon-bg-rounded">
-                <i class="fas fa-calendar-check deals-icon-rounded"></i>
-            </div>
-        </div>
 
 
+    <br>
 
-        <br>
+    <!-- <span class="hidden bg-green-600 bg-yellow-400 bg-red-400"></span> -->
 
-        <span class="hidden bg-green-600 bg-yellow-400 bg-red-400"></span>
-
-        <!-- Graphique des 7 derniers jours -->
-        <div class="card-chart flex items-end justify-between h-24 px-4 rounded-md">
-            @foreach($last as $data)
-            <div class="relative flex items-end justify-center h-24">
-                <div
-                    class="w-4 rounded-t-md shadow-md transform transition-transform duration-500 hover:scale-105"
-                    style="
+    <!-- Graphique des 7 derniers jours -->
+    <div class="card-chart flex items-end justify-between h-24 px-4 rounded-md">
+        @foreach($last as $data)
+        <div class="relative flex items-end justify-center h-24">
+            <div
+                class="w-4 rounded-t-md shadow-md transform transition-transform duration-500 hover:scale-105"
+                style="
             height: {{ $data['height'] }}%;
             background: linear-gradient(to top, {{ $data['color'] === 'bg-green-600' ? '#16a34a' : ($data['color'] === 'bg-yellow-400' ? '#facc15' : '#f87171') }}, #fff);"
-                    title="{{ $data['count'] }} RDV">
-                </div>
-                <span class="absolute bottom-[-1.5rem] text-xs text-gray-600">{{ $data['date'] }}</span>
+                title="{{ $data['count'] }} RDV">
             </div>
-
-            @endforeach
+            <span class="absolute bottom-[-1.5rem] text-xs text-gray-600">{{ $data['date'] }}</span>
         </div>
 
-        <br>
-
-        <div class="card-footer-rounded flex items-center justify-between">
-            <a href="{{ route('admin.rendezvous.index') }}" class="card-link-rounded deals-link-rounded">
-                Voir tout
-                <i class="fas fa-chevron-right ml-1 text-xs"></i>
-            </a>
-
-            <span class="card-status-rounded {{ $evolution >= 0 ? 'status-positive-rounded' : 'status-negative-rounded' }}">
-                Évolution : {{ $evolution >= 0 ? '+' : '' }}{{ $evolution }}% depuis {{ $phrase1 }}
-            </span>
-        </div>
+        @endforeach
     </div>
+
+    <br>
+
+    <div class="card-footer-rounded flex items-center justify-between">
+        <a href="{{ route('admin.rendezvous.index') }}" class="card-link-rounded deals-link-rounded">
+            Voir tout
+            <i class="fas fa-chevron-right ml-1 text-xs"></i>
+        </a>
+
+        <span class="card-status-rounded {{ $evolution >= 0 ? 'status-positive-rounded' : 'status-negative-rounded' }}">
+            Évolution : {{ $evolution >= 0 ? '+' : '' }}{{ $evolution }}% depuis {{ $phrase1 }}
+        </span>
+    </div>
+</div>
 
 
 
@@ -347,9 +359,8 @@
                     $evolutionPrefix=$totalEvolution> 0 ? '+' : '';
                     @endphp
 
-
                     <div class="w-full h-2 bg-gray-200 rounded-full">
-                        <div class="h-2 rounded-full bg-gradient-to-r {{ $progressColor }}" style="width: {{ $progressPercent }}%"></div>
+                        <div class="h-2 rounded-full bg-gradient-to-r  {{ $progressColor }}" style="width: {{ $progressPercent }}%"></div>
                     </div>
 
                     <div class="text-xs text-gray-500 mt-1">
@@ -417,7 +428,7 @@
 
 <!-- Fifth Row - Upcoming Appointments Table -->
 <!-- Fifth Row - Upcoming Appointments Table -->
-<div class="p-8">
+<div class="md:p-8 p-2">
 
     <div class="bg-white rounded-lg shadow-sm p-6">
         <div class="flex justify-between items-center mb-6">
@@ -443,20 +454,19 @@
                         <!-- Parent -->
                         <td class="px-4 py-3">
                             <div class="flex items-center">
-                                <div class="w-8 h-8 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-700 font-semibold mr-3">
-                                    {{ substr($rdv->user->name ?? 'P', 0, 1) }}
+                                <div class="hidden w-8 h-8 rounded-full bg-indigo-200 md:flex items-center justify-center text-indigo-700 font-semibold mr-3">
+                                    {{ substr($rdv->email ?? 'P', 0, 1) }}
                                 </div>
                                 <div>
-                                    <p class="font-medium">{{ $rdv->user->name ?? 'Parent inconnu' }}</p>
-                                    <p class="text-xs text-gray-500">{{ $rdv->user->email ?? '' }}</p>
+                                    <p class="font-medium">{{ $rdv->email }}</p>
+                                    {{-- <p class="text-xs text-gray-500">{{ $rdv->numero ?? '' }}</p> --}}
                                 </div>
                             </div>
                         </td>
-
-                        <!-- Spécialiste -->
-
-                        <!-- Type -->
-
+                        <!-- Date -->
+                        <td class="px-4 py-3">
+                            {{ $rdv->numero }}
+                        </td>
 
                         <!-- Lieu -->
 
@@ -495,7 +505,7 @@
 </div>
 
 
-<div class="p-6">
+<div class="p-2 md:p-6">
     <div class="bg-white rounded-lg shadow-sm p-6">
         <div class="flex justify-between items-center mb-6">
             <h3 class="text-gray-800 font-medium">Activité Récente</h3>
@@ -518,64 +528,64 @@
             </div>
             @endif
 
-            @if($recentMessage)
+            {{-- @if($recentMessage)
             <div class="border-l-2 border-green-500 pl-4 pb-4">
                 <div class="flex items-center">
                     <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
                     <span class="text-sm font-medium">Nouveau message reçu</span>
                     <span class="text-xs text-gray-500 ml-auto">{{ $recentMessage->created_at->diffForHumans() }}</span>
-                </div>
-                <p class="text-xs text-gray-500 mt-1">
-                    Message de {{ $recentMessage->user->name ?? 'Inconnu' }}
-                </p>
-            </div>
-            @endif
-
-            @if($recentPaiement)
-            <div class="border-l-2 border-yellow-500 pl-4 pb-4">
-                <div class="flex items-center">
-                    <div class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
-                    <span class="text-sm font-medium">Paiement confirmé</span>
-                    <span class="text-xs text-gray-500 ml-auto">{{ $recentPaiement->created_at->diffForHumans() }}</span>
-                </div>
-                <p class="text-xs text-gray-500 mt-1">
-                    Paiement de {{ $recentPaiement->montant }} MAD par {{ $recentPaiement->user->name ?? 'Client inconnu' }}
-                </p>
-            </div>
-            @endif
-
-            @if($recentRessource)
-            <div class="border-l-2 border-indigo-500 pl-4 pb-4">
-                <div class="flex items-center">
-                    <div class="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
-                    <span class="text-sm font-medium">Nouvelle ressource ajoutée</span>
-                    <span class="text-xs text-gray-500 ml-auto">{{ $recentRessource->created_at->diffForHumans() }}</span>
-                </div>
-                <p class="text-xs text-gray-500 mt-1">
-                    Ressource : {{ Str::limit($recentRessource->titre, 30) }}
-                </p>
-            </div>
-            @endif
-
-            @if($recentUser)
-            <div class="border-l-2 border-red-500 pl-4">
-                <div class="flex items-center">
-                    <div class="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
-                    <span class="text-sm font-medium">Nouvel utilisateur inscrit</span>
-                    <span class="text-xs text-gray-500 ml-auto">{{ $recentUser->created_at->diffForHumans() }}</span>
-                </div>
-                <p class="text-xs text-gray-500 mt-1">
-                    Bienvenue à {{ $recentUser->name }}
-                </p>
-            </div>
-            @endif
-
         </div>
+        <p class="text-xs text-gray-500 mt-1">
+            Message de {{ $recentMessage->user->name ?? 'Inconnu' }}
+        </p>
     </div>
+    @endif --}}
+
+    @if($recentPaiement)
+    <div class="border-l-2 border-yellow-500 pl-4 pb-4">
+        <div class="flex items-center">
+            <div class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+            <span class="text-sm font-medium">Paiement confirmé</span>
+            <span class="text-xs text-gray-500 ml-auto">{{ $recentPaiement->created_at->diffForHumans() }}</span>
+        </div>
+        <p class="text-xs text-gray-500 mt-1">
+            Paiement de {{ $recentPaiement->montant }} MAD par {{ $recentPaiement->user->name ?? 'Client inconnu' }}
+        </p>
+    </div>
+    @endif
+
+    @if($recentRessource)
+    <div class="border-l-2 border-indigo-500 pl-4 pb-4">
+        <div class="flex items-center">
+            <div class="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
+            <span class="text-sm font-medium">Nouvelle ressource ajoutée</span>
+            <span class="text-xs text-gray-500 ml-auto">{{ $recentRessource->created_at->diffForHumans() }}</span>
+        </div>
+        <p class="text-xs text-gray-500 mt-1">
+            Ressource : {{ Str::limit($recentRessource->titre, 30) }}
+        </p>
+    </div>
+    @endif
+
+    @if($recentUser)
+    <div class="border-l-2 border-red-500 pl-4">
+        <div class="flex items-center">
+            <div class="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
+            <span class="text-sm font-medium">Nouvel utilisateur inscrit</span>
+            <span class="text-xs text-gray-500 ml-auto">{{ $recentUser->created_at->diffForHumans() }}</span>
+        </div>
+        <p class="text-xs text-gray-500 mt-1">
+            Bienvenue à {{ $recentUser->name }}
+        </p>
+    </div>
+    @endif
+
+</div>
+</div>
 </div>
 <!-- Sixth Row - Objectives Card -->
-<div class="p-6">
-    <div class="bg-white rounded-lg shadow-sm p-6">
+<div class="p-2 md:p-6">
+    <div class="bg-white rounded-lg shadow-sm p-2 md:p-6">
         <h3 class="text-xl font-semibold mb-4 text-gray-800">🎯 Objectifs</h3>
         <p class="text-gray-800 mb-6">Avoir une vision complète du fonctionnement de la plateforme.</p>
 
@@ -677,7 +687,7 @@
             </div>
 
             <!-- Objectif 5 -->
-            <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 hover:shadow-md transition">
+            <!-- <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 hover:shadow-md transition">
                 <div class="flex items-center mb-3">
                     <div class="bg-purple-100 p-2 rounded-md mr-3">
                         <i class="fas fa-envelope text-purple-600"></i>
@@ -698,11 +708,11 @@
                         <a href="/admin/messages" class="text-indigo-500 hover:underline">Gérer la messagerie</a>
                     </li>
                 </ul>
-            </div>
+            </div> -->
 
             <!-- Objectif 6 - Messagerie -->
 
-            <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 hover:shadow-md transition">
+            <!-- <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 hover:shadow-md transition">
 
                 <div class="flex items-center mb-3">
 
@@ -738,13 +748,14 @@
                         <a href="/messagerie" class="text-indigo-500 hover:underline">Accéder à la messagerie</a>
                     </li>
                 </ul>
-            </div>
+            </div> -->
 
         </div>
     </div>
 </div>
 </div>
 <script>
+
     let modes = ['jour', 'semaine', 'mois', 'annee'];
     let currentIndex = modes.indexOf("{{ $filtre }}");
 
@@ -758,19 +769,21 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+
+console.log(window.innerWidth);
+
+    if(window.innerWidth < 768)
+        document.getElementById('revenusChart').setAttribute('width',250);
+
     const ctx = document.getElementById('revenusChart').getContext('2d');
 
     const revenusChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: {
-                !!json_encode($dates) !!
-            },
+            labels: {!!json_encode($dates) !!},
             datasets: [{
                     label: 'Revenus (MAD)',
-                    data: {
-                        !!json_encode($revenus) !!
-                    },
+                    data: {!!json_encode($revenus) !!},
                     borderColor: '#4ade80',
                     backgroundColor: 'rgba(74, 222, 128, 0.2)',
                     fill: true,
@@ -779,9 +792,7 @@
                 },
                 {
                     label: 'Abonnés',
-                    data: {
-                        !!json_encode($abonnes) !!
-                    },
+                    data: {!!json_encode($abonnes) !!},
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.2)',
                     fill: true,

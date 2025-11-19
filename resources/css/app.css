@@ -63,3 +63,38 @@ img {
      transform: rotate(360deg);
    }
  }
+
+ @media(max-width:767px){
+ .admin-nav {
+   width: 16rem;
+   /* transition: all 8s; */
+ }
+
+ /* .admin-nav>* {
+   transition: all 8s ease-in;
+ } */
+
+ .admin-nav.closed-nav {
+   width: min-content;
+   max-width: 20vw;
+   height: 10vh;
+   overflow: hidden;
+
+   background-color: transparent;
+   .nav-title {
+     display: none;
+   }
+
+   .admin-nav-btn {
+     margin: auto;
+   }
+
+   .nav-list {
+     a span {
+       display: none;
+     }
+      .absolute.bottom-0{
+        display: none;
+      }
+   }
+ }}

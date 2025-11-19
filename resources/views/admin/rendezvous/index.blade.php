@@ -35,7 +35,7 @@
                     <option value="">Tous</option>
                     <option value="attente" {{ request('statut') == 'attente' ? 'selected' : '' }}>En attente</option>
                     <option value="confirme" {{ request('statut') == 'confirme' ? 'selected' : '' }}>Confirmés</option>
-                    
+
                     <option value="annule" {{ request('statut') == 'annule' ? 'selected' : '' }}>Annulés</option>
                 </select>
             </div>
@@ -53,9 +53,9 @@
     </div>
 
     @if(session('success'))
-        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
-            <p>{{ session('success') }}</p>
-        </div>
+    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
+        <p>{{ session('success') }}</p>
+    </div>
     @endif
 
     <div class="mt-6">
@@ -70,81 +70,81 @@
                         <th class="p-3">Téléphone</th>
                         <th class="p-3">Date</th>
                         <th class="p-3">Statut</th>
-                       
+
                         <th class="p-3">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($rendezvous as $rdv)
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="p-3">{{ $rdv->id }}</td>
-                            <td class="p-3">{{ $rdv->user->name ?? $rdv->nom }}</td>
-                            <td class="p-3">{{ $rdv->email }}</td>
-                            <td class="p-3">{{ $rdv->numero }}</td>
-                            <td class="p-3">{{ \Carbon\Carbon::parse($rdv->date)->format('d/m/Y H:i') }}</td>
-                            <td class="p-3">
-                                @php
-                                    $colors = [
-                                        'attente' => 'bg-yellow-100 text-yellow-800', 
-                                        'confirme' => 'bg-green-100 text-green-800', 
-                                        'annule' => 'bg-red-100 text-red-800',
-                                        'refuse' => 'bg-gray-100 text-gray-800'
-                                    ];
-                                @endphp
-                                <span class="px-2 py-1 rounded {{ $colors[$rdv->statut] ?? '' }}">
-                                    {{ ucfirst($rdv->statut) }}
-                                </span>
-                            </td>
-                          
-                            <td class="p-3">
-                                <div class="flex space-x-2">
-                                    @if($rdv->statut == 'attente')
-                                        <form action="{{ route('admin.rendezvous.updateStatus', $rdv->id) }}" method="POST" class="inline">
-                                            @csrf
-                                            @method('PATCH')
-                                            <input type="hidden" name="statut" value="confirme">
-                                            <button type="submit" class="bg-green-500 text-white px-2 py-1 rounded text-xs" onclick="return confirm('Confirmer ce rendez-vous?')">
-                                                Accepter
-                                            </button>
-                                        </form>
-                                        <form action="{{ route('admin.rendezvous.updateStatus', $rdv->id) }}" method="POST" class="inline">
-                                            @csrf
-                                            @method('PATCH')
-                                            <input type="hidden" name="statut" value="refuse">
-                                            <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded text-xs" onclick="return confirm('Refuser ce rendez-vous?')">
-                                                Refuser
-                                            </button>
-                                        </form>
-                                    @endif
-                                    <button type="button" class="bg-blue-500 text-white px-2 py-1 rounded text-xs" onclick="showDetails({{ $rdv->id }})">
-                                     Détails
-                         </button>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="p-3">{{ $rdv->id }}</td>
+                        <td class="p-3">{{ $rdv->user->name ?? $rdv->nom }}</td>
+                        <td class="p-3">{{ $rdv->email }}</td>
+                        <td class="p-3">{{ $rdv->numero }}</td>
+                        <td class="p-3">{{ \Carbon\Carbon::parse($rdv->date)->format('d/m/Y H:i') }}</td>
+                        <td class="p-3">
+                            @php
+                            $colors = [
+                            'attente' => 'bg-yellow-100 text-yellow-800',
+                            'confirme' => 'bg-green-100 text-green-800',
+                            'annule' => 'bg-red-100 text-red-800',
+                            'refuse' => 'bg-gray-100 text-gray-800'
+                            ];
+                            @endphp
+                            <span class="px-2 py-1 rounded {{ $colors[$rdv->statut] ?? '' }}">
+                                {{ ucfirst($rdv->statut) }}
+                            </span>
+                        </td>
 
-                                    <a href="{{ route('admin.rendezvous.updateStatut', $rdv->id) }}" class="bg-purple-500 text-white px-2 py-1 rounded text-xs">
-                                        Modifier
-                                    </a>
-                                    
-                                       <button onclick="confirmDelete({{ $rdv->id }})" class="bg-red-500 text-white px-2 py-1 rounded text-xs">
-    Supprimer
-</button>
+                        <td class="p-3">
+                            <div class="flex space-x-2">
+                                @if($rdv->statut == 'attente')
+                                <form action="{{ route('admin.rendezvous.updateStatus', $rdv->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="hidden" name="statut" value="confirme">
+                                    <button type="submit" class="bg-green-500 text-white px-2 py-1 rounded text-xs" onclick="return confirm('Confirmer ce rendez-vous?')">
+                                        Accepter
+                                    </button>
+                                </form>
+                                <form action="{{ route('admin.rendezvous.updateStatus', $rdv->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="hidden" name="statut" value="refuse">
+                                    <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded text-xs" onclick="return confirm('Refuser ce rendez-vous?')">
+                                        Refuser
+                                    </button>
+                                </form>
+                                @endif
+                                <button type="button" class="bg-blue-500 text-white px-2 py-1 rounded text-xs" onclick="showDetails({{ $rdv->id }})">
+                                    Détails
+                                </button>
 
-                                </div>
-                            </td>
-                        </tr>
+                                <a href="{{ route('rendezvous.edit', $rdv->id) }}" class="bg-purple-500 text-white px-2 py-1 rounded text-xs">
+                                    Modifier
+                                </a>
+
+                                <button onclick="confirmDelete({{ $rdv->id }})" class="bg-red-500 text-white px-2 py-1 rounded text-xs">
+                                    Supprimer
+                                </button>
+
+                            </div>
+                        </td>
+                    </tr>
                     @empty
-                        <tr>
-                            <td colspan="9" class="p-4 text-center text-gray-500">Aucun rendez-vous trouvé.</td>
-                        </tr>
+                    <tr>
+                        <td colspan="9" class="p-4 text-center text-gray-500">Aucun rendez-vous trouvé.</td>
+                    </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
     </div>
-   
 
-<div class="mt-4">
-    {{ $rendezvous->withQueryString()->links() }}
-</div>
+
+    <div class="mt-4">
+        {{ $rendezvous->withQueryString()->links() }}
+    </div>
 
 </div>
 <!-- Fenêtre modale de confirmation -->
@@ -189,7 +189,7 @@
 
 
 <script>
-     function confirmDelete(rdvId) {
+    function confirmDelete(rdvId) {
         const modal = document.getElementById('deleteModal');
         const modalContentt = document.getElementById('modalContentt');
         const form = document.getElementById('deleteForm');
@@ -237,8 +237,8 @@
             if (fullRow && fullRow.classList.contains('full-message-row')) {
                 fullRow.style.display = 'none'; // always hide unless view clicked
             }
-        });
-        }
+        });
+    }
 
     function showDetails(id) {
         // Ici vous devriez charger les détails du rendez-vous via AJAX
@@ -247,7 +247,7 @@
             .then(response => response.json())
             .then(data => {
                 const modalContent = document.getElementById('modalContent');
-                
+
                 // Construire le contenu HTML avec les données
                 let html = `
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -281,7 +281,7 @@
                         </div>
                     </div>
                 `;
-                
+
                 if (data.statut === 'attente') {
                     html += `
                         <div class="mt-4 flex space-x-4">
@@ -304,7 +304,7 @@
                         </div>
                     `;
                 }
-                
+
                 modalContent.innerHTML = html;
                 document.getElementById('detailsModal').classList.remove('hidden');
             })
@@ -325,5 +325,5 @@
             closeModal();
         }
     }
-    </script>
-    @endsection
+</script>
+@endsection

@@ -21,7 +21,7 @@
         
         
         <div class="flex justify-end">
-            <a href="{{ route('admin.rendezvous.index') }}" class="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2">Annuler</a>
+            <a href="{{ route('back') }}" class="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2">Annuler</a>
             <button type="submit" class="bg-purple-600 text-white px-4 py-2 rounded">Enregistrer</button>
         </div>
     </form>
