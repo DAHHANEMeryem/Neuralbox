@@ -248,25 +248,24 @@
 
                         <div>
                             <label for="video_url" class="block text-sm font-medium text-gray-700 mb-2">
-                                {{ $ressource->video_url ? 'Remplacer la vidéo' : 'Ajouter une vidéo' }}
+                              {{ $ressource->video_url ? 'Remplacer la vidéo' : 'Ajouter une vidéo' }}
                             </label>
                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
                                 <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                  <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>
                                 <div class="text-sm text-gray-600">
-                                    <label for="video_url" class="cursor-pointer">
-                                        <span class="text-blue-600 hover:text-blue-500 font-medium">Cliquez pour choisir</span>
-                                        <span> ou glissez-déposez</span>
-                                    </label>
-                                    <input id="video_url" name="video_url" type="file" accept="video/mp4" class="sr-only">
+                                  <label for="video_url" class="cursor-pointer">
+                                    <span class="text-blue-600 hover:text-blue-500 font-medium">Cliquez pour choisir</span>
+                                    <span> ou glissez-déposez</span>
+                                  </label>
+                                  <input id="video_url" name="video_url" type="file" accept="video/mp4" class="sr-only">
                                 </div>
                                 <p class="text-xs text-gray-500 mt-1">Fichiers MP4 uniquement</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Image de prévisualisation -->
                     <div class="space-y-4">
                         <h3 class="text-base font-medium text-gray-900">Image de prévisualisation</h3>
 
@@ -313,7 +312,6 @@
                 </div>
             </div>
 
-            <!-- Boutons d'action -->
             <div class="flex items-center justify-between pt-6 border-t border-gray-200">
                 <a href="{{ route('admin.ressources.index') }}"
                     class="inline-flex items-center px-6 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">

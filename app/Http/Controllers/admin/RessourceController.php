@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use App\Models\Paiement;
+use App\Models\Rate;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -37,12 +37,12 @@ class RessourceController extends Controller
             ->orderBy('ordre', 'asc')
             ->get();
 
-        $ressourcesGrouped = $ressources->groupBy(function ($item) {
-            return $item->category->name ?? 'بدون فئة';
-        });
-        $ressourcesPremium = Ressource::getRessources('pedagogie', 'abonne');
+        // $ressourcesGrouped = $ressources->groupBy(function ($item) {
+        //     return $item->category->name ?? 'بدون فئة';
+        // });
+        // $ressourcesPremium = Ressource::getRessources('pedagogie', 'abonne');
 
-        return view('peda', compact('ressourcesGrouped', 'ressourcesPremium'));
+        return view('peda', compact('ressources'));
     }
 
     public function neuralbox()
@@ -73,46 +73,46 @@ class RessourceController extends Controller
         return view('neuralbox', compact('ressources'));
     }
     // public function showPedagogie()
-    // {
-    //     // Détermine si l'utilisateur est abonné
-    //     $estAbonne = Auth::check() && Auth::user()->is_admin || Paiement::where('user_id', Auth::id())->exists();
-    //     $visibilite = $estAbonne ? 'abonne' : 'tous';
+        // {
+        //     // Détermine si l'utilisateur est abonné
+        //     $estAbonne = Auth::check() && Auth::user()->is_admin || Paiement::where('user_id', Auth::id())->exists();
+        //     $visibilite = $estAbonne ? 'abonne' : 'tous';
 
-    //     // Récupère les ressources gratuites et premium si l'utilisateur est abonné
-    //     // $ressourcesGratuites = Ressource::getRessources('pedagogie', 'tous');
-    //     // $ressourcesPremium = Ressource::getRessources('pedagogie', 'abonne');
-    //     $ressources = Ressource::with('category')
-    //         ->where('categorie', 'pedagogie')
-    //         ->groupBy('category_id')
-    //         ->get();
+        //     // Récupère les ressources gratuites et premium si l'utilisateur est abonné
+        //     // $ressourcesGratuites = Ressource::getRessources('pedagogie', 'tous');
+        //     // $ressourcesPremium = Ressource::getRessources('pedagogie', 'abonne');
+        //     $ressources = Ressource::with('category')
+        //         ->where('categorie', 'pedagogie')
+        //         ->groupBy('category_id')
+        //         ->get();
 
-    //     return view('pedagogie', [
-    //         // 'ressourcesGratuites' => $ressourcesGratuites,
-    //         // 'ressourcesPremium' => $ressourcesPremium,
-    //         'estAbonne' => $estAbonne,
-    //         'visibilite' => $visibilite,
-    //     ]);
-    // }
+        //     return view('pedagogie', [
+        //         // 'ressourcesGratuites' => $ressourcesGratuites,
+        //         // 'ressourcesPremium' => $ressourcesPremium,
+        //         'estAbonne' => $estAbonne,
+        //         'visibilite' => $visibilite,
+        //     ]);
+        // }
 
-    // /**
-    //  * Affiche la page des ressources NeuralBox
-    //  */
-    // public function showNeuralBox()
-    // {
-    //     // Détermine si l'utilisateur est abonné
-    //     $estAbonne = Auth::check() && Auth::user()->is_admin || Paiement::where('user_id', Auth::id())->exists();
-    //     $visibilite = $estAbonne ? 'abonne' : 'tous';
+        // /**
+        //  * Affiche la page des ressources NeuralBox
+        //  */
+        // public function showNeuralBox()
+        // {
+        //     // Détermine si l'utilisateur est abonné
+        //     $estAbonne = Auth::check() && Auth::user()->is_admin || Paiement::where('user_id', Auth::id())->exists();
+        //     $visibilite = $estAbonne ? 'abonne' : 'tous';
 
-    //     // Récupère les ressources
-    //     $ressourcesGratuites = Ressource::getRessources('neuralbox', 'tous');
-    //     $ressourcesPremium = Ressource::getRessources('neuralbox', 'abonne');
+        //     // Récupère les ressources
+        //     $ressourcesGratuites = Ressource::getRessources('neuralbox', 'tous');
+        //     $ressourcesPremium = Ressource::getRessources('neuralbox', 'abonne');
 
-    //     return view('neuralbox1', [
-    //         'ressourcesGratuites' => $ressourcesGratuites,
-    //         'ressourcesPremium' => $ressourcesPremium,
-    //         'estAbonne' => $estAbonne,
-    //         'visibilite' => $visibilite,
-    //     ]);
+        //     return view('neuralbox1', [
+        //         'ressourcesGratuites' => $ressourcesGratuites,
+        //         'ressourcesPremium' => $ressourcesPremium,
+        //         'estAbonne' => $estAbonne,
+        //         'visibilite' => $visibilite,
+        //     ]);
     // }
     public function index()
     {
@@ -542,4 +542,38 @@ class RessourceController extends Controller
             // Optional: 'redirect_url' => route('admin.ressources.edit', $ressource)
         ]);
     }
+
+    public function reviews($id){
+        $reviews = Rate::where('ressource_id',$id)->with('user','ressource')->paginate(10);
+        
+        return view('admin.reviews.index',compact(['reviews']));
+    }
+    
+    public function reviewShow($id){
+        $review = Rate::with('user')->find($id);
+        
+        return view('admin.reviews.show',compact(['review']));
+    }
+
+    public function streamVideo($videoName)
+    {
+        // 1. Security Check: Ensure user is subscribed
+        if (!auth()->user()->subscription_type && !auth()->user()->is_admin) {
+            abort(403, 'Unauthorized');
+        }
+
+        // 2. Define the path to your private videos
+        $path = storage_path("app/private/videos/{$videoName}.mp4");
+
+        if (!file_exists($path)) {
+            abort(404);
+        }
+
+        // 3. Return the file as a stream
+        return response()->file($path, [
+            'Content-Type' => 'video/mp4', // or 'application/x-mpegURL' for HLS
+            'Accept-Ranges' => 'bytes',
+        ]);
+    }
+    
 }

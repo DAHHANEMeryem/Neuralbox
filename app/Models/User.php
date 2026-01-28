@@ -166,15 +166,19 @@ public function receivedContacts()
 {
     return $this->hasMany(Contact::class, 'receiver_id');
 }
+public function rates()
+{
+    return $this->hasMany(Rate::class);
+}
 
 
-    protected $appends = ['subscription_type'];
+protected $appends = ['subscription_type'];
 
-    public function getSubscriptionTypeAttribute()
-    {
-        $subscription = $this->subscription()->where('status', 'confirmed')->first();
-        return $subscription ? $subscription->type : null;
-    }
+public function getSubscriptionTypeAttribute()
+{
+    $subscription = $this->subscription()->where('status', 'confirmed')->first();
+    return $subscription ? $subscription->type : null;
+}
 
 
 

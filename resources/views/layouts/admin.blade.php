@@ -22,10 +22,10 @@
 
 @stack('scripts')
 
-<body class="bg-gray-100 font-sans leading-normal tracking-tight">
+<body class="font-sans leading-normal tracking-tight">
     <div class="flex min-h-screen">
         <!-- Sidebar -->
-        <aside class=" bg-white  fixed h-screen admin-nav closed-nav">
+        <aside class=" bg-white  fixed h-svh admin-nav closed-nav">
             <div class="p-2 pt-6 md:p-6">
 
 

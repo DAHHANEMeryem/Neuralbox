@@ -2,29 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-}
 
-/* Personnalisation des cartes admin */
 
-section {
+
+
+/* section {
   position: relative;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
-img {
+/* img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
+} */
 
 
 .dot {
@@ -65,19 +62,16 @@ img {
  }
 
  @media(max-width:767px){
- .admin-nav {
-   width: 16rem;
-   /* transition: all 8s; */
- }
+  .admin-nav {
+    transition: all 200ms;
+    width: 16rem;
+  }
 
- /* .admin-nav>* {
-   transition: all 8s ease-in;
- } */
 
  .admin-nav.closed-nav {
    width: min-content;
    max-width: 20vw;
-   height: 10vh;
+   height: 8vh;
    overflow: hidden;
 
    background-color: transparent;

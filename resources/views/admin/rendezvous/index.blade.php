@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="max-w-7xl mx-auto p-6">
+<div class="max-w-7xl mx-auto md:p-6">
     <h2 class="text-2xl font-bold mb-6">📆 Tous les Rendez-vous</h2>
 
     <div class="mb-4 grid grid-cols-2 md:grid-cols-5 gap-4">

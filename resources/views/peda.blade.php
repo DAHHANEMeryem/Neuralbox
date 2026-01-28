@@ -2,16 +2,16 @@
 
 @section('title', 'نيورال بوكس | الدليل البيداغوجي')
 
-@section('background', 'url(images/peda/1.png)')
+{{-- @section('background', 'url(images/peda/1.png)')
 
 @section('content')
 <div class="peda-page">
 
-  <section class="page-content pt-4 pb-0 peda">
+  <section class="page-content pt-md-4 pt-1 pb-0 peda">
     <div class="container">
       <div class="teacher-single-page mb-0">
         <div class="row justify-content-between">
-          <div class="col-lg-5 p-4">
+          <div class="col-lg-5 p-md-4">
             <div class="teacher-content">
 
               <p>{!! trans("peda.desc")!!}</p>
@@ -32,23 +32,7 @@
                 class="video-play play-video overlay-box">
                 <img src="assets/img/play.png" alt="">
               </a>
-              {{-- <a href="{{ route('video-link', ['videoName' => 'videos/why_neural.mp4']) }}" class="html5lightbox overlay-box" poster="images/peda/1.png">
-
-              <img src="{{ asset('assets/img/covers/why_neural.jpg') }}" class="w-100 h-100" alt="">
-              </a> --}}
-              {{--
-                <ul class="social-icons">
-                  <li><a href="#" title=""><i class="fa fa-clock"></i></a>
-                    <h3>{!! trans('peda.duree_') !!}</h3>
-                  </li>
-                  <li><a href="#" title=""><i class="fa fa-language"></i></a>
-                    <h3>{!! trans('peda.arabe') !!}</h3>
-                  </li>
-                  <li><a href="#" title=""><i class="fa fa-book"></i></a>
-                    <h3>{!! trans('peda.videos') !!}</h3>
-                  </li>
-                </ul> 
-              --}}
+              
             </div>
           </div>
         </div>
@@ -77,7 +61,7 @@
           <div class="accordion-body">
             <ul class="list-unstyled mb-0">
               @foreach($ressources as $ressource)
-              <li class="ps-4  mx-4 mb-4 ">
+              <li class="ps-md-4  mx-md-4 mb-4">
                 @if ($ressource->visibilite == 'tous')
                 <a href="#"
                   class="play-video fs-4 text-white"
@@ -90,8 +74,7 @@
                   {{ $ressource->titre }}
                 </a>
                 @else
-                <a
-                  @if($subscribed)
+                <a @if($subscribed)
                   data-video-url="{{ route('video-link', ['videoName' => $ressource->video_url]) }}"
                   data-bs-toggle="modal"
                   data-bs-target="#exampledsModal"
@@ -108,9 +91,7 @@
                   {{ $ressource->titre }}
                 </a>
                 @endif
-                <!-- <p class="text-white px-5 fs-6">
-                  {{-- {{ $ressource->description }} --}}
-                </p> -->
+                
               </li>
 
 
@@ -123,37 +104,10 @@
       @endforeach
 
     </div>
-
-    {{-- @foreach($ressourcesGratuites as $categoryName => $ressources)
-      <p class="title lead display-6 ">{{ $categoryName }}</p>
-    <div id="video-lightbox" style="display:none;">
-      <video id="video-player" controls width="100%"></video>
-    </div>
-    <div class="slick-carousel z-2">
-      @foreach($ressources as $ressource)
-      <a href="#video-lightbox"
-        class="slide-card overlay-box play-video"
-        data-video-url="{{ route('video-link', ['videoName' => $ressource->video_url]) }}">
-        <div class="image-wrapper">
-          <img src="{{ route('secure.file',['id' => $ressource->id,'type' => 'ressource'] ) }}" alt="{{__('hero.peda') ." ". $ressource->titre}}">
-          <div class="overlay">
-            <h5 class="title p-0">{{ $ressource->titre }}</h5>
-            <p class="desc">{{ $ressource->description }}</p>
-          </div>
-        </div>
-      </a>
-      @endforeach
-    </div>
-    @endforeach
-  </div>
-  --}}
 </div>
 
 @endsection
 
-
-
-@section('footer','footer')
 
 @section('scripts')
 <script>
@@ -294,4 +248,13 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
+
+
+@section('content')
+  <div class="px-md-5">
+    <livewire:video-player :page="'pedagogie'" />
+  </div>
+@endsection
+
+@section('footer','footer')

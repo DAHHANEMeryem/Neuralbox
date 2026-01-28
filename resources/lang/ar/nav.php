@@ -17,4 +17,5 @@ return [
   'copyright'=> '© جميع الحقوق محفوظة لشركة <a href="https://insiconsulting.com">INSIC</a> 2025',
   'produced_by'=>'مطور من طرف',
   'privacy'=> 'السياسة والخصوصية',
+  'head_message'=> 'مكاتب رؤى، الطابق 01، سات فيلاج، طنجة',
 ];

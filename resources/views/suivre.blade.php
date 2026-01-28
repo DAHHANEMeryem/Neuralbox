@@ -28,7 +28,7 @@
                 </div><!--newsz-ltr-text end-->
             </div>
             <div class="text-center col-lg-8">
-                <p>{{__("suivre.call_to_action_desc")}}</p>
+                <p class="text-white">{{__("suivre.call_to_action_desc")}}</p>
                 <a href="{{ route('rendezvous.create') }}" title="" class="w-fit btn-default mt-2">{{__("suivre.call_to_action_btn")}} <i class="fa fa-long-arrow-alt-right"></i></a>
 
             </div>

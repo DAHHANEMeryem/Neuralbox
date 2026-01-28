@@ -5,81 +5,68 @@
 @section('content')
 
 <section class="main-banner pt-0">
-	<div class="container">
-		<div class="row align-items-start">
-			<div class="col-lg-7 col-md-7 pt-4">
-				<div class="w-75 banner-text wow fadeInLeft position-relative" data-wow-duration="1000ms">
-					<h2 class="mx-auto text-center position-relative "><span>{{ __("hero.NeuralBox") }}</span><span class="insic ">by insic</span><br>{{__("hero.slogan")}}</h2>
-					<p class="mx-auto text-center">{{__("hero.desc")}}</p>
-					<!-- <form class="search-form">
-						<input type="text" name="search" placeholder="Search Class">
-						<button><i class="fa fa-search"></i></button>
-					</form> -->
-				</div>
-				<div class="box">
-					<img src="assets/img/Box/Box.png" class="box" alt="">
+	<div class="">
+		<div class="row laptop align-items-start justify-content-center">
+			<div class="col-md-6 p-6 content-banner">
+				<div class="banner-text wow fadeInLeft position-relative py-3 py-md-0" data-wow-duration="1000ms">
+					<h2 class="mx-none text-center position-relative "><span class="text-purple">{{ __("hero.NeuralBox") }}</span><br>{{__("hero.slogan")}}</h2>
+					<p class="mx-none mb-md-5">{{__("hero.desc")}}</p>
+					<div class="d-flex gap-md-4 gap-2 justify-content-center justify-content-md-start">
+						<a href="#pricing-two" class=" bg-primary  rounded-4 text-white">{{ __("nav.pricing") }}</a>
+						<a href="#contact" class=" bg-transparent text-blue  border-primary rounded-4 ">{{ __("nav.about") }}</a>
+					</div>
 				</div>
 			</div>
-			<div class="col-lg-5 col-md-5">
+			<div class=" col-md-6 position-relative">
 				<div class="hero_circle blue_circle">
-					120+<br>
-					أسرة سعيدة
-				</div>
-				<div class="hero_circle pink_circle">
 					500+<br>
 					طفل مستفيد
 				</div>
-				<div class="banner-img wow zoomIn" data-wow-duration="1000ms">
-					<img src="assets/img/banner-img.png" alt="">
-				</div><!--banner-img end-->
-				<div class="elements-bg wow zoomIn" data-wow-duration="1000ms"></div>
+				<div class="hero_circle pink_circle">
+					120+<br>
+					أسرة سعيدة
+				</div>
+				<div class="banner-img d-flex justify-content-start align-items-start wow zoomIn " data-wow-duration="1000ms">
+					<img src="{{asset('assets/img/hero/mean.png')}}" alt=""/>
+				</div>
 			</div>
 		</div>
-	</div>
-</section><!--main-banner end-->
-<!-- <h2 class="main-title">{{ __("hero.NeuralBox") }}</h2> -->
-
-</div>
-
-<section class="about-us-section">
-	<div class="container">
-		<div class="section-title  text-center">
-			<h2>{{ __("about.welcome_to") }}<span> {{ __("hero.NeuralBox") }}</span></h2>
-			<p class="mt-5 mb-4 desc	">{!! trans("about.desc")!!}</p>
-		</div><!--section-title end-->
-		<div class="about-sec">
-			<div class="container">
-				<div class="row">
-					<!-- <div class="col-lg-3 col-md-6 col-sm-6">
-						<div class="abt-col wow fadeInUp" data-wow-duration="1000ms">
-							<img src="assets/img/icon5.png" alt="">
-							<h3>{{ __("welcome.values.inside_change") }}</h3>
-						</div>
-					</div> -->
-					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="abt-col ">
-							<img src="assets/img/about/1.png" alt="" class="gsap-anim-target" data-animation="zoom-in">
-							<h3 class="gsap-anim-target" data-animation="fade-up">{{ __("welcome.values.empowering") }}</h3>
-							<!-- <p>Pelleneget tespharetra que fringilla egugue id eget pharetra</p> -->
-						</div><!--abt-col end-->
-					</div>
-					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="abt-col ">
-							<img src="assets/img/about/2.png" alt="" class="gsap-anim-target" data-animation="zoom-in">
-							<h3 class="gsap-anim-target" data-animation="fade-up">{{ __("welcome.values.integrating") }}</h3>
-							<!-- <p>Etiam risus neque, volutpat vel laoreet a, finibus volutpat non</p> -->
-						</div><!--abt-col end-->
-					</div>
-					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="abt-col ">
-							<img src="assets/img/about/3.png" alt="" class="gsap-anim-target" data-animation="zoom-in">
-							<h3 class="gsap-anim-target" data-animation="fade-up">{{ __("welcome.values.creativity") }}</h3>
-							<!-- <p>Mauris nec mi fequis giat, cursus tortor nec, pharetra tellus</p> -->
-						</div><!--abt-col end-->
+		<div class="row mobile align-items-start justify-content-center">
+			<div class="col-md-6 p-6 content-banner">
+				<div class="banner-text wow fadeInLeft position-relative py-3 py-md-0" data-wow-duration="1000ms">
+					<h2 class="mx-none text-center position-relative "><span class="text-purple">{{ __("hero.NeuralBox") }}</span><br>{{__("hero.slogan")}}</h2>
+					<p class="mx-none mb-md-5">{{__("hero.desc")}}</p>
+					<div class="d-flex gap-md-4 gap-2 justify-content-center justify-content-md-start">
+						<a href="#pricing-two" class=" bg-primary  rounded-4 text-white">{{ __("nav.pricing") }}</a>
+						<a href="#contact" class=" bg-transparent text-blue  border-primary rounded-4 ">{{ __("nav.about") }}</a>
 					</div>
 				</div>
 			</div>
-		</div><!--about-rw end-->
+			<div class=" col-md-6 position-relative">
+				<div class="hero_circle blue_circle">
+					500+<br>
+					طفل مستفيد
+				</div>
+				<div class="hero_circle pink_circle">
+					120+<br>
+					أسرة سعيدة
+				</div>
+				<div class="banner-img d-flex justify-content-start align-items-start wow zoomIn " data-wow-duration="1000ms">
+					<img src="{{asset('assets/img/hero/mean.png')}}" alt=""/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="gradient-bar"></div>
+</section>
+
+<section class="about-us-section">
+	<img src="{{ asset('assets/img/bg/about.svg') }}" class="about-bg about-bg-bottom" alt="">
+	<div class="container">
+		<div class="section-title  text-center">
+			<h2>{{ __("about.welcome_to") }}<span class="text-third"> {{ __("hero.NeuralBox") }}</span></h2>
+			<p class="mt-md-5 mb-md-4 desc	">{!! trans("about.desc")!!}</p>
+		</div>
 
 		<div class="blog-section">
 			<div class="blog-posts">
@@ -88,7 +75,7 @@
 						<a href="#" title="">
 							<img src="assets/img/covers/intro.jpg" alt="" class="cover object-position-top">
 						</a>
-						<span class="category">{{__("welcome.video_title")}}</span>
+						{{-- <span class="category">{{__("welcome.video_title")}}</span> --}}
 						<a data-video-url="{{ route('video-link', ['videoName' => 'intro']) }}"
 							data-bs-toggle="modal"
 							data-bs-target="#exampledsModal"
@@ -100,140 +87,12 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </section>
 
-
-{{-- <section class="page-content call-to-action-1  p-0">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="blog-section py-5 m-0 posts-page">
-					<div class="blog-posts">
-						<div class="blog-post quote-post">
-							<div class="blog-info">
-								<span class="category">{{__("welcome.call.title1")}}</span>
-<ul class="meta">
-	<!-- <li><a href="#" title="">17/09/2020</a></li> -->
-	<!-- <li><a href="#" title="">by Admin</a></li> -->
-	<!-- <li><img src="assets/img/icon13.png" alt="" /><a href="#" title="">Teachers,</a><a href="#" title="">
-											School</a></li> -->
-</ul>
-<p>{{!!("welcome.call.text1")!!}}</p>
-<a href="#contact">{{__("welcome.call.button1")}}</a>
-<!-- <span>Mother</span> -->
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section> --}}
-
 <section class="newsletter-section call ">
 
-	{{-- <div class="container">
-		<div class="newsletter-sec">
-			<div class="d-flex flex-column text-center align-items-center">
-				<div class="col-lg-4">
-					<div class="newsz-ltr-text">
-						<h2>{{__("welcome.call.title1")}}</h2>
-	</div>
-	</div> --}}
-	{{-- <div class="text-center col-lg-10">
-					<p>{!! trans("welcome.call.text1")!!}</p>
-					<a href="#pricing" title="" class="w-fit btn-default mt-4">{{__("welcome.call.button1")}} <i class="fa fa-long-arrow-alt-right"></i></a> --}}
-	<!-- <form class="newsletter-form">
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<input type="text" name="name" placeholder="Name">
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<input type="email" name="email" placeholder="Email">
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group select-tg">
-									<select>
-										<option>Class</option>
-										<option>Class</option>
-										<option>Class</option>
-										<option>Class</option>
-										<option>Class</option>
-										<option>Class</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<textarea name="message" placeholder="Message"></textarea>
-								</div>
-							</div>
-						</div>
-					</form> -->
-	{{-- </div> --}}
-	{{-- </div>
-		</div>
-	</div> --}}
-
-	{{-- <div class="container">
-            <div class="section-title text-center">
-				<h2 >{!! trans("welcome.call.title1")!!}</h2>
-			</div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="main-timeline5">
-                        <div class="timeline timeline-item">
-                            <div class="timeline-icon"><span class="year">1</span></div>
-                            <div class="timeline-content">
-                                <p class="description">
-                                    {!! trans('welcome.steps.first') !!}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="timeline timeline-item">
-                            <div class="timeline-icon"><span class="year">2</span></div>
-                            <div class="timeline-content">
-                                <p class="description">
-                                    {!! trans('welcome.steps.second') !!}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="timeline timeline-item">
-                            <div class="timeline-icon"><span class="year">3</span></div>
-                            <div class="timeline-content">
-                                <p class="description">
-                                    {!! trans('welcome.steps.third') !!}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="timeline timeline-item">
-                            <div class="timeline-icon"><span class="year">4</span></div>
-                            <div class="timeline-content">
-                                <p class="description">
-                                    {!! trans('welcome.steps.four') !!}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="timeline timeline-item">
-                            <div class="timeline-icon"><span class="year">5</span></div>
-                            <div class="timeline-content">
-                                <p class="description">
-                                    {!! trans('welcome.steps.five') !!}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </div> --}}
-
-	<div class="container py-5">
+	<div class="container py-md-5">
 		<div class="row text-center justify-content-center">
 			<div class="section-title text-center">
 				<h2>{!! trans("welcome.call.title1")!!}</h2>
@@ -241,7 +100,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col">
+			<div class="col p-0">
 				<div class="timeline-steps ">
 					<div class="timeline-step">
 						<div class="timeline-content">
@@ -284,13 +143,14 @@
 	</div>
 </section>
 
-<section class="about-page-content pt-md-4 p-0">
+<section class="about-page-content overflow-hidden pt-md-4 pb-5 p-0">
+	<img src="{{ asset('assets/img/bg/about-content.svg') }}" class="about-bg about-bg-top" alt="">
 	<div class="container">
 		<div class="abt-page-row">
 			<div class="row align-items-center">
 				<div class="col-lg-6 col-md-6">
 					<div class="section-title">
-						<p class="text-blue-neural	 ">{!! trans("welcome.coach_abd_founder") !!}</p>
+						<p class="text-black">{!! trans("welcome.coach_abd_founder") !!}</p>
 						<h2>{!! trans("welcome.coach_abd") !!}</h2>
 						<!-- <a href="classes.html" title="" class="btn-default">Classes <i class="fa fa-long-arrow-alt-right"></i></a> -->
 					</div>
@@ -318,14 +178,37 @@
 			</div>
 		</div><!--abt-page-row end-->
 	</div>
-</section><!--about-page-content end-->
+</section>
+
+
+<div class="blog-section position-relative">
+	<img src="{{ asset('assets/img/bg/about-blue.svg') }}" class="about-bg about-bg-top bg-gray" alt="">
+	<div class="container">
+		<div class="blog-posts">
+			<div class="blog-post video-post">
+				<div class="blog-thumbnail ">
+					<a href="#" >
+						<img src="assets/img/covers/storyCover.webp" alt="" class="cover object-position-top">
+					</a>
+					{{-- <span class="category">{{__("welcome.video_story")}}</span> --}}
+					<a data-video-url="{{ route('video-link', ['videoName' => 'story']) }}"
+						data-bs-toggle="modal"
+						data-bs-target="#exampledsModal" class="video-play play-video overlay-box">
+						<img src="assets/img/play.png" alt="">
+					</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
 
 <section>
-	<div class="news-block-two ">
+	<div class="news-block-two" >
 		<div class="inner-box">
 			<section class="services-section">
 				<div class="container">
-					<div class="sec-title right-align">
+					<div class="section-title yellow text-white text-center">
 						<h2>
 							{!!__('transelt.titre1')!!}
 						</h2>
@@ -377,7 +260,6 @@
 							</div>
 						</div>
 
-
 						<!-- Service Block -->
 						<div class="service-block col-lg-3 col-md-4 col-4">
 							<div class="inner-box">
@@ -408,10 +290,6 @@
 							</div>
 						</div>
 
-
-
-
-
 						<!-- Service Block -->
 						<div class="service-block col-lg-3 col-md-4 col-4">
 							<div class="inner-box">
@@ -431,10 +309,6 @@
 								{!!__('transelt.h510')!!}
 							</div>
 						</div>
-
-
-
-
 
 						<!-- Service Block -->
 						<div class="service-block col-lg-3 col-md-4 col-4">
@@ -456,8 +330,6 @@
 							</div>
 						</div>
 
-
-
 					</div>
 				</div>
 			</section>
@@ -465,26 +337,8 @@
 	</div>
 </section>
 
-<div class="blog-section">
-	<div class="blog-posts">
-		<div class="blog-post video-post">
-			<div class="blog-thumbnail ">
-				<a href="#" title="">
-					<img src="assets/img/covers/storyCover.webp" alt="" class="cover object-position-top">
-				</a>
-				<span class="category">{{__("welcome.video_story")}}</span>
-				<a data-video-url="{{ route('video-link', ['videoName' => 'story']) }}"
-					data-bs-toggle="modal"
-					data-bs-target="#exampledsModal" class="video-play play-video overlay-box">
-					<img src="assets/img/play.png" alt="">
-				</a>
-			</div>
 
-		</div>
-	</div>
-</div>
-
-<section class="course-section">
+{{-- <section class="course-section">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6">
@@ -559,7 +413,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> --}}
 
 <section class="portfolio-section">
 	<div class="auto-container">
@@ -716,7 +570,7 @@
 	</div>
 </section>
 
-<section id="pricing" class="d-flex min-h-screen ">
+{{-- <section id="pricing" class="d-flex min-h-screen ">
 	<div class="d-flex w-100  justify-content-space-between">
 		<div class="card pricing-card price-red text-center">
 			<!-- SVG Wave -->
@@ -898,25 +752,182 @@
 		</div>
 
 	</div>
+</section> --}}
+
+<section id="pricing-two" class="d-flex min-h-screen ">
+    <div class="container">
+        <div class="row g-0 laptop text-center align-items-stretch">
+            
+            <div class="col-3 d-flex flex-column pt-5">
+                <div class="feature-header"></div> <div class="feature-row">محتوى مجاني</div>
+                <div class="feature-row">صندوق نيورال بوكس</div>
+                <div class="feature-row">تخفيض على الدورات التدريبية</div>
+                <div class="feature-row">دليل استعمال نيورال بوكس</div>
+                <div class="feature-row">خصم على استشارات مواكبة</div>
+                <div class="feature-row">تقييم ومتابعة لتطور الطفل</div>
+                <div class="feature-row">المحتوى البيداغوجي</div>
+                <div class="feature-row">كتب إلكترونية</div>
+                <div class="feature-row">مجتمع نيورال بوكس على التلغرام</div>
+                <div class="feature-row border-0">مراجع لفهم مشاكل واضطرابات التعلم</div>
+            </div>
+
+            <div class="col-3 d-flex flex-column pt-5">
+                <div class="package-header mb-4">
+                    <h3>باقة الانطلاق</h3>
+                    <h2>0 DH</h2>
+                </div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
+                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
+                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
+                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
+                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
+                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row text-warning border-0"><i class="fas fa-times"></i></div>
+                <div class="mt-auto pb-4">
+                    <a href="#" class="btn btn-light rounded-pill px-4">أنشئ حسابك الآن</a>
+                </div>
+            </div>
+
+            <div class="col-3 d-flex flex-column pt-5">
+                <div class="package-header mb-4">
+                    <h3>باقة نيورال بوكس</h3>
+                    <h2>2300 DH</h2>
+                </div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
+                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row text-warning border-0"><i class="fas fa-times"></i></div>
+                <div class="mt-auto pb-4">
+                    <a href="#" class="btn btn-light rounded-pill px-4">اختر الباقة</a>
+                </div>
+            </div>
+
+            <div class="col-3 d-flex flex-column pt-5 highlighted-col">
+                <div class="package-header mb-4">
+                    <h3>باقة نيورال بوكس</h3>
+                    <h2>3200 DH</h2>
+                </div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row border-0"><i class="fas fa-check"></i></div>
+                <div class="mt-auto pb-4">
+                    <a href="#" class="btn btn-magenta rounded-pill px-4">اختر الباقة</a>
+                </div>
+            </div>
+
+        </div>
+        {{-- <div class="row g-0 mobile text-center align-items-stretch">
+			<div class="card">
+				<h5 class="card-header">Featured</h5>
+				<div class="card-body">
+					<h5 class="card-title">Special title treatment</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+				</div>
+			</div>
+        </div> --}}
+    </div>
+</section>
+
+<section class="partners">
+	<div class="container">
+		<h6 class="sec-title">{{ __('transelt.our_partners') }}</h6>
+		<div class="row">
+			<div class="col partner-logo-container"> <img class="partner-logo" src="{{ asset('assets/img/partners/insic.png') }}" alt="insic logo"></div>
+			<div class="col partner-logo-container"> <img class="partner-logo" src="{{ asset('assets/img/partners/LC.png') }}" alt="Leaders Camp logo"></div>
+			<div class="col partner-logo-container"> <img class="partner-logo" src="{{ asset('assets/img/partners/taqasom.png') }}" alt="Taqasom logo"></div>
+			<div class="col partner-logo-container"> <img class="partner-logo" src="{{ asset('assets/img/partners/abd.png') }}" alt="Abdssamad logo"></div>
+			<div class="col partner-logo-container"> <img class="partner-logo" src="{{ asset('assets/img/partners/conceptify.png') }}" alt="Conceptify logo"></div>
+		</div>
+	</div>
+</section>
+
+<section id="contact" class="main_contact pt-md-5 pb-md-5">
+	<div class="container">
+		<div class="row gap-4 flex-column flex-md-row justify-content-center">
+			<div class="col-md-5 order-2 order-md-1 col-12 contact-container">
+				<div class="d-flex gap-3 p-3 info-item" ><i class="fas fa-phone-flip"></i><h6>{{ __('contact.fix_number') }} 	| 	{{ __('contact.phone_number') }}</h6></div>
+				{{-- <div class="d-flex gap-3 p-3 info-item" ><i class="fas fa-phone-flip"></i><h6>{{ __('contact.phone_number') }}</h6></div> --}}
+				<div class="d-flex gap-3 p-3 info-item" ><i class="fas fa-location-dot"></i><h6>{{ __('contact.addresseDesc') }}</h6></div>
+				<div class="map-container">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7445.99017683554!2d-5.848830065145886!3d35.76088448176391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b87629bd97a35%3A0xa3d8d404e9cd8c3e!2sInstitut%20de%20Neurosciences%20et%20Coaching%20-%20INSIC!5e0!3m2!1sfr!2sma!4v1769084833075!5m2!1sfr!2sma"  style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+				</div>
+			</div>
+			<div class="col-md-6 order-1 order-md-2 col-12 form-container">
+				<h6 class="sec-title">{{ __('transelt.happy_to_contact') }}</h6>
+				@php
+					$topic = [
+						['id' => 'golden_pack', 'title' => __('transelt.golden_pack')],
+						['id' => 'basic_pack', 'title' => __('transelt.basic_pack')],
+						['id' => 'neuralbox_pack', 'title' => __('transelt.neuralbox_pack')],
+						['id' => 'our_formations', 'title' => __('transelt.our_formations')],
+						['id' => 'other', 'title' => __('transelt.other')],
+					];
+				@endphp
+					<form action="{{ route('contact.send') }}" method="POST">
+    					@csrf
+					<div class="rating-group">
+						@foreach($topic as $t)
+							<div class="">
+								<input type="radio" name="topic" value="{{ $t['id'] }}" id="{{ $t['id'] }}" {{ $t['id'] == "other" ? "checked" :"" }}>
+								<label class="radio-label" for="{{ $t['id'] }}">{{ __('transelt.'.$t['id']) }}</label>
+							</div>
+						@endforeach
+					</div>
+
+					<div>
+						<input type="text" placeholder="{{ __('contact.full_name') }}" name="full_name" id="full_name" />
+					</div>
+					<div>
+						<input type="email" placeholder="{{ __('contact.email') }}" name="email" id="email" />
+					</div>
+					<div>
+						<textarea placeholder="{{ __('contact.message') }}" name="message" id="message" ></textarea>
+					</div>
+					<button type="submit" class="bg-purple text-white float-start" >{{ __('contact.send') }} <i class="fas fa-paper-plane"></i></button>
+				</form>
+				@if(session('success'))
+					<div class="alert alert-success">{{ session('success') }}</div>
+				@endif
+			</div>
+		</div>
+	</div>
 </section>
 
 
-<section class="page-content mt-5 pt-2 pb-0">
-	<div class="container pt-5">
+
+
+{{-- <section class="page-content mt-md-5 pt-md-2 pb-0 mt-0 pt-1">
+	<div class="container pt-md-5">
 		<div class="mdp-contact">
 			<div class="row">
 				<div class="col-lg-7 gap-3 col-md-7">
 					<div class="sec-title comment-area">
-						<h2 class="mb-5">{{ __("contact.contact_us")}}</h2>
+						<h2 class="mb-md-5">{{ __("contact.contact_us")}}</h2>
 						<form id="contact-form" method="post" action="#">
 							<div class="response"></div>
 							<div class="row">
-								<div class="col-lg-6">
+								<div class="col-md-6 col-6">
 									<div class="form-group">
 										<input type="text" name="name" class="name" placeholder="{{ __('contact.full_name') }}" required>
 									</div><!--form-group end-->
 								</div>
-								<div class="col-lg-6">
+								<div class="col-md-6 col-6">
 									<div class="form-group">
 										<input type="email" name="email" class="email" placeholder="{{ __('contact.email') }}" required>
 									</div><!--form-group end-->
@@ -944,7 +955,7 @@
 						<!-- <h3>{{ __('contact.we_are_here') }}</h3> -->
 						<ul>
 							<li>
-								<div class="d-flex flex-wrap">
+								<div class="contact-info-container d-flex flex-md-wrap flex-row">
 									<div class="icon-v">
 										<img src="assets/img/icon15.png" alt="">
 									</div>
@@ -961,7 +972,7 @@
 								</div>
 							</li>
 							<li>
-								<div class="d-flex flex-wrap">
+								<div class="contact-info-container d-flex flex-md-wrap flex-row">
 									<div class="icon-v">
 										<img src="assets/img/icon16.png" alt="">
 									</div>
@@ -972,7 +983,7 @@
 								</div>
 							</li>
 							<li>
-								<div class="d-flex flex-wrap">
+								<div class="contact-info-container d-flex flex-md-wrap flex-row">
 									<div class="icon-v">
 										<img src="assets/img/icon17.png" alt="">
 									</div>
@@ -1001,407 +1012,7 @@
 			</div>
 		</div><!--mdp-contact end-->
 	</div>
-</section>
-
-
-{{--
-	<section class="classes-section">
-		<div class="container">
-			<div class="sec-title">
-				<h2>Our Classes</h2>
-				<p>Nam mattis felis id sodales rutrum. Nulla ornare tristique mauris, a laoreet erat ornare sit amet. Nulla sagittis faucibus lacus</p>
-			</div><!--sec-title end-->
-			<div class="classes-sec">
-				<div class="row classes-carousel">
-					<div class="col-lg-3">
-						<div class="classes-col wow fadeInUp" data-wow-duration="1000ms">
-							<div class="class-thumb">
-								<img src="https://via.placeholder.com/1680x1120" alt="" class="w-100">
-								<a href="contacts.html" title="" class="crt-btn">
-									<img src="assets/img/icon10.png" alt="">
-								</a>
-							</div>
-							<div class="class-info">
-								<h3><a href="class-single.html" title="">Basic English Speaking and Grammar</a></h3>
-								<span>Mon-Fri</span>
-								<span>10 AM - 12 AM</span>
-								<div class="d-flex flex-wrap align-items-center">
-									<div class="posted-by">
-										<img src="https://via.placeholder.com/26x26" alt="">
-										<a href="#" title="">Amanda Kern</a>
-									</div>
-									<strong class="price">$45</strong>
-								</div>
-							</div>
-						</div><!--classes-col end-->
-					</div>
-					<div class="col-lg-3">
-						<div class="classes-col wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="200ms">
-							<div class="class-thumb">
-								<img src="https://via.placeholder.com/1970x1326" alt="" class="w-100">
-								<a href="contacts.html" title="" class="crt-btn">
-									<img src="assets/img/icon10.png" alt="">
-								</a>
-							</div>
-							<div class="class-info">
-								<h3><a href="class-single.html" title="">Natural Sciences & Mathematics Courses</a></h3>
-								<span>Mon-Fri</span>
-								<span>10 AM - 12 AM</span>
-								<div class="d-flex flex-wrap align-items-center">
-									<div class="posted-by">
-										<img src="https://via.placeholder.com/26x26" alt="">
-										<a href="#" title="">Gypsy Hardinge</a>
-									</div>
-									<strong class="price">$67</strong>
-								</div>
-							</div>
-						</div><!--classes-col end-->
-					</div>
-					<div class="col-lg-3">
-						<div class="classes-col wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
-							<div class="class-thumb">
-								<img src="https://via.placeholder.com/1440x960" alt="" class="w-100">
-								<a href="contacts.html" title="" class="crt-btn">
-									<img src="assets/img/icon10.png" alt="">
-								</a>
-							</div>
-							<div class="class-info">
-								<h3><a href="class-single.html" title="">Environmental Studies & Earth Sciences</a></h3>
-								<span>Mon-Fri</span>
-								<span>10 AM - 12 AM</span>
-								<div class="d-flex flex-wrap align-items-center">
-									<div class="posted-by">
-										<img src="https://via.placeholder.com/26x26" alt="">
-										<a href="#" title="">Margje Jutten</a>
-									</div>
-									<strong class="price">$89</strong>
-								</div>
-							</div>
-						</div><!--classes-col end-->
-					</div>
-					<div class="col-lg-3">
-						<div class="classes-col wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
-							<div class="class-thumb">
-								<img src="https://via.placeholder.com/1296x864" alt="" class="w-100">
-								<a href="contacts.html" title="" class="crt-btn">
-									<img src="assets/img/icon10.png" alt="">
-								</a>
-							</div>
-							<div class="class-info">
-								<h3><a href="class-single.html" title="">Hospitality, Leisure & Sports Courses</a></h3>
-								<span>Mon-Fri</span>
-								<span>10 AM - 12 AM</span>
-								<div class="d-flex flex-wrap align-items-center">
-									<div class="posted-by">
-										<img src="https://via.placeholder.com/26x26" alt="">
-										<a href="#" title="">Hubert Franck</a>
-									</div>
-									<strong class="price">$67</strong>
-								</div>
-							</div>
-						</div><!--classes-col end-->
-					</div>
-					<div class="col-lg-3">
-						<div class="classes-col">
-							<div class="class-thumb">
-								<img src="https://via.placeholder.com/1680x1120" alt="" class="w-100">
-								<a href="contacts.html" title="" class="crt-btn">
-									<img src="assets/img/icon10.png" alt="">
-								</a>
-							</div>
-							<div class="class-info">
-								<h3><a href="class-single.html" title="">Basic English Speaking and Grammar</a></h3>
-								<span>Mon-Fri</span>
-								<span>10 AM - 12 AM</span>
-								<div class="d-flex flex-wrap align-items-center">
-									<div class="posted-by">
-										<img src="https://via.placeholder.com/26x26" alt="">
-										<a href="#" title="">Amanda Kern</a>
-									</div>
-									<strong class="price">$45</strong>
-								</div>
-							</div>
-						</div><!--classes-col end-->
-					</div>
-					<div class="col-lg-3">
-						<div class="classes-col">
-							<div class="class-thumb">
-								<img src="https://via.placeholder.com/1970x1326" alt="" class="w-100">
-								<a href="contacts.html" title="" class="crt-btn">
-									<img src="assets/img/icon10.png" alt="">
-								</a>
-							</div>
-							<div class="class-info">
-								<h3><a href="class-single.html" title="">Natural Sciences & Mathematics Courses</a></h3>
-								<span>Mon-Fri</span>
-								<span>10 AM - 12 AM</span>
-								<div class="d-flex flex-wrap align-items-center">
-									<div class="posted-by">
-										<img src="https://via.placeholder.com/26x26" alt="">
-										<a href="#" title="">Gypsy Hardinge</a>
-									</div>
-									<strong class="price">$67</strong>
-								</div>
-							</div>
-						</div><!--classes-col end-->
-					</div>
-					<div class="col-lg-3">
-						<div class="classes-col">
-							<div class="class-thumb">
-								<img src="https://via.placeholder.com/1440x960" alt="" class="w-100">
-								<a href="contacts.html" title="" class="crt-btn">
-									<img src="assets/img/icon10.png" alt="">
-								</a>
-							</div>
-							<div class="class-info">
-								<h3><a href="class-single.html" title="">Environmental Studies & Earth Sciences</a></h3>
-								<span>Mon-Fri</span>
-								<span>10 AM - 12 AM</span>
-								<div class="d-flex flex-wrap align-items-center">
-									<div class="posted-by">
-										<img src="https://via.placeholder.com/26x26" alt="">
-										<a href="#" title="">Margje Jutten</a>
-									</div>
-									<strong class="price">$89</strong>
-								</div>
-							</div>
-						</div><!--classes-col end-->
-					</div>
-					<div class="col-lg-3">
-						<div class="classes-col">
-							<div class="class-thumb">
-								<img src="https://via.placeholder.com/1296x864" alt="" class="w-100">
-								<a href="contacts.html" title="" class="crt-btn">
-									<img src="assets/img/icon10.png" alt="">
-								</a>
-							</div>
-							<div class="class-info">
-								<h3><a href="class-single.html" title="">Hospitality, Leisure & Sports Courses</a></h3>
-								<span>Mon-Fri</span>
-								<span>10 AM - 12 AM</span>
-								<div class="d-flex flex-wrap align-items-center">
-									<div class="posted-by">
-										<img src="https://via.placeholder.com/26x26" alt="">
-										<a href="#" title="">Hubert Franck</a>
-									</div>
-									<strong class="price">$67</strong>
-								</div>
-							</div>
-						</div><!--classes-col end-->
-					</div>
-				</div>
-				<div class="lnk-dv text-center">
-					<a href="classes.html" title="" class="btn-default">Classes <i class="fa fa-long-arrow-alt-right"></i></a>
-				</div>
-			</div><!--classes-sec end-->
-		</div>
-	</section><!--classes-section end-->
-
-	<section class="teachers-section">
-		<div class="container">
-			<div class="section-title text-center">
-				<h2>Our Awesome <br /> Teachers</h2>
-				<p>Quisque id ultrices tellus, ac sodales ex. Cras nec ante viverra, bibendum justo eget, lacinia dui. Donec ligula ligula, elementum sit amet</p>
-			</div><!--section-title end-->
-			<div class="teachers">
-				<div class="row">
-					<div class="col-lg-3 col-md-3 col-sm-6 col-6 full-wdth">
-						<div class="teacher">
-							<div class="teacher-img">
-								<img src="https://via.placeholder.com/1120x1680" alt="" class="w-100">
-								<div class="sc-div">
-									<ul>
-										<li><a href="https://www.instagram.com/neuralbox/" title="Neuralbox Instagram account"><i class="fab fa-instagram"></i></a></li>
-										<li><a href="#" title=""><i class="fab fa-linkedin-in"></i></a></li>
-										<li><a href="#" title=""><i class="fab fa-facebook-f"></i></a></li>
-									</ul>
-									<span><img src="assets/img/plus.png" alt=""></span>
-								</div>
-							</div>
-							<div class="teacher-info">
-								<h3><a href="teacher-single.html" title="">Polina Kerston</a></h3>
-								<span>English Teacher</span>
-							</div>
-						</div><!--teacher end-->
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-6 col-6 full-wdth">
-						<div class="teacher">
-							<div class="teacher-img">
-								<img src="https://via.placeholder.com/1376x2064" alt="" class="w-100">
-								<div class="sc-div">
-									<ul>
-										<li><a href="https://www.instagram.com/neuralbox/" title="Neuralbox Instagram account"><i class="fab fa-instagram"></i></a></li>
-										<li><a href="#" title=""><i class="fab fa-linkedin-in"></i></a></li>
-										<li><a href="#" title=""><i class="fab fa-facebook-f"></i></a></li>
-									</ul>
-									<span><img src="assets/img/plus.png" alt=""></span>
-								</div>
-							</div>
-							<div class="teacher-info">
-								<h3><a href="teacher-single.html" title="">Faadi Al Rahman</a></h3>
-								<span>Instructor</span>
-							</div>
-						</div><!--teacher end-->
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-6 col-6 full-wdth">
-						<div class="teacher">
-							<div class="teacher-img">
-								<img src="https://via.placeholder.com/1336x2004" alt="" class="w-100">
-								<div class="sc-div">
-									<ul>
-										<li><a href="https://www.instagram.com/neuralbox/" title="Neuralbox Instagram account"><i class="fab fa-instagram"></i></a></li>
-										<li><a href="#" title=""><i class="fab fa-linkedin-in"></i></a></li>
-										<li><a href="#" title=""><i class="fab fa-facebook-f"></i></a></li>
-									</ul>
-									<span><img src="assets/img/plus.png" alt=""></span>
-								</div>
-							</div>
-							<div class="teacher-info">
-								<h3><a href="teacher-single.html" title="">Chikelu Obasea</a></h3>
-								<span>Art Teacher</span>
-							</div>
-						</div><!--teacher end-->
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-6 col-6 full-wdth">
-						<div class="teacher">
-							<div class="teacher-img">
-								<img src="https://via.placeholder.com/1204x1804" alt="" class="w-100">
-								<div class="sc-div">
-									<ul>
-										<li><a href="https://www.instagram.com/neuralbox/" title="Neuralbox Instagram account"><i class="fab fa-instagram"></i></a></li>
-										<li><a href="#" title=""><i class="fab fa-linkedin-in"></i></a></li>
-										<li><a href="#" title=""><i class="fab fa-facebook-f"></i></a></li>
-									</ul>
-									<span><img src="assets/img/plus.png" alt=""></span>
-								</div>
-							</div>
-							<div class="teacher-info">
-								<h3><a href="teacher-single.html" title="">Katayama Fumiki</a></h3>
-								<span>Teacher</span>
-							</div>
-						</div><!--teacher end-->
-					</div>
-				</div>
-			</div><!--teachers end-->
-		</div>
-	</section>
-
-
-	<section class="blog-section">
-		<div class="container">
-			<div class="section-title text-center">
-				<h2>Recent News</h2>
-				<p>Nam mattis felis id sodales rutrum. Nulla ornare tristique mauris, a laoreet erat ornare sit amet. Nulla sagittis faucibus lacusMorbi lorem sem, aliquet</p>
-			</div><!--section-title end-->
-			<div class="blog-posts">
-				<div class="row">
-					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="blog-post">
-							<div class="blog-thumbnail">
-								<img src="https://via.placeholder.com/1680x1120" alt="" class="w-100">
-								<span class="category">English</span>
-							</div>
-							<div class="blog-info">
-								<ul class="meta">
-									<li><a href="#" title="">17/09/2020</a></li>
-									<li><a href="#" title="">by Admin</a></li>
-									<li><img src="assets/img/icon13.png" alt="" /><a href="#" title="">Teachers,</a><a href="#" title=""> School</a></li>
-								</ul>
-								<h3><a href="post.html" title="">Campus clean workshop</a></h3>
-								<p>Nam mattis felis id sodales rutrum. Nulla ornare tristique mauris, a laoreet erat ornare sit amet</p>
-								<a href="post.html" title="" class="read-more">Read <i class="fa fa-long-arrow-alt-right"></i></a>
-							</div>
-						</div><!--blog-post end-->
-					</div>
-					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="blog-post">
-							<div class="blog-thumbnail">
-								<img src="https://via.placeholder.com/1440x960" alt="" class="w-100">
-								<span class="category">English</span>
-							</div>
-							<div class="blog-info">
-								<ul class="meta">
-									<li><a href="#" title="">17/09/2020</a></li>
-									<li><a href="#" title="">by Admin</a></li>
-									<li><img src="assets/img/icon13.png" alt="" /><a href="#" title="">Teachers,</a><a href="#" title=""> School</a></li>
-								</ul>
-								<h3><a href="post.html" title="">Campus clean workshop</a></h3>
-								<p>Nam mattis felis id sodales rutrum. Nulla ornare tristique mauris, a laoreet erat ornare sit amet</p>
-								<a href="post.html" title="" class="read-more">Read <i class="fa fa-long-arrow-alt-right"></i></a>
-							</div>
-						</div><!--blog-post end-->
-					</div>
-					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="blog-post">
-							<div class="blog-thumbnail">
-								<img src="https://via.placeholder.com/1680x1120" alt="" class="w-100">
-								<span class="category">English</span>
-							</div>
-							<div class="blog-info">
-								<ul class="meta">
-									<li><a href="#" title="">17/09/2020</a></li>
-									<li><a href="#" title="">by Admin</a></li>
-									<li><img src="assets/img/icon13.png" alt="" /><a href="#" title="">Teachers,</a><a href="#" title=""> School</a></li>
-								</ul>
-								<h3><a href="post.html" title="">Campus clean workshop</a></h3>
-								<p>Nam mattis felis id sodales rutrum. Nulla ornare tristique mauris, a laoreet erat ornare sit amet</p>
-								<a href="post.html" title="" class="read-more">Read <i class="fa fa-long-arrow-alt-right"></i></a>
-							</div>
-						</div><!--blog-post end-->
-					</div>
-				</div>
-			</div><!--blog-posts end-->
-		</div>
-	</section><!--blog-section end-->
-
-	<section class="newsletter-section">
-		<div class="container">
-			<div class="newsletter-sec">
-				<div class="row align-items-center">
-					<div class="col-lg-4">
-						<div class="newsz-ltr-text">
-							<h2>Join us <br /> and stay tuned!</h2>
-							<a href="contacts.html" title="" class="btn-default">Join Us <i class="fa fa-long-arrow-alt-right"></i></a>
-						</div><!--newsz-ltr-text end-->
-					</div>
-					<div class="col-lg-8">
-						<form class="newsletter-form">
-							<div class="row">
-								<div class="col-md-4">
-									<div class="form-group">
-										<input type="text" name="name" placeholder="Name">
-									</div><!--form-group end-->
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<input type="email" name="email" placeholder="Email">
-									</div><!--form-group end-->
-								</div>
-								<div class="col-md-4">
-									<div class="form-group select-tg">
-										<select>
-											<option>Class</option>
-											<option>Class</option>
-											<option>Class</option>
-											<option>Class</option>
-											<option>Class</option>
-											<option>Class</option>
-										</select>
-									</div><!--form-group end-->
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<textarea name="message" placeholder="Message"></textarea>
-									</div><!--form-group end-->
-								</div>
-							</div>
-						</form><!--newsletter-form end-->
-					</div>
-				</div>
-			</div><!--newsletter-sec end-->
-		</div>
-	</section><!--newsletter-sec end-->
---}}
+</section> --}}
 
 @endsection
 @section('videoModal','without')

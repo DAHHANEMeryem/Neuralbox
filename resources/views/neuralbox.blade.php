@@ -1,4 +1,4 @@
- @extends('layouts.app')
+ {{-- @extends('layouts.app')
 
  @section('title', 'نيورال بوكس | دليل نيورال بوكس')
 
@@ -17,7 +17,7 @@
 
  <div class="peda-page">
 
-   <section class="page-content pt-5 pb-0 peda">
+   <section class="page-content pt-md-5 pt-1 pb-0 peda">
      <div class="container">
        <div class="teacher-single-page mb-0">
          <div class="row justify-content-between ">
@@ -26,33 +26,22 @@
 
                <p>{!! trans("neuralbox.desc") !!}</p>
 
-               {{-- <button class=" btn-default text-xl ps-4 py-2 h-auto ">{{__("neuralbox.watch_now")}}<i class="fa fa-long-arrow-alt-right"></i></button> --}}
 
              </div>
            </div>
-           <div class="col-lg-7  justify-start">
+           <div class="col-lg-7 mt-md-0 mt-2 justify-start">
              <div class="teacher-coly rounded-4 overflow-hidden">
-               <a class="play-video  overlay-box" poster="images/peda/1.png">
+               <a class="play-video  overlay-box"  poster="images/peda/1.png">
                  <img src="{{ asset('assets/img/covers/why_neural.jpg') }}" class="w-100 h-auto" alt="">
                </a>
                <a data-video-url="{{ route('video-link', ['videoName' => 'intro']) }}"
                  data-bs-toggle="modal"
                  data-bs-target="#exampledsModal"
-                 data-form="false"
+                 data-form="{{ false }}"
                  class="video-play play-video overlay-box">
                  <img src="assets/img/play.png" alt="">
                </a>
-               {{-- <ul class="social-icons">
-                <li><a href="#" title=""><i class="fa fa-clock"></i></a>
-                  <h3>{!! trans('neuralbox.duree_') !!}</h3>
-                </li>
-                <li><a href="#" title=""><i class="fa fa-language"></i></a>
-                  <h3>{!! trans('neuralbox.arabe') !!}</h3>
-                </li>
-                <li><a href="#" title=""><i class="fa fa-book"></i></a>
-                  <h3>{!! trans('neuralbox.videos') !!}</h3>
-                </li>
-              </ul> --}}
+               
              </div>
            </div>
          </div>
@@ -64,7 +53,7 @@
 
      <ul class="list-unstyled mb-0 categories-list">
        @foreach($ressources as $ressource)
-       <li class="ps-4  mx-4 mb-5 border-b-2">
+       <li class="ps-4  mx-4 mb-md-5 mb-3 border-b-2">
          @if ($ressource->visibilite == 'tous')
          <a href="#"
            class="play-video fs-4 text-white"
@@ -94,7 +83,6 @@
          </a>
          @endif
          <!-- <p class="text-white px-5 fs-6">
-          {{-- {{ $ressource->description }} --}}
         </p> -->
        </li>
 
@@ -164,7 +152,7 @@
        /* stylelint-disable-next-line */
        if ({{Auth::check()}}) {
          $("#ressource_id").val(ressourceid);
-        console.log(ressourceid);
+        
         
          $.ajax({
            url: "{{ route('rates.isAlreadySubmitted') }}",
@@ -189,11 +177,14 @@
        el.addEventListener('click', function(e) {
          e.preventDefault();
          let id = this.getAttribute('data-video-id');
-
-         checkSubmitted(id)
-
-
-
+          let withForm =  this.getAttribute('data-form');
+          if(withForm == false){
+            $("#rateForm").addClass("d-none");
+          }else{
+            console.log("haaa");
+            
+            checkSubmitted(id);
+          }
 
          const videoData = {
            id: id,
@@ -268,147 +259,156 @@
  @endsection
  @endsection
 
- <div class="modal fade overflow-hidden video-learning-modal vh-100" id="exampledsModal" tabindex="1" aria-labelledby="exampledsModalLabel" aria-hidden="true">
-   <div class="modal-dialog m-auto   modal-xl  modal-dialog-centered">
-     <div class="modal-content vh-100 bg-transparent flex-row-reverse   border-0 shadow-lg">
-       <div class="modal-body  overflow-y-auto  p-0">
-         <video id="video-player" controls width="100%"></video>
-         @auth
+ <div class="modal neuralbox-modal fade overflow-hidden video-learning-modal vh-100" id="exampledsModal" tabindex="1" aria-labelledby="exampledsModalLabel" aria-hidden="true">
+    <button type="button" class="btn position-absolute text-white bg-transparent close" data-bs-dismiss="modal">X</button> 
+    <div class="modal-dialog m-auto   modal-xl  modal-dialog-centered"> 
+      <div class="modal-content vh-100 bg-transparent flex-row-reverse   border-0 shadow-lg">
+        <div class="modal-body  overflow-y-auto  p-0">
+          <video id="video-player" controls width="100%"></video>
+          @auth
 
-         <form id="rateForm" class="p-4 bg-light   shadow-sm">
-           @csrf
-           <input type="hidden" id="ressource_id" name="signed_ressource_id" value="">
+          <form id="rateForm" class="p-md-4 p-1 bg-light   shadow-sm">
+            @csrf
+            <input type="hidden" id="ressource_id" name="signed_ressource_id" value="">
 
-           <div id="form-messages" class="mb-3"></div>
+            <div id="form-messages" class="mb-3"></div>
 
-           <h5 class="mb-3 fw-bold text-center">المرجو وضع علامة في الخانة الملائمة لتقييمكم:</h5>
+            <h5 class="mb-3 fw-bold text-center">المرجو وضع علامة في الخانة الملائمة لتقييمكم:</h5>
 
-           <div class="table-responsive mb-4">
-             <table class="table table-bordered align-middle text-center">
-               <thead class="table-secondary">
-                 <tr>
-                   <th>التقييم</th>
-                   <th>درجة الرضا</th>
-                   <th>التقييم</th>
-                   <th>درجة الرضا</th>
-                 </tr>
-               </thead>
-               <tbody>
-                 <tr>
-                   <td>تم احترام خطوات دليل الاستعمال</td>
-                   <td>
-                     @foreach(['fully','partially','not_at_all'] as $val)
-                     <div class="form-check form-check-inline">
-                       <input class="form-check-input" type="radio" required name="manual_steps_respect" value="{{ $val }}">
-                       <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
-                     </div>
-                     @endforeach
-                   </td>
-                   <td>تقوية التركيز والانتباه والذاكرة</td>
-                   <td>
-                     @foreach(['good','average','weak'] as $val)
-                     <div class="form-check form-check-inline">
-                       <input class="form-check-input" type="radio" required name="focus_and_memory" value="{{ $val }}">
-                       <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
-                     </div>
-                     @endforeach
-                   </td>
-                 </tr>
+            <div class="table-responsive mb-4">
+              <table class="table table-bordered align-middle text-center">
+                <thead class="table-secondary">
+                  <tr>
+                    <th>التقييم</th>
+                    <th>درجة الرضا</th>
+                    <th>التقييم</th>
+                    <th>درجة الرضا</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>تم احترام خطوات دليل الاستعمال</td>
+                    <td>
+                      @foreach(['fully','partially','not_at_all'] as $val)
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" required name="manual_steps_respect" value="{{ $val }}">
+                        <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
+                      </div>
+                      @endforeach
+                    </td>
+                    <td>تقوية التركيز والانتباه والذاكرة</td>
+                    <td>
+                      @foreach(['good','average','weak'] as $val)
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" required name="focus_and_memory" value="{{ $val }}">
+                        <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
+                      </div>
+                      @endforeach
+                    </td>
+                  </tr>
 
-                 <tr>
-                   <td>انخراط أفراد الأسرة</td>
-                   <td>
-                     @foreach(['good','average','weak'] as $val)
-                     <div class="form-check form-check-inline">
-                       <input class="form-check-input" type="radio" required name="family_involvement" value="{{ $val }}">
-                       <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
-                     </div>
-                     @endforeach
-                   </td>
-                   <td>الثبات الحركي والانفعالي</td>
-                   <td>
-                     @foreach(['good','average','weak'] as $val)
-                     <div class="form-check form-check-inline">
-                       <input class="form-check-input" type="radio" required name="motor_and_emotional_stability" value="{{ $val }}">
-                       <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
-                     </div>
-                     @endforeach
-                   </td>
-                 </tr>
+                  <tr>
+                    <td>انخراط أفراد الأسرة</td>
+                    <td>
+                      @foreach(['good','average','weak'] as $val)
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" required name="family_involvement" value="{{ $val }}">
+                        <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
+                      </div>
+                      @endforeach
+                    </td>
+                    <td>الثبات الحركي والانفعالي</td>
+                    <td>
+                      @foreach(['good','average','weak'] as $val)
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" required name="motor_and_emotional_stability" value="{{ $val }}">
+                        <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
+                      </div>
+                      @endforeach
+                    </td>
+                  </tr>
 
-                 <tr>
-                   <td>تحقيق المتعة والترفيه</td>
-                   <td>
-                     @foreach(['good','average','weak'] as $val)
-                     <div class="form-check form-check-inline">
-                       <input class="form-check-input" type="radio" required name="enjoyment" value="{{ $val }}">
-                       <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
-                     </div>
-                     @endforeach
-                   </td>
-                   <td>تجنب الإدمان الإلكتروني</td>
-                   <td>
-                     @foreach(['fully','partially','not_at_all'] as $val)
-                     <div class="form-check form-check-inline">
-                       <input class="form-check-input" type="radio" required name="digital_addiction_avoidance" value="{{ $val }}">
-                       <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
-                     </div>
-                     @endforeach
-                   </td>
-                 </tr>
+                  <tr>
+                    <td>تحقيق المتعة والترفيه</td>
+                    <td>
+                      @foreach(['good','average','weak'] as $val)
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" required name="enjoyment" value="{{ $val }}">
+                        <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
+                      </div>
+                      @endforeach
+                    </td>
+                    <td>تجنب الإدمان الإلكتروني</td>
+                    <td>
+                      @foreach(['fully','partially','not_at_all'] as $val)
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" required name="digital_addiction_avoidance" value="{{ $val }}">
+                        <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
+                      </div>
+                      @endforeach
+                    </td>
+                  </tr>
 
-                 <tr>
-                   <td>تحقيق التحدي والمثابرة</td>
-                   <td>
-                     @foreach(['good','average','weak'] as $val)
-                     <div class="form-check form-check-inline">
-                       <input class="form-check-input" type="radio" required name="challenge_and_persistence" value="{{ $val }}">
-                       <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
-                     </div>
-                     @endforeach
-                   </td>
-                   <td>تم استعمال الوثائق المرفقة</td>
-                   <td>
-                     @foreach(['fully','partially','not_at_all'] as $val)
-                     <div class="form-check form-check-inline">
-                       <input class="form-check-input" type="radio" required name="attached_docs_usage" value="{{ $val }}">
-                       <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
-                     </div>
-                     @endforeach
-                   </td>
-                 </tr>
-               </tbody>
-             </table>
-           </div>
+                  <tr>
+                    <td>تحقيق التحدي والمثابرة</td>
+                    <td>
+                      @foreach(['good','average','weak'] as $val)
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" required name="challenge_and_persistence" value="{{ $val }}">
+                        <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
+                      </div>
+                      @endforeach
+                    </td>
+                    <td>تم استعمال الوثائق المرفقة</td>
+                    <td>
+                      @foreach(['fully','partially','not_at_all'] as $val)
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" required name="attached_docs_usage" value="{{ $val }}">
+                        <label class="form-check-label">{{ __('neuralbox.'.$val) }}</label>
+                      </div>
+                      @endforeach
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-           <div class="mb-3">
-             <label class="form-label fw-bold">إيجابيات اللعبة:</label>
-             <textarea class="form-control" name="game_strengths" rows="3"></textarea>
-           </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold">إيجابيات اللعبة:</label>
+              <textarea class="form-control" name="game_strengths" rows="3"></textarea>
+            </div>
 
-           <div class="mb-3">
-             <label class="form-label fw-bold">النتائج الملحوظة:</label>
-             <textarea class="form-control" name="observed_results" rows="3"></textarea>
-           </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold">النتائج الملحوظة:</label>
+              <textarea class="form-control" name="observed_results" rows="3"></textarea>
+            </div>
 
-           <div class="mb-3">
-             <label class="form-label fw-bold">الصعوبات:</label>
-             <textarea class="form-control" name="difficulties" rows="3"></textarea>
-           </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold">الصعوبات:</label>
+              <textarea class="form-control" name="difficulties" rows="3"></textarea>
+            </div>
 
-           <div class="mb-3">
-             <label class="form-label fw-bold">إضافات وملاحظات عامة:</label>
-             <textarea class="form-control" name="general_notes" rows="3"></textarea>
-           </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold">إضافات وملاحظات عامة:</label>
+              <textarea class="form-control" name="general_notes" rows="3"></textarea>
+            </div>
 
-           <div class="text-center mt-4">
-             <button type="submit" class="btn btn-primary px-5">إرسال التقييم</button>
-           </div>
-         </form>
-         @endauth
-       </div>
-     </div>
-   </div>
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-primary px-5">إرسال التقييم</button>
+            </div>
+          </form>
+          @endauth
+        </div>
+      </div>
+    </div>
  </div>
 
- @section('footer','footer')
+ @section('footer','footer') --}}
+
+@extends('layouts.app')
+@section('content')
+  <div class="px-md-5">
+    <livewire:video-player :page="'neuralbox'" />
+  </div>
+@endsection
+@section('footer','footer')

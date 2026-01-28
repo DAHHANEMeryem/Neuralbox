@@ -4,7 +4,7 @@
 
 
 @section('content')
-<link href="{{asset('css/dashbordadmin.css')}}" rel="stylesheet">
+<link href="{{asset('assets/css/dashbordadmin.css')}}" rel="stylesheet">
 <div class="mb-8 ">
     <div class="justify-between gap-4 flex flex-col mb-2 md:flex-row">
         <div class="">
@@ -171,139 +171,80 @@
 
 
 <!-- Exemple avec Style 3: Arrondi et Coloré -->
-<div class="flex grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-    <!-- Card 4 - Conversion Rate -->
-    {{-- 
-        <div class="dashboard-card-rounded conversion-card-rounded">
-            <div class="card-header-rounded">
-            <!-- <div>
-                <h3 class="card-title-rounded">Messages</h3>
-                <p class="card-value-rounded conversion-value-rounded">
-                    Total : {{ $totalMessages }}
-                </p>
-            </div> -->
-            <div class="card-icon-container-rounded conversion-icon-bg-rounded">
-                <i class="fas fa-envelope conversion-icon-rounded"></i>
-            </div>
-            </div>
-
-            <div class="flex justify-between px-4 py-2">
-                <div class="flex flex-col items-center">
-                    <span class="text-sm text-gray-500">Non lus</span>
-                    <span class="text-lg font-bold text-red-500">{{ $messagesNonLus }}</span>
+<div class="flex flex-col md:flex-row grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+   
+    <div class="analytics-card md:w-1/2">
+        <div class="card-header">
+            <h3 class="header-title">Revenus Analytics</h3>
+        </div>
+        <div class="chart-container">
+            <canvas id="revenusChart" width="1000" height="200"></canvas>
+        </div>
+        <div class="chart-footer">
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color revenue-color" style="background-color:#4ade80;"></div>
+                    <span class="legend-text">Revenus</span>
                 </div>
-                <div class="flex flex-col items-center">
-                    <span class="text-sm text-gray-500">Lus</span>
-                    <span class="text-lg fon    t-bold text-green-600">{{ $messagesLus }}</span>
+                <div class="legend-item">
+                    <div class="legend-color profit-color" style="background-color:#3b82f6;"></div>
+                    <span class="legend-text">Abonnés</span>
                 </div>
             </div>
+            <a href="/admin/paiements" class="view-all-link">
+                Voir tout
+                <i class="fas fa-chevron-right link-icon"></i>
+            </a>
+        </div>
+    </div>
 
-            <div class="flex justify-between px-4 py-2">
+    <div class="dashboard-card-rounded deals-card-rounded">
+        <div class="card-header-rounded">
+            <div>
+                <h3 class="card-title-rounded">Total Rendez-vous</h3>
+                <p class="card-value-rounded deals-value-rounded">{{ $totalRdv }}</p>
+            </div>
+            <div class="card-icon-container-rounded deals-icon-bg-rounded">
+                <i class="fas fa-calendar-check deals-icon-rounded"></i>
+            </div>
+        </div>
 
-                @foreach($last as $data)
-                <div class="relative flex items-end justify-center h-20">
-                    <div
-                        class="w-4 rounded-t-md shadow-md transform transition-transform duration-500 hover:scale-105"
-                        style="
-                        height: {{ $data['height'] }}%;
-                        background: linear-gradient(to top, {{ $data['color'] === 'bg-green-600' ? '#16a34a' : ($data['color'] === 'bg-yellow-400' ? '#facc15' : '#f87171') }}, #fff);
-                    "
-                        title="{{ $data['count'] }} message">
-                    </div>
-                    <span class="absolute bottom-[-1.5rem] text-xs text-gray-600">{{ $data['date'] }}</span>
+
+
+        <br>
+
+        <!-- <span class="hidden bg-green-600 bg-yellow-400 bg-red-400"></span> -->
+
+        <!-- Graphique des 7 derniers jours -->
+        <div class="card-chart flex items-end justify-between h-24 px-4 rounded-md">
+            @foreach($last as $data)
+            <div class="relative flex items-end justify-center h-24">
+                <div
+                    class="w-4 rounded-t-md shadow-md transform transition-transform duration-500 hover:scale-105"
+                    style="
+                height: {{ $data['height'] }}%;
+                background: linear-gradient(to top, {{ $data['color'] === 'bg-green-600' ? '#16a34a' : ($data['color'] === 'bg-yellow-400' ? '#facc15' : '#f87171') }}, #fff);"
+                    title="{{ $data['count'] }} RDV">
                 </div>
-
-                @endforeach
-
+                <span class="absolute bottom-[-1.5rem] text-xs text-gray-600">{{ $data['date'] }}</span>
             </div>
 
-            <div class="card-footer-rounded flex justify-between items-center">
-
-                <a href="{{ route('admin.messages.index') }}" class="card-link-rounded conversion-link-rounded">
-                    Voir tous les messages
-                    <i class="fas fa-chevron-right ml-1 text-xs"></i>
-                </a>
-                <span class="card-status-rounded status-positive-rounded">
-                    Non lus : {{ $percentNonLus }}% | Lus : {{ $percentLus }}%
-                </span>
-            </div>
-        </div> 
-    --}}
-<div class="analytics-card md:w-1/2">
-    <div class="card-header">
-        <h3 class="header-title">Revenus Analytics</h3>
-    </div>
-    <div class="chart-container">
-        <canvas id="revenusChart" width="1000" height="200"></canvas>
-    </div>
-    <div class="chart-footer">
-        <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color revenue-color" style="background-color:#4ade80;"></div>
-                <span class="legend-text">Revenus</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color profit-color" style="background-color:#3b82f6;"></div>
-                <span class="legend-text">Abonnés</span>
-            </div>
-        </div>
-        <a href="/admin/paiements" class="view-all-link">
-            Voir tout
-            <i class="fas fa-chevron-right link-icon"></i>
-        </a>
-    </div>
-</div>
-<!-- Card 5 - Total Deals -->
-<div class="dashboard-card-rounded deals-card-rounded">
-    <div class="card-header-rounded">
-        <div>
-            <h3 class="card-title-rounded">Total Rendez-vous</h3>
-            <p class="card-value-rounded deals-value-rounded">{{ $totalRdv }}</p>
-        </div>
-        <div class="card-icon-container-rounded deals-icon-bg-rounded">
-            <i class="fas fa-calendar-check deals-icon-rounded"></i>
-        </div>
-    </div>
-
-
-
-    <br>
-
-    <!-- <span class="hidden bg-green-600 bg-yellow-400 bg-red-400"></span> -->
-
-    <!-- Graphique des 7 derniers jours -->
-    <div class="card-chart flex items-end justify-between h-24 px-4 rounded-md">
-        @foreach($last as $data)
-        <div class="relative flex items-end justify-center h-24">
-            <div
-                class="w-4 rounded-t-md shadow-md transform transition-transform duration-500 hover:scale-105"
-                style="
-            height: {{ $data['height'] }}%;
-            background: linear-gradient(to top, {{ $data['color'] === 'bg-green-600' ? '#16a34a' : ($data['color'] === 'bg-yellow-400' ? '#facc15' : '#f87171') }}, #fff);"
-                title="{{ $data['count'] }} RDV">
-            </div>
-            <span class="absolute bottom-[-1.5rem] text-xs text-gray-600">{{ $data['date'] }}</span>
+            @endforeach
         </div>
 
-        @endforeach
+        <br>
+
+        <div class="card-footer-rounded flex flex-col-reverse md:flex-row items-center justify-between">
+            <a href="{{ route('admin.rendezvous.index') }}" class="card-link-rounded deals-link-rounded">
+                Voir tout
+                <i class="fas fa-chevron-right ml-1 text-xs"></i>
+            </a>
+
+            <span class="card-status-rounded {{ $evolution >= 0 ? 'status-positive-rounded' : 'status-negative-rounded' }}">
+                Évolution : {{ $evolution >= 0 ? '+' : '' }}{{ $evolution }}% depuis {{ $phrase1 }}
+            </span>
+        </div>
     </div>
-
-    <br>
-
-    <div class="card-footer-rounded flex items-center justify-between">
-        <a href="{{ route('admin.rendezvous.index') }}" class="card-link-rounded deals-link-rounded">
-            Voir tout
-            <i class="fas fa-chevron-right ml-1 text-xs"></i>
-        </a>
-
-        <span class="card-status-rounded {{ $evolution >= 0 ? 'status-positive-rounded' : 'status-negative-rounded' }}">
-            Évolution : {{ $evolution >= 0 ? '+' : '' }}{{ $evolution }}% depuis {{ $phrase1 }}
-        </span>
-    </div>
-</div>
-
-
-
 </div>
 
 
@@ -353,7 +294,7 @@
                     // Choisir la couleur selon le pourcentage
                     $evolutionColor=$totalEvolution===0 ? 'text-gray-500'
                     : ($totalEvolution <=30 ? 'text-yellow-500'
-                    : ($totalEvolution <=75 ? 'text-orange-500'
+                    : ($totalEvolution <=75 ? 'text-pu-500'
                     : 'text-green-500' ));
 
                     $evolutionPrefix=$totalEvolution> 0 ? '+' : '';

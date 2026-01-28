@@ -4,17 +4,17 @@
 
  @section('content')
 
- <div class="container py-5">
+ <div class="container payment-form py-5">
      <div class="card shadow-lg border-0 mx-auto rounded-4" style="max-width: 650px;">
          <!-- Header -->
-         <div class="card-header text-primary  lead text-center py-4 rounded-top-4">
+         <div class="card-header text-primary  lead text-center py-md-4 py-2 rounded-top-4">
              <h2 class="card-title mb-1 fw-bold">{!! trans("payment.continue_payment") !!}</h2>
              {{-- <p class="card-subtitle lead text-white-50">Complétez votre inscription à Neural Box</p> --}}
          </div>
 
          <form action="{{ route('payment.process') }}" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
              @csrf
-             <div class="card-body p-4">
+             <div class="card-body p-md-4 p-2">
 
                  <div class="mb-4">
                      <h3 class="h5 mb-3 d-flex align-items-center text-secondary">
@@ -31,7 +31,7 @@
                      <h3 class="h5 mb-3 d-flex align-items-center text-secondary">
                          <i class="fas fa-wallet me-2 text-primary"></i> {!! trans('payment.type') !!}
                      </h3>
-                     <div class="d-flex gap-3 payment_options flex-wrap">
+                     <div class="d-flex gap-3 payment_options flex-row  flex-md-wrap">
                          <input type="radio" class="btn-check" value="card" name="payment_option" id="payment_option" checked>
                          <label class="btn btn-outline-primary px-4 py-2 rounded-pill shadow-sm" for="payment_option">
                              <i class="fas fa-credit-card me-2"></i> {!! trans('payment.card') !!}

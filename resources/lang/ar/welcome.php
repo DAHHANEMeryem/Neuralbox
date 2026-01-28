@@ -2,7 +2,7 @@
 
 return [
     "video_title"=>"فيديو تعريفي عن NeuralBox",
-    "coach_abd" => "الكوتش <span>عبد الصمد أشتاشن</span>",
+    "coach_abd" => "<span>الكوتش عبد الصمد أشتاشن</span>",
     "abd_info_1" => "رئيس المعهد المغربي للعلوم العصبية INSIC",
     "abd_info_2" => "أخصائي علاج معرفي سلوكي TCC",
     "abd_info_3" => "أخصائي علاج اضطرابات التعلم TSA ",

@@ -1,10 +1,17 @@
 
 // const { start } = require("alpinejs");
-(function ($) {
-    "use strict";
 
-    $(document).ready(function () {
+
+
+$(document).ready(function () {
+
         const $spinner = $("#global-spinner");
+        
+        // const content = document.querySelector('main-section');
+        
+        // content.classList.remove('hidden');
+        
+        $spinner.css('display','none');
 
         function setupVideoModal({
             videoPlayerSelector = "#video-player",
@@ -167,27 +174,7 @@
                 $("#popup-payment").css("display", "none");
             }
         );
-        // $(".disabled-payment").on("click", function (event) {
-        //     $("#popup-login").css("display", "flex");
-        // });
-
-        // $("#popup-login .close, .popup-overlay").on("click", function (event) {
-        //     $("#popup-login").css("display", "none");
-        // });
-        // $(".popup-overlay >*").on("click", function (event) {
-        //     event.preventDefault();
-        // });
-        // Handle hover effects for video playback
-        //   document.querySelectorAll('.video-card video').forEach(video => {
-        //     video.addEventListener('mouseenter', () => {
-        //       video.play();
-        //     });
-        //     video.addEventListener('mouseleave', () => {
-        //       video.pause();
-        //       video.currentTime = 0;
-        //       video.load(); // Reset to show poster
-        //     });
-        //   });
+        
 
         $(".abt-carousel").slick({
             infinite: true,
@@ -198,6 +185,15 @@
             centerMode: true,
             speed: 700, // Duration of the slide transition in milliseconds
             cssEase: "ease-in-out",
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        centerPadding: "5px",
+                    },
+                },
+            ],
             // arrows: true,
             dots: true,
             rtl: true,
@@ -206,7 +202,7 @@
         $(".slick-carousel").slick({
             centerMode: false,
             centerPadding: "60px",
-            slidesToShow: 4,
+            slidesToShow: 1,
             rtl: true,
             arrows: true,
             infinite: false,
@@ -214,6 +210,7 @@
                 {
                     breakpoint: 768,
                     settings: {
+                        slidesToShow: 1,
                         centerPadding: "20px",
                     },
                 },
@@ -394,20 +391,23 @@
             "click",
             function () {
                 $(this)
-                    .parent()
-                    .toggleClass("active")
-                    .siblings()
-                    .removeClass("active");
+                .parent()
+                .toggleClass("active")
+                .siblings()
+                .removeClass("active");
                 $(this).next("ul").slideToggle();
                 $(this).parent().siblings().find("ul").slideUp();
                 return false;
             }
         );
+        $(".responsive-menu ul li > a").on(
+            "click", function () {
+                $(".menu-btn").toggleClass("active");
+                $(".responsive-menu").toggleClass("active");
+            }
+        );
+        
 
-        /**
-         * AJAX Contact Form Script
-         * Working Contact Form
-         */
         if ($("#contact-form").length) {
             $("#submit").on("click", function () {
                 var o = new Object();
@@ -445,60 +445,10 @@
             });
         }
 
-        /**
-         * Back to top button
-         */
         $(".back-to-top").on("click", function () {
             scrollTo({ top: 0, behavior: "smooth" });
         });
 
-        /**Masonary
-            // function enableMasonry() {
-            //     if ($(".masonry-items-container").length) {
-            //         var winDow = $(window);
-            //         // Needed variables
-            //         var $container = $(".masonry-items-container");
-
-            //         $container.isotope({
-            //             itemSelector: ".masonry-item",
-            //             masonry: {
-            //                 columnWidth: ".masonry-item.col-lg-6",
-            //             },
-            //             animationOptions: {
-            //                 duration: 500,
-            //                 easing: "linear",
-            //             },
-            //         });
-
-            //         // GSAP animation after Isotope layout is complete
-            //         $container.on("arrangeComplete", function () {
-            //             gsap.fromTo(
-            //                 ".masonry-item",
-            //                 { opacity: 0, y: 50 },
-            //                 {
-            //                     opacity: 1,
-            //                     y: 0,
-            //                     duration: 0.6,
-            //                     stagger: 0.1,
-            //                     ease: "power2.out",
-            //                 }
-            //             );
-            //         });
-
-            //         winDow.bind("resize", function () {
-            //             $container.isotope({
-            //                 itemSelector: ".masonry-item",
-            //                 animationOptions: {
-            //                     duration: 500,
-            //                     easing: "linear",
-            //                     queue: false,
-            //                 },
-            //             });
-            //         });
-            //     }
-            // }
-
-         enableMasonry();**/
     });
 
     $(window).on("load", function () {
@@ -517,20 +467,7 @@
                     },
                 });
 
-                // The GSAP animation is now tied to a reliable layout event
-                // $container.on("arrangeComplete", function () {
-                //     gsap.fromTo(
-                //         ".masonry-item",
-                //         { opacity: 0, y: 50 },
-                //         {
-                //             opacity: 1,
-                //             y: 0,
-                //             duration: 0.6,
-                //             stagger: 0.1,
-                //             ease: "power2.out",
-                //         }
-                //     );
-                // });
+                
 
                 $(window).bind("resize", function () {
                     $container.isotope({
@@ -579,51 +516,9 @@
         }
     }
 
-    // gsap.from(".coach-card", {
-    //     opacity: 0,
-    //     y: 50,
-    //     scale: 0.9,
-    //     duration: 0.8,
-    //     ease: "power3.out",
-    //     stagger: 0.2,
-    //     scrollTrigger: {
-    //         trigger: ".coach-card",
-    //         start: "top 90%",
-    //         toggleActions: "play none none none",
-    //     },
-    // });
 
     if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
-        // Animate title and description on scroll
-        // gsap.to(".hero-title-animated", {
-        //     scrollTrigger: {
-        //         trigger: ".hero-title-animated",
-        //         start: "top 80%",
-        //         toggleActions: "play none none none",
-        //     },
-        //     opacity: 1,
-        //     y: 0,
-        //     scale: 1,
-        //     duration: 1.2,
-        //     ease: "power2.out",
-        //     overwrite: true,
-        // });
-
-        // gsap.to(".hero-description", {
-        //     scrollTrigger: {
-        //         trigger: ".hero-description",
-        //         start: "top 85%",
-        //         scrub: true,
-        //         toggleActions: "play none none none",
-        //     },
-        //     opacity: 1,
-        //     y: 0,
-        //     scale: 1,
-
-        //     duration: 1.2,
-        //     ease: "power2.out",
-        //     overwrite: true,
-        // });
+       
 
         // Video reveal and playback using ScrollTrigger
         const videoWrapper = document.querySelector(".video-wrapper");
@@ -668,5 +563,3 @@
         }
     }
 
-
-})(jQuery);

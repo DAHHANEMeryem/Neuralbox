@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <div class="flex items-center justify-between mb-8">
-        <h1 class="text-3xl font-bold text-indigo-700">
+<div class="container mx-auto md:px-4 md:py-8">
+    <div class="flex items-center flex-col md:flex-row justify-between mb-8">
+        <h1 class="text-lg md:text-3xl font-bold text-indigo-700">
             Tableau des Paiements
         </h1>
         <a href="{{ route('admin.export.paiements.pdf') }}"
@@ -14,38 +14,38 @@
 
 
     <!-- Statistiques -->
-    <div class="grid grid-cols-3 md:grid-cols-3 gap-6 mb-12">
-        <div class="bg-white rounded-2xl shadow-lg p-6 border border-green-100 hover:scale-105 transition-transform duration-300">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-6 mb-12">
+        <div class="bg-white rounded-2xl shadow-lg p-2 md:p-6 border border-green-100 hover:scale-105 transition-transform duration-300">
             <h2 class="text-lg font-semibold text-gray-700 mb-2">Paiements réussis</h2>
-            <p class="text-2xl font-bold text-green-600">{{ $successCount }} Paiements</p>
+            <p class="text-base md:text-2xl font-bold text-green-600">{{ $successCount }} Paiements</p>
         </div>
-        <div class="bg-white rounded-2xl shadow-lg p-6 border border-green-100 hover:scale-105 transition-transform duration-300">
+        <div class="bg-white rounded-2xl shadow-lg p-2 md:p-6 border border-green-100 hover:scale-105 transition-transform duration-300">
             <h2 class="text-lg font-semibold text-gray-700 mb-2">Paiements en cours</h2>
-            <p class="text-2xl font-bold text-sky-400">{{ $pendingCount }} Paiements</p>
+            <p class="text-base md:text-2xl font-bold text-sky-400">{{ $pendingCount }} Paiements</p>
         </div>
-        <div class="bg-white rounded-2xl shadow-lg p-6 border border-red-100 hover:scale-105 transition-transform duration-300">
+        <div class="bg-white rounded-2xl shadow-lg p-2 md:p-6 border border-red-100 hover:scale-105 transition-transform duration-300">
             <h2 class="text-lg font-semibold text-gray-700 mb-2">Paiements échoués</h2>
-            <p class="text-2xl font-bold text-red-600">{{ $failCount }} Paiements</p>
+            <p class="text-base md:text-2xl font-bold text-red-600">{{ $failCount }} Paiements</p>
         </div>
-        <div class="bg-white rounded-2xl shadow-lg p-6 border border-indigo-100 hover:scale-105 transition-transform duration-300">
+        <div class="bg-white rounded-2xl shadow-lg p-2 md:p-6 border border-indigo-100 hover:scale-105 transition-transform duration-300">
             <h2 class="text-lg font-semibold text-gray-700 mb-2">Total des paiements valider</h2>
-            <p class="text-2xl font-bold text-indigo-600">{{ number_format($total, 2) }} DH</p>
+            <p class="text-base md:text-2xl font-bold text-indigo-600">{{ number_format($total, 2) }} DH</p>
         </div>
-        <div class="bg-white rounded-2xl shadow-lg p-6 border border-indigo-100 hover:scale-105 transition-transform duration-300">
+        <div class="bg-white rounded-2xl shadow-lg p-2 md:p-6 border border-indigo-100 hover:scale-105 transition-transform duration-300">
             <h2 class="text-lg font-semibold text-gray-700 mb-2">Paiements valider ce mois</h2>
-            <p class="text-2xl font-bold text-indigo-600">{{ number_format($monthlyRevenue, 2) }} DH</p>
+            <p class="text-base md:text-2xl font-bold text-indigo-600">{{ number_format($monthlyRevenue, 2) }} DH</p>
         </div>
     </div>
-    <table class="min-w-full border-collapse rounded-lg overflow-hidden shadow-lg">
+    <table class=" block md:table  w-full border-collapse rounded-lg overflow-x-scroll md:overflow-hidden shadow-lg">
     <thead class="bg-gradient-to-r from-indigo-500 to-indigo-700 text-white">
         <tr>
             <!-- <th class="px-6 py-3 text-center font-semibold">ID</th> -->
-            <th class="px-6 py-3 text-center font-semibold">Utilisateur</th>
-            <th class="px-6 py-3 text-center font-semibold">Montant</th>
-            <th class="px-6 py-3 text-center font-semibold">Statut</th>
-            <th class="px-6 py-3 text-center font-semibold">Méthod</th>
+            <th class="px-2 md:px-6 py-1 md:py-3 text-center font-semibold">Utilisateur</th>
+            <th class="px-2 md:px-6 py-1 md:py-3 text-center font-semibold">Montant</th>
+            <th class="px-2 md:px-6 py-1 md:py-3 text-center font-semibold">Statut</th>
+            <th class="px-2 md:px-6 py-1 md:py-3 text-center font-semibold">Méthod</th>
+            <th class="px-2 md:px-6 py-1 md:py-3 text-center font-semibold">Date</th>
             {{-- <th class="px-6 py-3 text-center font-semibold">Reçu</th> --}}
-            <th class="px-6 py-3 text-center font-semibold">Date</th>
             {{-- <th class="px-6 py-3 text-center font-semibold"></th> --}}
             <!-- <th class="px-6 py-3 text-center font-semibold">Méthode</th>-->
         </tr>
@@ -54,9 +54,9 @@
         @forelse($paiements as $paiement)
         <tr onclick="goto(`{{route('admin.paiements.show',$paiement->id)}}`)" class="border-b cursor-pointer hover:bg-indigo-50 transition-colors duration-200">
             <!-- <td class="px-6 py-4 text-center text-gray-700">{{ $paiement->id }}</td> -->
-            <td class="px-6 py-4 text-center text-gray-700">{{ $paiement->user->name ?? 'N/A' }}</td>
-            <td class="px-6 py-4 text-center font-semibold text-indigo-600">{{ number_format($paiement->amount, 2) }} MAD</td>
-            <td class="px-6 py-4 text-center font-semibold">
+            <td class="px-2 md:px-6 py-1 md:py-4 text-center text-gray-700">{{ $paiement->user->name ?? 'N/A' }}</td>
+            <td class="px-2 md:px-6 py-1 md:py-4 text-center font-semibold text-indigo-600">{{ number_format($paiement->amount, 2) }} MAD</td>
+            <td class="px-2 md:px-6 py-1 md:py-4 text-center font-semibold">
                 @if(strtolower($paiement->status) === 'validated')
                 <span class="text-green-600 bg-green-100 px-3 py-1 rounded-full">Validé</span>
                 @elseif(strtolower($paiement->status) === 'pending')
@@ -65,9 +65,9 @@
                 <span class="text-gray-600 bg-gray-100 px-3 py-1 rounded-full capitalize">Echoué</span>
                 @endif
             </td>
-            <td class="px-6 py-4 text-center capitalize text-gray-600">{{ $paiement->method }}</td>
+            <td class="px-2 md:px-6 py-1 md:py-4 text-center capitalize text-gray-600">{{ $paiement->method }}</td>
             {{-- <td class="px-6 py-4 text-center capitalize text-gray-600"><a target="_blank" href="{{ route('secure.file',['id' => $paiement->id,'type' => 'paiment']) }}">{{ $paiement->receipt ? 'voit Reçu' : 'Pas de reçu' }}</a></td> --}}
-            <td class="px-6 py-4 text-center text-gray-500">{{ $paiement->created_at->format('d/m/Y') }}</td>
+            <td class="px-2 md:px-6 py-1 md:py-4 text-center text-gray-500">{{ $paiement->created_at->format('d/m/Y') }}</td>
             {{-- <td class="px-6 py-4 text-center text-gray-500"><a href="{{ route('admin.subscription_edit',$paiement) }}" class="p-2"><i class="fa fa-pen text-green-500"></i></a></td> --}}
         </tr>
         @empty

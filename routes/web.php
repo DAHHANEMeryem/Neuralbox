@@ -33,6 +33,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RateController;
+use App\Livewire\VideoPlayer ;
 use Illuminate\Http\Request;
 
 // routes/web.php
@@ -88,16 +89,19 @@ Route::middleware('auth')->group(function () {
 
     // Charger les messages d'une conversation avec un utilisateur spécifique
     Route::get('/messagerie/messages/{user}', [ContactController::class, 'getUserMessages']);
-
+    
     // Charger tous les messages généraux (pour les admins)
     Route::get('/messagerie/all-messages', [ContactController::class, 'getAllMessages'])->name('messagerie.getAllMessages');
-
+    
     // Envoyer un message général (pour les admins)
     Route::post('/messagerie/send-general', [ContactController::class, 'sendGeneralMessage'])->name('messagerie.sendGeneralMessage');
-
+    
     // Afficher une conversation spécifique (page dédiée)
     Route::get('/messagerie/conversation/{user}', [ContactController::class, 'showConversation'])->name('messagerie.showConversation');
     Route::get('/messagerie/messages-generaux', [ContactController::class, 'getGeneralMessages']);
+
+    Route::get('/ressource/{id}/reviews', [RessourceController::class, 'reviews'])->name('ressource.reviews');
+    Route::get('/reviewShow{id}', [RessourceController::class, 'reviewShow'])->name('ressource.reviews.show');
 });
 
 
@@ -418,11 +422,13 @@ Route::get('/file/{type}/{id}', function ($type,$id) {
     ]);
 })->name('secure.file');
 
-
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 Route::post('/ressources/navigate', [RessourceController::class, 'navigate'])->name('ressource.navigate');
 
 Route::post('/admin/ressources/upload-chunk', [RessourceController::class, 'uploadChunk'])->name('admin.ressources.uploadChunk');
 Route::post('/admin/ressources/merge-chunks', [RessourceController::class, 'mergeChunks'])->name('admin.ressources.mergeChunks');
+
+Route::get('/learning/{slug?}', VideoPlayer::class)->name('learning.index')->middleware('auth');
 
 require __DIR__ . '/auth.php';

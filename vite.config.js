@@ -8,10 +8,10 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    build: {
-        manifest: true,
-        outDir: "public/build", // 👈 should point here
-        emptyOutDir: true,
-    },
-    base: "/build/",
+    // build: {
+    //     manifest: true,
+    //     outDir: "public/build", // 👈 should point here
+    //     emptyOutDir: true,
+    // },
+    // base: "/build/",
 });
