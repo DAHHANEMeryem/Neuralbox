@@ -14,7 +14,7 @@ class VideoPlayer extends Component
 
     #[Url(as: 'v')]
     public $currentVideoId;
-
+    public $videoDescription; // <-- nouvelle propriété
     public $videoTitle;
     public $videoUrl;
 
@@ -24,30 +24,31 @@ class VideoPlayer extends Component
     public $isSubmitted = false;
     public $isSubscribed = false;
 
-    public function mount($page)
-    {
-        // $this->ressources = $ressources;
-        $this->page = $page;
+   public function mount($page)
+{
+    $this->page = $page;
 
-        // if($this->page == 'pedagogie'){
-        //     $this->groupedRessources = $this->ressources->groupBy(function ($item) {
-        //         return $item->category->name ?? 'Other';
-        //     });
-        // }
+    $ressources = $this->getFilteredRessources();
 
-
-        $startingVideo = $this->getFilteredRessources()->first()->where('visibilite','tous')->where('id', $this->currentVideoId)->first()
-             ?? $this->getFilteredRessources()->first()->where('visibilite', 'tous')->first();
-
-        // $startingVideo = $this->ressources->where('id', $this->currentVideoId)->first()
-        //     ?? $this->ressources->first();
-        if ($startingVideo) {
-            $this->selectVideo($startingVideo->id);
-        }
-
-        $this->checkIfSubscribed();
-        $this->checkIfSubmitted();
+    // Si c'est groupé (pedagogie) → on "aplati"
+    if ($ressources instanceof \Illuminate\Support\Collection && $ressources->first() instanceof \Illuminate\Support\Collection) {
+        $ressources = $ressources->flatten();
     }
+
+    // Chercher la vidéo demandée dans l’URL si elle est publique
+    $startingVideo = $ressources
+        ->where('visibilite', 'tous')
+        ->where('id', $this->currentVideoId)
+        ->first()
+        ?? $ressources->where('visibilite', 'tous')->first();
+
+    if ($startingVideo) {
+        $this->selectVideo($startingVideo->id);
+    }
+
+    $this->checkIfSubscribed();
+    $this->checkIfSubmitted();
+}
 
     protected function getFilteredRessources()
     {
@@ -69,19 +70,20 @@ class VideoPlayer extends Component
     }
 
     public function selectVideo($videoId)
-    {
-        $video = Ressource::find($videoId);
+{
+    $video = Ressource::find($videoId);
 
-        if ($video) {
-            $this->currentVideoId = $video->id;
-            $this->videoTitle = $video->titre;
-            $this->videoUrl = route('video-link', ['videoName' => $video->video_url]);
-            $this->checkIfSubmitted();
+    if ($video) {
+        $this->currentVideoId = $video->id;
+        $this->videoTitle = $video->titre;
+        $this->videoDescription = $video->description; // <-- ajouter ça
+        $this->videoUrl = route('video-link', ['videoName' => $video->video_url]);
+        $this->checkIfSubmitted();
 
-            // Dispatch event to refresh HLS.js player in JS
-            $this->dispatch('videoChanged', url: route('video-link', ['videoName' => $video->video_url]));
-        }
+        // Dispatch event to refresh HLS.js player in JS
+        $this->dispatch('videoChanged', url: route('video-link', ['videoName' => $video->video_url]));
     }
+}
 
     public function checkIfSubmitted()
     {

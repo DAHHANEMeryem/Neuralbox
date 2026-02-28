@@ -239,12 +239,11 @@ class DashboardController extends Controller
 
 
 
-            $abonneToday = Subscription::whereDate('created_at', today())->where('status', 'confirmed')->count();
+            $abonneToday = Subscription::whereDate('created_at', today())->where('status', 'validated')->count();
             $abonne_total = $abonneToday;
 
 
-            $abonne_hier = Subscription::whereDate('created_at', Carbon::yesterday())->where('status', 'confirmed')->count();
-
+            $abonne_hier = Subscription::whereDate('created_at', Carbon::yesterday())->where('status', 'validated')->count();
 
 
             if ($abonne_hier  > 0) {
@@ -552,14 +551,14 @@ class DashboardController extends Controller
             $fin_semaine = Carbon::now()->endOfWeek();
 
             // Paiements de cette semaine
-            $abonne_total = Subscription::whereBetween('created_at', [$debut_semaine, $fin_semaine])->where('status', 'confirmed')->count();
+            $abonne_total = Subscription::whereBetween('created_at', [$debut_semaine, $fin_semaine])->where('status', 'validated')->count();
 
             // Début / Fin de la semaine précédente
             $debut_semaine_prec = Carbon::now()->subWeek()->startOfWeek();
             $fin_semaine_prec = Carbon::now()->subWeek()->endOfWeek();
 
             // Paiements de la semaine précédente
-            $total_semaine_prec = Subscription::whereBetween('created_at', [$debut_semaine_prec, $fin_semaine_prec])->where('status', 'confirmed')->count();
+            $total_semaine_prec = Subscription::whereBetween('created_at', [$debut_semaine_prec, $fin_semaine_prec])->where('status', 'validated')->count();
 
             // Calcul de l’évolution
             if ($total_semaine_prec > 0) {
@@ -834,14 +833,14 @@ class DashboardController extends Controller
             $fin_mois = Carbon::now()->endOfMonth();
 
             // Paiements de cette semaine
-            $abonne_total = Subscription::whereBetween('created_at', [$debut_mois, $fin_mois])->where('status', 'confirmed')->count();
+            $abonne_total = Subscription::whereBetween('created_at', [$debut_mois, $fin_mois])->where('status', 'validated')->count();
 
             // Début / Fin de la semaine précédente
             $debut_mois_prec = Carbon::now()->subMonth()->startOfMonth();
             $fin_mois_prec = Carbon::now()->subMonth()->endOfMonth();
 
             // Paiements de la semaine précédente
-            $total_mois_prec = Subscription::whereBetween('created_at', [$debut_mois_prec, $fin_mois_prec])->where('status', 'confirmed')->count();
+            $total_mois_prec = Subscription::whereBetween('created_at', [$debut_mois_prec, $fin_mois_prec])->where('status', 'validated')->count();
 
             // Calcul de l’évolution
 
@@ -1120,14 +1119,14 @@ class DashboardController extends Controller
             $fin_annee = Carbon::now()->endOfYear();
 
             // Paiements de cette semaine
-            $abonne_total = Subscription::whereBetween('created_at', [$debut_annee, $fin_annee])->where('status', 'confirmed')->count();
+            $abonne_total = Subscription::whereBetween('created_at', [$debut_annee, $fin_annee])->where('status', 'validated')->count();
 
             // Début / Fin de la semaine précédente
             $debut_annee_prec = Carbon::now()->subYear()->startOfYear();
             $fin_annee_prec = Carbon::now()->subYear()->endOfYear();
 
             // Paiements de la semaine précédente
-            $total_annee_prec = Subscription::whereBetween('created_at', [$debut_annee_prec, $fin_annee_prec])->where('status', 'confirmed')->count();
+            $total_annee_prec = Subscription::whereBetween('created_at', [$debut_annee_prec, $fin_annee_prec])->where('status', 'validated')->count();
 
             // Calcul de l’évolution
 

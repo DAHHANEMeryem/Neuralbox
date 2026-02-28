@@ -187,7 +187,10 @@ public function getSubscriptionTypeAttribute()
     // User.php
 
 
+public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 
 }
-
-
+  

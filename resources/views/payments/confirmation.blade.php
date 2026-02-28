@@ -46,17 +46,9 @@
         }
 
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .payment-details {
@@ -110,15 +102,9 @@
 
 <body>
     @if(session('success'))
-    <div style="background-color: #d4edda; padding: 10px; text-align: center; color: #155724;">
-        {{ session('success') }}
-    </div>
-    @endif
-
-    @if(session('info'))
-    <div style="background-color: #d1ecf1; padding: 10px; text-align: center; color: #0c5460;">
-        {{ session('info') }}
-    </div>
+        <div style="background-color: #d4edda; padding: 10px; text-align: center; color: #155724;">
+            {{ session('success') }}
+        </div>
     @endif
 
     <div class="confirmation-container">
@@ -133,35 +119,26 @@
             <div class="payment-details">
                 <h5 class="mb-3">تفاصيل الدفعة</h5>
 
+                @php
+                    $packs = [
+                        'golden' => 'Golden',
+                        'silver' => 'NeuralBox',
+                    ];
+                @endphp
+
                 <div class="detail-row">
                     <span>رقم المعاملة:</span>
                     <span><strong>#{{ $paymentInfo->id }}</strong></span>
                 </div>
 
                 <div class="detail-row">
+                    <span>الباقة:</span>
+                    <span>{{ $packs[$paymentInfo->pack] ?? 'غير متوفر' }}</span>
+                </div>
+
+                <div class="detail-row">
                     <span>اسم حامل البطاقة:</span>
-                    <span>{{ $paymentInfo->name }}</span>
-                </div>
-
-                @if($paymentInfo->method === 'stripe')
-                <div class="detail-row">
-                    <span>رقم البطاقة:</span>
-                    <span>{{ $paymentInfo->masked_card_number ?? '**** **** **** ****' }}</span>
-                </div>
-                @endif
-
-
-
-                <div class="detail-row">
-                    <span>طريقة الدفع:</span>
-                    <span>
-                        @switch($paymentInfo->method)
-                        @case('stripe') بطاقة ائتمان @break
-                        @case('paypal') PayPal @break
-                        @case('bank_transfer') تحويل بنكي @break
-                        @default {{ $paymentInfo->payment_method }}
-                        @endswitch
-                    </span>
+                    <span>{{ $paymentInfo->name ?? 'غير متوفر' }}</span>
                 </div>
 
                 <div class="detail-row">
@@ -169,10 +146,19 @@
                     <span>{{ $paymentInfo->email ?? 'غير متوفر' }}</span>
                 </div>
 
+                <div class="detail-row">
+                    <span>الهاتف:</span>
+                    <span>{{ $paymentInfo->phone ?? 'غير متوفر' }}</span>
+                </div>
 
                 <div class="detail-row">
-                    <span>تاريخ الدفع:</span>
-                    <span>{{ $paymentInfo->created_at->format('d/m/Y H:i') }}</span>
+                    <span>المدينة:</span>
+                    <span>{{ $paymentInfo->city ?? 'غير متوفر' }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span>العنوان:</span>
+                    <span>{{ $paymentInfo->address ?? 'غير متوفر' }}</span>
                 </div>
 
                 <div class="detail-row">
@@ -182,12 +168,8 @@
             </div>
 
             <div class="action-buttons">
-                <a href="{{ route('dashboard') }}" class="btn-dashboard">
-                    <i class="fas fa-tachometer-alt"></i> الذهاب للوحة التحكم
-                </a>
-
-                <a href="{{ route('subscriptions.index') }}" class="btn-dashboard" style="background: linear-gradient(45deg, #28a745, #20c997);">
-                    <i class="fas fa-arrow-right"></i> العودة للاشتراكات
+                <a href="{{ route('home') }}" class="btn-dashboard" style="background: linear-gradient(45deg, #28a745, #20c997);">
+                    <i class="fas fa-arrow-right"></i> NeuralBox
                 </a>
             </div>
 

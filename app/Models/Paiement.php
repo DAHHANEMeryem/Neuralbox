@@ -11,12 +11,29 @@ class Paiement extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'amount', 'method', 'status','receipt','created_at','updated_at'
-    ];
+    'user_id',
+    'pack',
+    'amount',
+    'method',
+    'status',
+    'receipt',
+    'name',
+    'email',
+    'phone',
+    'address',
+    'city',
+    'created_at',
+    'updated_at'
+];
+
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
+    public function subscription()
+{
+    return $this->hasOne(Subscription::class, 'paiement_id');
+}
+
 }

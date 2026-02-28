@@ -3,6 +3,65 @@
 @section('title', 'نورال بوكس | الرئيسية')
 
 @section('content')
+<style>
+
+
+/* l’image reste normale */
+.hero-poster {
+ 
+	margin-top: -90px;
+	
+}
+
+.box-overlay {
+    position: absolute;
+    bottom: 40px; /* ⬅️ remonte la vidéo de 100px */
+    left: 50px;
+    width: 800px;
+    z-index: 3;
+
+    pointer-events: none;
+    filter: drop-shadow(0 12px 25px rgba(0,0,0,.25));
+    border-radius: 14px;
+
+    animation: float 3s ease-in-out infinite;
+}
+.main-banner {
+    padding-bottom: 80px; /* espace réservé pour la box */
+}
+@media screen and (max-width: 768px) {
+    .hero-poster {
+        margin-top: -60px; /* remonte moins sur mobile */
+    }
+
+    .box-overlay {
+        bottom: 50px;  /* remonte un peu moins */
+        left: 50px;    /* recentre un peu */
+        width: 250px;  /* réduit la largeur */
+    }
+
+    .main-banner {
+        padding-bottom: 60px;
+    }
+}
+
+/* Styles pour mobiles très petits <= 480px */
+@media screen and (max-width: 480px) {
+    .hero-poster {
+        margin-top: -40px;
+    }
+
+    .box-overlay {
+        bottom: 10px;
+        left: -10px;
+        width: 400px;
+    }
+
+    .main-banner {
+        padding-bottom: 50px;
+    }
+}
+</style>
 
 <section class="main-banner pt-0">
 	<div class="">
@@ -26,38 +85,34 @@
 					120+<br>
 					أسرة سعيدة
 				</div>
-				<div class="banner-img d-flex justify-content-start align-items-start wow zoomIn " data-wow-duration="1000ms">
-					<img src="{{asset('assets/img/hero/mean.png')}}" alt=""/>
-				</div>
+				<div class="banner-img d-flex justify-content-start align-items-start hero-media">
+
+    <!-- image de fond -->
+    <img 
+        src="{{ asset('assets/img/hero/mean.png') }}" 
+        alt="NeuralBox"
+        class="hero-poster"
+    >
+
+    <!-- vidéo box incrustée -->
+    <video 
+        id="heroBoxVideo"
+        class="box-overlay"
+        muted
+        autoplay
+        loop
+        playsinline
+        preload="auto"
+    >
+        <source src="{{ asset('assets/videos/box-animation.webm') }}" type="video/webm">
+    </video>
+
+</div>
 			</div>
 		</div>
-		<div class="row mobile align-items-start justify-content-center">
-			<div class="col-md-6 p-6 content-banner">
-				<div class="banner-text wow fadeInLeft position-relative py-3 py-md-0" data-wow-duration="1000ms">
-					<h2 class="mx-none text-center position-relative "><span class="text-purple">{{ __("hero.NeuralBox") }}</span><br>{{__("hero.slogan")}}</h2>
-					<p class="mx-none mb-md-5">{{__("hero.desc")}}</p>
-					<div class="d-flex gap-md-4 gap-2 justify-content-center justify-content-md-start">
-						<a href="#pricing-two" class=" bg-primary  rounded-4 text-white">{{ __("nav.pricing") }}</a>
-						<a href="#contact" class=" bg-transparent text-blue  border-primary rounded-4 ">{{ __("nav.about") }}</a>
-					</div>
-				</div>
-			</div>
-			<div class=" col-md-6 position-relative">
-				<div class="hero_circle blue_circle">
-					500+<br>
-					طفل مستفيد
-				</div>
-				<div class="hero_circle pink_circle">
-					120+<br>
-					أسرة سعيدة
-				</div>
-				<div class="banner-img d-flex justify-content-start align-items-start wow zoomIn " data-wow-duration="1000ms">
-					<img src="{{asset('assets/img/hero/mean.png')}}" alt=""/>
-				</div>
-			</div>
-		</div>
+		
 	</div>
-	<div class="gradient-bar"></div>
+	
 </section>
 
 <section class="about-us-section">
@@ -73,7 +128,7 @@
 				<div class="blog-post video-post">
 					<div class="blog-thumbnail ">
 						<a href="#" title="">
-							<img src="assets/img/covers/intro.jpg" alt="" class="cover object-position-top">
+							<img src="assets/img/covers/why_neural.jpg" alt="" class="cover object-position-top">
 						</a>
 						{{-- <span class="category">{{__("welcome.video_title")}}</span> --}}
 						<a data-video-url="{{ route('video-link', ['videoName' => 'intro']) }}"
@@ -89,6 +144,8 @@
 		</div>
 	</div>
 </section>
+
+
 
 <section class="newsletter-section call ">
 
@@ -137,6 +194,37 @@
 							<p class="h6 text-muted mb-0 mb-lg-0">{!! trans("welcome.steps.five")!!}</p>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="about-us-section">
+	<img src="{{ asset('assets/img/bg/about.svg') }}" class="about-bg about-bg-bottom" alt="">
+	<div class="container">
+		<div class="section-title  text-center">
+			<h2>{{ __("about.gift") }}<span class="text-third"> {{ __("hero.NeuralBox") }}</span></h2>
+			<p class="mt-md-5 mb-md-4 desc	">{!! trans("about.desc2")!!}</p>
+		</div>
+
+		<div class="blog-section">
+			<div class="blog-posts">
+				<div class="blog-post video-post">
+					<div class="blog-thumbnail ">
+						<a href="#" title="">
+							<img src="assets/img/covers/intro2.jpeg" alt="" class="cover object-position-top">
+						</a>
+						{{-- <span class="category">{{__("welcome.video_title")}}</span> --}}
+						<a data-video-url="{{ route('video-link', ['videoName' => 'INTRO_NEURALBOX']) }}"
+							data-bs-toggle="modal"
+							data-bs-target="#exampledsModal"
+							class="video-play play-video overlay-box">
+							<img src="assets/img/play.png" alt="">
+						</a>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -415,6 +503,27 @@
 	</div>
 </section> --}}
 
+
+
+<!-- Fancybox CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"/>
+<!-- Fancybox JS -->
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const video = document.getElementById("heroBoxVideo");
+    if (video) {
+        video.play().catch(() => {});
+    }
+});
+</script>
+
+
+
+
+
+
 <section class="portfolio-section">
 	<div class="auto-container">
 		<div class="sec-title right-align">
@@ -423,155 +532,112 @@
 
 		<!-- <img src="{{asset('assets/img/abt-element.png')}}" class=" bg translate-middle -z-10 position-absolute start-0 top-50" alt=""> -->
 		<div class="masonry-items-container relative  row  clearfix overflow-hidden ">
-			<!-- <img class="cadre absolute top-0 left-0 " src="{{ asset('assets/img/cadre.svg') }}" alt=""> -->
-			<!-- Project Block -->
 
-			<!-- <div class="corner top-left"></div>
-			<div class="corner top-right"></div>
-			<div class="corner bottom-right"></div>
-			<div class="dash top"></div>
-			<div class="dash bottom"></div>
-			<div class="dash left"></div>
-			<div class="dash right"></div> -->
+            <!-- Project Block -->
+            <div class="project-block masonry-item col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-box3">
+                    <a data-fancybox="gallery" data-caption="Vidéo 1"
+                       href="https://www.youtube.com/watch?v=7VR3UoDR3TE">
+                        <div class="image1">
+                            <img src="images/resource/cover/1.jpg" alt="Vidéo 1" />
+                            <div class="overlay-box">
+                                <div class="overlay-inner">
+                                    <div class="content">
+                                        <!-- icône play -->
+                                        <svg fill="#000000" width="80px" height="80px" viewBox="0 0 163.861 163.861">
+                                            <g>
+                                                <path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
+                                                c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
-			<div class="project-block masonry-item col-lg-6 col-md-12 col-sm-12">
-				<div class="inner-box3">
-					<div class="image1">
-						<img src="images/resource/cover/1.jpg" alt="" />
-						<!-- Overlay Box -->
-						<a class="icon html5lightbox" data-fancybox="gallery-2" data-caption="" href="https://www.youtube.com/embed/7VR3UoDR3TE">
-							<div class="overlay-box">
-								<div class="overlay-inner">
-									<div class="content">
-										<svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-											width="800px" height="800px" viewBox="0 0 163.861 163.861"
-											xml:space="preserve">
-											<g>
-												<path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
-														c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" />
-											</g>
-										</svg>
-									</div>
-								</div>
-							</div>
-					</div>
-					</a>
+            <!-- Project Block -->
+            <div class="project-block masonry-item col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-box3">
+                    <a data-fancybox="gallery" data-caption="Vidéo 2"
+                       href="https://www.youtube.com/watch?v=kz1GnP8OOLQ">
+                        <div class="image1">
+                            <img src="images/resource/cover/2.jpg" alt="Vidéo 2" />
+                            <div class="overlay-box">
+                                <div class="overlay-inner">
+                                    <div class="content">
+                                        <svg fill="#000000" width="80px" height="80px" viewBox="0 0 163.861 163.861">
+                                            <g>
+                                                <path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
+                                                c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
-				</div>
-			</div>
+            <!-- Project Block -->
+            <div class="project-block masonry-item col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-box3">
+                    <a data-fancybox="gallery" data-caption="Vidéo 3"
+                       href="https://www.youtube.com/watch?v=pCbDVP1D2ug">
+                        <div class="image1">
+                            <img src="images/resource/cover/4.jpg" alt="Vidéo 3" />
+                            <div class="overlay-box">
+                                <div class="overlay-inner">
+                                    <div class="content">
+                                        <svg fill="#000000" width="80px" height="80px" viewBox="0 0 163.861 163.861">
+                                            <g>
+                                                <path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
+                                                c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
-			<!-- Project Block -->
-			<div class="project-block masonry-item col-lg-6 col-md-12 col-sm-12 ">
-				<div class="inner-box3">
-					<div class="image1">
-						<img src="images/resource/cover/2.jpg" alt="" />
-						<!-- Overlay Box -->
-						<a class="icon html5lightbox" data-fancybox="gallery-2" data-caption="" href="https://www.youtube.com/embed/kz1GnP8OOLQ">
-							<div class="overlay-box">
-								<div class="overlay-inner">
-									<div class="content">
-										<svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-											width="800px" height="800px" viewBox="0 0 163.861 163.861"
-											xml:space="preserve">
-											<g>
-												<path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
-															c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" />
-											</g>
-										</svg>
-									</div>
-								</div>
-							</div>
-					</div>
-					</a>
-				</div>
-			</div>
+            <!-- Project Block -->
+            <div class="project-block masonry-item col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-box3">
+                    <a data-fancybox="gallery" data-caption="Vidéo 4"
+                       href="https://www.youtube.com/watch?v=69dyRI7yhyM">
+                        <div class="image1">
+                            <img src="images/resource/cover/3.jpg" alt="Vidéo 4" />
+                            <div class="overlay-box">
+                                <div class="overlay-inner">
+                                    <div class="content">
+                                        <svg fill="#000000" width="80px" height="80px" viewBox="0 0 163.861 163.861">
+                                            <g>
+                                                <path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
+                                                c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
-			<!-- Project Block -->
-			<div class="project-block masonry-item col-lg-6 col-md-12 col-sm-12 ">
-				<div class="inner-box3">
-
-					<div class="image1">
-						<img src="images/resource/cover/4.jpg" alt="" />
-						<!-- Overlay Box -->
-						<a class="icon html5lightbox html5lightbox" data-fancybox="gallery-2" data-caption="" href="https://www.youtube.com/embed/pCbDVP1D2ug">
-							<div class="overlay-box">
-								<div class="overlay-inner">
-									<div class="content">
-										<svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-											width="800px" height="800px" viewBox="0 0 163.861 163.861"
-											xml:space="preserve">
-											<g>
-												<path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
-														c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" />
-											</g>
-										</svg>
-									</div>
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Project Block -->
-			<div class="project-block masonry-item col-lg-6 col-md-12 col-sm-12">
-				<div class="inner-box3">
-					<div class="image1">
-						<img src="images/resource/cover/5.jpg" alt="" />
-						<!-- Overlay Box -->
-						<a class="icon html5lightbox" data-fancybox="gallery-3" data-caption="" href="https://youtu.be/pCbDVP1D2ug?si=mbYCXjSYK0DnNYZF">
-							<div class="overlay-box">
-								<div class="overlay-inner">
-									<div class="content">
-										<svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-											width="800px" height="800px" viewBox="0 0 163.861 163.861"
-											xml:space="preserve">
-											<g>
-												<path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
-														c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" />
-											</g>
-										</svg>
-									</div>
-								</div>
-							</div>
-					</div>
-					</a>
-				</div>
-			</div>
-
-			<!-- Project Block -->
-			<div class="project-block masonry-item col-lg-6 col-md-12 col-sm-12 ">
-				<div class="inner-box3">
-					<div class="image1">
-						<img src="images/resource/cover/3.jpg" alt="" />
-						<!-- Overlay Box -->
-						<a class="icon html5lightbox" data-fancybox="gallery-2" data-caption="" href="https://www.youtube.com/embed/69dyRI7yhyM">
-							<div class="overlay-box">
-								<div class="overlay-inner">
-									<div class="content">
-										<svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-											width="800px" height="800px" viewBox="0 0 163.861 163.861"
-											xml:space="preserve">
-											<g>
-												<path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275
-															c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z" />
-											</g>
-										</svg>
-									</div>
-								</div>
-							</div>
-					</div>
-					</a>
-				</div>
-			</div>
-
-		</div>
-
-	</div>
+        </div>
+    </div>
 </section>
 
-{{-- <section id="pricing" class="d-flex min-h-screen ">
+ <section id="pricing" class="d-block d-md-none">
+	
 	<div class="d-flex w-100  justify-content-space-between">
+		<div class="pricing-wrapper d-flex w-100">
 		<div class="card pricing-card price-red text-center">
 			<!-- SVG Wave -->
 			<div class="top-wave">
@@ -752,9 +818,76 @@
 		</div>
 
 	</div>
-</section> --}}
+	</div>
+	<style>
+		.card-body ul {
+			font-size: 13px;
+		}
+		/* ====== PRICING SECTION ====== */
+#pricing {
+  padding: 40px 15px;
+}
 
-<section id="pricing-two" class="d-flex min-h-screen ">
+/* Wrapper */
+.pricing-wrapper {
+  gap: 24px;
+  justify-content: center;
+}
+
+/* Cards */
+.pricing-card {
+  width: 100%;
+  max-width: 360px;
+}
+
+/* SVG wave responsive */
+.top-wave svg {
+  width: 100%;
+  height: auto;
+}
+
+/* ====== MOBILE ====== */
+@media (max-width: 768px) {
+
+  #pricing {
+    min-height: auto;
+  }
+
+  .pricing-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pricing-card {
+    max-width: 100%;
+  }
+
+  .price {
+    font-size: 2rem;
+  }
+
+  .card-body {
+    padding: 24px 20px;
+  }
+}
+/* Remonter le prix au-dessus du contenu sur mobile */
+@media (max-width: 768px) {
+  .pricing-card .price {
+    margin-top: -15px; /* ajuste la valeur selon besoin */
+    font-size: 2rem;   /* tu peux augmenter ou diminuer la taille */
+  }
+
+  .pricing-card .card-title {
+    margin-top: -20px; /* ajuste la valeur selon besoin */
+    font-size: 2rem;   /* tu peux augmenter ou diminuer la taille */
+  }
+}
+
+
+	</style>
+</section> 
+
+<section id="pricing-two"  class="d-none d-md-block">
     <div class="container">
         <div class="row g-0 laptop text-center align-items-stretch">
             

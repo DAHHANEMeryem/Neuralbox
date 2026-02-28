@@ -79,4 +79,63 @@ class PaiementController extends Controller
         $payment = Paiement::with('user')->findOrFail($id); // Fetch the rendezvous by its ID
         return view('admin.paiements.show', compact('payment')); // Pass it to the view
     }
+public function updateStatus(Request $request, Paiement $paiement)
+{
+    // Mettre à jour le status du paiement
+    $paiement->status = $request->input('status', $paiement->status);
+    $paiement->save();
+
+    // Vérifier si le paiement est validé
+    if ($paiement->status === 'validated') {
+
+        // Vérifier si une subscription existe déjà pour ce paiement
+        $subscription = $paiement->subscription;
+
+        if (!$subscription) {
+            // Déterminer le type de subscription selon le montant
+            if ($paiement->amount == 2300) {
+                $type = 'neuralbox';
+            } elseif ($paiement->amount == 3200) {
+                $type = 'golden';
+            } else {
+                $type = 'basic'; // fallback si montant inconnu
+            }
+
+            // Créer la subscription
+            $subscription = $paiement->user->subscriptions()->create([
+                'user_id' => $paiement->user_id,
+                'paiement_id' => $paiement->id,
+                'type' => $type,
+                'status' => 'validated',
+                'start_date' => now(),
+                'end_date' => now()->addMonth(),
+            ]);
+        }
+
+        // 🔹 Redirection vers la rubrique correspondante
+        if ($subscription->type == 'neuralbox') {
+            return redirect()->route('admin.subscriptions', ['filter' => 'neuralbox'])
+                             ->with('success', 'Paiement validé et abonné Neuralbox créé.');
+        } elseif ($subscription->type == 'golden') {
+            return redirect()->route('admin.subscriptions', ['filter' => 'golden'])
+                             ->with('success', 'Paiement validé et abonné Golden créé.');
+        }
+    }
+
+    return redirect()->back()->with('success', 'Paiement mis à jour.');
+}
+
+public function subscriptions(Request $request)
+{
+    // Récupérer les abonnements Neuralbox et Golden
+    $neuralboxs = Subscription::where('type', 'neuralbox')->with('user')->paginate(10, ['*'], 'neuralbox_page');
+    $goldens = Subscription::where('type', 'golden')->with('user')->paginate(10, ['*'], 'golden_page');
+
+    return view('admin.subscriptions.index', compact('neuralboxs', 'goldens'));
+}
+
+
+
+ 
+
 }

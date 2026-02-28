@@ -1,6 +1,26 @@
 <?php
 
 return [
+    "full_name" => "الاسم الكامل",
+    "full_name_placeholder" => "أدخل اسمك الكامل",
+
+    "phone" => "رقم الهاتف",
+    "phone_placeholder" => "أدخل رقم الهاتف",
+
+    "email" => "البريد الإلكتروني",
+    "email_placeholder" => "example@email.com",
+
+    "delivery_address" => "📍 عنوان التوصيل",
+
+    "city" => "المدينة",
+    "city_placeholder" => "اختر المدينة",
+
+    "address" => "العنوان",
+    "address_placeholder" => "الحي – الشارع – رقم المنزل",
+
+    "notes" => "ملاحظات إضافية (اختياري)",
+    "notes_placeholder" => "مثال: قرب المدرسة، الطابق الثاني...",
+
     "continue_payment"=> "أكمل تسجيلك في نيورال بوكس",
     "pack"=> "اختر العرض",
     "type"=> "طريقة الدفع",
@@ -20,6 +40,7 @@ return [
     "price_to_transfer"=> "المبلغ المراد تحويله" ,
     "bank_info"=> "معلومات البنك" ,
     "virement_notion"=> "يرجى تضمين اسمك الأول والأخير في وصل التحويل." ,
+    "COD"=> "الدفع عند التسليم" ,
 
     "card_number"=> "رقم البطاقة" ,
     "card_holder_name"=> "اسم صاحب البطاقة" ,
@@ -29,6 +50,8 @@ return [
 
     "receipt"=> "إيصال الدفع" ,
     "process"=> "إتمام الدفع" ,
+
+    
 
     "errors" => [
         "payment_option_required" =>  "يرجى اختيار طريقة الدفع",

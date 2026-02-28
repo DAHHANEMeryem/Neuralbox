@@ -48,63 +48,48 @@
   'class' => $subscribed ? 'play-video private fs-4 text-white' : ' disabled-link opacity-50 fs-4 text-white',
   ];
   @endphp
-  <div class="videos-slide pb-5 position-relative">
-    <div class="accordion  categories-list" id="accordionExample">
-      @foreach($ressourcesGrouped as $categoryName => $ressources)
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="heading-{{ Str::slug($categoryName) }}">
-          <button class="accordion-button collapsed fs-2 text-white fw-bold fill-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ Str::slug($categoryName) }}" aria-expanded="false" aria-controls="collapse-{{ Str::slug($categoryName) }}">
-            {{ $categoryName }}
-          </button>
-        </h2>
-        <div id="collapse-{{ Str::slug($categoryName) }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ Str::slug($categoryName) }}" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <ul class="list-unstyled mb-0">
-              @foreach($ressources as $ressource)
-              <li class="ps-md-4  mx-md-4 mb-4">
-                @if ($ressource->visibilite == 'tous')
-                <a href="#"
-                  class="play-video fs-4 text-white"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampledsModal"
-                  data-video-url="{{ route('video-link', ['videoName' => $ressource->video_url]) }}"
-                  data-video-title="{{ $ressource->titre }}"
-                  data-order="{{ $ressource->ordre }}"
-                  data-video-id="{{$ressource->id}}">
-                  {{ $ressource->titre }}
-                </a>
-                @else
-                <a @if($subscribed)
-                  data-video-url="{{ route('video-link', ['videoName' => $ressource->video_url]) }}"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampledsModal"
-                  data-video-title="{{ $ressource->titre }}"
-                  data-order="{{ $ressource->ordre }}"
-                  data-video-id="{{$ressource->id}}"
-                  @else
-                  href="javascript:void(0)" onclick="showPopup()"
-                  @endif
-                  @foreach($linkAttrs as $attr=> $value)
-                  {{ $attr }}="{{ $value }}"
-                  @endforeach
-                  >
-                  {{ $ressource->titre }}
-                </a>
-                @endif
-                
-              </li>
+  <div class="videos-slide pb-5">
+    <div class="list-group" id="categoryList">
 
+        @foreach($ressourcesGrouped as $categoryName => $ressources)
+        <div class="mb-3">
+            <!-- Bouton catégorie -->
+            <button class="list-group-item list-group-item-action bg-primary text-white fw-bold" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#cat-{{ Str::slug($categoryName) }}" 
+                    aria-expanded="false">
+                {{ $categoryName }}
+            </button>
 
-              </li>
-              @endforeach
-            </ul>
-          </div>
+            <!-- Liste des vidéos de cette catégorie -->
+            <div class="collapse mt-2" id="cat-{{ Str::slug($categoryName) }}">
+                <ul class="list-unstyled ms-3">
+                    @foreach($ressources as $ressource)
+                        @php
+                            $isAccessible = $ressource->visibilite == 'tous' || $subscribed;
+                        @endphp
+                        <li class="mb-1">
+                            <a href="{{ $isAccessible ? '#' : 'javascript:void(0)' }}" 
+                               class="play-video text-white {{ $isAccessible ? '' : 'opacity-50 disabled-link' }}"
+                               data-bs-toggle="{{ $isAccessible ? 'modal' : '' }}"
+                               data-bs-target="{{ $isAccessible ? '#exampledsModal' : '' }}"
+                               data-video-url="{{ $isAccessible ? route('video-link', ['videoName' => $ressource->video_url]) : '' }}"
+                               data-video-title="{{ $ressource->titre }}"
+                               data-order="{{ $ressource->ordre }}"
+                               data-video-id="{{$ressource->id}}">
+                                {{ $ressource->titre }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
-      </div>
-      @endforeach
+        @endforeach
 
     </div>
 </div>
+
 
 @endsection
 

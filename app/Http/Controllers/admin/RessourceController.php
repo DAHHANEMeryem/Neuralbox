@@ -558,9 +558,11 @@ class RessourceController extends Controller
     public function streamVideo($videoName)
     {
         // 1. Security Check: Ensure user is subscribed
-        if (!auth()->user()->subscription_type && !auth()->user()->is_admin) {
-            abort(403, 'Unauthorized');
-        }
+        $user = auth()->user();
+
+if (!$user->has_access && !$user->is_admin) {
+    abort(403, 'Vous n’avez pas accès à cette vidéo.');
+}
 
         // 2. Define the path to your private videos
         $path = storage_path("app/private/videos/{$videoName}.mp4");

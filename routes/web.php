@@ -234,12 +234,14 @@ Route::get('lang/{locale}', function ($locale) {
 
 
 
+
 // باقي الروابط
 // Route::get('/video-url/{filename}', [CoursController::class, 'getVideoUrl'])->where('filename', '.*')->name('video-link');
 
 Route::get('/secure/video/{path}', [CoursController::class, 'serveSecureVideo'])
     ->where('path', '.*')
     ->name('secure.video');
+    // routes/web.php
 
 Route::get('/video-url/{videoName}', [CoursController::class, 'getVideo'])
     ->where('videoName', '.*')
@@ -432,3 +434,16 @@ Route::post('/admin/ressources/merge-chunks', [RessourceController::class, 'merg
 Route::get('/learning/{slug?}', VideoPlayer::class)->name('learning.index')->middleware('auth');
 
 require __DIR__ . '/auth.php';
+
+Route::patch('/admin/paiements/{paiement}/update-status', [PaiementController::class, 'updateStatus'])
+    ->name('admin.paiements.update_status');
+
+
+
+use App\Http\Controllers\admin\UtilisateurController;
+
+Route::post('/utilisateurs/{id}/access', [UtilisateurController::class, 'giveAccess']);
+Route::post('/utilisateurs/{id}/revoke', [UtilisateurController::class, 'revokeAccess']);
+Route::get('/video/{videoName}', [CoursController::class, 'getVideos'])->name('video-link');
+
+

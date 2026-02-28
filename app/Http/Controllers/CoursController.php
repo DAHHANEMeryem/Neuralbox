@@ -44,6 +44,21 @@ class CoursController extends Controller
     //     $response->header('Content-Type', "video/mp4");
     //     return $response;
     // }
+public function getVideos($videoName)
+{
+    $extensions = ['mp4', 'mov'];
+
+    foreach ($extensions as $ext) {
+        $path = storage_path('app/videos/' . $videoName . '.' . $ext);
+
+        if (file_exists($path)) {
+            return response()->file($path);
+        }
+    }
+
+    abort(404);
+}
+    
     public function getVideo(string $videoName)
     {
         $path = "videos/{$videoName}_hls/index.m3u8";

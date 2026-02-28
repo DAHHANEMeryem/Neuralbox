@@ -78,7 +78,7 @@
                                 class="flex items-center px-4 py-3 rounded-md
                                         {{ request()->is('admin/paiements*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
                                 <i class="fas fa-credit-card mr-3 w-5 text-center"></i>
-                                <span>Paiments</span>
+                                <span>Paiements</span>
                             </a>
                         </li>
 
@@ -91,6 +91,15 @@
                                 <span>Ressources</span>
                             </a>
                         </li>
+
+                        <li>
+    <a href="{{ route('categories.index') }}"
+       class="flex items-center px-4 py-3 rounded-md
+              {{ request()->is('admin/categories*') ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-700' }}">
+        <i class="fas fa-book-open mr-3 w-5 text-center"></i>
+        <span>Categories</span>
+    </a>
+</li>
                         <li>
                             <a href="/"
                                 class="flex items-center px-4 py-3 rounded-md

@@ -12,6 +12,7 @@ class Subscription extends Model
         'type',
         'status',
         'user_id',
+        'paiement_id',
     ];
 
 
@@ -22,4 +23,9 @@ class Subscription extends Model
         return $this->belongsTo(User::class);
     }
     
+public function paiement()
+{
+    return $this->belongsTo(Paiement::class, 'paiement_id');
+}
+
 }

@@ -24,4 +24,26 @@ class UtilisateurController extends Controller
         User::destroy($id);
         return redirect()->back()->with('success', 'Utilisateur supprimé.');
     }
+
+    public function giveAccess($id)
+{
+    $user = User::findOrFail($id);
+    $user->has_access = 1; // On donne l'accès
+    $user->save();
+
+ return response()->json([
+        'status' => 'success',
+        'details' => "Utilisateur {$user->name} a maintenant accès."
+    ]);
+}
+
+    public function revokeAccess($id) {
+    $user = User::findOrFail($id);
+    $user->has_access = 0; // retirer accès
+    $user->save();
+
+    return response()->json([
+        'details' => 'Accès retiré pour ' . $user->name
+    ]);
+}
 }

@@ -32,7 +32,7 @@
 
 
         <!-- Card 2 -->
-        <div class="dashboard-card">
+       {{-- <div class="dashboard-card">
             <div class="dashboard-card-header">
                 <div>
                     <h3 class="dashboard-card-title">Total revenus</h3>
@@ -53,7 +53,7 @@
                 <a href="/admin/paiements" class="dashboard-link">Voir tout <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
                 <span class="dashboard-subtext">{{ $phrase}}</span>
             </div>
-        </div>
+        </div>--}}
         <div class="dashboard-card">
             <div class="dashboard-card-header">
                 <div>
@@ -171,7 +171,7 @@
 
 
 <!-- Exemple avec Style 3: Arrondi et Coloré -->
-<div class="flex flex-col md:flex-row grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+{{--<div class="flex flex-col md:flex-row grid-cols-1 md:grid-cols-2 gap-6 mt-6">
    
     <div class="analytics-card md:w-1/2">
         <div class="card-header">
@@ -245,7 +245,7 @@
             </span>
         </div>
     </div>
-</div>
+</div>--}}
 
 
 

@@ -24,33 +24,25 @@
         <div class="mb-6">
             <label for="type" class="block text-sm font-medium">Pack :</label>
             <select name="type" id="type" class="mt-1 block w-full border rounded p-2">
-                <option value="neuralbox" {{ $subscription->type == 'attente' ? 'selected' : '' }}>Neuralbox</option>
+                <option value="neuralbox" {{ $subscription->type == 'neuralbox' ? 'selected' : '' }}>Neuralbox</option>
+                    <option value="silver" {{ $subscription->type == 'silver' ? 'selected' : '' }}>Neuralbox</option>
                 <option value="golden" {{ $subscription->type == 'golden' ? 'selected' : '' }}>Golden</option>
             </select>
         </div>
-        <div class="mb-6">
-            <label for="statut" class="block text-sm font-medium">Statut :</label>
-            <select name="statut" id="statut" class="mt-1 block w-full border rounded p-2">
-                <option value="confirmed" {{ $subscription->statut == 'confirmed' ? 'selected' : '' }}>Confirmé</option>
-                <option value="not_confirmed" {{ $subscription->statut == 'not_confirmed' ? 'selected' : '' }}>Pas confirmé</option>
-                <option value="paused" {{ $subscription->statut == 'paused' ? 'selected' : '' }}>Pause</option>
-            </select>
-        </div>
+        
 
         <div class="flex justify-end">
-            <a href="{{ route('back') }}" class="mr-4 inline-block px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition">
+            <a href="{{ route('admin.subscriptions') }}" class="mr-4 inline-block px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition">
                 ← Annuler
             </a>
-            <button type="submit" class="inline-block px-6 py-2 bg-green-800 text-white font-semibold rounded hover:bg-green-700 transition">
-                Mettre à jour
-            </button>
+           
         </div>
     </form>
 </div>
 
 <div class="mt-8 text-right">
-    <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-        ← Retour au tableau de bord
+    <a href="{{ route('admin.subscriptions') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+        ← Retour aux abonnements
     </a>
 </div>
 </div>
