@@ -1,96 +1,96 @@
-<style>
-/* ================================
-   Styles Généraux
-   ================================ */
-.btn-guide {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: linear-gradient(135deg, #775b9f, #3aa0c9);
-    color: #fff;
-    border: none;
-    padding: 8px 20px;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 25px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.bg-lock {
-    background-color: #f8f9fa;
-    opacity: 0.7;
-}
-
-.bg-purple {
-    background-color: #775b9f !important;
-    color: white !important;
-}
-
-/* ================================
-   Mobile (max-width: 767px)
-   ================================ */
-@media (max-width: 767px) {
-    /* 1. Titre et Description de la vidéo active */
-    #current-video-title {
-        font-size: 1.2rem !important;
-        line-height: 1.4;
-        margin-top: 10px;
-        margin-bottom: 5px;
-        text-align: right; /* Aligne à droite pour l'arabe */
-    }
-
-    #current-video-desc {
-        font-size: 0.85rem !important;
-        line-height: 1.5;
-        color: #4b5563;
-        text-align: right;
-    }
-
-    .video-details {
-        padding-top: 0 !important;
-        margin-top: 10px;
-    }
-
-    hr {
-        margin: 10px 0 !important;
-    }
-
-    /* 2. Styles de la Playlist (Items) */
-    .playlist-item-container {
-        padding: 8px !important;
-        margin-bottom: 8px !important;
-    }
-
-    .thumbnail-container {
-        width: 100px !important;
-    }
-
-    .thumbnail-container img {
-        height: 60px !important;
-    }
-
-    .video-title {
-        font-size: 0.9rem !important;
-        line-height: 1.1;
-        margin-bottom: 2px !important;
-    }
-
-    .video-desc {
-        font-size: 0.75rem !important;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    .fa-2x {
-        font-size: 1.2rem !important;
-    }
-}
-</style>
 
 <div class="container-fluid mt-md-4">
+    <style>
+    /* ================================
+       Styles Généraux
+       ================================ */
+    .btn-guide {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: linear-gradient(135deg, #775b9f, #3aa0c9);
+        color: #fff;
+        border: none;
+        padding: 8px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 25px;
+        cursor: pointer;
+        z-index: 10;
+    }
+    
+    .bg-lock {
+        background-color: #f8f9fa;
+        opacity: 0.7;
+    }
+    
+    .bg-purple {
+        background-color: #775b9f !important;
+        color: white !important;
+    }
+    
+    /* ================================
+       Mobile (max-width: 767px)
+       ================================ */
+    @media (max-width: 767px) {
+        /* 1. Titre et Description de la vidéo active */
+        #current-video-title {
+            font-size: 1.2rem !important;
+            line-height: 1.4;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            text-align: right; /* Aligne à droite pour l'arabe */
+        }
+    
+        #current-video-desc {
+            font-size: 0.85rem !important;
+            line-height: 1.5;
+            color: #4b5563;
+            text-align: right;
+        }
+    
+        .video-details {
+            padding-top: 0 !important;
+            margin-top: 10px;
+        }
+    
+        hr {
+            margin: 10px 0 !important;
+        }
+    
+        /* 2. Styles de la Playlist (Items) */
+        .playlist-item-container {
+            padding: 8px !important;
+            margin-bottom: 8px !important;
+        }
+    
+        .thumbnail-container {
+            width: 100px !important;
+        }
+    
+        .thumbnail-container img {
+            height: 60px !important;
+        }
+    
+        .video-title {
+            font-size: 0.9rem !important;
+            line-height: 1.1;
+            margin-bottom: 2px !important;
+        }
+    
+        .video-desc {
+            font-size: 0.75rem !important;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    
+        .fa-2x {
+            font-size: 1.2rem !important;
+        }
+    }
+    </style>
     <div class="row">
 
         {{-- Section Vidéo --}}
