@@ -17,8 +17,9 @@
         <div class="signin-section">
             <div class="logo" style="color: rgb(26, 32, 219);">
 
-                <a href="{{ url('/') }}" class="logo-text1" style="color:rgb(11, 29, 221); text-decoration: none;">الرئيسية</a>
-            </div>
+<a href="{{ url('/') }}" class="logo">
+    <img src="{{ asset('assets/img/logo.png') }}" alt="NeuralBox Logo" style="height: 60px; ">
+</a>            </div>
 
             <h1>تسجيل الدخول الى نيورال بوكس</h1>
 
@@ -33,8 +34,7 @@
 
             </div>
 
-            <div class="divider">:او استخدم حسابك البريدي</div>
-
+<div class="divider">أو استخدموا حسابكم البريدي</div>
             <form class="login-form" action="{{ route('login') }}" method="POST">
                 @csrf
                 <div class="form-group">
@@ -57,9 +57,9 @@
             <div class="shape shape-3"></div>
 
 
-            <h2 class="welcome-title">!مرحبا</h2>
-            <p class="welcome-text">ادخل معلوماتك الشخصية وابدء رحلتك معنا</p>
-            <a href="{{ route('register') }}" class="signup-btn">انشاء حساب</a>
+            <h2 class="welcome-title">مرحبا</h2>
+<p class="welcome-text">ادخلوا معلوماتكم الشخصية وابدؤوا رحلتكم معنا</p>      
+      <a href="{{ route('register') }}" class="signup-btn">إنشاء حساب</a>
         </div>
     </div>
 </body>

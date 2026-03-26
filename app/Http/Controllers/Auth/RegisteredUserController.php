@@ -60,6 +60,6 @@ class RegisteredUserController extends Controller
         }
 
         // Otherwise, return a normal redirect response
-        return back()->with('success', 'Votre compte a été créé avec succès.');
+        return redirect('/')->with('success', 'Votre compte a été créé avec succès.');
     }
 }

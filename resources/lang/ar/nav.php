@@ -16,6 +16,6 @@ return [
   'profile'=>'  الملف الشخصي',
   'copyright'=> '© جميع الحقوق محفوظة لشركة <a href="https://insiconsulting.com">INSIC</a> 2025',
   'produced_by'=>'مطور من طرف',
-  'privacy'=> 'السياسة والخصوصية',
+  'privacy'=> 'سياسة الخصوصية ',
   'head_message'=> 'مكاتب رؤى، الطابق 01، سات فيلاج، طنجة',
 ];

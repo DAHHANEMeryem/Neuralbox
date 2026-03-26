@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=El Messiri:wght@200;300;400;500;700;800;900&display=swap&family=El+Messiri:wght@400..700&display=swap');
 
 :root {
-    --bs-primary: #42b9e8;
-        --bs-primary-rgb: 66, 185, 232;
+    --bs-primary: #775b9f;
+--bs-primary-rgb: 119, 91, 159;
     width: 100svw;
     overflow-x: hidden;
     --bs-orange: #f37335;
@@ -2257,60 +2257,7 @@ body[dir="rtl"] .news-block-two h5 {
         }
     }
 
-    .menu-btn {
-        text-align: center;
-        position: fixed;
-        top: 2vh;
-        left: 2vw;
-        z-index: 9999999;
-        cursor: pointer;
-        margin-inline-start: auto;
-        width: 2.5rem;
-        /* display: none; */
-        height: 2.5rem;
-        line-height: 54px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .menu-btn>a {
-        display: inline-block;
-        width: 2.5rem;
-    }
-
-    .menu-btn>a span {
-        display: block;
-        width: 100%;
-        height: 0.5rem;
-        background-color: var(--bs-blue-neural);
-        margin-bottom: 4px;
-        transition: all 0.4s ease-in-out;
-        border-radius: 1rem;
-    }
-    
-    .menu-btn>a span:last-child {
-        margin-bottom: 0;
-    }
-    
-    .menu-btn.active span {
-        background-color: #f1f1f1;
-    }
-
-    .menu-btn.active span.bar1 {
-        transform: translateY(8px) rotate(-45deg);
-    }
-
-    .menu-btn.active span.bar2 {
-        opacity: 0;
-        visibility: hidden;
-        transform: scaleX(2);
-    }
-
-    .menu-btn.active span.bar3 {
-        transform: translateY(-6px) rotate(-135deg);
-    }
-
+/* --- Style du bouton menu --- */ .menu-btn { z-index: 9999999; cursor: pointer; width: 35px; height: 30px; } .menu-btn a span { display: block; width: 100%; height: 4px; /* Épaisseur */ background-color: #6244C5 !important; /* Votre violet */ margin-bottom: 5px; transition: all 0.3s ease-in-out; border-radius: 4px; } .menu-btn a span:last-child { margin-bottom: 0; } /* --- Animation du X --- */ /* Couleur du X quand actif */ .menu-btn.active a span { background-color: #f1f1f1 !important; } /* On fait pivoter la barre 1 */ .menu-btn.active .bar1 { transform: translateY(9px) rotate(45deg) !important; } /* On cache la barre 2 */ .menu-btn.active .bar2 { opacity: 0 !important; transform: translateX(-20px); } /* On fait pivoter la barre 3 */ .menu-btn.active .bar3 { transform: translateY(-9px) rotate(-45deg) !important; } @media (max-width: 767px) { /* 1. Le Logo : On le centre et on baisse sa priorité */ .logo-mobile-centered { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 5; /* Priorité basse */ pointer-events: auto; /* Permet de cliquer sur le logo */ } /* 2. Le Bouton Menu : On monte sa priorité */ .menu-btn-container { position: relative; z-index: 9999 !important; /* Priorité haute : passe DEVANT le logo */ } .menu-btn span { display: block; width: 30px; height: 4px; background-color: #6244C5 !important; margin-bottom: 5px; transition: all 0.3s ease; } /* 3. Ajustement du X pour qu'il ne bouge pas du coin gauche */ .menu-btn.active .bar1 { transform: translateY(9px) rotate(45deg) !important; } .menu-btn.active .bar2 { opacity: 0 !important; } .menu-btn.active .bar3 { transform: translateY(-9px) rotate(-45deg) !important; } }
 
     .newsletter-section.call {
         margin-top: 0;

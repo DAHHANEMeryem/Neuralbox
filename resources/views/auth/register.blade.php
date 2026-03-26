@@ -15,11 +15,12 @@
     <div class="signup-container">
         <div class="logo" style="color: rgb(26, 32, 219);">
 
-            <a href="{{ url('/') }}" class="logo-text1" style="color:rgb(252, 253, 255); text-decoration: none;">الرئيسية</a>
-        </div>
+<a href="{{ url('/') }}" class="logo">
+    <img src="{{ asset('assets/img/logo.png') }}" alt="NeuralBox Logo" style="height: 150px; align-items: center;">
+</a>        </div>
 
         <div class="signup-form-section">
-            <h1>!انشاء حساب </h1>
+            <h1>أنشئوا حسابكم</h1>
 
             <div class="social-login">
 
@@ -31,7 +32,7 @@
 
             </div>
 
-            <div class="divider">:او استخدم بريدك الالكتروني للتسجيل</div>
+            <div class="divider">أو استخدموا بريدكم الإلكتروني للتسجيل</div>
 
             <form action="{{ route('register') }}" method="POST">
                 @csrf
@@ -77,7 +78,7 @@
                 @error('password_confirmation')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
                 @enderror
-                <button type="submit" class="btn">تسجيل الدخول</button>
+                <button type="submit" class="btn">إنشاء حساب</button>
 
             </form>
         </div>
@@ -87,9 +88,8 @@
             <div class="shape shape-3"></div>
 
 
-
-            <h2 class="welcome-title">!مرحبا بك </h2>
-            <p class="welcome-text">للبقاء على تواصل معنا يرجى تسجيل الدخول بمعلوماتك الشخصية</p>
+<h2 class="welcome-title">!مرحبا بكم </h2>
+<p class="welcome-text">للبقاء على تواصل معنا يرجى تسجيل الدخول بمعلوماتكم الشخصية</p>
             <a href="{{ route('login') }}" class="signup-btn">تسجيل الدخول </a>
         </div>
     </div>

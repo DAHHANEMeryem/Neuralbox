@@ -444,6 +444,6 @@ use App\Http\Controllers\admin\UtilisateurController;
 
 Route::post('/utilisateurs/{id}/access', [UtilisateurController::class, 'giveAccess']);
 Route::post('/utilisateurs/{id}/revoke', [UtilisateurController::class, 'revokeAccess']);
-Route::get('/video/{videoName}', [CoursController::class, 'getVideos'])->name('video-link');
+//Route::get('/video/{videoName}', [CoursController::class, 'getVideos'])->name('video-link');
 
 

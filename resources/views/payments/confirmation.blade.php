@@ -6,9 +6,12 @@
     <title>نيورال بوكس | تأكيد الاشتراك</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Tajawal', sans-serif;
             background-color: #f0f2f5;
             margin: 0;
             padding: 0;
@@ -31,7 +34,7 @@
         .success-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(45deg, #28a745, #20c997);
+            background: linear-gradient(#775b9f);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -109,12 +112,10 @@
 
     <div class="confirmation-container">
         <div class="success-card">
-            <div class="success-icon">
-                <i class="fas fa-check"></i>
-            </div>
+          <div class="success-icon"> <i class="fas fa-check"></i> </div>
 
-            <h2 class="text-success mb-3">مبروك! تم تأكيد اشتراكك</h2>
-            <p class="lead">شكراً لك على اختيار نيورال بوكس. تم معالجة دفعتك بنجاح.</p>
+            <h2 class="text-success mb-3"> تم تسجيل طلبكم!</h2>
+            <p class="lead"> شكراً لاختياركم نيورال بوكس. سيقوم فريقنا بالتواصل معكم قريبًا لتأكيد اشتراككم.</p>
 
             <div class="payment-details">
                 <h5 class="mb-3">تفاصيل الدفعة</h5>
@@ -168,20 +169,11 @@
             </div>
 
             <div class="action-buttons">
-                <a href="{{ route('home') }}" class="btn-dashboard" style="background: linear-gradient(45deg, #28a745, #20c997);">
+                <a href="{{ route('home') }}" class="btn-dashboard" style="background: linear-gradient(#775b9f);">
                     <i class="fas fa-arrow-right"></i> NeuralBox
                 </a>
             </div>
 
-            <div class="next-steps">
-                <h5><i class="fas fa-lightbulb"></i> الخطوات التالية</h5>
-                <ul class="text-right" style="list-style: none; padding: 0;">
-                    <li><i class="fas fa-check text-success"></i> ستتلقى رسالة تأكيد على بريدك الإلكتروني</li>
-                    <li><i class="fas fa-check text-success"></i> يمكنك الآن الوصول لجميع محتويات الباقة</li>
-                    <li><i class="fas fa-check text-success"></i> ابدأ رحلة التعلم مع طفلك اليوم</li>
-                    <li><i class="fas fa-check text-success"></i> تواصل معنا إذا كنت تحتاج أي مساعدة</li>
-                </ul>
-            </div>
         </div>
     </div>
 </body>

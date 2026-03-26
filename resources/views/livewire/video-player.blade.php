@@ -1,208 +1,243 @@
+<style>
+/* ================================
+   Styles Généraux
+   ================================ */
+.btn-guide {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #775b9f, #3aa0c9);
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.bg-lock {
+    background-color: #f8f9fa;
+    opacity: 0.7;
+}
+
+.bg-purple {
+    background-color: #775b9f !important;
+    color: white !important;
+}
+
+/* ================================
+   Mobile (max-width: 767px)
+   ================================ */
+@media (max-width: 767px) {
+    /* 1. Titre et Description de la vidéo active */
+    #current-video-title {
+        font-size: 1.2rem !important;
+        line-height: 1.4;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        text-align: right; /* Aligne à droite pour l'arabe */
+    }
+
+    #current-video-desc {
+        font-size: 0.85rem !important;
+        line-height: 1.5;
+        color: #4b5563;
+        text-align: right;
+    }
+
+    .video-details {
+        padding-top: 0 !important;
+        margin-top: 10px;
+    }
+
+    hr {
+        margin: 10px 0 !important;
+    }
+
+    /* 2. Styles de la Playlist (Items) */
+    .playlist-item-container {
+        padding: 8px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .thumbnail-container {
+        width: 100px !important;
+    }
+
+    .thumbnail-container img {
+        height: 60px !important;
+    }
+
+    .video-title {
+        font-size: 0.9rem !important;
+        line-height: 1.1;
+        margin-bottom: 2px !important;
+    }
+
+    .video-desc {
+        font-size: 0.75rem !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .fa-2x {
+        font-size: 1.2rem !important;
+    }
+}
+</style>
+
 <div class="container-fluid mt-md-4">
     <div class="row">
 
-        <!-- VIDEO PLAYER -->
-        <div class="col-12 px-0 px-md-2 col-md-8">
-            <div class="video-container shadow-xl rounded-md bg-black mb-3"
+        {{-- Section Vidéo --}}
+        <div class="col-12 col-md-8 px-0 px-md-2">
+            <div class="video-container shadow-xl rounded-md bg-black mb-3" 
                  style="position: relative; overflow: hidden; aspect-ratio: 16/9;">
-                <video id="video-player"
-                       controls
-                       class="w-100 h-100"
-                       crossorigin="anonymous">
-                </video>
+                <video id="video-player" controls class="w-100 h-100" crossorigin="anonymous"></video>
+                <button class="btn-guide" onclick="openGuideModal('{{ $page }}')">
+                    📘 {{ $page === 'neuralbox' ? 'الدليل' : 'الموجه' }}
+                </button>
             </div>
 
-            <!-- VIDEO DETAILS -->
-            <div class="video-details mb-md-4">
-                <h3 class="fw-bold text-black display-6">{{ $videoTitle }}</h3>
-                @if(!empty($videoDescription))
-                    <p class="text-gray-700 mt-2">{{ $videoDescription }}</p>
-                @endif
+            <div class="video-details mb-md-4 px-2 px-md-0">
+                <h3 id="current-video-title" class="fw-bold text-black display-6">{{ $videoTitle }}</h3>
+                <p id="current-video-desc" class="text-gray-700 mt-2">{{ $videoDescription }}</p>
                 <hr>
             </div>
 
-            <!-- RATING FORM -->
+            {{-- Formulaire --}}
             @if(Auth::check() && $page === 'neuralbox')
-                @if(!$isSubmitted)
-                    <div class="rating-section card border-0 mt-md-4">
-                        <div class="card-body">
+                <div id="rating-form-anchor" class="card border-0 mt-md-4">
+                    <div class="card-body">
+                        @if(!$isSubmitted)
                             @include('partials.rating-form-content')
-                        </div>
+                        @else
+                            <div class="alert alert-info fs-7"> {{ __('transelt.already_rated') }} </div>
+                        @endif
                     </div>
-                @else
-                    <div class="alert alert-info fs-7">
-                        {{ __('transelt.already_rated') }}
-                    </div>
-                @endif
+                </div>
             @endif
         </div>
 
-        <!-- PLAYLIST SIDEBAR -->
-        <div class="col-lg-4 z-10 overflow-visible">
+        {{-- Section Playlist --}}
+        <div class="col-12 col-md-4">
             <div class="playlist-sidebar" style="max-height: 80vh; overflow-y:auto;">
+                @php $allRessourcesFlat = ($page === 'pedagogie') ? $ressources->flatten() : $ressources; @endphp
 
                 @if($page === 'pedagogie')
                     @foreach($ressources as $categoryName => $items)
-                        <div class="category mb-3" wire:key="category-{{ $loop->index }}">
-                            <!-- HEADER DE LA CATEGORIE -->
-                            <div class="category-header p-2 bg-light rounded cursor-pointer"
-                                 onclick="toggleCategory(this)">
-                                <strong>{{ __('ressources.unit') }} {{ $loop->iteration }}: {{ $categoryName }}</strong>
-                                <span class="badge bg-secondary ms-2">{{ count($items) }}</span>
-                                <span class="float-end">&#9660;</span> <!-- flèche -->
+                        <div class="category mb-3">
+                            <div class="category-header p-2 bg-light rounded cursor-pointer" onclick="toggleCategory(this)">
+                                <strong>{{ $categoryName }}</strong>
+                                <span class="float-end">&#9660;</span>
                             </div>
-
-                            <!-- LISTE DES VIDEOS -->
-                            <div class="category-items mt-2" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
-                                @foreach($items as $ressource)
-                                    @php
-                                        $isSubscribed = Auth::check() && (Auth::user()->has_access || Auth::user()->is_admin);
-                                        $locked = !$isSubscribed && $ressource->visibilite != 'tous';
-                                    @endphp
-
-                                    <div wire:key="ressource-{{ $ressource->id }}"
-                                         @if(!$locked)
-                                            wire:click="selectVideo({{ $ressource->id }})"
-                                         @else
-                                            onclick="showSubscriptionPopup()"
-                                         @endif
-                                         class="d-flex mb-2 shadow cursor-pointer p-2 rounded
-                                                {{ $locked ? 'bg-lock' : '' }}
-                                                {{ $currentVideoId == $ressource->id ? 'bg-purple' : '' }}">
-
-                                        @if($locked)
-                                            <div class="position-absolute top-0 rounded overlay w-100 h-100 start-0 d-flex justify-content-center align-items-center">
-                                                <i class="fas fa-lock text-white fa-lg"></i>
-                                            </div>
-                                        @endif
-
-                                        <!-- THUMBNAIL -->
-                                        <div class="flex-shrink-0 thumbnail col-5">
-                                            <img src="{{ route('secure.file',['type'=>'ressource','id'=>$ressource->id]) }}"
-                                                 class="img-fluid rounded" alt="thumbnail">
-                                        </div>
-
-                                        <!-- TEXTE -->
-                                        <div class="flex-grow-1 me-3 col-7">
-                                            <h6 class="mb-1 fw-bold
-                                                {{ $currentVideoId == $ressource->id ? 'text-white' : 'text-dark' }}">
-                                                {{ $ressource->titre }}
-                                            </h6>
-                                            <small class="truncate-multiline fs-7
-                                                {{ $currentVideoId == $ressource->id ? 'text-white' : 'text-muted' }}">
-                                                {{ $ressource->description }}
-                                            </small>
-                                        </div>
-                                    </div>
+                            <div class="category-items mt-2">
+                                @foreach($items as $res)
+                                    @include('livewire.partials.video-item', ['ressource' => $res, 'flatList' => $allRessourcesFlat])
                                 @endforeach
                             </div>
                         </div>
                     @endforeach
                 @else
-                    <!-- MODE NEURALBOX : LISTE SIMPLE -->
-                    @foreach($ressources as $ressource)
-                        @php
-                            $isSubscribed = Auth::check() && (Auth::user()->has_access || Auth::user()->is_admin);
-                            $locked = !$isSubscribed && $ressource->visibilite != 'tous';
-                        @endphp
-
-                        <div wire:key="ressource-{{ $ressource->id }}"
-                             @if(!$locked)
-                                wire:click="selectVideo({{ $ressource->id }})"
-                             @else
-                                onclick="showSubscriptionPopup()"
-                             @endif
-                             class="position-relative d-flex mb-3 shadow cursor-pointer p-2 rounded
-                                    {{ $locked ? 'bg-lock' : '' }}
-                                    {{ $currentVideoId == $ressource->id ? 'bg-purple' : '' }}">
-
-                            @if($locked)
-                                <div class="position-absolute top-0 rounded overlay w-100 h-100 start-0 d-flex justify-content-center align-items-center">
-                                    <i class="fas fa-lock text-white fa-lg"></i>
-                                </div>
-                            @endif
-
-                            <!-- THUMBNAIL -->
-                            <div class="flex-shrink-0 thumbnail col-5">
-                                <img src="{{ route('secure.file',['type'=>'ressource','id'=>$ressource->id]) }}"
-                                     class="img-fluid rounded" alt="thumbnail">
-                            </div>
-
-                            <!-- TEXTE -->
-                            <div class="flex-grow-1 me-3 col-7">
-                                <h6 class="mb-1 fw-bold
-                                    {{ $currentVideoId == $ressource->id ? 'text-white' : 'text-dark' }}">
-                                    {{ $ressource->titre }}
-                                </h6>
-                                <small class="truncate-multiline fs-7
-                                    {{ $currentVideoId == $ressource->id ? 'text-white' : 'text-muted' }}">
-                                    {{ $ressource->description }}
-                                </small>
-                            </div>
-                        </div>
+                    @foreach($ressources as $res)
+                        @include('livewire.partials.video-item', ['ressource' => $res, 'flatList' => $allRessourcesFlat])
                     @endforeach
                 @endif
-
             </div>
         </div>
-
     </div>
 </div>
 
-<!-- MODAL SUBSCRIPTION -->
-<script>
-function showSubscriptionPopup() {
-    var myModal = new bootstrap.Modal(document.getElementById('subscriptionModal'));
-    myModal.show();
-}
-
-// Toggle slide pour sidebar pédagogique
-function toggleCategory(header) {
-    const items = header.nextElementSibling;
-    if(items.style.maxHeight && items.style.maxHeight !== '0px'){
-        items.style.maxHeight = '0';
-    } else {
-        items.style.maxHeight = items.scrollHeight + 'px';
-    }
-}
-</script>
-
-<!-- HLS.js VIDEO PLAYER -->
 @script
 <script>
 let hls = null;
 const videoElement = document.getElementById('video-player');
 
+// Configuration de la lecture HLS
 function setupHls(url) {
     if (!url) return;
-
-    if (hls) {
-        hls.destroy();
-    }
+    if (hls) hls.destroy();
 
     if (Hls.isSupported()) {
-        hls = new Hls();
-        hls.loadSource(url);
+        hls = new Hls(); 
+        hls.loadSource(url); 
         hls.attachMedia(videoElement);
-
-        hls.on(Hls.Events.MANIFEST_PARSED, () => {
-            videoElement.play().catch(e => console.log("Autoplay bloqué ou erreur :", e));
-        });
-
+        hls.on(Hls.Events.MANIFEST_PARSED, () => videoElement.play());
     } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
-
-        videoElement.src = url;
-        videoElement.addEventListener('loadedmetadata', () => videoElement.play());
+        videoElement.src = url; 
+        videoElement.play();
     }
 }
 
-// Charger la vidéo initiale
-const initialUrl = @json($videoUrl);
-if (initialUrl) setupHls(initialUrl);
+// Initialisation au chargement
+setupHls(@json($videoUrl));
 
-// Écouter le changement de vidéo via Livewire
-$wire.on('videoChanged', (event) => {
-    setupHls(event.url);
+// Écouteur pour le changement de vidéo via Livewire
+$wire.on('videoChanged', (data) => {
+    const info = Array.isArray(data) ? data[0] : data;
+    setupHls(info.url);
+    document.getElementById('current-video-title').innerText = info.title;
+    document.getElementById('current-video-desc').innerText = info.description || '';
+
+    setTimeout(() => {
+        const playlistContainer = document.querySelector('.playlist-sidebar');
+        const activeItem = document.querySelector('.bg-purple') || document.querySelector('.border-white');
+
+        if (activeItem && playlistContainer) {
+            const topPos = activeItem.offsetTop - playlistContainer.offsetTop;
+            playlistContainer.scrollTo({
+                top: topPos,
+                behavior: 'smooth'
+            });
+        }
+    }, 300);
 });
+
+// Gestion de la fin de la vidéo
+videoElement.onended = function() {
+    @if(!Auth::check())
+        showSubscriptionPopup();
+        return;
+    @endif
+
+    const anchor = document.getElementById('rating-form-anchor');
+    if(anchor) anchor.scrollIntoView({ behavior: 'smooth' });
+
+    const currentId = parseInt(@this.currentVideoId);
+    $wire.call('markVideoCompleted', currentId).then(() => {
+        const allVideos = @json($allRessourcesFlat->pluck('id'));
+        const currentIndex = allVideos.indexOf(currentId);
+
+        if (currentIndex >= 0 && currentIndex < allVideos.length - 1) {
+            $wire.call('selectVideo', allVideos[currentIndex + 1]);
+        }
+    });
+};
+
+// Fonctions globales
+window.toggleCategory = (el) => {
+    const items = el.nextElementSibling;
+    items.style.display = (items.style.display === 'none') ? 'block' : 'none';
+};
+
+window.showSubscriptionPopup = () => {
+    const modalEl = document.getElementById('subscriptionModal');
+    if (modalEl) {
+        const modal = new bootstrap.Modal(modalEl);
+        modal.show();
+    }
+};
+
+window.showProgressionPopup = () => {
+    const modalEl = document.getElementById('progressionModal');
+    if (modalEl) {
+        const modal = new bootstrap.Modal(modalEl);
+        modal.show();
+    }
+};
 </script>
 @endscript

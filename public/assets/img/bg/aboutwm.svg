@@ -1,0 +1,15 @@
+<svg width="1440" height="826" viewBox="0 0 1440 826" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <pattern id="motifPNG" patternUnits="userSpaceOnUse" width="120" height="120">
+      <image href="motif1.png" width="120" height="120"/>
+    </pattern>
+  </defs>
+
+  <!-- Fond violet -->
+  <path d="M0 0H1440V725C912.5 1039 561 498 0 725V0Z" fill="#775b9f"/>
+
+  <!-- Motif répété -->
+  <rect x="0" y="0" width="1440" height="826" fill="url(#motifPNG)" opacity="0.15"/>
+
+</svg>

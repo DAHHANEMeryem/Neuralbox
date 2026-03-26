@@ -22,7 +22,7 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 class RessourceController extends Controller
 {
 
-    //private $ffmpegPath = '/home/u948188746/ffmpeg/ffmpeg-7.0.2-amd64-static/ffmpeg';
+    private $ffmpegPath = '/home/u948188746/ffmpeg/ffmpeg-7.0.2-amd64-static/ffmpeg';
 
     public function pedagogie()
     {
@@ -282,7 +282,7 @@ class RessourceController extends Controller
                 $outputPath = $outputDir . "/index.m3u8";
 
                 $process = new Process([
-                    'ffmpeg',
+                    $this->ffmpegPath,
                     '-i',
                     $inputPath,
                     '-c:v',
@@ -507,7 +507,7 @@ class RessourceController extends Controller
 
             // IMPORTANT: Use full paths for ffmpeg
             $process = new Process([
-                'ffmpeg',
+                $this->ffmpegPath,
                 '-i',
                 $inputPath,
                 '-c:v',

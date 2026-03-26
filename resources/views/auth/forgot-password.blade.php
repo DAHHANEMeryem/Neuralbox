@@ -14,8 +14,9 @@
     <div class="login-container">
         <div class="signin-section">
             <div class="logo" style="color: rgb(26, 32, 219);">
-                <a href="{{ url('/') }}" class="logo-text1" style="color:rgb(11, 29, 221); text-decoration: none;">الرئيسية</a>
-            </div>
+<a href="{{ url('/') }}" class="logo">
+    <img src="{{ asset('assets/img/logo.png') }}" alt="NeuralBox Logo" style="height: 60px;">
+</a>            </div>
 
             <h1>إعادة تعيين كلمة المرور</h1>
 
@@ -47,8 +48,8 @@
             <div class="shape shape-2"></div>
             <div class="shape shape-3"></div>
 
-            <h2 class="welcome-title">مرحباً بك!</h2>
-            <p class="welcome-text">أدخل بريدك الإلكتروني لتصلك رسالة إعادة التعيين.</p>
+           <h2 class="welcome-title">مرحباً بكم!</h2>
+<p class="welcome-text">أدخلوا بريدكم الإلكتروني لتصلكم رسالة إعادة التعيين.</p>
             <a href="{{ route('register') }}" class="signup-btn">إنشاء حساب</a>
         </div>
     </div>

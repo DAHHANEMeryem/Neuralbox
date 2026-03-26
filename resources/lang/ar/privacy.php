@@ -22,5 +22,5 @@ return [
 	'changes_title' => '8. تعديلات على سياسة الخصوصية',
 	'changes' => 'قد نقوم بتحديث هذه السياسة، وسنقوم بإعلامكم بأي تغييرات رئيسية عبر البريد الإلكتروني أو الموقع.',
 	'contact_title' => 'كيفية التواصل معنا',
-	'contact' => '<strong>البريد الإلكتروني:</strong> <a href="mailto:contact@insiconsulting.com" class="text-decoration-none">contact@insiconsulting.com</a><br><strong>العنوان:</strong> Roa Offices, Étage 01, N3, Sat village, Tanger',
+	'contact' => '<strong>البريد الإلكتروني:</strong> <a href="mailto:contact@insiconsulting.com" class="text-decoration-none">contact@insiconsulting.com</a><br><strong>العنوان:</strong> Misterkhouch, Rue Ajdir, Villa 57, Tanger',
 ];

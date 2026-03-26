@@ -10,7 +10,7 @@ return [
     "email" => "البريد الإلكتروني",
     "email_placeholder" => "example@email.com",
 
-    "delivery_address" => "📍 عنوان التوصيل",
+    "delivery_address" => "معلومات التوصيل",
 
     "city" => "المدينة",
     "city_placeholder" => "اختر المدينة",
@@ -49,7 +49,7 @@ return [
     "card_security_message_SSL"=> "الدفع مؤمن بتشفير SSL" ,
 
     "receipt"=> "إيصال الدفع" ,
-    "process"=> "إتمام الدفع" ,
+    "process"=> "تأكيد الإشتراك" ,
 
     
 

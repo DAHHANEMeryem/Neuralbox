@@ -3,263 +3,224 @@
 @section('title', 'نورال بوكس | الرئيسية')
 
 @section('content')
-<style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-pV+UvAa1f7YfT4S6hR+gG3MThmT+KJ5+HnGLiG7L8Vv1Z+t+Gk7Czv/8M/1b6x8ZbR4e5KXkJXJf0ZK0X8TjvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{{ asset('css/main2.css') }}">
+<script src="{{ asset('js/main2.js') }}"></script>
 
 
-/* l’image reste normale */
-.hero-poster {
+
+<section class="hero-section">
+  
+    <div class="hero-content">
+      
+      <h1 class="hero-title">نيورال بوكس</h1>
+      <h2 class="hero-subtitle">هدية الأسرة السعيدة</h2>
+
+      <p class="hero-text">
+          أول منصة متخصصة في تقديم خدمات علاجية، <br>وحلول لمشاكل التركيز، الذاكرة، الإدمان على الشاشات <br>وكذا التعثر الدراسي واضطرابات التعلم.
+      </p>
+
+	  <div class="hero-stats">
+    <div class="stat-item">
+        <span>+230 أســـــرة سعيدة</span>
+        </div>
+    <div class="stat-item">
+        <span>خبرة أكثـــــر من 15 سنة</span>
+        
+    </div>
+    <div class="stat-item">
+        <span>+520 طفــــــل مستفيد</span>
+        
+    </div>
+</div>
+<div class="hero-buttons">
+  
+  <!-- Desktop -->
+  <a href="{{ url('/') }}#pricing-two" class="btn primary btn-desktop">
+    اشتركوا الآن
+  </a>
+
+  <!-- Mobile -->
+  <a href="{{ url('/') }}#pricing" class="btn primary btn-mobile">
+    اشتركوا الآن
+  </a>
+
+  <a href="{{ route('about') }}" class="btn secondary">من نحن؟</a>
+
+</div>
+
+    </div>
+
+</section>
+
+<section class="about-us-section">
+    <img src="{{ asset('assets/img/bg/about.svg') }}" class="about-bg about-bg-bottom reveal" alt="">
+
+    <div class="section-title text-center">
+        <h2 class="reveal mt-4 mt-md-5">{{ __("about.welcome_to") }}<span class="text-third"> {{ __("hero.NeuralBox") }}</span></h2>
+        <p class="mt-3 mt-md-3 mb-md-4 desc reveal d-1">{!! trans("about.desc")!!}</p>
+    </div>
+
+    <div class="blog-section reveal d-2">
+        <div class="container d-flex justify-content-center">
+            <div class="video-preview-container" onclick="openVideo()">
+                <img src="{{ asset('assets/img/covers/intro2.webp') }}" alt="Cover" class="img-landscape">
+                <div class="play-button-overlay">
+                    <img src="{{ asset('assets/img/play.png') }}" alt="Play" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="videoLightbox" class="video-lightbox">
+        <span class="close-video" onclick="closeVideo()">&times;</span>
+        <div class="lightbox-content">
+            <video id="player" controls playsinline>
+                <source src="{{ route('video-link', ['videoName' => 'INTRO NEURALBOX']) }}" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
  
-	margin-top: -90px;
+
+   
+</section>
+
+
+
+
+<section class="how-it-works animated-steps">
+    <div class="container py-md-5">
+        <div class="row text-center justify-content-center mb-5">
+            <h2 class="process-main-title pt-5">
+                <span class="word-blue">{!! trans("welcome.call.word1")!!}</span>
+                <span class="word-purple">{!! trans("welcome.call.word2")!!}</span>
+            </h2>
+        </div>
+
+        <div class="steps-wrapper">
+            <svg class="step-line" viewBox="0 0 1000 100" preserveAspectRatio="none">
+                <path d="M0,50 Q250,100 500,50 T1000,50" fill="none" stroke="#775b9f" stroke-width="2" opacity="0.3" />
+            </svg>
+
+            <div class="step-item item-top" style="--delay: 1">
+                <div class="step-content">اشتركوا في المنصة واطلبوا صندوق نيورال بوكس</div>
+                <div class="step-node">
+                    <span class="step-number1">01</span>
+                    <div class="circle"><i class="fas fa-user-plus"></i></div>
+                </div>
+            </div>
+
+            <div class="step-item item-bottom" style="--delay: 2">
+                <div class="step-node">
+                    <span class="step-number">02</span>
+                    <div class="circle"><i class="fas fa-headset"></i></div>
+                </div>
+                <div class="step-content">سيتصل بكم مندوبنا لتأكيد معلومات التوصيل</div>
+            </div>
+
+            <div class="step-item item-top" style="--delay: 3">
+                <div class="step-content">في غضون أيام قليلة سوف يصلكم صندوق السعادة إلى البيت</div>
+                <div class="step-node">
+                    <span class="step-number1">03</span>
+                    <div class="circle"><i class="fas fa-box-open"></i></div>
+                </div>
+            </div>
+
+            <div class="step-item item-bottom" style="--delay: 4">
+                <div class="step-node">
+                    <span class="step-number">04</span>
+                    <div class="circle"><i class="fas fa-check-double"></i></div>
+                </div>
+                <div class="step-content">عيشوا التميز و النجاح عبر حسابكم بالمنصة</div>
+            </div>
+        </div>
+    </div>
+
 	
-}
+<div class="steps-mobile  ">
+    <div class="step-item" style="--delay: 1">
+        <span>01</span>
+        <div class="circle"><i class="fas fa-user-plus"></i></div>
+        <p>اشتركوا في المنصة واطلبوا صندوق نيورال بوكس</p>
+    </div>
 
-.box-overlay {
-    position: absolute;
-    bottom: 40px; /* ⬅️ remonte la vidéo de 100px */
-    left: 50px;
-    width: 800px;
-    z-index: 3;
+    <div class="step-item" style="--delay: 2">
+        <span>02</span>
+        <div class="circle"><i class="fas fa-headset"></i></div>
+<p>سيتصل بكم مندوبنا لتأكيد معلومات التوصيل</p>    </div>
 
-    pointer-events: none;
-    filter: drop-shadow(0 12px 25px rgba(0,0,0,.25));
-    border-radius: 14px;
+    <div class="step-item" style="--delay: 3">
+        <span>03</span>
+        <div class="circle"><i class="fas fa-box-open"></i></div>
+<p>في غضون أيام قليلة <br>سوف يصلكم صندوق السعادة إلى البيت</p>
+    </div>
 
-    animation: float 3s ease-in-out infinite;
-}
-.main-banner {
-    padding-bottom: 80px; /* espace réservé pour la box */
-}
-@media screen and (max-width: 768px) {
-    .hero-poster {
-        margin-top: -60px; /* remonte moins sur mobile */
-    }
+    <div class="step-item" style="--delay: 4">
+        <span>04</span>
+        <div class="circle"><i class="fas fa-check-double"></i></div>
+        <p>عيشوا التميز و النجاح عبر حسابكم بالمنصة</p>
+    </div>
+</div>
+</section>
 
-    .box-overlay {
-        bottom: 50px;  /* remonte un peu moins */
-        left: 50px;    /* recentre un peu */
-        width: 250px;  /* réduit la largeur */
-    }
 
-    .main-banner {
-        padding-bottom: 60px;
-    }
-}
 
-/* Styles pour mobiles très petits <= 480px */
-@media screen and (max-width: 480px) {
-    .hero-poster {
-        margin-top: -40px;
-    }
 
-    .box-overlay {
-        bottom: 10px;
-        left: -10px;
-        width: 400px;
-    }
 
-    .main-banner {
-        padding-bottom: 50px;
-    }
-}
-</style>
 
-<section class="main-banner pt-0">
-	<div class="">
-		<div class="row laptop align-items-start justify-content-center">
-			<div class="col-md-6 p-6 content-banner">
-				<div class="banner-text wow fadeInLeft position-relative py-3 py-md-0" data-wow-duration="1000ms">
-					<h2 class="mx-none text-center position-relative "><span class="text-purple">{{ __("hero.NeuralBox") }}</span><br>{{__("hero.slogan")}}</h2>
-					<p class="mx-none mb-md-5">{{__("hero.desc")}}</p>
-					<div class="d-flex gap-md-4 gap-2 justify-content-center justify-content-md-start">
-						<a href="#pricing-two" class=" bg-primary  rounded-4 text-white">{{ __("nav.pricing") }}</a>
-						<a href="#contact" class=" bg-transparent text-blue  border-primary rounded-4 ">{{ __("nav.about") }}</a>
-					</div>
-				</div>
-			</div>
-			<div class=" col-md-6 position-relative">
-				<div class="hero_circle blue_circle">
-					500+<br>
-					طفل مستفيد
-				</div>
-				<div class="hero_circle pink_circle">
-					120+<br>
-					أسرة سعيدة
-				</div>
-				<div class="banner-img d-flex justify-content-start align-items-start hero-media">
 
-    <!-- image de fond -->
-    <img 
-        src="{{ asset('assets/img/hero/mean.png') }}" 
-        alt="NeuralBox"
-        class="hero-poster"
-    >
+<section class="about-us-section">
+	<img src="{{ asset('assets/img/bg/about.svg') }}" class="about-bg about-bg-bottom reveal" alt="">
+	<div class="container">
+		<div class="section-title  text-center">
+			<h2 class="reveal mt-4 mt-md-5">{{ __("about.titre2-f1") }}<span class="text-third"> {{ __("about.titre2-f2")  }}</span></h2>
+			<p class="mt-3 mt-md-3 mb-md-4 desc	reveal d-1">{!! trans("about.desc2")!!}</p>
+		</div>
 
-    <!-- vidéo box incrustée -->
-    <video 
-        id="heroBoxVideo"
-        class="box-overlay"
-        muted
-        autoplay
-        loop
-        playsinline
-        preload="auto"
-    >
-        <source src="{{ asset('assets/videos/box-animation.webm') }}" type="video/webm">
+<div class="video-fix">
+
+    <!-- 🔹 Vidéo -->
+    <video controls poster="{{ asset('assets/img/covers/why_neural.jpeg') }}">
+        <source src="{{ route('video-link', ['videoName' => 'intro']) }}" type="video/mp4">
     </video>
 
 </div>
-			</div>
-		</div>
-		
 	</div>
 	
 </section>
 
-<section class="about-us-section">
-	<img src="{{ asset('assets/img/bg/about.svg') }}" class="about-bg about-bg-bottom" alt="">
-	<div class="container">
-		<div class="section-title  text-center">
-			<h2>{{ __("about.welcome_to") }}<span class="text-third"> {{ __("hero.NeuralBox") }}</span></h2>
-			<p class="mt-md-5 mb-md-4 desc	">{!! trans("about.desc")!!}</p>
-		</div>
-
-		<div class="blog-section">
-			<div class="blog-posts">
-				<div class="blog-post video-post">
-					<div class="blog-thumbnail ">
-						<a href="#" title="">
-							<img src="assets/img/covers/why_neural.jpg" alt="" class="cover object-position-top">
-						</a>
-						{{-- <span class="category">{{__("welcome.video_title")}}</span> --}}
-						<a data-video-url="{{ route('video-link', ['videoName' => 'intro']) }}"
-							data-bs-toggle="modal"
-							data-bs-target="#exampledsModal"
-							class="video-play play-video overlay-box">
-							<img src="assets/img/play.png" alt="">
-						</a>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-
-
-<section class="newsletter-section call ">
-
-	<div class="container py-md-5">
-		<div class="row text-center justify-content-center">
-			<div class="section-title text-center">
-				<h2>{!! trans("welcome.call.title1")!!}</h2>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col p-0">
-				<div class="timeline-steps ">
-					<div class="timeline-step">
-						<div class="timeline-content">
-							<div class="inner-circle"><span>1</span></div>
-							{{-- <p class="h6 mt-3 mb-1">1</p> --}}
-							<p class="h6 text-muted mb-0 mb-lg-0">{!! trans("welcome.steps.first")!!}</p>
-						</div>
-					</div>
-					<div class="timeline-step">
-						<div class="timeline-content">
-							<div class="inner-circle"><span>2</span></div>
-							{{-- <p class="h6 mt-3 mb-1">2004</p> --}}
-							<p class="h6 text-muted mb-0 mb-lg-0">{!! trans("welcome.steps.second")!!}</p>
-						</div>
-					</div>
-					<div class="timeline-step">
-						<div class="timeline-content">
-							<div class="inner-circle"><span>3</span></div>
-							{{-- <p class="h6 mt-3 mb-1">2005</p> --}}
-							<p class="h6 text-muted mb-0 mb-lg-0">{!! trans("welcome.steps.third")!!}</p>
-						</div>
-					</div>
-					<div class="timeline-step">
-						<div class="timeline-content">
-							<div class="inner-circle"><span>4</span></div>
-							{{-- <p class="h6 mt-3 mb-1">2010</p> --}}
-							<p class="h6 text-muted mb-0 mb-lg-0">{!! trans("welcome.steps.four")!!}</p>
-						</div>
-					</div>
-					<div class="timeline-step mb-0">
-						<div class="timeline-content">
-							<div class="inner-circle"><span>5</span></div>
-							{{-- <p class="h6 mt-3 mb-1">2020</p> --}}
-							<p class="h6 text-muted mb-0 mb-lg-0">{!! trans("welcome.steps.five")!!}</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-
-<section class="about-us-section">
-	<img src="{{ asset('assets/img/bg/about.svg') }}" class="about-bg about-bg-bottom" alt="">
-	<div class="container">
-		<div class="section-title  text-center">
-			<h2>{{ __("about.gift") }}<span class="text-third"> {{ __("hero.NeuralBox") }}</span></h2>
-			<p class="mt-md-5 mb-md-4 desc	">{!! trans("about.desc2")!!}</p>
-		</div>
-
-		<div class="blog-section">
-			<div class="blog-posts">
-				<div class="blog-post video-post">
-					<div class="blog-thumbnail ">
-						<a href="#" title="">
-							<img src="assets/img/covers/intro2.jpeg" alt="" class="cover object-position-top">
-						</a>
-						{{-- <span class="category">{{__("welcome.video_title")}}</span> --}}
-						<a data-video-url="{{ route('video-link', ['videoName' => 'INTRO_NEURALBOX']) }}"
-							data-bs-toggle="modal"
-							data-bs-target="#exampledsModal"
-							class="video-play play-video overlay-box">
-							<img src="assets/img/play.png" alt="">
-						</a>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
 <section class="about-page-content overflow-hidden pt-md-4 pb-5 p-0">
-	<img src="{{ asset('assets/img/bg/about-content.svg') }}" class="about-bg about-bg-top" alt="">
+	<img src="{{ asset('assets/img/bg/about-content.svg') }}" class="about-bg about-bg-top reveal" alt="">
 	<div class="container">
 		<div class="abt-page-row">
 			<div class="row align-items-center">
 				<div class="col-lg-6 col-md-6">
-					<div class="section-title">
+					<div class="section-title reveal">
 						<p class="text-black">{!! trans("welcome.coach_abd_founder") !!}</p>
 						<h2>{!! trans("welcome.coach_abd") !!}</h2>
 						<!-- <a href="classes.html" title="" class="btn-default">Classes <i class="fa fa-long-arrow-alt-right"></i></a> -->
 					</div>
-					<div class="act-inffo">
+					<div class="act-inffo reveal d-1">
 						<!-- <span>ABOUT US</span>
 						<h2>Our Mission</h2> -->
 						<!-- <p>Praesent rhoncus justo erat, sed sollicitudin arcu malesuada vel. Etiam scelerisque justo ut purus luctus ullamcorper. Vivamus vitae elit ligula. Fusce eu rutrum nisl.</p> -->
 						<ul>
-							<li>{!! trans("welcome.abd_info_1") !!}</li>
-							<li>{!! trans("welcome.abd_info_2") !!}</li>
-							<li>{!! trans("welcome.abd_info_3") !!}</li>
-							<li>{!! trans("welcome.abd_info_4") !!}</li>
-							<li>{!! trans("welcome.abd_info_5") !!}</li>
-							<li>{!! trans("welcome.abd_info_6") !!}</li>
-							<li>{!! trans("welcome.abd_info_7") !!}</li>
+							<li>{!! trans("welcome.abd_info_1") !!}؛ </li>
+							<li>{!! trans("welcome.abd_info_2") !!}؛</li>
+							<li>{!! trans("welcome.abd_info_3") !!}؛</li>
+							<li>{!! trans("welcome.abd_info_4") !!}؛</li>
+							<li>{!! trans("welcome.abd_info_5") !!}؛</li>
+							<li>{!! trans("welcome.abd_info_6") !!}؛</li>
+							<li>{!! trans("welcome.abd_info_7") !!}.</li>
 						</ul>
 					</div>
 				</div>
-				<div class="col-lg-6 col-md-6 ">
+				<div class="col-lg-6 col-md-6 reveal d-2 ">
 					<div class="abt-img">
-						<img src="assets/img/abt1.png" alt="">
+						<img src="{{ asset('assets/img/abt1.webp')}}" alt="">
 					</div><!--avt-img end-->
 				</div>
 
@@ -269,41 +230,35 @@
 </section>
 
 
-<div class="blog-section position-relative">
-	<img src="{{ asset('assets/img/bg/about-blue.svg') }}" class="about-bg about-bg-top bg-gray" alt="">
-	<div class="container">
-		<div class="blog-posts">
-			<div class="blog-post video-post">
-				<div class="blog-thumbnail ">
-					<a href="#" >
-						<img src="assets/img/covers/storyCover.webp" alt="" class="cover object-position-top">
-					</a>
-					{{-- <span class="category">{{__("welcome.video_story")}}</span> --}}
-					<a data-video-url="{{ route('video-link', ['videoName' => 'story']) }}"
-						data-bs-toggle="modal"
-						data-bs-target="#exampledsModal" class="video-play play-video overlay-box">
-						<img src="assets/img/play.png" alt="">
-					</a>
-				</div>
 
-			</div>
-		</div>
+<div class="blog-section position-relative">
+	<img src="{{ asset('assets/img/bg/about-blue.svg') }}" class="about-bg about-bg-top  reveal d-1" alt="">
+	<div class="container">
+		<div class="video-fix">
+
+    <video controls poster="{{ asset('assets/img/covers/storyCover.jpeg') }}">
+        <source src="{{ route('video-link', ['videoName' => 'story']) }}" type="video/mp4">
+    </video>
+
+</div>
 	</div>
+
 </div>
 
 <section>
 	<div class="news-block-two" >
 		<div class="inner-box">
-			<section class="services-section">
+<section class="services-section" style="background-color: #775b9f;">
 				<div class="container">
-					<div class="section-title yellow text-white text-center">
+					<div class="section-title yellow text-white text-center custom-desktop-margin reveal">
+					
 						<h2>
 							{!!__('transelt.titre1')!!}
 						</h2>
 					</div>
 					<div class="row clearfix">
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-4">
+						<div class="service-block col-lg-3 col-md-4 col-4 reveal">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/9.png')}}" alt="" /></span>
@@ -312,7 +267,7 @@
 							</div>
 						</div>
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-4">
+						<div class="service-block col-lg-3 col-md-4 col-4 reveal d-1">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/4.png')}}" alt="" /></span>
@@ -321,7 +276,7 @@
 							</div>
 						</div>
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-4">
+						<div class="service-block col-lg-3 col-md-4 col-4 reveal d-2">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/8.png')}}" alt="" /></span>
@@ -330,7 +285,7 @@
 							</div>
 						</div>
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-4">
+						<div class="service-block col-lg-3 col-md-4 col-4 reveal d-3">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/5.png')}}" alt="" /></span>
@@ -339,7 +294,7 @@
 							</div>
 						</div>
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-4">
+						<div class="service-block col-lg-3 col-md-4 col-4 reveal d-4">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/12.png')}}" alt="" /></span>
@@ -349,27 +304,7 @@
 						</div>
 
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-4">
-							<div class="inner-box">
-								<div class="icon-box">
-									<span class="icon slide-up"><img src="{{asset('images/icons/fea/1.png')}}" alt="" /></span>
-								</div>
-								{!!__('transelt.h56')!!}
-							</div>
-						</div>
-
-						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-4">
-							<div class="inner-box">
-								<div class="icon-box">
-									<span class="icon"><img src="{{asset('images/icons/fea/2.png')}}" alt="" /></span>
-								</div>
-								{!!__('transelt.h57')!!}
-							</div>
-						</div>
-
-						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-4">
+						<div class="service-block col-lg-3 col-md-4 col-4 reveal d-5">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/3.png')}}" alt="" /></span>
@@ -379,7 +314,18 @@
 						</div>
 
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-4">
+						<div class="service-block col-lg-3 col-md-4 col-4 reveal d-1">
+							<div class="inner-box">
+								<div class="icon-box">
+									<span class="icon"><img src="{{asset('images/icons/fea/2.png')}}" alt="" /></span>
+								</div>
+								{!!__('transelt.h57')!!}
+							</div>
+						</div>
+
+						<!-- Service Block -->
+						
+               <div class="service-block col-lg-3 col-md-4 col-4 reveal d-2">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/6.png')}}" alt="" /></span>
@@ -387,9 +333,18 @@
 								{!!__('transelt.h59')!!}
 							</div>
 						</div>
-
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-4">
+						
+              <div class="service-block col-lg-3 col-md-4 col-4 reveal d-3">
+							<div class="inner-box">
+								<div class="icon-box">
+									<span class="icon slide-up"><img src="{{asset('images/icons/fea/1.png')}}" alt="" /></span>
+								</div>
+								{!!__('transelt.h56')!!}
+							</div>
+						</div>
+						<!-- Service Block -->
+						<div class="service-block col-lg-3 col-md-4 col-4 reveal d-4">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/7.png')}}" alt="" /></span>
@@ -399,7 +354,7 @@
 						</div>
 
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-4">
+						<div class="service-block col-lg-3 col-md-4 col-4 reveal d-5">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/10.png')}}" alt="" /></span>
@@ -409,7 +364,7 @@
 						</div>
 
 						<!-- Service Block -->
-						<div class="service-block col-lg-3 col-md-4 col-4">
+						<div class="service-block col-lg-3 col-md-4 col-4 reveal d-6">
 							<div class="inner-box">
 								<div class="icon-box">
 									<span class="icon"><img src="{{asset('images/icons/fea/11.png')}}" alt="" /></span>
@@ -434,10 +389,10 @@
 					<div class="sec-title">
 						<h2>{{ __("welcome.temoignage.title") }}</h2>
 						<!-- <p>{{ __("welcome.temoignage.text") }}</p> -->
-						<!-- <h3><img src="assets/img/icon11.png" alt="">{{__("welcome.temoignage.call")}}<a href="´tel:+212539324232"><strong dir="ltr"> +212 539 32 42 32</strong></a></h3> -->
+						<!-- <h3><img src="{{ asset('assets/img/icon11.png') }}" alt="">{{__("welcome.temoignage.call")}}<a href="´tel:+212539324232"><strong dir="ltr"> +212 539 32 42 32</strong></a></h3> -->
 					</div><!--sec-title end-->
 					<div class="course-img">
-						<img src="assets/img/course-img.png" alt="">
+						<img src="{{ asset('assets/img/course-img.png') }}" alt="">
 					</div><!--course-img end-->
 				</div><!--find-course end-->
 			</div>
@@ -447,7 +402,7 @@
 						<!-- <div class="d-flex flex-wrap align-items-center">
 							<ul class="course-meta">
 								<li>
-									<img src="assets/img/icon12.png" alt="">
+									<img src="{{ asset('assets/img/icon12.png') }}" alt="">
 									29/07/2020
 								</li>
 								<li>
@@ -462,7 +417,7 @@
 								<img src="https://via.placeholder.com/26x26" alt="">
 								<a href="#" title="">Hayat Aït Moulay Hachem</a>
 							</div>
-							<!-- <span class="locat"><img src="assets/img/loct.png" alt="" />43 castle road 517 district</span> -->
+							<!-- <span class="locat"><img src="{{ asset('assets/img/loct.png') }}" alt="" />43 castle road 517 district</span> -->
 						</div>
 					</div>
 					<div class="course-card wow fadeInLeft" data-wow-duration="1000ms">
@@ -473,7 +428,7 @@
 								<img src="https://via.placeholder.com/26x26" alt="">
 								<a href="#" title="">Safaa Imrani</a>
 							</div>
-							<!-- <span class="locat"><img src="assets/img/loct.png" alt="" />43 castle road 517 district</span> -->
+							<!-- <span class="locat"><img src="{{ asset('assets/img/loct.png') }}" alt="" />43 castle road 517 district</span> -->
 						</div>
 					</div>
 					<div class="course-card wow fadeInLeft" data-wow-duration="1000ms">
@@ -493,7 +448,7 @@
 								<img src="https://via.placeholder.com/26x26" alt="">
 								<a href="#" title="">Ziani Ahmed</a>
 							</div>
-							<!-- <span class="locat"><img src="assets/img/loct.png" alt="" />43 castle road 517 district</span> -->
+							<!-- <span class="locat"><img src="{{ asset('assets/img/loct.png') }}" alt="" />43 castle road 517 district</span> -->
 						</div>
 					</div>
 				</div>
@@ -510,14 +465,7 @@
 <!-- Fancybox JS -->
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const video = document.getElementById("heroBoxVideo");
-    if (video) {
-        video.play().catch(() => {});
-    }
-});
-</script>
+
 
 
 
@@ -671,16 +619,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-			<div class="card-body ">
+			<div class="card-body pt-5 ">
 				<div>
-					<h5 class="card-title text-white fw-bold fs-4 z-1 position-relative">{!! __('transelt.title1')!!}</h5>
+					<h5 class="card-title text-white fw-bold fs-4 z-1 position-relative ">{!! __('transelt.title1')!!}</h5>
 					<h2 class="price text-white fw-bold mt-n2 z-1 position-relative" dir="ltr">0 DH</h2>
 					{!!__('transelt.ul1')!!}
 				</div>
+				
 
-
-				<a href="{{route('register')}}" class="btn btn-warning fw-bold text-white rounded-pill mt-3 w-100 px-5 justify-content-center">{{ __("auth.register_now") }}</a>
-			</div>
+ @if(Auth::check())
+        <button class="btn btn-success fw-bold text-white rounded-pill mt-3 w-100 px-5" disabled style="cursor: not-allowed;">
+             استمتع ! أنت مسجل بالفعل
+        </button>
+    @else
+        <a href="{{ route('register') }}" class="btn btn-warning fw-bold text-white rounded-pill mt-3 w-100 px-5 justify-content-center">
+            {{ __("auth.register_now") }}
+        </a>
+    @endif
+    </div>
 		</div>
 
 		<div class="card pricing-card price-blue text-center">
@@ -715,14 +671,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-			<div class="card-body ">
+			<div class="card-body pt-5 ">
 				<div>
 					<h5 class="card-title text-white fw-bold fs-4 z-1 position-relative">{!! __('transelt.title3')!!}</h5>
 					<h2 class="price text-white fw-bold mt-n2 z1 position-relative" dir="ltr">2300 DH</h2>
 					{!!__('transelt.ul3')!!}
 				</div>
 
-				<a href="{{route('payment.form')}}" class="btn btn-warning fw-bold text-white rounded-pill mt-3 w-100 px-5 justify-content-center">اختر الباقة</a>
+				<a href="{{ route('payment.form', ['pack' => 'silver']) }}" class="btn btn-warning fw-bold text-white rounded-pill mt-3 w-100 px-5 justify-content-center">اختر الباقة</a>
 			</div>
 		</div>
 
@@ -763,23 +719,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			<div class="ribbon">
 				<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 111.84 138.11">
 					<defs>
-						<style>
-							.cls-1 {
-								fill: #223b8a;
-							}
-
-							.cls-2 {
-								fill: #fff;
-							}
-
-							.cls-3 {
-								isolation: isolate;
-							}
-
-							.cls-4 {
-								fill: #c6c6c6;
-							}
-						</style>
+						
 					</defs>
 					<g id="Layer_1-2" data-name="Layer 1">
 						<g class="cls-3">
@@ -807,150 +747,93 @@ document.addEventListener("DOMContentLoaded", () => {
 				</svg>
 			</div>
 
-			<div class="card-body ">
+			<div class="card-body pt-5">
 				<div>
 					<h5 class="card-title text-white fw-bold fs-4 z-1 position-relative">{!! __('transelt.title2')!!}</h5>
 					<h2 class="price text-white fw-bold mt-n2 z1 position-relative" dir="ltr">3200 DH</h2>
 					{!!__('transelt.ul2')!!}
 				</div>
-				<a href="{{route('payment.form')}}" class="btn btn-warning fw-bold text-white rounded-pill mt-3 w-100 px-5 justify-content-center">اختر الباقة</a>
+			<a href="{{ route('payment.form', ['pack' => 'golden']) }}" class="btn btn-warning fw-bold text-white rounded-pill mt-3 w-100 px-5 justify-content-center">اختر الباقة</a>
 			</div>
 		</div>
 
 	</div>
 	</div>
-	<style>
-		.card-body ul {
-			font-size: 13px;
-		}
-		/* ====== PRICING SECTION ====== */
-#pricing {
-  padding: 40px 15px;
-}
-
-/* Wrapper */
-.pricing-wrapper {
-  gap: 24px;
-  justify-content: center;
-}
-
-/* Cards */
-.pricing-card {
-  width: 100%;
-  max-width: 360px;
-}
-
-/* SVG wave responsive */
-.top-wave svg {
-  width: 100%;
-  height: auto;
-}
-
-/* ====== MOBILE ====== */
-@media (max-width: 768px) {
-
-  #pricing {
-    min-height: auto;
-  }
-
-  .pricing-wrapper {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .pricing-card {
-    max-width: 100%;
-  }
-
-  .price {
-    font-size: 2rem;
-  }
-
-  .card-body {
-    padding: 24px 20px;
-  }
-}
-/* Remonter le prix au-dessus du contenu sur mobile */
-@media (max-width: 768px) {
-  .pricing-card .price {
-    margin-top: -15px; /* ajuste la valeur selon besoin */
-    font-size: 2rem;   /* tu peux augmenter ou diminuer la taille */
-  }
-
-  .pricing-card .card-title {
-    margin-top: -20px; /* ajuste la valeur selon besoin */
-    font-size: 2rem;   /* tu peux augmenter ou diminuer la taille */
-  }
-}
-
-
-	</style>
+	
 </section> 
 
+
 <section id="pricing-two"  class="d-none d-md-block">
+	<div class="section-title  text-center reveal" style="margin-top: 60px">
+			<h2>{{ __("transelt.titre_box") }}<span class="text-third"> {{ __("transelt.titre_box2")  }}</span></h2>
+		</div>
     <div class="container">
+
         <div class="row g-0 laptop text-center align-items-stretch">
             
-            <div class="col-3 d-flex flex-column pt-5">
-                <div class="feature-header"></div> <div class="feature-row">محتوى مجاني</div>
+            <div class="col-3 d-flex flex-column pt-5 reveal">
+                <div class="feature-header"></div> <div class="feature-row">المحتوى المجاني</div>
                 <div class="feature-row">صندوق نيورال بوكس</div>
-                <div class="feature-row">تخفيض على الدورات التدريبية</div>
-                <div class="feature-row">دليل استعمال نيورال بوكس</div>
-                <div class="feature-row">خصم على استشارات مواكبة</div>
-                <div class="feature-row">تقييم ومتابعة لتطور الطفل</div>
-                <div class="feature-row">المحتوى البيداغوجي</div>
-                <div class="feature-row">كتب إلكترونية</div>
-                <div class="feature-row">مجتمع نيورال بوكس على التلغرام</div>
-                <div class="feature-row border-0">مراجع لفهم مشاكل واضطرابات التعلم</div>
+				<div class="feature-row">دليل استعمال نيورال بوكس</div>
+				<div class="feature-row">المحتوى التعليمي</div>
+			    <div class="feature-row">شهادة التكوين من نيورالبوكس</div>
+				<div class="feature-row">مجتمع نيورال بوكس على التلغرام</div>
+                <div class="feature-row">خصم على استشارات مواكبة +</div>
+                <div class="feature-row border-0">تخفيض على الدورات التكوينية</div>
             </div>
 
-            <div class="col-3 d-flex flex-column pt-5">
+            <div class="col-3 d-flex flex-column pt-5 reveal d-1">
                 <div class="package-header mb-4">
                     <h3>باقة الانطلاق</h3>
-                    <h2>0 DH</h2>
+                    <h2>0 د.م</h2>
                 </div>
                 <div class="feature-row"><i class="fas fa-check"></i></div>
                 <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
                 <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
                 <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
                 <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
-                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
-                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
                 <div class="feature-row"><i class="fas fa-check"></i></div>
-                <div class="feature-row"><i class="fas fa-check"></i></div>
+				<div class="feature-row text-warning"><i class="fas fa-times"></i></div>
                 <div class="feature-row text-warning border-0"><i class="fas fa-times"></i></div>
                 <div class="mt-auto pb-4">
-                    <a href="#" class="btn btn-light rounded-pill px-4">أنشئ حسابك الآن</a>
+    @if(Auth::check())
+        <button class="btn btn-success rounded-pill px-4" disabled style="cursor: not-allowed;">
+             استمتع ! أنت مسجل بالفعل
+        </button>
+    @else
+        <a href="{{ route('register') }}" class="btn btn-light rounded-pill px-4">
+            أنشئ حسابك الآن
+        </a>
+    @endif
+</div>
+            </div>
+
+            <div class="col-3 d-flex flex-column pt-5 reveal d-2">
+                <div class="package-header mb-4">
+                    <h3>باقة نيورال بوكس</h3>
+                    <h2>2300 د.م</h2>
+                </div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
+                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
+                <div class="feature-row"><i class="fas fa-check"></i></div>
+
+                <div class="mt-auto pb-4">
+                   <!-- Pack Silver / نيورال بوكس -->
+<a href="{{ route('payment.form', ['pack' => 'silver']) }}" class="btn btn-light rounded-pill px-4">اختر الباقة</a>
+
                 </div>
             </div>
 
-            <div class="col-3 d-flex flex-column pt-5">
+            <div class="col-3 d-flex flex-column pt-5 highlighted-col reveal d-3">
                 <div class="package-header mb-4">
-                    <h3>باقة نيورال بوكس</h3>
-                    <h2>2300 DH</h2>
+                    <h3>الباقة الذهبية</h3>
+                    <h2>3200 د.م</h2>
                 </div>
-                <div class="feature-row"><i class="fas fa-check"></i></div>
-                <div class="feature-row"><i class="fas fa-check"></i></div>
-                <div class="feature-row"><i class="fas fa-check"></i></div>
-                <div class="feature-row"><i class="fas fa-check"></i></div>
-                <div class="feature-row"><i class="fas fa-check"></i></div>
-                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
-                <div class="feature-row text-warning"><i class="fas fa-times"></i></div>
-                <div class="feature-row"><i class="fas fa-check"></i></div>
-                <div class="feature-row"><i class="fas fa-check"></i></div>
-                <div class="feature-row text-warning border-0"><i class="fas fa-times"></i></div>
-                <div class="mt-auto pb-4">
-                    <a href="#" class="btn btn-light rounded-pill px-4">اختر الباقة</a>
-                </div>
-            </div>
-
-            <div class="col-3 d-flex flex-column pt-5 highlighted-col">
-                <div class="package-header mb-4">
-                    <h3>باقة نيورال بوكس</h3>
-                    <h2>3200 DH</h2>
-                </div>
-                <div class="feature-row"><i class="fas fa-check"></i></div>
-                <div class="feature-row"><i class="fas fa-check"></i></div>
                 <div class="feature-row"><i class="fas fa-check"></i></div>
                 <div class="feature-row"><i class="fas fa-check"></i></div>
                 <div class="feature-row"><i class="fas fa-check"></i></div>
@@ -960,8 +843,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="feature-row"><i class="fas fa-check"></i></div>
                 <div class="feature-row border-0"><i class="fas fa-check"></i></div>
                 <div class="mt-auto pb-4">
-                    <a href="#" class="btn btn-magenta rounded-pill px-4">اختر الباقة</a>
-                </div>
+
+<!-- Pack Gold / الباقة الذهبية -->
+<a href="{{ route('payment.form', ['pack' => 'golden']) }}" class="btn btn-magenta rounded-pill px-4">اختر الباقة</a>                </div>
             </div>
 
         </div>
@@ -978,36 +862,85 @@ document.addEventListener("DOMContentLoaded", () => {
 </section>
 
 <section class="partners">
-	<div class="container">
-		<h6 class="sec-title">{{ __('transelt.our_partners') }}</h6>
-		<div class="row">
-			<div class="col partner-logo-container"> <img class="partner-logo" src="{{ asset('assets/img/partners/insic.png') }}" alt="insic logo"></div>
-			<div class="col partner-logo-container"> <img class="partner-logo" src="{{ asset('assets/img/partners/LC.png') }}" alt="Leaders Camp logo"></div>
-			<div class="col partner-logo-container"> <img class="partner-logo" src="{{ asset('assets/img/partners/taqasom.png') }}" alt="Taqasom logo"></div>
-			<div class="col partner-logo-container"> <img class="partner-logo" src="{{ asset('assets/img/partners/abd.png') }}" alt="Abdssamad logo"></div>
-			<div class="col partner-logo-container"> <img class="partner-logo" src="{{ asset('assets/img/partners/conceptify.png') }}" alt="Conceptify logo"></div>
-		</div>
-	</div>
-</section>
+  <div class="container">
+    <h6 class="sec-title text-center">{{ __('transelt.our_partners') }}</h6>
 
+    <div id="partnersCarousel" class="carousel slide custom-carousel" data-bs-ride="carousel">
+      
+      <div class="carousel-controls-container">
+        <button class="carousel-control-prev" type="button" data-bs-target="#partnersCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#partnersCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <div class="carousel-inner">
+  <div class="carousel-item active">
+    <div class="partner-group">
+      <div class="partner"><img src="{{ asset('assets/img/partners/abd.png') }}" alt="..."></div>
+      <div class="partner"><img src="{{ asset('assets/img/partners/taqasom.png') }}" alt="..."></div>
+      <div class="partner"><img src="{{ asset('assets/img/partners/LOGO-TEAM-BUILDING.png') }}" alt="..."></div>
+      <div class="partner hide-on-mobile"><img src="{{ asset('assets/img/partners/insic.png') }}" alt="..."></div>
+    </div>
+  </div>
+
+  <div class="carousel-item">
+    <div class="partner-group">
+      <div class="partner"><img src="{{ asset('assets/img/partners/conceptify.png') }}" alt="..."></div>
+      <div class="partner"><img src="{{ asset('assets/img/partners/opool.png') }}" alt="..."></div>
+      <div class="partner"><img src="{{ asset('assets/img/partners/LC.png') }}" alt="..."></div>
+      <div class="partner hide-on-mobile"><img src="{{ asset('assets/img/partners/abd.png') }}" alt="..."></div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
 <section id="contact" class="main_contact pt-md-5 pb-md-5">
 	<div class="container">
 		<div class="row gap-4 flex-column flex-md-row justify-content-center">
 			<div class="col-md-5 order-2 order-md-1 col-12 contact-container">
-				<div class="d-flex gap-3 p-3 info-item" ><i class="fas fa-phone-flip"></i><h6>{{ __('contact.fix_number') }} 	| 	{{ __('contact.phone_number') }}</h6></div>
-				{{-- <div class="d-flex gap-3 p-3 info-item" ><i class="fas fa-phone-flip"></i><h6>{{ __('contact.phone_number') }}</h6></div> --}}
-				<div class="d-flex gap-3 p-3 info-item" ><i class="fas fa-location-dot"></i><h6>{{ __('contact.addresseDesc') }}</h6></div>
+				<div class="d-flex justify-content-center align-items-center gap-3 p-3 info-item">
+    <i class="fab fa-whatsapp"></i>
+
+    <div>
+        <a href="javascript:void(0)" onclick="openContactModal('+212667325757')">
+            {{ __('contact.phone_number') }} |
+        </a>
+    
+        <a href="javascript:void(0)" onclick="openContactModal('+212644830627')">
+            {{ __('contact.phone_number2') }}
+        </a>
+    </div>
+</div>
+<div class="d-flex justify-content-center align-items-center gap-3 p-3 info-item">
+    <i class="fas fa-phone-alt"></i>
+    <h5>
+        <a href="tel:+212539324232" style="text-decoration:none; color: inherit; align-items: center; display: flex;">
+            {{ __('contact.fix_number') }}
+        </a> 
+       
+    </h5>
+</div>	
+	
+
+{{-- <div class="d-flex gap-3 p-3 info-item" ><i class="fas fa-phone-flip"></i><h6>{{ __('contact.phone_number') }}</h6></div> --}}
+				<div class="d-flex justify-content-center align-items-center gap-3 p-3 info-item"><i class="fas fa-map-marker-alt"></i><h6>{{ __('contact.addresseDesc') }}</h6></div>
 				<div class="map-container">
-					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7445.99017683554!2d-5.848830065145886!3d35.76088448176391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b87629bd97a35%3A0xa3d8d404e9cd8c3e!2sInstitut%20de%20Neurosciences%20et%20Coaching%20-%20INSIC!5e0!3m2!1sfr!2sma!4v1769084833075!5m2!1sfr!2sma"  style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-				</div>
+<iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d450.53152286838684!2d-5.8298674262225765!3d35.77303049195055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDQ2JzE4LjkiTiA1wrA0OSc0Ny41Ilc!5e0!3m2!1sfr!2sma!4v1773664750736!5m2!1sfr!2sma" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>				</div>
 			</div>
 			<div class="col-md-6 order-1 order-md-2 col-12 form-container">
 				<h6 class="sec-title">{{ __('transelt.happy_to_contact') }}</h6>
 				@php
 					$topic = [
 						['id' => 'golden_pack', 'title' => __('transelt.golden_pack')],
-						['id' => 'basic_pack', 'title' => __('transelt.basic_pack')],
 						['id' => 'neuralbox_pack', 'title' => __('transelt.neuralbox_pack')],
+						['id' => 'basic_pack', 'title' => __('transelt.basic_pack')],
 						['id' => 'our_formations', 'title' => __('transelt.our_formations')],
 						['id' => 'other', 'title' => __('transelt.other')],
 					];
@@ -1040,6 +973,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			</div>
 		</div>
 	</div>
+
 </section>
 
 
@@ -1090,7 +1024,7 @@ document.addEventListener("DOMContentLoaded", () => {
 							<li>
 								<div class="contact-info-container d-flex flex-md-wrap flex-row">
 									<div class="icon-v">
-										<img src="assets/img/icon15.png" alt="">
+										<img src="{{ asset('assets/img/icon15.png') }}" alt="">
 									</div>
 									<div class="dd-cont">
 										<h4>{{ __('contact.phone') }}</h4>
@@ -1107,7 +1041,7 @@ document.addEventListener("DOMContentLoaded", () => {
 							<li>
 								<div class="contact-info-container d-flex flex-md-wrap flex-row">
 									<div class="icon-v">
-										<img src="assets/img/icon16.png" alt="">
+										<img src="{{ asset('assets/img/icon16.png') }}" alt="">
 									</div>
 									<div class="dd-cont">
 										<h4>{{ __('contact.work_time') }}</h4>
@@ -1118,7 +1052,7 @@ document.addEventListener("DOMContentLoaded", () => {
 							<li>
 								<div class="contact-info-container d-flex flex-md-wrap flex-row">
 									<div class="icon-v">
-										<img src="assets/img/icon17.png" alt="">
+										<img src="{{ asset('assets/img/icon17.png') }}" alt="">
 									</div>
 									<div class="dd-cont">
 										<h4>{{ __('contact.addresse') }}</h4>
